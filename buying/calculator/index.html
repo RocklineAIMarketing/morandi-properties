@@ -1,1 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mortgage Calculator — Morandi Properties</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --white:      #ffffff;
+      --blue-grey:  #b0bec5;
+      --light-bg:   #f4f6f8;
+      --navy:       #1a2d4a;
+      --navy-light: #2e4a6e;
+      --text-muted: #607d8b;
+    }
+
+    body { font-family: 'Barlow', sans-serif; color: var(--navy); }
+
+    /* ─── HEADER ─────────────────────────────────────────────── */
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); background-size: cover; background-position: center; }
+    .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
+    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,0.18); gap: 2px; }
+    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color 0.2s; }
+    .nav-link:hover { color: var(--navy-light); }
+    .nav-link.active { border-bottom: 2px solid var(--navy); }
+    .nav-label { cursor: default; user-select: none; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu, .nav-dropdown:focus-within .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,0.15); min-width: 200px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; z-index: 100; }
+    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background 0.15s; }
+    .dropdown-menu a:hover { background: #eceff1; }
+    .hamburger-btn { display: none; flex-direction: column; gap: 5px; align-items: flex-start; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all 0.25s ease; }
+    .hamburger-btn span:nth-child(1) { width: 24px; }
+    .hamburger-btn span:nth-child(2) { width: 17px; }
+    .hamburger-btn span:nth-child(3) { width: 24px; }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
+    .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
+    .mobile-nav-group { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .mobile-nav-toggle { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); background: none; border: none; cursor: pointer; padding: 8px 24px; display: flex; align-items: center; gap: 8px; }
+    .mobile-nav-toggle .caret { font-size: 18px; transition: transform 0.2s; display: inline-block; }
+    .mobile-nav-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+    .mobile-nav-sub { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding-bottom: 4px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.35s ease, opacity 0.25s ease 0.2s; }
+    .mobile-nav-sub.open { max-height: 320px; opacity: 1; }
+    .mobile-nav-sub a { font-family: 'Barlow', sans-serif !important; font-size: 14px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; color: var(--text-muted) !important; padding: 6px 24px !important; text-transform: uppercase; }
+    @media (max-width: 960px) {
+      .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
+      .hamburger-btn { display: flex; grid-column: 1; }
+      .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
+      .nav-row { display: none; }
+    }
+
+    /* ─── PAGE HERO ──────────────────────────────────────────── */
+    .page-hero { background: var(--white); padding: 72px 40px 64px; border-bottom: 1px solid #dce3e8; }
+    .page-hero-inner { max-width: 760px; margin: 0 auto; }
+    .page-hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 16px; }
+    .page-hero-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 5vw, 56px); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; margin-bottom: 24px; }
+    .page-hero-divider { width: 48px; height: 3px; background: var(--navy); margin-bottom: 28px; opacity: 0.2; }
+    .page-hero-body { font-size: 16px; font-weight: 400; line-height: 1.85; color: var(--text-muted); margin-bottom: 20px; }
+    .page-hero-body strong { color: var(--navy); font-weight: 600; }
+    .page-hero-note { font-size: 13px; font-weight: 500; color: var(--blue-grey); letter-spacing: 0.06em; border-left: 3px solid #dce3e8; padding-left: 16px; line-height: 1.7; margin-top: 28px; }
+    @media (max-width: 900px) { .page-hero { padding: 52px 24px 48px; } }
+
+    /* ─── CALCULATOR SECTION ─────────────────────────────────── */
+    .calc-section { background: var(--light-bg); padding: 80px 40px; }
+    .calc-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 420px 1fr; gap: 32px; align-items: start; }
+
+    /* ─── INPUT PANEL ────────────────────────────────────────── */
+    .calc-inputs { background: var(--white); border: 1px solid #dce3e8; padding: 40px; display: flex; flex-direction: column; gap: 28px; }
+    .calc-inputs-title { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); padding-bottom: 20px; border-bottom: 1px solid #dce3e8; }
+
+    .field-group { display: flex; flex-direction: column; gap: 8px; }
+    .field-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+    .field-input-wrap { position: relative; display: flex; align-items: center; }
+    .field-prefix, .field-suffix { position: absolute; font-size: 13px; font-weight: 600; color: var(--text-muted); pointer-events: none; }
+    .field-prefix { left: 12px; }
+    .field-suffix { right: 12px; }
+
+    .field-input {
+      width: 100%;
+      height: 44px;
+      border: 1px solid #dce3e8;
+      background: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      padding: 0 14px;
+      transition: border-color 0.2s;
+      -moz-appearance: textfield;
+    }
+    .field-input::-webkit-inner-spin-button,
+    .field-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .field-input:focus { outline: none; border-color: var(--navy); }
+    .field-input.has-prefix { padding-left: 26px; }
+    .field-input.has-suffix { padding-right: 30px; }
+
+    .term-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .term-btn {
+      height: 44px;
+      border: 1px solid #dce3e8;
+      background: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .term-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .term-btn.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+
+    .calc-btn {
+      width: 100%;
+      height: 50px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 4px;
+    }
+    .calc-btn:hover { background: var(--navy-light); }
+
+    /* ─── LIVE RATES WIDGET ──────────────────────────────────── */
+    .rates-widget {
+      background: var(--white);
+      border: 1px solid #dce3e8;
+      border-top: 3px solid var(--navy);
+      padding: 20px 24px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .rates-widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .rates-widget-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .rates-live-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .rates-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4caf50;
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .rates-live-dot.loading { background: var(--blue-grey); animation: none; }
+
+    .rates-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #dce3e8;
+      border: 1px solid #dce3e8;
+      margin-bottom: 10px;
+    }
+    .rate-cell {
+      background: var(--white);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transition: background 0.15s;
+    }
+    .rate-cell:hover { background: #f9fafb; }
+    .rate-cell-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .rate-cell-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .rate-cell-val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .rate-cell-change {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+    .rate-up { color: #e53935; }
+    .rate-down { color: #43a047; }
+    .rate-flat { color: var(--text-muted); }
+    .rate-cell-apr {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* skeleton shimmer */
+    .rate-skeleton {
+      display: inline-block;
+      width: 64px;
+      height: 22px;
+      background: linear-gradient(90deg, #eceff1 25%, #dde3e8 50%, #eceff1 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 2px;
+      vertical-align: bottom;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .rates-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .rates-timestamp {
+      font-size: 9px;
+      color: var(--blue-grey);
+      letter-spacing: 0.06em;
+    }
+    .rates-apply-btn {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: none;
+      border: 1px solid #dce3e8;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .rates-apply-btn:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .rates-error {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 12px 0 4px;
+    }
+
+    /* ─── RESULTS PANEL ──────────────────────────────────────── */
+    .calc-results { display: flex; flex-direction: column; gap: 24px; }
+
+    .result-summary { background: var(--navy); padding: 36px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .result-main { grid-column: 1 / -1; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 24px; margin-bottom: 4px; }
+    .result-main-label { font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 8px; }
+    .result-main-num { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(42px, 5vw, 58px); font-weight: 600; color: var(--white); letter-spacing: 0.02em; line-height: 1; }
+    .result-main-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 6px; }
+    .result-stat { display: flex; flex-direction: column; gap: 4px; }
+    .result-stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+    .result-stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; color: var(--white); letter-spacing: 0.02em; }
+
+    /* ─── BREAKDOWN + PIE ────────────────────────────────────── */
+    .result-breakdown { background: var(--white); border: 1px solid #dce3e8; padding: 32px 36px; }
+    .result-breakdown-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); margin-bottom: 24px; }
+    .breakdown-layout { display: grid; grid-template-columns: 1fr 180px; gap: 32px; align-items: center; }
+    .breakdown-rows { display: flex; flex-direction: column; gap: 14px; }
+    .breakdown-row { display: flex; flex-direction: column; gap: 5px; }
+    .breakdown-row-top { display: flex; justify-content: space-between; align-items: center; }
+    .breakdown-row-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+    .breakdown-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .breakdown-row-val { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: var(--navy); }
+    .breakdown-bar-track { height: 4px; background: #eceff1; width: 100%; }
+    .breakdown-bar-fill { height: 4px; transition: width 0.6s ease; }
+
+    /* Pie chart */
+    .pie-wrap { position: relative; width: 180px; height: 180px; flex-shrink: 0; }
+    .pie-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .pie-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; }
+    .pie-center-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+    .pie-center-val { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; color: var(--navy); line-height: 1.1; }
+
+    /* ─── AMORTIZATION ───────────────────────────────────────── */
+    .result-amort { background: var(--white); border: 1px solid #dce3e8; }
+    .amort-header { padding: 24px 36px; border-bottom: 1px solid #dce3e8; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .amort-header-title { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); }
+    .amort-toggle { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); background: none; border: 1px solid #dce3e8; padding: 8px 16px; cursor: pointer; transition: all 0.18s; }
+    .amort-toggle:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    .amort-table-wrap { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .amort-table-wrap.open { max-height: 480px; overflow-y: auto; }
+    .amort-table { width: 100%; border-collapse: collapse; }
+    .amort-table th { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); padding: 12px 20px; text-align: right; background: #f9fafb; border-bottom: 1px solid #dce3e8; position: sticky; top: 0; }
+    .amort-table th:first-child { text-align: left; }
+    .amort-table td { font-size: 12.5px; color: var(--navy); padding: 10px 20px; text-align: right; border-bottom: 1px solid #f0f4f6; }
+    .amort-table td:first-child { text-align: left; font-weight: 600; color: var(--text-muted); }
+    .amort-table tr:last-child td { border-bottom: none; }
+    .amort-table tr:hover td { background: #f9fafb; }
+
+    /* ─── CTA STRIP ──────────────────────────────────────────── */
+    .calc-cta { background: var(--light-bg); padding: 60px 40px; position: relative; overflow: hidden; border-top: 1px solid #dce3e8; }
+    .calc-cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; position: relative; z-index: 1; }
+    .calc-cta-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .calc-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; margin-bottom: 10px; }
+    .calc-cta-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; max-width: 480px; }
+    .calc-cta-btns { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .btn-primary { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; text-align: center; padding: 15px 32px; white-space: nowrap; transition: background 0.2s, color 0.2s; }
+    .btn-white { background: var(--navy); color: var(--white); }
+    .btn-white:hover { background: var(--navy-light); }
+    .btn-outline { background: transparent; color: var(--navy); border: 1.5px solid rgba(26,45,74,0.35); }
+    .btn-outline:hover { border-color: var(--navy); background: rgba(26,45,74,0.06); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    .site-footer { background: var(--navy); padding: 64px 40px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .footer-tagline { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
+    .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
+    .footer-address { font-size: 13.5px; font-weight: 400; line-height: 1.7; color: rgba(255,255,255,0.75); text-align: center; }
+    .footer-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.06em; color: var(--white); text-decoration: none; transition: color 0.2s; }
+    .footer-phone:hover { color: var(--blue-grey); }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    .footer-social-label { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-grey); }
+    .footer-social-icons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; flex-shrink: 0; }
+    .footer-social-link:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.75); display: block; transition: fill 0.2s; }
+    .footer-social-link:hover svg { fill: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; gap: 16px; flex-wrap: wrap; }
+    .footer-legal { font-size: 11.5px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ─── PLACEHOLDER STATE ──────────────────────────────────── */
+    .results-placeholder { background: var(--white); border: 1px solid #dce3e8; padding: 60px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; min-height: 280px; }
+    .results-placeholder-icon { opacity: 0.15; }
+    .results-placeholder-text { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); opacity: 0.4; }
+    .results-placeholder-sub { font-size: 13px; color: var(--text-muted); opacity: 0.7; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .calc-inner { grid-template-columns: 1fr; }
+      .calc-cta-inner { grid-template-columns: 1fr; }
+      .calc-cta-btns { flex-direction: row; flex-wrap: wrap; }
+      .calc-cta::before { display: none; }
+    }
+    @media (max-width: 700px) {
+      .calc-section { padding: 52px 20px; }
+      .calc-inputs { padding: 28px 24px; }
+      .result-summary { padding: 28px 24px; }
+      .result-breakdown { padding: 24px; }
+      .breakdown-layout { grid-template-columns: 1fr; }
+      .pie-wrap { width: 140px; height: 140px; margin: 0 auto; }
+      .amort-header { padding: 20px 24px; }
+      .calc-cta { padding: 52px 24px; }
+    }
+    @media (max-width: 900px) {
+      .site-footer { padding: 52px 24px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-social { align-items: flex-start; }
+      .footer-social-icons { justify-content: flex-start; }
+      .footer-contact { align-items: flex-start; text-align: left; }
+      .footer-address { text-align: left; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .page-hero { padding: 52px 24px 48px; }
+    }
+
+    /* ─── DISCLOSURE ─────────────────────────────────────────── */
+    .calc-disclosure { max-width: 1100px; margin: 0 auto; padding: 20px 0 0; }
+    .calc-disclosure p { font-size: 11px; color: var(--text-muted); line-height: 1.7; opacity: 0.8; }
+
+    /* ─── TAX GRAPHIC ────────────────────────────────────────── */
+    .tax-section { background: var(--white); padding: 80px 40px; border-top: 1px solid #dce3e8; }
+    .tax-inner { max-width: 1100px; margin: 0 auto; }
+    .tax-header { margin-bottom: 48px; }
+    .tax-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 14px; }
+    .tax-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; margin-bottom: 12px; }
+    .tax-subhead { font-size: 14px; color: var(--text-muted); line-height: 1.75; max-width: 640px; }
+    .tax-bars { display: flex; flex-direction: column; gap: 0; border: 1px solid #dce3e8; }
+    .tax-row { display: grid; grid-template-columns: 180px 1fr 80px; align-items: center; gap: 20px; padding: 20px 28px; border-bottom: 1px solid #dce3e8; transition: background 0.15s; }
+    .tax-row:last-child { border-bottom: none; }
+    .tax-row:hover { background: #f9fafb; }
+    .tax-row-name { display: flex; flex-direction: column; gap: 2px; }
+    .tax-row-suburb { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); }
+    .tax-row-county { font-size: 10px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.06em; }
+    .tax-bar-track { height: 8px; background: #eceff1; flex: 1; }
+    .tax-bar-fill { height: 8px; transition: width 1s cubic-bezier(0.23,1,0.32,1); width: 0%; }
+    .tax-row-rate { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; color: var(--navy); text-align: right; white-space: nowrap; }
+    .tax-row-rate sup { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+    .tax-footer { margin-top: 24px; display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .tax-avg-note { font-size: 12px; font-weight: 500; color: var(--text-muted); line-height: 1.7; }
+    .tax-avg-note strong { color: var(--navy); }
+    .tax-source { font-size: 11px; color: var(--text-muted); opacity: 0.7; line-height: 1.6; max-width: 440px; text-align: right; }
+    @media (max-width: 700px) {
+      .tax-section { padding: 52px 20px; }
+      .tax-row { grid-template-columns: 110px 1fr 60px; gap: 10px; padding: 16px 16px; }
+      .tax-row-suburb { font-size: 11px; }
+      .tax-row-rate { font-size: 17px; }
+      .tax-source { text-align: left; }
+    }
+
+    /* left column stack */
+    .calc-left-col { display: flex; flex-direction: column; gap: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════ -->
+<header class="site-header" role="banner">
+  <div class="logo-row">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="/" class="logo-placeholder">Morandi Properties</a>
+  </div>
+  <nav class="nav-row" role="navigation" aria-label="Primary navigation">
+    <a href="/" class="nav-link">Home</a>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Buying ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+        <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+        <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+        <a href="https://morandiproperties.com/buying/calculator" class="active">Mortgage Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Selling ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+        <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+        <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Insights ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+        <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Realtors ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+        <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+        <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Contact ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+        <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+        <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main role="main">
+
+  <!-- ─── PAGE HERO ─────────────────────────────────────────── -->
+  <section class="page-hero" aria-label="Mortgage Calculator introduction">
+    <div class="page-hero-inner">
+      <p class="page-hero-eyebrow">Morandi Properties &mdash; Southwest Suburbs of Chicago</p>
+      <h1 class="page-hero-headline">Mortgage Calculator:<br>Estimate Your Monthly Payment</h1>
+      <div class="page-hero-divider"></div>
+      <p class="page-hero-body">
+        Use this calculator to get a clear picture of what your monthly payment might look like — including <strong>principal, interest, property taxes, homeowner's insurance, and HOA fees</strong>. It's a starting point, not a guarantee, but it's the same math Ray uses when he sits down with buyers to talk budget in the southwest suburbs.
+      </p>
+      <p class="page-hero-body">
+        Home prices in <strong>Orland Park, Tinley Park, Frankfort, Mokena, and New Lenox</strong> vary significantly by neighborhood, school district, and lot size. Knowing your comfortable payment range before you tour homes makes every conversation faster and every offer smarter.
+      </p>
+      <p class="page-hero-note">
+        Numbers look right but you have questions? Ray Morandi works with a network of trusted local lenders who can give you a real pre-approval — not an estimate. Call (708) 555-0000 anytime.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── CALCULATOR ────────────────────────────────────────── -->
+  <section class="calc-section" aria-label="Mortgage calculator">
+    <div class="calc-inner">
+
+      <!-- LEFT COLUMN: inputs + rates widget -->
+      <div class="calc-left-col">
+
+        <!-- INPUTS -->
+        <div class="calc-inputs">
+          <div class="calc-inputs-title">Loan Details</div>
+
+          <div class="field-group">
+            <label class="field-label" for="homePrice">Home Price</label>
+            <div class="field-input-wrap">
+              <span class="field-prefix">$</span>
+              <input class="field-input has-prefix" type="number" id="homePrice" value="425000" min="0" step="1000">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="downPayment">Down Payment</label>
+            <div style="display:grid;grid-template-columns:1fr 100px;gap:8px;">
+              <div class="field-input-wrap">
+                <span class="field-prefix">$</span>
+                <input class="field-input has-prefix" type="number" id="downPayment" value="85000" min="0" step="1000">
+              </div>
+              <div class="field-input-wrap">
+                <input class="field-input has-suffix" type="number" id="downPct" value="20" min="0" max="100" step="0.5">
+                <span class="field-suffix">%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="interestRate">Interest Rate</label>
+            <div class="field-input-wrap">
+              <input class="field-input has-suffix" type="number" id="interestRate" value="6.85" min="0" max="30" step="0.05">
+              <span class="field-suffix">%</span>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <span class="field-label">Loan Term</span>
+            <div class="term-btns">
+              <button class="term-btn" data-term="10">10 Yr</button>
+              <button class="term-btn" data-term="15">15 Yr</button>
+              <button class="term-btn active" data-term="20">20 Yr</button>
+              <button class="term-btn" data-term="25">25 Yr</button>
+              <button class="term-btn" data-term="30">30 Yr</button>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="propTax">Annual Property Tax</label>
+            <div class="field-input-wrap">
+              <span class="field-prefix">$</span>
+              <input class="field-input has-prefix" type="number" id="propTax" value="8500" min="0" step="100">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="insurance">Annual Homeowner's Insurance</label>
+            <div class="field-input-wrap">
+              <span class="field-prefix">$</span>
+              <input class="field-input has-prefix" type="number" id="insurance" value="1800" min="0" step="100">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="hoa">Monthly HOA Fee</label>
+            <div class="field-input-wrap">
+              <span class="field-prefix">$</span>
+              <input class="field-input has-prefix" type="number" id="hoa" value="0" min="0" step="10">
+            </div>
+          </div>
+
+          <button class="calc-btn" id="calcBtn">Calculate Payment</button>
+        </div>
+
+        <!-- ─── LIVE RATES WIDGET ──────────────────────────────── -->
+        <div class="rates-widget" aria-label="Current mortgage rates">
+          <div class="rates-widget-header">
+            <span class="rates-widget-title">Today's Mortgage Rates</span>
+            <span class="rates-live-badge">
+              <span class="rates-live-dot loading" id="ratesDot"></span>
+              <span id="ratesStatus">Fetching...</span>
+            </span>
+          </div>
+
+          <div class="rates-grid" id="ratesGrid">
+            <div class="rate-cell">
+              <span class="rate-cell-label">30-Year Fixed</span>
+              <div class="rate-cell-row">
+                <span class="rate-cell-val" id="r30"><span class="rate-skeleton"></span></span>
+                <span class="rate-cell-change" id="r30c"></span>
+              </div>
+              <span class="rate-cell-apr" id="r30a"></span>
+            </div>
+            <div class="rate-cell">
+              <span class="rate-cell-label">15-Year Fixed</span>
+              <div class="rate-cell-row">
+                <span class="rate-cell-val" id="r15"><span class="rate-skeleton"></span></span>
+                <span class="rate-cell-change" id="r15c"></span>
+              </div>
+              <span class="rate-cell-apr" id="r15a"></span>
+            </div>
+            <div class="rate-cell">
+              <span class="rate-cell-label">20-Year Fixed</span>
+              <div class="rate-cell-row">
+                <span class="rate-cell-val" id="r20"><span class="rate-skeleton"></span></span>
+                <span class="rate-cell-change" id="r20c"></span>
+              </div>
+              <span class="rate-cell-apr" id="r20a"></span>
+            </div>
+            <div class="rate-cell">
+              <span class="rate-cell-label">5/1 ARM</span>
+              <div class="rate-cell-row">
+                <span class="rate-cell-val" id="rarm"><span class="rate-skeleton"></span></span>
+                <span class="rate-cell-change" id="rarmc"></span>
+              </div>
+              <span class="rate-cell-apr" id="rarma"></span>
+            </div>
+          </div>
+
+          <div id="ratesError" style="display:none" class="rates-error">Unable to load current rates. Please try again shortly.</div>
+
+          <div class="rates-footer">
+            <span class="rates-timestamp" id="ratesTimestamp"></span>
+            <button class="rates-apply-btn" id="ratesApplyBtn">Use 30-Yr Rate &rarr;</button>
+          </div>
+        </div>
+
+      </div><!-- end calc-left-col -->
+
+      <!-- RESULTS -->
+      <div class="calc-results" id="calcResults">
+
+        <div class="results-placeholder" id="resultsPlaceholder">
+          <svg class="results-placeholder-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#1a2d4a" stroke-width="1">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+          </svg>
+          <p class="results-placeholder-text">Your estimate will appear here</p>
+          <p class="results-placeholder-sub">Fill in your loan details and click Calculate Payment</p>
+        </div>
+
+        <div id="resultsContent" style="display:none;flex-direction:column;gap:24px;">
+
+          <!-- SUMMARY BAR -->
+          <div class="result-summary">
+            <div class="result-main">
+              <p class="result-main-label">Estimated Monthly Payment</p>
+              <p class="result-main-num" id="rMonthly">—</p>
+              <p class="result-main-sub">Principal &amp; Interest + Tax + Insurance + HOA</p>
+            </div>
+            <div class="result-stat">
+              <span class="result-stat-label">Loan Amount</span>
+              <span class="result-stat-val" id="rLoanAmt">—</span>
+            </div>
+            <div class="result-stat">
+              <span class="result-stat-label">Total Interest Paid</span>
+              <span class="result-stat-val" id="rTotalInt">—</span>
+            </div>
+            <div class="result-stat">
+              <span class="result-stat-label">Total Cost of Loan</span>
+              <span class="result-stat-val" id="rTotalCost">—</span>
+            </div>
+            <div class="result-stat">
+              <span class="result-stat-label">Payoff Date</span>
+              <span class="result-stat-val" id="rPayoff">—</span>
+            </div>
+          </div>
+
+          <!-- BREAKDOWN + PIE -->
+          <div class="result-breakdown">
+            <p class="result-breakdown-title">Monthly Payment Breakdown</p>
+            <div class="breakdown-layout">
+              <div class="breakdown-rows">
+
+                <div class="breakdown-row">
+                  <div class="breakdown-row-top">
+                    <span class="breakdown-row-label"><span class="breakdown-dot" style="background:#1a2d4a;"></span>Principal &amp; Interest</span>
+                    <span class="breakdown-row-val" id="bPI">—</span>
+                  </div>
+                  <div class="breakdown-bar-track"><div class="breakdown-bar-fill" id="bBarPI" style="background:#1a2d4a;width:0%;"></div></div>
+                </div>
+
+                <div class="breakdown-row">
+                  <div class="breakdown-row-top">
+                    <span class="breakdown-row-label"><span class="breakdown-dot" style="background:#4a7a9b;"></span>Property Tax</span>
+                    <span class="breakdown-row-val" id="bTax">—</span>
+                  </div>
+                  <div class="breakdown-bar-track"><div class="breakdown-bar-fill" id="bBarTax" style="background:#4a7a9b;width:0%;"></div></div>
+                </div>
+
+                <div class="breakdown-row">
+                  <div class="breakdown-row-top">
+                    <span class="breakdown-row-label"><span class="breakdown-dot" style="background:#7fb3c8;"></span>Insurance</span>
+                    <span class="breakdown-row-val" id="bIns">—</span>
+                  </div>
+                  <div class="breakdown-bar-track"><div class="breakdown-bar-fill" id="bBarIns" style="background:#7fb3c8;width:0%;"></div></div>
+                </div>
+
+                <div class="breakdown-row" id="hoaRow">
+                  <div class="breakdown-row-top">
+                    <span class="breakdown-row-label"><span class="breakdown-dot" style="background:#b0bec5;"></span>HOA</span>
+                    <span class="breakdown-row-val" id="bHoa">—</span>
+                  </div>
+                  <div class="breakdown-bar-track"><div class="breakdown-bar-fill" id="bBarHoa" style="background:#b0bec5;width:0%;"></div></div>
+                </div>
+
+              </div>
+
+              <!-- PIE CHART -->
+              <div class="pie-wrap">
+                <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" id="pieChart">
+                  <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#eceff1" stroke-width="3.2"/>
+                  <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#1a2d4a" stroke-width="3.2" id="piePI" stroke-dasharray="0 100" stroke-dashoffset="0"/>
+                  <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#4a7a9b" stroke-width="3.2" id="pieTax" stroke-dasharray="0 100" stroke-dashoffset="0"/>
+                  <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#7fb3c8" stroke-width="3.2" id="pieIns" stroke-dasharray="0 100" stroke-dashoffset="0"/>
+                  <circle cx="18" cy="18" r="15.9155" fill="none" stroke="#b0bec5" stroke-width="3.2" id="pieHoa" stroke-dasharray="0 100" stroke-dashoffset="0"/>
+                </svg>
+                <div class="pie-center">
+                  <span class="pie-center-label">P&amp;I</span>
+                  <span class="pie-center-val" id="pieCenterPct">—</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- AMORTIZATION -->
+          <div class="result-amort">
+            <div class="amort-header">
+              <span class="amort-header-title">Amortization Schedule</span>
+              <button class="amort-toggle" id="amortToggle">Show Schedule ▾</button>
+            </div>
+            <div class="amort-table-wrap" id="amortTableWrap">
+              <table class="amort-table" id="amortTable">
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th>Principal</th>
+                    <th>Interest</th>
+                    <th>Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="amortBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="calc-disclosure">
+      <p>This calculator provides estimates for informational purposes only and does not constitute a loan commitment or financial advice. Actual payments will vary based on lender requirements, credit score, loan type, and other factors. Contact a licensed lender for an accurate quote. Illinois property tax rates vary by municipality and assessment year. Mortgage rates displayed are national averages sourced via AI and may not reflect local lender offers.</p>
+    </div>
+  </section>
+
+
+  <!-- ─── PROPERTY TAX GRAPHIC ─────────────────────────────── -->
+  <section class="tax-section" aria-label="Local property tax rates by suburb">
+    <div class="tax-inner">
+      <div class="tax-header">
+        <p class="tax-eyebrow">Southwest Chicago Suburbs &mdash; 2023/2024 Data</p>
+        <h2 class="tax-headline">Local Property Tax Rates by Community</h2>
+        <p class="tax-subhead">Illinois has the second-highest property taxes in the country. Rates vary significantly across the southwest suburbs based on county, school district, and local levies. Use these figures as a starting point when entering your tax estimate above.</p>
+      </div>
+
+      <div class="tax-bars" id="taxBars">
+
+        <div class="tax-row" data-rate="2.30" data-max="3.20">
+          <div class="tax-row-name">
+            <span class="tax-row-suburb">Orland Park</span>
+            <span class="tax-row-county">Cook County</span>
+          </div>
+          <div class="tax-bar-track"><div class="tax-bar-fill" style="background:#1a2d4a;"></div></div>
+          <div class="tax-row-rate">2.30<sup>%</sup></div>
+        </div>
+
+        <div class="tax-row" data-rate="2.55" data-max="3.20">
+          <div class="tax-row-name">
+            <span class="tax-row-suburb">Tinley Park</span>
+            <span class="tax-row-county">Cook &amp; Will County</span>
+          </div>
+          <div class="tax-bar-track"><div class="tax-bar-fill" style="background:#2e4a6e;"></div></div>
+          <div class="tax-row-rate">2.55<sup>%</sup></div>
+        </div>
+
+        <div class="tax-row" data-rate="2.15" data-max="3.20">
+          <div class="tax-row-name">
+            <span class="tax-row-suburb">Frankfort</span>
+            <span class="tax-row-county">Will County</span>
+          </div>
+          <div class="tax-bar-track"><div class="tax-bar-fill" style="background:#3d6080;"></div></div>
+          <div class="tax-row-rate">2.15<sup>%</sup></div>
+        </div>
+
+        <div class="tax-row" data-rate="2.10" data-max="3.20">
+          <div class="tax-row-name">
+            <span class="tax-row-suburb">Mokena</span>
+            <span class="tax-row-county">Will County</span>
+          </div>
+          <div class="tax-bar-track"><div class="tax-bar-fill" style="background:#4a7a9b;"></div></div>
+          <div class="tax-row-rate">2.10<sup>%</sup></div>
+        </div>
+
+        <div class="tax-row" data-rate="2.45" data-max="3.20">
+          <div class="tax-row-name">
+            <span class="tax-row-suburb">New Lenox</span>
+            <span class="tax-row-county">Will County</span>
+          </div>
+          <div class="tax-bar-track"><div class="tax-bar-fill" style="background:#5a8fa8;"></div></div>
+          <div class="tax-row-rate">2.45<sup>%</sup></div>
+        </div>
+
+      </div>
+
+      <div class="tax-footer">
+        <p class="tax-avg-note">On a <strong>$400,000 home</strong>, a 2.3% rate equals roughly <strong>$9,200/year</strong> — or <strong>$767/month</strong> added to your mortgage payment. Rates vary by tax code area within each community.</p>
+        <p class="tax-source">Sources: Civic Federation (effective tax rates 2024), BlockShopper analysis Q2 2024, Village of Mokena 2023 Tax Levy comparison (payable 2024). Rates shown are approximate effective rates and will vary by specific address and school district. Consult the Cook or Will County Assessor for precise figures.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ───────────────────────────────────────────────── -->
+  <div class="calc-cta">
+    <div class="calc-cta-inner">
+      <div>
+        <p class="calc-cta-eyebrow">Morandi Properties &mdash; Orland Park, IL</p>
+        <h2 class="calc-cta-headline">Ready to Turn Numbers<br>Into a Real Pre-Approval?</h2>
+        <p class="calc-cta-sub">A calculator gives you a ballpark. Ray Morandi's lending network can give you a real pre-approval letter — fast — so you're ready to move when the right home hits the market in Orland Park, Tinley Park, or anywhere in the southwest suburbs.</p>
+      </div>
+      <div class="calc-cta-btns">
+        <a href="tel:+17085550000" class="btn-primary btn-white">Call Ray: (708) 555-0000</a>
+        <a href="https://morandiproperties.com/buying/listings" class="btn-primary btn-outline">Browse Active Listings &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── FOOTER ─────────────────────────────────────────────── -->
+<footer class="site-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">Morandi Properties</a>
+        <p class="footer-tagline">Helping Chicagoland families buy and sell homes in Orland Park, Tinley Park, Frankfort, Mokena, and New Lenox since 2006.</p>
+      </div>
+      <div class="footer-contact" itemscope itemtype="https://schema.org/RealEstateAgent">
+        <span class="footer-contact-label">Get In Touch</span>
+        <p class="footer-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="streetAddress">123 Main Street, Suite 100</span><br>
+          <span itemprop="addressLocality">Orland Park</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60462</span>
+        </p>
+        <a href="tel:+17085550000" class="footer-phone" itemprop="telephone">(708) 555-0000</a>
+      </div>
+      <div class="footer-social">
+        <span class="footer-social-label">Follow Along</span>
+        <div class="footer-social-icons">
+          <a href="#" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">
+        &copy; 2026 Morandi Properties. All rights reserved.<br>
+        Ray Morandi — Licensed Illinois Real Estate Broker &middot; License #PLACEHOLDER
+      </p>
+      <nav class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="https://morandiproperties.com/contact/office">Contact</a>
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ MOBILE NAV ════════════════════════════════════════════ -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+  <a href="/">Home</a>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">Buying <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnBuying">
+      <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+      <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+      <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+      <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">Selling <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnSelling">
+      <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+      <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+      <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">Insights <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnInsights">
+      <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+      <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">Realtors <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnTeam">
+      <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+      <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+      <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">Contact <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnContact">
+      <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+      <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+      <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // ── Mobile nav ───────────────────────────────────────────────
+  const hBtn = document.getElementById('hamburgerBtn');
+  const mNav = document.getElementById('mobileNav');
+  const mCls = document.getElementById('mobileNavClose');
+  function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
+  hBtn.addEventListener('click', openNav);
+  mCls.addEventListener('click', closeNav);
+  mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+  document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sub = document.getElementById(btn.dataset.target);
+      const isOpen = sub.classList.contains('open');
+      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-toggle').forEach(b => b.setAttribute('aria-expanded','false'));
+      if (!isOpen) { sub.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  // ── Loan term buttons ────────────────────────────────────────
+  let selectedTerm = 20;
+  document.querySelectorAll('.term-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.term-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedTerm = parseInt(btn.dataset.term);
+    });
+  });
+
+  // ── Down payment sync ────────────────────────────────────────
+  const priceEl = document.getElementById('homePrice');
+  const downEl  = document.getElementById('downPayment');
+  const pctEl   = document.getElementById('downPct');
+
+  priceEl.addEventListener('input', () => {
+    const p = parseFloat(priceEl.value) || 0;
+    const pct = parseFloat(pctEl.value) || 0;
+    downEl.value = Math.round(p * pct / 100);
+  });
+  downEl.addEventListener('input', () => {
+    const p = parseFloat(priceEl.value) || 0;
+    const d = parseFloat(downEl.value) || 0;
+    pctEl.value = p > 0 ? (d / p * 100).toFixed(1) : 0;
+  });
+  pctEl.addEventListener('input', () => {
+    const p = parseFloat(priceEl.value) || 0;
+    const pct = parseFloat(pctEl.value) || 0;
+    downEl.value = Math.round(p * pct / 100);
+  });
+
+  // ── Formatting helpers ───────────────────────────────────────
+  const fmt  = n => '$' + Math.round(n).toLocaleString();
+  const fmtK = n => {
+    if (n >= 1000000) return '$' + (n/1000000).toFixed(2) + 'M';
+    if (n >= 1000) return '$' + Math.round(n/1000) + 'K';
+    return '$' + Math.round(n);
+  };
+
+  // ── Pie chart helper ─────────────────────────────────────────
+  function setPieSlice(el, pct, offset) {
+    el.setAttribute('stroke-dasharray', `${pct} ${100 - pct}`);
+    el.setAttribute('stroke-dashoffset', offset);
+  }
+
+  // ── Calculate ────────────────────────────────────────────────
+  function calculate() {
+    const price    = parseFloat(priceEl.value) || 0;
+    const down     = parseFloat(downEl.value) || 0;
+    const rate     = parseFloat(document.getElementById('interestRate').value) || 0;
+    const term     = selectedTerm;
+    const annTax   = parseFloat(document.getElementById('propTax').value) || 0;
+    const annIns   = parseFloat(document.getElementById('insurance').value) || 0;
+    const monthHoa = parseFloat(document.getElementById('hoa').value) || 0;
+
+    const loanAmt  = price - down;
+    if (loanAmt <= 0) return;
+
+    const n  = term * 12;
+    const r  = rate / 100 / 12;
+    const pi = r > 0 ? loanAmt * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1) : loanAmt / n;
+    const monthTax = annTax / 12;
+    const monthIns = annIns / 12;
+    const total = pi + monthTax + monthIns + monthHoa;
+
+    const totalPaid = pi * n;
+    const totalInt  = totalPaid - loanAmt;
+    const totalCost = totalPaid + (monthTax + monthIns + monthHoa) * n;
+
+    const payoffDate = new Date();
+    payoffDate.setMonth(payoffDate.getMonth() + n);
+    const payoffStr = payoffDate.toLocaleDateString('en-US', {month:'short', year:'numeric'});
+
+    document.getElementById('rMonthly').textContent  = fmt(total);
+    document.getElementById('rLoanAmt').textContent  = fmtK(loanAmt);
+    document.getElementById('rTotalInt').textContent = fmtK(totalInt);
+    document.getElementById('rTotalCost').textContent= fmtK(totalCost);
+    document.getElementById('rPayoff').textContent   = payoffStr;
+
+    document.getElementById('bPI').textContent  = fmt(pi);
+    document.getElementById('bTax').textContent = fmt(monthTax);
+    document.getElementById('bIns').textContent = fmt(monthIns);
+    document.getElementById('bHoa').textContent = fmt(monthHoa);
+
+    const piPct  = pi / total * 100;
+    const taxPct = monthTax / total * 100;
+    const insPct = monthIns / total * 100;
+    const hoaPct = monthHoa / total * 100;
+
+    document.getElementById('bBarPI').style.width  = piPct + '%';
+    document.getElementById('bBarTax').style.width = taxPct + '%';
+    document.getElementById('bBarIns').style.width = insPct + '%';
+    document.getElementById('bBarHoa').style.width = hoaPct + '%';
+
+    document.getElementById('hoaRow').style.display = monthHoa > 0 ? 'flex' : 'none';
+
+    const circumference = 100;
+    let offset = 0;
+    setPieSlice(document.getElementById('piePI'),  piPct,  circumference - offset);
+    offset += piPct;
+    setPieSlice(document.getElementById('pieTax'), taxPct, circumference - offset);
+    offset += taxPct;
+    setPieSlice(document.getElementById('pieIns'), insPct, circumference - offset);
+    offset += insPct;
+    setPieSlice(document.getElementById('pieHoa'), hoaPct, circumference - offset);
+
+    document.getElementById('pieCenterPct').textContent = Math.round(piPct) + '%';
+
+    const tbody = document.getElementById('amortBody');
+    tbody.innerHTML = '';
+    let balance = loanAmt;
+    for (let yr = 1; yr <= term; yr++) {
+      let yearPrincipal = 0, yearInterest = 0;
+      for (let m = 0; m < 12; m++) {
+        const intPayment = balance * r;
+        const prinPayment = pi - intPayment;
+        yearInterest  += intPayment;
+        yearPrincipal += prinPayment;
+        balance -= prinPayment;
+        if (balance < 0) balance = 0;
+      }
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${yr}</td>
+        <td>${fmt(yearPrincipal)}</td>
+        <td>${fmt(yearInterest)}</td>
+        <td>${fmt(Math.max(0, balance))}</td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    document.getElementById('resultsPlaceholder').style.display = 'none';
+    const rc = document.getElementById('resultsContent');
+    rc.style.display = 'flex';
+  }
+
+  // ── Amortization toggle ──────────────────────────────────────
+  document.getElementById('amortToggle').addEventListener('click', function() {
+    const wrap = document.getElementById('amortTableWrap');
+    const isOpen = wrap.classList.contains('open');
+    wrap.classList.toggle('open');
+    this.textContent = isOpen ? 'Show Schedule ▾' : 'Hide Schedule ▴';
+  });
+
+  document.getElementById('calcBtn').addEventListener('click', calculate);
+  calculate();
+
+  // ── Tax bar scroll animation ──────────────────────────────────
+  const taxObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const rows = document.querySelectorAll('.tax-row');
+        rows.forEach((row, i) => {
+          const rate = parseFloat(row.dataset.rate);
+          const max  = parseFloat(row.dataset.max);
+          const pct  = (rate / max * 100).toFixed(1);
+          setTimeout(() => {
+            row.querySelector('.tax-bar-fill').style.width = pct + '%';
+          }, i * 100);
+        });
+        taxObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+  const taxSection = document.getElementById('taxBars');
+  if (taxSection) taxObserver.observe(taxSection);
+
+  // ═══════════════════════════════════════════════════════════════
+  // ── LIVE MORTGAGE RATES — powered by Claude AI ───────────────
+  // ═══════════════════════════════════════════════════════════════
+
+  let liveRates = null; // store fetched rates
+
+  function setRatesUI(state) {
+    const dot = document.getElementById('ratesDot');
+    const status = document.getElementById('ratesStatus');
+    if (state === 'loading') {
+      dot.classList.add('loading');
+      status.textContent = 'Fetching...';
+    } else if (state === 'live') {
+      dot.classList.remove('loading');
+      status.textContent = 'Live';
+    } else {
+      dot.classList.add('loading');
+      status.textContent = 'Unavailable';
+    }
+  }
+
+  function renderRates(data) {
+    // data: { r30, r15, r20, rarm } — each { rate, apr, change }
+    function changeHTML(val) {
+      if (!val && val !== 0) return '';
+      const sign = val > 0 ? '+' : '';
+      const cls  = val > 0 ? 'rate-up' : val < 0 ? 'rate-down' : 'rate-flat';
+      const arrow = val > 0 ? '▲' : val < 0 ? '▼' : '—';
+      return `<span class="rate-cell-change ${cls}">${arrow} ${sign}${val.toFixed(2)}%</span>`;
+    }
+
+    const fields = [
+      { id: 'r30',  key: 'r30'  },
+      { id: 'r15',  key: 'r15'  },
+      { id: 'r20',  key: 'r20'  },
+      { id: 'rarm', key: 'rarm' },
+    ];
+
+    fields.forEach(f => {
+      const d = data[f.key];
+      if (!d) return;
+      document.getElementById(f.id).textContent = d.rate.toFixed(2) + '%';
+      document.getElementById(f.id + 'c').outerHTML = changeHTML(d.change) +
+        `<span id="${f.id}c" class="rate-cell-change ${d.change > 0 ? 'rate-up' : d.change < 0 ? 'rate-down' : 'rate-flat'}">${d.change > 0 ? '▲' : d.change < 0 ? '▼' : '—'} ${d.change >= 0 ? '+' : ''}${(d.change||0).toFixed(2)}%</span>`;
+      // simpler approach:
+      const cEl = document.getElementById(f.id + 'c');
+      if (cEl) {
+        const c = d.change || 0;
+        cEl.className = 'rate-cell-change ' + (c > 0 ? 'rate-up' : c < 0 ? 'rate-down' : 'rate-flat');
+        cEl.textContent = (c > 0 ? '▲ +' : c < 0 ? '▼ ' : '— ') + c.toFixed(2) + '%';
+      }
+      const aEl = document.getElementById(f.id + 'a');
+      if (aEl) aEl.textContent = d.apr ? 'APR ' + d.apr.toFixed(2) + '%' : '';
+    });
+
+    liveRates = data;
+
+    // Timestamp
+    const now = new Date();
+    document.getElementById('ratesTimestamp').textContent =
+      'Updated ' + now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'});
+  }
+
+  async function fetchMortgageRates() {
+    setRatesUI('loading');
+    document.getElementById('ratesError').style.display = 'none';
+
+    try {
+      const today = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+      const prompt = `You are a mortgage data assistant. Today is ${today}. Return ONLY valid JSON (no markdown, no explanation) with current US national average mortgage rates in this exact format:
+{
+  "r30":  { "rate": 7.02, "apr": 7.08, "change": -0.04 },
+  "r15":  { "rate": 6.45, "apr": 6.53, "change": -0.03 },
+  "r20":  { "rate": 6.78, "apr": 6.85, "change": -0.02 },
+  "rarm": { "rate": 6.21, "apr": 7.14, "change":  0.05 }
+}
+"rate" is the interest rate %, "apr" is APR %, "change" is week-over-week change in percentage points (positive = up, negative = down). Use the most current Freddie Mac or Bankrate data you know. Return ONLY the JSON object.`;
+
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 300,
+          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      const data = await response.json();
+      const textBlocks = (data.content || []).filter(b => b.type === 'text').map(b => b.text).join('');
+
+      // Extract JSON
+      const jsonMatch = textBlocks.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error('No JSON in response');
+      const rates = JSON.parse(jsonMatch[0]);
+
+      // Validate structure
+      if (!rates.r30 || !rates.r15 || !rates.r20 || !rates.rarm) throw new Error('Missing rate fields');
+
+      renderRates(rates);
+      setRatesUI('live');
+    } catch (err) {
+      console.error('Rates fetch error:', err);
+      setRatesUI('error');
+      document.getElementById('ratesError').style.display = 'block';
+      // Clear skeletons
+      ['r30','r15','r20','rarm'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = '—';
+      });
+    }
+  }
+
+  // ── Apply rate to calculator ──────────────────────────────────
+  document.getElementById('ratesApplyBtn').addEventListener('click', () => {
+    if (!liveRates || !liveRates.r30) return;
+    document.getElementById('interestRate').value = liveRates.r30.rate.toFixed(2);
+    calculate();
+    document.getElementById('interestRate').style.borderColor = 'var(--navy)';
+    setTimeout(() => {
+      document.getElementById('interestRate').style.borderColor = '';
+    }, 1200);
+  });
+
+  // ── Fetch on load + auto-refresh every 30 minutes ────────────
+  fetchMortgageRates();
+  setInterval(fetchMortgageRates, 30 * 60 * 1000);
+
+</script>
+
+</body>
+</html>

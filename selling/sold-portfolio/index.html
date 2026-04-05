@@ -1,1 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recent Sales Portfolio | Morandi Properties</title>
+  <meta name="description" content="Browse Ray Morandi's recent sales across Orland Park, Homer Glen, Frankfort, Mokena, New Lenox and more. Top 1% Illinois agent with $180M+ in closed sales.">
+  <link rel="canonical" href="https://www.morandiproperties.com/recent-sales">
 
+  <!-- ─── Schema Markup ─────────────────────────────────────────────────────
+       RealEstateAgent: signals Ray's identity, credentials, and service area
+       to Google, Bing, and AI Overviews (ChatGPT, Perplexity, etc.)
+       ItemList: marks up the top sales as structured sold-property records —
+       eligible for rich results and AI citation as proof of production.
+  ──────────────────────────────────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "RealEstateAgent",
+        "@id": "https://www.morandiproperties.com/#agent",
+        "name": "Ray Morandi",
+        "url": "https://www.morandiproperties.com",
+        "telephone": "+17085166666",
+        "email": "ray@morandiproperties.com", /* REPLACE with actual email */
+        "image": "https://www.morandiproperties.com/images/ray-morandi.jpg", /* REPLACE with actual headshot URL */
+        "description": "Ray Morandi is a Top 1% Illinois real estate agent with $180M+ in closed sales and 20+ years of experience serving Orland Park, Homer Glen, Frankfort, Mokena, Tinley Park, and New Lenox.",
+        "areaServed": [
+          { "@type": "City", "name": "Orland Park", "containedIn": { "@type": "State", "name": "Illinois" } },
+          { "@type": "City", "name": "Homer Glen",  "containedIn": { "@type": "State", "name": "Illinois" } },
+          { "@type": "City", "name": "Frankfort",   "containedIn": { "@type": "State", "name": "Illinois" } },
+          { "@type": "City", "name": "Mokena",      "containedIn": { "@type": "State", "name": "Illinois" } },
+          { "@type": "City", "name": "Tinley Park", "containedIn": { "@type": "State", "name": "Illinois" } },
+          { "@type": "City", "name": "New Lenox",   "containedIn": { "@type": "State", "name": "Illinois" } }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "15715 Wolf Rd",
+          "addressLocality": "Orland Park",
+          "addressRegion": "IL",
+          "postalCode": "60462",
+          "addressCountry": "US"
+        },
+        "sameAs": [
+          "https://www.facebook.com/morandiproperties",   /* REPLACE with actual */
+          "https://www.instagram.com/morandiproperties",  /* REPLACE with actual */
+          "https://www.linkedin.com/in/raymorandi"        /* REPLACE with actual */
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Real Estate Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Selling" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Home Buying" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property Valuation" } }
+          ]
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5.0",    /* REPLACE with actual average */
+          "reviewCount": "200",    /* REPLACE with actual count */
+          "bestRating": "5",
+          "worstRating": "1"
+        }
+      },
+      {
+        "@type": "ItemList",
+        "name": "Ray Morandi Recent Sales — Top Closed Transactions",
+        "description": "A selection of top closed sales by Ray Morandi across the Chicagoland southwest suburbs.",
+        "url": "https://www.morandiproperties.com/recent-sales",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1,  "name": "16110 S Sandy Bank Ct, Homer Glen IL 60491",   "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 2,  "name": "15201 S Mackenzie Dr, Homer Glen IL 60491",    "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 3,  "name": "14403 Iz Brook Dr, Homer Glen IL 60491",       "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 4,  "name": "421 S Sunnyside Ave, Elmhurst IL 60126",       "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 5,  "name": "16152 Syd Creek Dr, Homer Glen IL 60491",      "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 6,  "name": "16110 S Sandy Bank Ct, Homer Glen IL 60491",   "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 7,  "name": "337 Sherlock St, Frankfort IL 60423",          "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 8,  "name": "7831 Northwoods Dr, Frankfort IL 60423",       "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 9,  "name": "16206 Syd Creek Dr, Homer Glen IL 60491",      "url": "https://www.morandiproperties.com/recent-sales" },
+          { "@type": "ListItem", "position": 10, "name": "13887 W Wildwood Ln, Homer Glen IL 60491",     "url": "https://www.morandiproperties.com/recent-sales" }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- DNS prefetch for external resources -->
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://maps.googleapis.com">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+  <!-- MarkerCluster CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+
+  <!-- Gesture Handling CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css"/>
+
+  <!-- Google Fonts — non-render-blocking via media trick -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap"></noscript>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:      #ffffff;
+      --blue-grey:  #b0bec5;
+      --light-bg:   #f4f6f8;
+      --navy:       #1a2d4a;
+      --navy-light: #2e4a6e;
+      --text-muted: #607d8b;
+      --line:       #dce3e8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
+
+    /* ─── Header ─────────────────────────────────────────── */
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc, #b0bec5); }
+    .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
+    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,.18); }
+    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color .2s; }
+    .nav-link:hover { color: var(--navy-light); }
+    .nav-link.active { border-bottom: 2px solid var(--navy); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,.15); min-width: 180px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 100; }
+    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background .15s; }
+    .dropdown-menu a:hover { background: #eceff1; }
+    .cta-btn { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white); background: var(--navy); text-decoration: none; padding: 10px 20px; margin-left: 12px; white-space: nowrap; transition: background .2s; }
+    .cta-btn:hover { background: var(--navy-light); }
+    .hamburger-btn { display: none; flex-direction: column; gap: 5px; align-items: flex-start; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all .25s ease; }
+    .hamburger-btn span:nth-child(1) { width: 24px; }
+    .hamburger-btn span:nth-child(2) { width: 17px; }
+    .hamburger-btn span:nth-child(3) { width: 24px; }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
+    .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
+    .mobile-nav-cta { margin-top: 28px; }
+    .mobile-nav-cta a { font-family: 'Barlow', sans-serif !important; font-size: 13px !important; font-weight: 600 !important; background: var(--navy) !important; color: var(--white) !important; padding: 13px 28px !important; letter-spacing: .1em !important; }
+
+    /* ─── Portfolio ───────────────────────────────────────── */
+    .portfolio-section { background: var(--light-bg); padding: 48px 40px 80px; }
+    .portfolio-header { max-width: 1100px; margin: 0 auto 28px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .portfolio-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 8px; }
+    .portfolio-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(24px, 3vw, 34px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); }
+    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .f-btn { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; background: var(--white); border: 1px solid var(--line); color: var(--text-muted); padding: 7px 16px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; white-space: nowrap; }
+    .f-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .f-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    .portfolio-wrapper { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 340px; gap: 0; border: 1px solid var(--line); background: var(--white); height: 620px; overflow: hidden; }
+    .map-col { position: relative; height: 100%; }
+    #sold-map { height: 100%; width: 100%; }
+    .list-col { display: flex; flex-direction: column; border-left: 1px solid var(--line); height: 100%; overflow: hidden; }
+    .list-col-header { padding: 18px 20px; background: var(--navy); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+    .list-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--white); }
+    .list-col-count { font-size: 11px; color: var(--blue-grey); letter-spacing: .06em; }
+    .scroll-container { flex: 1; overflow-y: scroll; min-height: 0; }
+    .scroll-container::-webkit-scrollbar { width: 4px; }
+    .scroll-container::-webkit-scrollbar-track { background: var(--light-bg); }
+    .scroll-container::-webkit-scrollbar-thumb { background: var(--line); }
+
+    /* ─── Flip Cards ──────────────────────────────────────── */
+    .flip-feed { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .flip-card { height: 120px; perspective: 1000px; cursor: pointer; flex-shrink: 0; }
+    .flip-card.highlighted .flip-inner { transform: rotateY(180deg); }
+    .flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1); }
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
+    .flip-front { background: var(--light-bg); border: 1px solid var(--line); }
+    .flip-front-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #dce3e8 0%, #b0bec5 100%); display: flex; align-items: center; justify-content: center; }
+    .flip-front-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(26,45,74,.85) 0%, transparent 100%); padding: 10px 12px 8px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .flip-front-address { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .03em; color: var(--white); line-height: 1.15; }
+    .flip-front-city { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--blue-grey); display: block; margin-bottom: 2px; }
+    .flip-front-badge { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white); background: var(--navy-light); padding: 3px 8px; flex-shrink: 0; }
+    .flip-hint { position: absolute; top: 8px; right: 8px; font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white); background: rgba(26,45,74,.6); padding: 2px 7px; opacity: 0; transition: opacity .2s; }
+    .flip-card:hover .flip-hint { opacity: 1; }
+    .flip-back { background: var(--navy); border: 1px solid var(--navy); transform: rotateY(180deg); padding: 14px 16px; display: flex; flex-direction: column; justify-content: space-between; }
+    .flip-back-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .flip-back-address { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 600; letter-spacing: .02em; color: var(--white); line-height: 1.1; }
+    .flip-back-city { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--blue-grey); display: block; margin-bottom: 3px; }
+    .flip-back-price { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 600; color: var(--white); letter-spacing: .02em; text-align: right; flex-shrink: 0; }
+    .flip-back-stats { display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,.1); padding-top: 10px; }
+    .flip-stat { flex: 1; display: flex; flex-direction: column; gap: 2px; padding-right: 10px; border-right: 1px solid rgba(255,255,255,.1); }
+    .flip-stat:last-child { border-right: none; padding-right: 0; padding-left: 10px; }
+    .flip-stat:not(:first-child):not(:last-child) { padding-left: 10px; }
+    .flip-stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; color: var(--white); letter-spacing: .02em; }
+    .flip-stat-lbl { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-grey); }
+
+    /* ─── Stats Bar ───────────────────────────────────────── */
+    .stats-bar { background: var(--navy); padding: 40px; }
+    .stats-bar-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 0 32px; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
+    .stat-item:first-child { padding-left: 0; }
+    .stat-item:last-child { border-right: none; }
+    .stat-val { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 600; color: var(--white); letter-spacing: .02em; display: block; }
+    .stat-lbl { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-top: 6px; display: block; }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+    .site-footer { background: var(--navy); padding: 64px 40px 32px; border-top: 1px solid rgba(255,255,255,.07); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .footer-tagline { font-size: 13px; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
+    .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
+    .footer-address { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,.75); text-align: center; }
+    .footer-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .06em; color: var(--white); text-decoration: none; transition: color .2s; }
+    .footer-phone:hover { color: var(--blue-grey); }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    .footer-social-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); }
+    .footer-social-icons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; }
+    .footer-social-link:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,.75); display: block; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; gap: 16px; flex-wrap: wrap; }
+    .footer-legal { font-size: 11.5px; color: rgba(255,255,255,.35); line-height: 1.6; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: rgba(255,255,255,.7); }
+
+    /* ─── Popup styles ────────────────────────────────────── */
+    .leaflet-popup-content-wrapper { border-radius: 2px !important; box-shadow: 0 4px 16px rgba(26,45,74,.18) !important; border: 1px solid var(--line) !important; padding: 0 !important; overflow: hidden !important; }
+    .leaflet-popup-content { font-family: 'Barlow', sans-serif !important; font-size: 13px !important; color: var(--navy) !important; margin: 0 !important; width: 220px !important; }
+    .popup-sv-img { width: 100%; height: 120px; display: block; object-fit: cover; background: var(--light-bg); }
+    .popup-sv-placeholder { width: 100%; height: 120px; background: linear-gradient(135deg, #dce3e8, #b0bec5); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+    .popup-body { padding: 10px 12px 12px; }
+    .popup-city { font-size: 9px !important; font-weight: 600 !important; letter-spacing: .14em !important; text-transform: uppercase !important; color: var(--blue-grey) !important; display: block !important; margin-bottom: 2px !important; }
+    .popup-address { font-family: 'Barlow Condensed', sans-serif !important; font-size: 15px !important; font-weight: 600 !important; display: block; line-height: 1.15; margin-bottom: 4px; }
+    .popup-price { font-size: 13px; font-weight: 600; color: var(--navy-light); display: block; margin-bottom: 6px; }
+    .popup-badge { display: inline-block !important; font-size: 9px !important; font-weight: 600 !important; letter-spacing: .1em !important; text-transform: uppercase !important; color: var(--navy-light) !important; border: 1px solid var(--navy-light) !important; padding: 2px 7px !important; }
+
+    /* ─── Cluster overrides to match navy theme ──────────── */
+    .marker-cluster-small,
+    .marker-cluster-medium,
+    .marker-cluster-large { background-color: rgba(26,45,74,.25) !important; }
+    .marker-cluster-small div,
+    .marker-cluster-medium div,
+    .marker-cluster-large div { background-color: rgba(26,45,74,.85) !important; color: #fff !important; font-family: 'Barlow Condensed', sans-serif !important; font-size: 13px !important; font-weight: 600 !important; letter-spacing: .04em !important; }
+
+    /* ─── CTA Bands ───────────────────────────────────────── */
+    .cta-band { padding: 64px 40px; }
+    .cta-band--light { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .cta-band--dark  { background: var(--navy); }
+    .cta-band-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .cta-band-text { max-width: 620px; }
+    .cta-band-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 8px; }
+    .cta-band--dark .cta-band-eyebrow { color: var(--blue-grey); }
+    .cta-band-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); margin-bottom: 10px; line-height: 1.1; }
+    .cta-band--dark .cta-band-headline { color: var(--white); }
+    .cta-band-sub { font-size: 14px; line-height: 1.7; color: var(--text-muted); }
+    .cta-band--dark .cta-band-sub { color: rgba(255,255,255,.65); }
+    .cta-band-btn { font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; padding: 16px 32px; white-space: nowrap; flex-shrink: 0; transition: background .2s, color .2s; }
+    .cta-band--light .cta-band-btn { background: var(--navy); color: var(--white); }
+    .cta-band--light .cta-band-btn:hover { background: var(--navy-light); }
+    .cta-band--dark  .cta-band-btn { background: var(--white); color: var(--navy); }
+    .cta-band--dark  .cta-band-btn:hover { background: var(--blue-grey); }
+
+    /* ─── Video Section ───────────────────────────────────── */
+    .video-section { background: var(--white); padding: 72px 40px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 8px; }
+    .section-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(22px, 2.8vw, 32px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); margin-bottom: 36px; }
+    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .video-card { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--line); overflow: hidden; }
+    .video-embed-wrap { position: relative; width: 100%; padding-top: 56.25%; background: var(--light-bg); }
+    .video-embed-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-card-body { padding: 14px 16px 16px; background: var(--white); }
+    .video-card-address { font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: .02em; color: var(--navy); display: block; margin-bottom: 3px; }
+    .video-card-meta { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* ─── Testimonials Section ────────────────────────────── */
+    .testimonials-section { background: var(--light-bg); padding: 72px 40px; border-top: 1px solid var(--line); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .tcard { background: var(--white); border: 1px solid var(--line); padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+    .tcard-stars { display: flex; gap: 3px; }
+    .tcard-star { width: 14px; height: 14px; fill: #f4b400; }
+    .tcard-text { font-size: 13.5px; line-height: 1.7; color: #3d4f5c; flex: 1; }
+    .tcard-footer { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+    .tcard-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 600; color: var(--white); flex-shrink: 0; }
+    .tcard-meta { display: flex; flex-direction: column; gap: 1px; }
+    .tcard-name { font-size: 13px; font-weight: 600; color: var(--navy); letter-spacing: .01em; }
+    .tcard-source { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
+    .tcard-google-icon { margin-left: auto; flex-shrink: 0; }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
+      .hamburger-btn { display: flex; grid-column: 1; }
+      .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
+      .nav-row { display: none; }
+      .portfolio-section { padding: 36px 24px 60px; }
+      .portfolio-wrapper { grid-template-columns: 1fr; height: auto; }
+      .map-col { height: 380px; }
+      .list-col { height: 500px; border-left: none; border-top: 1px solid var(--line); }
+      .stats-bar { padding: 40px 24px; }
+      .stats-bar-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .stat-item { border-right: none !important; padding: 0; }
+      .site-footer { padding: 52px 24px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-social { align-items: flex-start; }
+      .footer-social-icons { justify-content: flex-start; }
+      .footer-contact { align-items: flex-start; text-align: left; }
+      .footer-address { text-align: left; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .video-section, .testimonials-section { padding: 52px 24px; }
+      .video-grid { grid-template-columns: 1fr; gap: 20px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .stats-bar-inner { grid-template-columns: 1fr 1fr; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header" role="banner">
+  <div class="logo-row">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="/" class="logo-placeholder">Morandi Properties</a>
+  </div>
+  <nav class="nav-row" role="navigation" aria-label="Primary navigation">
+    <a href="/"             class="nav-link">Home</a>
+    <a href="/sale"         class="nav-link">Our Listings</a>
+    <a href="/mlssearch"    class="nav-link">MLS Search</a>
+    <a href="/sell"         class="nav-link">Selling</a>
+    <a href="/recent-sales" class="nav-link active">Recent Sales</a>
+    <a href="/reviews"      class="nav-link">Reviews</a>
+    <a href="/team-1"       class="nav-link">The Team</a>
+    <div class="nav-dropdown">
+      <a href="/clienttools" class="nav-link">Tools ▾</a>
+      <div class="dropdown-menu">
+        <a href="/mortgagecalculator">Mortgage Calculator</a>
+        <a href="/valuationrequest">Valuation Request</a>
+        <a href="/emailalerts">Email Alerts</a>
+        <a href="/mlssearch">MLS Search</a>
+        <a href="/openhouse">Open House</a>
+      </div>
+    </div>
+    <a href="/contact" class="nav-link">Contact</a>
+    <a href="/mlssearch" class="cta-btn">Check Out Our Listings</a>
+  </nav>
+</header>
+
+<main role="main">
+<section class="portfolio-section">
+  <div class="portfolio-header">
+    <div class="portfolio-header-left">
+      <p class="portfolio-eyebrow">Signature Sales</p>
+      <h2 class="portfolio-headline">Check Out Our Last 100 Sales</h2>
+    </div>
+    <div class="filter-row">
+      <button class="f-btn active" onclick="filterCards('1M+', this)">$1M+</button>
+      <button class="f-btn" onclick="filterCards('750k', this)">$750K–$999K</button>
+      <button class="f-btn" onclick="filterCards('500k', this)">$500K–$749K</button>
+    </div>
+  </div>
+
+  <div class="portfolio-wrapper">
+    <div class="map-col"><div id="sold-map"></div></div>
+    <div class="list-col">
+      <div class="list-col-header">
+        <span class="list-col-title">Top 25 Sales</span>
+        <span class="list-col-count" id="prop-count">25 properties</span>
+      </div>
+      <div class="scroll-container" id="listings-feed"></div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item"><span class="stat-val">$180M+</span><span class="stat-lbl">In Closed Sales</span></div>
+    <div class="stat-item"><span class="stat-val">500+</span><span class="stat-lbl">Families Helped</span></div>
+    <div class="stat-item"><span class="stat-val">Top 1%</span><span class="stat-lbl">Agents in Illinois</span></div>
+    <div class="stat-item"><span class="stat-val">20 Yr</span><span class="stat-lbl">Local Experience</span></div>
+  </div>
+</div>
+</main>
+
+<!-- ─── CTA 1: Current Listings ──────────────────────── -->
+<div class="cta-band cta-band--light">
+  <div class="cta-band-inner">
+    <div class="cta-band-text">
+      <p class="cta-band-eyebrow">What's Available Now</p>
+      <h2 class="cta-band-headline">Browse Our Current Listings</h2>
+      <p class="cta-band-sub">From starter homes to luxury estates — see every active property Ray's team has on the market across the Chicagoland southwest suburbs.</p>
+    </div>
+    <a href="/sale" class="cta-band-btn">See Available Listings</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     VIDEO WALKTHROUGHS
+     Replace each VIDEO_ID_HERE with the YouTube video ID.
+     Example: https://youtu.be/dQw4w9WgXcQ → ID is dQw4w9WgXcQ
+     Also update the address and sale price text below each video.
+════════════════════════════════════════════════════════ -->
+<section class="video-section">
+  <div class="section-inner">
+    <p class="section-eyebrow">Inside the Sale</p>
+    <h2 class="section-headline">Property Walkthroughs</h2>
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-embed-wrap">
+          <!-- REPLACE VIDEO_ID_HERE with your YouTube video ID -->
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
+            title="Walkthrough — 16110 S Sandy Bank Ct, Homer Glen"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="video-card-body">
+          <span class="video-card-address">16110 S Sandy Bank Ct — Homer Glen</span> <!-- REPLACE address -->
+          <span class="video-card-meta">Sold · $1,346,597</span> <!-- REPLACE price -->
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-embed-wrap">
+          <!-- REPLACE VIDEO_ID_HERE with your YouTube video ID -->
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
+            title="Walkthrough — 15201 S Mackenzie Dr, Homer Glen"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="video-card-body">
+          <span class="video-card-address">15201 S Mackenzie Dr — Homer Glen</span> <!-- REPLACE address -->
+          <span class="video-card-meta">Sold · $1,315,529</span> <!-- REPLACE price -->
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-embed-wrap">
+          <!-- REPLACE VIDEO_ID_HERE with your YouTube video ID -->
+          <iframe
+            src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
+            title="Walkthrough — 421 S Sunnyside Ave, Elmhurst"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+        <div class="video-card-body">
+          <span class="video-card-address">421 S Sunnyside Ave — Elmhurst</span> <!-- REPLACE address -->
+          <span class="video-card-meta">Sold · $1,149,000</span> <!-- REPLACE price -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     GOOGLE REVIEWS
+     Replace the reviewer name, initials, review text, and
+     date on each card with real Google reviews.
+     To get review text: Google "Morandi Properties" →
+     click Reviews → copy verbatim.
+════════════════════════════════════════════════════════ -->
+<section class="testimonials-section">
+  <div class="section-inner">
+    <p class="section-eyebrow">What Clients Are Saying</p>
+    <h2 class="section-headline">Google Reviews</h2>
+    <div class="testimonials-grid">
+
+      <!-- REVIEW 1 — replace all placeholder text -->
+      <div class="tcard">
+        <div class="tcard-stars">
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT. Copy directly from Ray's Google Business Profile to keep it authentic and verbatim.</p>
+        <div class="tcard-footer">
+          <div class="tcard-avatar">AB</div> <!-- REPLACE initials -->
+          <div class="tcard-meta">
+            <span class="tcard-name">Reviewer Name</span> <!-- REPLACE -->
+            <span class="tcard-source">Google Review · Month Year</span> <!-- REPLACE date -->
+          </div>
+          <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+      </div>
+
+      <!-- REVIEW 2 -->
+      <div class="tcard">
+        <div class="tcard-stars">
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
+        <div class="tcard-footer">
+          <div class="tcard-avatar">CD</div>
+          <div class="tcard-meta">
+            <span class="tcard-name">Reviewer Name</span>
+            <span class="tcard-source">Google Review · Month Year</span>
+          </div>
+          <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+      </div>
+
+      <!-- REVIEW 3 -->
+      <div class="tcard">
+        <div class="tcard-stars">
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
+        <div class="tcard-footer">
+          <div class="tcard-avatar">EF</div>
+          <div class="tcard-meta">
+            <span class="tcard-name">Reviewer Name</span>
+            <span class="tcard-source">Google Review · Month Year</span>
+          </div>
+          <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+      </div>
+
+      <!-- REVIEW 4 -->
+      <div class="tcard">
+        <div class="tcard-stars">
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
+        <div class="tcard-footer">
+          <div class="tcard-avatar">GH</div>
+          <div class="tcard-meta">
+            <span class="tcard-name">Reviewer Name</span>
+            <span class="tcard-source">Google Review · Month Year</span>
+          </div>
+          <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+      </div>
+
+      <!-- REVIEW 5 -->
+      <div class="tcard">
+        <div class="tcard-stars">
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
+        <div class="tcard-footer">
+          <div class="tcard-avatar">IJ</div>
+          <div class="tcard-meta">
+            <span class="tcard-name">Reviewer Name</span>
+            <span class="tcard-source">Google Review · Month Year</span>
+          </div>
+          <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+      </div>
+
+      <!-- REVIEW 6 -->
+      <div class="tcard">
+        <div class="tcard-stars">
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
+        <div class="tcard-footer">
+          <div class="tcard-avatar">KL</div>
+          <div class="tcard-meta">
+            <span class="tcard-name">Reviewer Name</span>
+            <span class="tcard-source">Google Review · Month Year</span>
+          </div>
+          <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA 2: Contact ───────────────────────────────── -->
+<div class="cta-band cta-band--light">
+  <div class="cta-band-inner">
+    <div class="cta-band-text">
+      <p class="cta-band-eyebrow">Let's Get Started</p>
+      <h2 class="cta-band-headline">Ready to Buy or Sell? Let's Talk.</h2>
+      <p class="cta-band-sub">Ray has helped 500+ Chicagoland families navigate one of the biggest decisions of their lives. Reach out today for a no-pressure conversation about your goals.</p>
+    </div>
+    <a href="/contact" class="cta-band-btn">Contact Ray</a>
+  </div>
+</div>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">Morandi Properties</a>
+        <p class="footer-tagline">Helping Chicagoland families buy and sell homes in Orland Park, Tinley Park, Frankfort, Mokena, and New Lenox since 2006.</p>
+      </div>
+      <div class="footer-contact">
+        <span class="footer-contact-label">Get In Touch</span>
+        <p class="footer-address">15715 Wolf Rd<br>Orland Park, IL 60462</p>
+        <a href="tel:+17085166666" class="footer-phone">(708) 516-6666</a>
+      </div>
+      <div class="footer-social">
+        <span class="footer-social-label">Follow Along</span>
+        <div class="footer-social-icons">
+          <a href="#" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">&copy; 2026 Morandi Properties. All rights reserved.<br>Ray Morandi — Licensed Illinois Real Estate Broker</p>
+      <nav class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="/contact">Contact</a>
+        <a href="/mlssearch">MLS Search</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+  <a href="/">Home</a><a href="/sale">Our Listings</a><a href="/mlssearch">MLS Search</a>
+  <a href="/sell">Selling</a><a href="/recent-sales">Recent Sales</a><a href="/reviews">Reviews</a>
+  <a href="/team-1">The Team</a><a href="/clienttools">Tools</a><a href="/contact">Contact</a>
+  <div class="mobile-nav-cta"><a href="/mlssearch">Check Out Our Listings</a></div>
+</nav>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<!-- MarkerCluster JS -->
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
+<!-- Gesture Handling JS -->
+<script src="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.js" defer></script>
+
+<script>
+  /* ─── Mobile nav ─────────────────────────────────────── */
+  const hBtn = document.getElementById('hamburgerBtn');
+  const mNav = document.getElementById('mobileNav');
+  const mCls = document.getElementById('mobileNavClose');
+  function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
+  hBtn.addEventListener('click', openNav);
+  mCls.addEventListener('click', closeNav);
+  mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+
+  /*
+   * ── Sales data ───────────────────────────────────────────
+   * Columns: [addr, city, zip, price, lat, lng, photo]
+   *
+   * ADDING PHOTOS — paste the image URL into the 7th slot:
+   *   ["16110 S Sandy Bank Ct", "Homer Glen", "60491", 1346597, 41.6089,-87.9578, "https://...jpg"],
+   * Leave the quotes empty ("") for any property without a photo yet.
+   * The popup will show a clean placeholder until a URL is added.
+   */
+  const ALL = [
+    ["19602 Swanberg Ln",           "Mokena",         "60448", 440000,  41.5248,-87.8651, ""],
+    ["21726 Higley Ln",             "Frankfort",      "60423", 490000,  41.4963,-87.8459, ""],
+    ["18409 S Haas Rd",             "Mokena",         "60448", 1000000, 41.5219,-87.8634, ""],
+    ["14848 W Ginger Ln",           "Homer Glen",     "60491", 689900,  41.6098,-87.9512, ""],
+    ["0 C Rte #52",                 "Manhattan",      "60442", 250000,  41.4225,-87.9856, ""],
+    ["(Undisclosed)",               "Manhattan",      "60442", 220000,  41.4198,-87.9901, ""],
+    ["18134 Martin Ave",            "Homewood",       "60430", 210400,  41.5598,-87.6612, ""],
+    ["7767 Bristol Park Dr",        "Tinley Park",    "60477", 260000,  41.5731,-87.7954, ""],
+    ["2451 Hawthorne Rd",           "Homewood",       "60430", 280000,  41.5621,-87.6589, ""],
+    ["16813 81st Ave",              "Tinley Park",    "60477", 219900,  41.5698,-87.8001, ""],
+    ["20277 Brendan St",            "Frankfort",      "60423", 700000,  41.5019,-87.8512, ""],
+    ["11636 Lake Shore Dr",         "Orland Park",    "60467", 490000,  41.6034,-87.8823, ""],
+    ["9134 S Pulaski Rd",           "Oak Lawn",       "60453", 191500,  41.7287,-87.7234, ""],
+    ["18521 Homewood Ave",          "Homewood",       "60430", 279000,  41.5578,-87.6634, ""],
+    ["421 S Sunnyside Ave",         "Elmhurst",       "60126", 1149000, 41.8921,-87.9367, ""],
+    ["14403 Iz Brook Dr",           "Homer Glen",     "60491", 1099900, 41.6023,-87.9478, ""],
+    ["337 Sherlock St",             "Frankfort",      "60423", 950000,  41.4978,-87.8534, ""],
+    ["17140 Deer Run Dr",           "Orland Park",    "60467", 715000,  41.6089,-87.8867, ""],
+    ["1190 Sierra Rdg",             "New Lenox",      "60451", 781850,  41.5089,-87.9723, ""],
+    ["935 N Butternut Cir",         "Frankfort",      "60423", 765000,  41.4991,-87.8478, ""],
+    ["NE Cornr Kankakee & Smith",   "Manhattan",      "60442", 103000,  41.4267,-87.9812, ""],
+    ["2165 High View Rd",           "New Lenox",      "60451", 529900,  41.5112,-87.9698, ""],
+    ["19612 Crested Butte Ln",      "Mokena",         "60448", 470000,  41.5234,-87.8678, ""],
+    ["17020 Delevan St",            "Lockport",       "60441", 342500,  41.5901,-88.0423, ""],
+    ["307 N Meadow St",             "Grant Park",     "60940", 160000,  41.2378,-87.6456, ""],
+    ["9366 Fox Run Cir",            "Frankfort",      "60423", 410000,  41.4945,-87.8501, ""],
+    ["762 Lake Rd",                 "New Lenox",      "60451", 249900,  41.5067,-87.9745, ""],
+    ["1911 W Crestview Cir",        "Romeoville",     "60446", 290000,  41.6478,-88.0934, ""],
+    ["15606 W Sweedler Rd",         "Manhattan",      "60442", 1000000, 41.4312,-87.9934, ""],
+    ["9100 Oakwood Dr",             "Tinley Park",    "60487", 435000,  41.5812,-87.8123, ""],
+    ["1030 Hummingbird Ln",         "Peotone",        "60468", 454000,  41.3312,-87.7834, ""],
+    ["14011 Creek Crossing Dr",     "Orland Park",    "60467", 495000,  41.6012,-87.8845, ""],
+    ["16035 S Parker Rd",           "Homer Glen",     "60491", 699000,  41.6056,-87.9534, ""],
+    ["11315 Sycamore Ln",           "Palos Hills",    "60465", 248000,  41.6978,-87.8312, ""],
+    ["669 Olde Oak Dr",             "Bourbonnais",    "60914", 340000,  41.1623,-87.8845, ""],
+    ["18140 Buckingham Dr",         "Orland Park",    "60467", 720000,  41.6045,-87.8812, ""],
+    ["14149 S Chicory Trl",         "Homer Glen",     "60491", 716500,  41.6034,-87.9501, ""],
+    ["15175 Rodao Ln",              "Orland Park",    "60467", 810000,  41.6067,-87.8834, ""],
+    ["7833 W 100th Pl",             "Palos Hills",    "60465", 425000,  41.6945,-87.8345, ""],
+    ["8060 W Harvest Dr",           "Frankfort",      "60423", 445000,  41.4934,-87.8523, ""],
+    ["16417 Francis Ct",            "Orland Park",    "60467", 305000,  41.6023,-87.8856, ""],
+    ["22736 Parkview Ln",           "Frankfort",      "60423", 115000,  41.5034,-87.8467, ""],
+    ["23039 Lakeview Estates Blvd", "Frankfort",      "60423", 115000,  41.5056,-87.8445, ""],
+    ["22902 Maddeline Ln",          "Frankfort",      "60423", 115000,  41.5045,-87.8490, ""],
+    ["14129 S Chicory Trl",         "Homer Glen",     "60491", 740000,  41.6028,-87.9489, ""],
+    ["20358 Taliesin Way",          "Frankfort",      "60423", 565000,  41.5001,-87.8545, ""],
+    ["1262 Rutgers Dr",             "Woodridge",      "60517", 535000,  41.7434,-88.0312, ""],
+    ["16437 W Deerwood Dr",         "Lockport",       "60441", 685000,  41.5934,-88.0467, ""],
+    ["27719 W Rowe Ave",            "Spring Grove",   "60081", 198000,  42.4423,-88.2312, ""],
+    ["669 Bridgeman Ln",            "Romeoville",     "60446", 415000,  41.6512,-88.0912, ""],
+    ["8425 Nielsen Dr",             "Tinley Park",    "60487", 485000,  41.5834,-87.8145, ""],
+    ["18538 May St",                "Homewood",       "60430", 323730,  41.5589,-87.6601, ""],
+    ["12503 W Manor Dr",            "Homer Glen",     "60491", 500000,  41.6012,-87.9556, ""],
+    ["20277 Brendan St (land)",     "Frankfort",      "60423", 95000,   41.5023,-87.8519, ""],
+    ["13868 S Penny Ln",            "Homer Glen",     "60491", 615000,  41.6045,-87.9523, ""],
+    ["19921 Foxborough Dr",         "Mokena",         "60448", 749900,  41.5256,-87.8634, ""],
+    ["15201 S Mackenzie Dr",        "Homer Glen",     "60491", 1315529, 41.6078,-87.9567, ""],
+    ["300 Village Cir Unit 503",    "Willow Springs", "60480", 315000,  41.7345,-87.8712, ""],
+    ["16106 Syd Creek Dr",          "Lockport",       "60491", 825000,  41.5956,-88.0489, ""],
+    ["16228 Goose Lake Dr",         "Crest Hill",     "60403", 399990,  41.5734,-88.1023, ""],
+    ["9032 W 140th St",             "Orland Park",    "60462", 185000,  41.6145,-87.8934, ""],
+    ["16110 S Sandy Bank Ct",       "Homer Glen",     "60491", 1346597, 41.6089,-87.9578, ""],
+    ["8530 S Kolin Ave",            "Chicago",        "60652", 310000,  41.7356,-87.7234, ""],
+    ["17748 Tulip Ln",              "Tinley Park",    "60477", 525000,  41.5756,-87.7978, ""],
+    ["304 Hillside Rd",             "New Lenox",      "60451", 210000,  41.5134,-87.9712, ""],
+    ["1220 Lee Ave",                "Melrose Park",   "60160", 349000,  41.9012,-87.8578, ""],
+    ["7831 Northwoods Dr",          "Frankfort",      "60423", 922560,  41.4956,-87.8512, ""],
+    ["438 N Catherine Ave",         "La Grange Park", "60526", 772500,  41.8334,-87.8712, ""],
+    ["13252 S Country Club Ct",     "Palos Heights",  "60463", 265000,  41.6623,-87.8034, ""],
+    ["147 Hawthorne Ln",            "New Lenox",      "60451", 265000,  41.5098,-87.9756, ""],
+    ["8924 Palos Springs Dr",       "Orland Park",    "60462", 466505,  41.6123,-87.8912, ""],
+    ["14037 Catherine Dr",          "Orland Park",    "60462", 425500,  41.6112,-87.8923, ""],
+    ["20322 Taliesin Way",          "Frankfort",      "60423", 579000,  41.5012,-87.8556, ""],
+    ["7458 W Benton Dr",            "Frankfort",      "60423", 364500,  41.4967,-87.8534, ""],
+    ["2644 Par Four Ln",            "Joliet",         "60436", 218900,  41.5234,-88.1423, ""],
+    ["13007 W Beaver Lake Dr",      "Homer Glen",     "60491", 650000,  41.6034,-87.9545, ""],
+    ["14525 Sanctuary Dr",          "Orland Park",    "60467", 119900,  41.6056,-87.8878, ""],
+    ["1917 Carriage Ln",            "Joliet",         "60433", 280000,  41.5212,-88.1367, ""],
+    ["11628 Kaup Ln",               "Orland Park",    "60467", 563000,  41.6023,-87.8834, ""],
+    ["5659 W Cornelia Ave",         "Chicago",        "60634", 435000,  41.9534,-87.7656, ""],
+    ["16141 Hackney Dr",            "Orland Park",    "60467", 339900,  41.6034,-87.8845, ""],
+    ["16206 Syd Creek Dr",          "Homer Glen",     "60491", 903500,  41.6067,-87.9589, ""],
+    ["17523 S Gilbert Dr",          "Lockport",       "60441", 310000,  41.5912,-88.0445, ""],
+    ["19972 Lily Ct",               "Frankfort",      "60423", 647500,  41.4989,-87.8523, ""],
+    ["1010 Rocky Hill Cir",         "Joliet",         "60432", 285000,  41.5189,-88.1389, ""],
+    ["10S280 Grant St",             "Burr Ridge",     "60527", 345000,  41.7523,-87.9178, ""],
+    ["16152 Syd Creek Dr",          "Homer Glen",     "60491", 1125208, 41.6056,-87.9601, ""],
+    ["15316 W Pinewood Rd",         "Lockport",       "60441", 314000,  41.5923,-88.0412, ""],
+    ["11603 Brookwood Dr",          "Orland Park",    "60467", 455000,  41.6012,-87.8867, ""],
+    ["5629 James Dr",               "Oak Forest",     "60452", 298000,  41.6134,-87.7534, ""],
+    ["15705 Orlan Brook Dr",        "Orland Park",    "60462", 225000,  41.6134,-87.8956, ""],
+    ["7540 S Hamilton Ave",         "Chicago",        "60620", 272900,  41.7612,-87.6534, ""],
+    ["13887 W Wildwood Ln",         "Homer Glen",     "60491", 939000,  41.6056,-87.9512, ""],
+    ["1106 Kinmonth Dr",            "Joliet",         "60433", 190000,  41.5201,-88.1345, ""],
+    ["11515 Settlers Pond Way",     "Orland Park",    "60467", 240500,  41.6001,-87.8889, ""],
+    ["15201 S Mackenzie Dr #21",    "Homer Glen",     "60491", 127400,  41.6082,-87.9571, ""],
+    ["15123 W Quincy Cir",          "Manhattan",      "60442", 265000,  41.4289,-87.9878, ""],
+    ["10 Silo Ridge Rd W",          "Orland Park",    "60467", 600000,  41.6045,-87.8901, ""],
+    ["16145 Hackney Dr",            "Orland Park",    "60467", 299900,  41.6038,-87.8849, ""],
+    ["7935 Richardson Ln",          "Tinley Park",    "60487", 338000,  41.5789,-87.8167, ""],
+  ];
+
+  /* ─── Helpers ─────────────────────────────────────────── */
+  const fmt  = p => '$' + p.toLocaleString();
+  const tier = p => p >= 1000000 ? 'Platinum Sale' : p >= 750000 ? 'Luxury Estate' : p >= 500000 ? 'Premium Sale' : 'Closed Sale';
+  const cat  = p => p >= 1000000 ? '1M+' : p >= 750000 ? '750k' : p >= 500000 ? '500k' : 'other';
+
+  // No API key needed — photos come from the data array above (index 6).
+
+  /* ─── Sort & slice ───────────────────────────────────── */
+  const SORTED = [...ALL].sort((a, b) => b[3] - a[3]);
+  const TOP25  = SORTED.slice(0, 25);
+
+  /* ─── Single uniform pin SVG ─────────────────────────── */
+  function mkIcon(active) {
+    const fill = active ? '#2e4a6e' : '#1a2d4a';
+    const sz   = active ? 34 : 26;
+    const h    = Math.round(sz * 1.3);
+    return L.divIcon({
+      className: '',
+      html: `<svg width="${sz}" height="${h}" viewBox="0 0 30 39" xmlns="http://www.w3.org/2000/svg"
+               style="filter:drop-shadow(0 2px 5px rgba(0,0,0,.35));display:block;">
+               <path d="M15 0C6.716 0 0 6.716 0 15c0 8.284 15 24 15 24S30 23.284 30 15C30 6.716 23.284 0 15 0z" fill="${fill}"/>
+               <circle cx="15" cy="14" r="5.5" fill="white" opacity="0.9"/>
+             </svg>`,
+      iconSize:   [sz, h],
+      iconAnchor: [sz / 2, h],
+      popupAnchor:[0, -h]
+    });
+  }
+
+  /* ─── Init map with gesture handling ────────────────── */
+  window.addEventListener('load', function () {
+    const map = L.map('sold-map', {
+      gestureHandling: true,   // ctrl+scroll on desktop / two-finger on mobile
+      zoomControl:     true,
+      scrollWheelZoom: true,   // enabled — gesture plugin manages the UX
+    }).setView([41.59, -87.95], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    /* ─── MarkerCluster group ─────────────────────────── */
+    const clusterGroup = L.markerClusterGroup({
+      maxClusterRadius: 60,
+      spiderfyOnMaxZoom: true,
+      showCoverageOnHover: false,
+      zoomToBoundsOnClick: true,
+    });
+
+    /* ─── Build popup HTML ───────────────────────────── */
+    function buildPopup(addr, city, zip, price, photo) {
+      const imgHtml = photo
+        ? `<img class="popup-sv-img" src="${photo}" alt="Photo of ${addr}" loading="lazy" onerror="this.parentElement.querySelector('.popup-sv-placeholder').style.display='flex';this.style.display='none'"><div class="popup-sv-placeholder" style="display:none">Photo Coming Soon</div>`
+        : `<div class="popup-sv-placeholder">Photo Coming Soon</div>`;
+      return `
+        ${imgHtml}
+        <div class="popup-body">
+          <span class="popup-city">${city}, IL ${zip}</span>
+          <span class="popup-address">${addr}</span>
+          <span class="popup-price">${fmt(price)}</span>
+          <span class="popup-badge">${tier(price)}</span>
+        </div>`;
+    }
+
+    /* ─── Add all 100 pins to cluster ───────────────── */
+    const top25AddrSet = new Set(TOP25.map(s => s[0] + '|' + s[2]));
+    const cardMarkers  = {}; // top25 rank → marker
+
+    ALL.forEach(s => {
+      const [addr, city, zip, price, lat, lng, photo] = s;
+      const mk = L.marker([lat, lng], { icon: mkIcon(false) });
+      mk.bindPopup(buildPopup(addr, city, zip, price, photo), { maxWidth: 240 });
+      clusterGroup.addLayer(mk);
+      const rank = TOP25.findIndex(t => t[0] === addr && t[2] === zip);
+      if (rank >= 0) cardMarkers[rank] = mk;
+    });
+
+    map.addLayer(clusterGroup);
+
+    /* ─── Card interactions ──────────────────────────── */
+    let activeRank = null;
+
+    function filterCards(c, btnEl) {
+      document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+
+      // Reset previously active marker
+      if (activeRank !== null && cardMarkers[activeRank]) {
+        cardMarkers[activeRank].setIcon(mkIcon(false));
+      }
+      activeRank = null;
+
+      const feed    = document.getElementById('listings-feed');
+      const countEl = document.getElementById('prop-count');
+      feed.innerHTML = '';
+
+      const filtered = TOP25.map((s, r) => ({ s, r })).filter(({ s }) => c === 'all' || cat(s[3]) === c);
+      countEl.textContent = filtered.length + ' properties';
+
+      const ff = document.createElement('div');
+      ff.className = 'flip-feed';
+
+      filtered.forEach(({ s, r }) => {
+        const [addr, city, zip, price, lat, lng] = s;
+        const card = document.createElement('div');
+        card.className = 'flip-card';
+        card.id = 'card-' + r;
+        card.innerHTML = `
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="flip-front-placeholder">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1a2d4a" stroke-width="1" opacity="0.3">
+                  <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+                  <path d="M9 21V12h6v9"/>
+                </svg>
+              </div>
+              <div class="flip-hint">Hover for details</div>
+              <div class="flip-front-overlay">
+                <div>
+                  <span class="flip-front-city">${city}, IL</span>
+                  <span class="flip-front-address">${addr}</span>
+                </div>
+                <span class="flip-front-badge">${tier(price)}</span>
+              </div>
+            </div>
+            <div class="flip-back">
+              <div class="flip-back-top">
+                <div>
+                  <span class="flip-back-city">${city}, IL ${zip}</span>
+                  <span class="flip-back-address">${addr}</span>
+                </div>
+                <span class="flip-back-price">${fmt(price)}</span>
+              </div>
+              <div class="flip-back-stats">
+                <div class="flip-stat">
+                  <span class="flip-stat-val">#${r + 1}</span>
+                  <span class="flip-stat-lbl">Top Sale Rank</span>
+                </div>
+                <div class="flip-stat">
+                  <span class="flip-stat-val">${tier(price)}</span>
+                  <span class="flip-stat-lbl">Sale Tier</span>
+                </div>
+                <div class="flip-stat">
+                  <span class="flip-stat-val">${zip}</span>
+                  <span class="flip-stat-lbl">ZIP Code</span>
+                </div>
+              </div>
+            </div>
+          </div>`;
+
+        card.addEventListener('click', () => {
+          // Deactivate previous card
+          if (activeRank !== null && activeRank !== r) {
+            const prev = document.getElementById('card-' + activeRank);
+            if (prev) prev.classList.remove('highlighted');
+            if (cardMarkers[activeRank]) cardMarkers[activeRank].setIcon(mkIcon(false));
+          }
+          card.classList.toggle('highlighted');
+          const on = card.classList.contains('highlighted');
+          if (cardMarkers[r]) cardMarkers[r].setIcon(mkIcon(on));
+
+          if (on) {
+            // Zoom in, unspiderfy clusters, open popup
+            clusterGroup.zoomToShowLayer(cardMarkers[r], () => {
+              cardMarkers[r].openPopup();
+            });
+            activeRank = r;
+          } else {
+            if (cardMarkers[r]) cardMarkers[r].closePopup();
+            activeRank = null;
+          }
+        });
+
+        ff.appendChild(card);
+      });
+      feed.appendChild(ff);
+    }
+
+    /* expose filterCards globally for onclick handlers */
+    window.filterCards = filterCards;
+    filterCards('1M+', document.querySelector('.f-btn'));
+  });
+</script>
+</body>
+</html>

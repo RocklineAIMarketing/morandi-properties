@@ -7,12 +7,6 @@
   <meta name="description" content="Browse Ray Morandi's recent sales across Orland Park, Homer Glen, Frankfort, Mokena, New Lenox and more. Top 1% Illinois agent with $180M+ in closed sales.">
   <link rel="canonical" href="https://www.morandiproperties.com/recent-sales">
 
-  <!-- ─── Schema Markup ─────────────────────────────────────────────────────
-       RealEstateAgent: signals Ray's identity, credentials, and service area
-       to Google, Bing, and AI Overviews (ChatGPT, Perplexity, etc.)
-       ItemList: marks up the top sales as structured sold-property records —
-       eligible for rich results and AI citation as proof of production.
-  ──────────────────────────────────────────────────────────────────────── -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -23,8 +17,8 @@
         "name": "Ray Morandi",
         "url": "https://www.morandiproperties.com",
         "telephone": "+17085166666",
-        "email": "ray@morandiproperties.com", /* REPLACE with actual email */
-        "image": "https://www.morandiproperties.com/images/ray-morandi.jpg", /* REPLACE with actual headshot URL */
+        "email": "ray@morandiproperties.com",
+        "image": "https://www.morandiproperties.com/images/morandi-agency/ray-morandi.jpg",
         "description": "Ray Morandi is a Top 1% Illinois real estate agent with $180M+ in closed sales and 20+ years of experience serving Orland Park, Homer Glen, Frankfort, Mokena, Tinley Park, and New Lenox.",
         "areaServed": [
           { "@type": "City", "name": "Orland Park", "containedIn": { "@type": "State", "name": "Illinois" } },
@@ -36,16 +30,16 @@
         ],
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "15715 Wolf Rd",
+          "streetAddress": "15715 S. Wolf Rd",
           "addressLocality": "Orland Park",
           "addressRegion": "IL",
-          "postalCode": "60462",
+          "postalCode": "60467",
           "addressCountry": "US"
         },
         "sameAs": [
-          "https://www.facebook.com/morandiproperties",   /* REPLACE with actual */
-          "https://www.instagram.com/morandiproperties",  /* REPLACE with actual */
-          "https://www.linkedin.com/in/raymorandi"        /* REPLACE with actual */
+          "https://www.facebook.com/morandiproperties",
+          "https://www.instagram.com/morandiproperties",
+          "https://www.linkedin.com/in/raymorandi"
         ],
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
@@ -58,8 +52,8 @@
         },
         "aggregateRating": {
           "@type": "AggregateRating",
-          "ratingValue": "5.0",    /* REPLACE with actual average */
-          "reviewCount": "200",    /* REPLACE with actual count */
+          "ratingValue": "5.0",
+          "reviewCount": "200",
           "bestRating": "5",
           "worstRating": "1"
         }
@@ -86,22 +80,13 @@
   }
   </script>
 
-  <!-- DNS prefetch for external resources -->
   <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://maps.googleapis.com">
-
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
-  <!-- MarkerCluster CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
-
-  <!-- Gesture Handling CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.css"/>
-
-  <!-- Google Fonts — non-render-blocking via media trick -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
@@ -121,36 +106,50 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
 
-    /* ─── Header ─────────────────────────────────────────── */
-    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc, #b0bec5); }
+    /* ─── HEADER ─────────────────────────────────────────────── */
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); background-size: cover; background-position: center; }
     .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
-    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
-    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,.18); }
-    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color .2s; }
+    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,0.18); gap: 2px; }
+    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color 0.2s; }
     .nav-link:hover { color: var(--navy-light); }
     .nav-link.active { border-bottom: 2px solid var(--navy); }
+    .nav-label { cursor: default; user-select: none; }
     .nav-dropdown { position: relative; }
-    .nav-dropdown:hover .dropdown-menu,
-    .nav-dropdown:focus-within .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
-    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,.15); min-width: 180px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 100; }
-    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background .15s; }
+    .nav-dropdown:hover .dropdown-menu, .nav-dropdown:focus-within .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,0.15); min-width: 200px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; z-index: 100; }
+    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background 0.15s; }
     .dropdown-menu a:hover { background: #eceff1; }
-    .cta-btn { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white); background: var(--navy); text-decoration: none; padding: 10px 20px; margin-left: 12px; white-space: nowrap; transition: background .2s; }
-    .cta-btn:hover { background: var(--navy-light); }
+
+    /* ─── HAMBURGER ───────────────────────────────────────────── */
     .hamburger-btn { display: none; flex-direction: column; gap: 5px; align-items: flex-start; background: none; border: none; cursor: pointer; padding: 4px; }
-    .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all .25s ease; }
+    .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all 0.25s ease; }
     .hamburger-btn span:nth-child(1) { width: 24px; }
     .hamburger-btn span:nth-child(2) { width: 17px; }
     .hamburger-btn span:nth-child(3) { width: 24px; }
     .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
     .hamburger-btn.open span:nth-child(2) { opacity: 0; }
     .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
-    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+
+    /* ─── MOBILE NAV ──────────────────────────────────────────── */
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
     .mobile-nav.open { opacity: 1; pointer-events: all; }
     .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
-    .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
-    .mobile-nav-cta { margin-top: 28px; }
-    .mobile-nav-cta a { font-family: 'Barlow', sans-serif !important; font-size: 13px !important; font-weight: 600 !important; background: var(--navy) !important; color: var(--white) !important; padding: 13px 28px !important; letter-spacing: .1em !important; }
+    .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
+    .mobile-nav-group { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .mobile-nav-toggle { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); background: none; border: none; cursor: pointer; padding: 8px 24px; display: flex; align-items: center; gap: 8px; }
+    .mobile-nav-toggle .caret { font-size: 18px; transition: transform 0.2s; display: inline-block; }
+    .mobile-nav-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+    .mobile-nav-sub { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding-bottom: 4px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.35s ease, opacity 0.25s ease 0.2s; }
+    .mobile-nav-sub.open { max-height: 320px; opacity: 1; }
+    .mobile-nav-sub a { font-family: 'Barlow', sans-serif !important; font-size: 14px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; color: var(--text-muted) !important; padding: 6px 24px !important; text-transform: uppercase; }
+
+    @media (max-width: 960px) {
+      .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
+      .hamburger-btn { display: flex; grid-column: 1; }
+      .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
+      .nav-row { display: none; }
+    }
 
     /* ─── Portfolio ───────────────────────────────────────── */
     .portfolio-section { background: var(--light-bg); padding: 48px 40px 80px; }
@@ -211,7 +210,7 @@
     .stat-lbl { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-top: 6px; display: block; }
 
     /* ─── Footer ──────────────────────────────────────────── */
-    .site-footer { background: var(--navy); padding: 64px 40px 32px; border-top: 1px solid rgba(255,255,255,.07); }
+    .site-footer { background: var(--navy); padding: 64px 40px 32px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
     .footer-brand { display: flex; flex-direction: column; gap: 16px; }
@@ -225,9 +224,10 @@
     .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
     .footer-social-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); }
     .footer-social-icons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
-    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; }
+    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; flex-shrink: 0; }
     .footer-social-link:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.07); }
-    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,.75); display: block; }
+    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,.75); display: block; transition: fill .2s; }
+    .footer-social-link:hover svg { fill: var(--white); }
     .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; gap: 16px; flex-wrap: wrap; }
     .footer-legal { font-size: 11.5px; color: rgba(255,255,255,.35); line-height: 1.6; }
     .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
@@ -245,7 +245,7 @@
     .popup-price { font-size: 13px; font-weight: 600; color: var(--navy-light); display: block; margin-bottom: 6px; }
     .popup-badge { display: inline-block !important; font-size: 9px !important; font-weight: 600 !important; letter-spacing: .1em !important; text-transform: uppercase !important; color: var(--navy-light) !important; border: 1px solid var(--navy-light) !important; padding: 2px 7px !important; }
 
-    /* ─── Cluster overrides to match navy theme ──────────── */
+    /* ─── Cluster overrides ──────────────────────────────── */
     .marker-cluster-small,
     .marker-cluster-medium,
     .marker-cluster-large { background-color: rgba(26,45,74,.25) !important; }
@@ -260,7 +260,6 @@
     .cta-band-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
     .cta-band-text { max-width: 620px; }
     .cta-band-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 8px; }
-    .cta-band--dark .cta-band-eyebrow { color: var(--blue-grey); }
     .cta-band-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(22px, 2.6vw, 30px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); margin-bottom: 10px; line-height: 1.1; }
     .cta-band--dark .cta-band-headline { color: var(--white); }
     .cta-band-sub { font-size: 14px; line-height: 1.7; color: var(--text-muted); }
@@ -300,10 +299,6 @@
 
     /* ─── Responsive ─────────────────────────────────────── */
     @media (max-width: 900px) {
-      .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
-      .hamburger-btn { display: flex; grid-column: 1; }
-      .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
-      .nav-row { display: none; }
       .portfolio-section { padding: 36px 24px 60px; }
       .portfolio-wrapper { grid-template-columns: 1fr; height: auto; }
       .map-col { height: 380px; }
@@ -325,42 +320,67 @@
     @media (max-width: 540px) {
       .stats-bar-inner { grid-template-columns: 1fr 1fr; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .testimonials-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+<!-- ═══ HEADER ════════════════════════════════════════════════ -->
 <header class="site-header" role="banner">
   <div class="logo-row">
     <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
-    <a href="/" class="logo-placeholder">Morandi Properties</a>
+    <a href="/" class="logo-placeholder">
+  <img src="images/logos/morandi-properties-logo.png" alt="Morandi Properties Logo" style="height: 55px; width: auto; vertical-align: middle;">
+</a>
   </div>
   <nav class="nav-row" role="navigation" aria-label="Primary navigation">
-    <a href="/"             class="nav-link">Home</a>
-    <a href="/sale"         class="nav-link">Our Listings</a>
-    <a href="/mlssearch"    class="nav-link">MLS Search</a>
-    <a href="/sell"         class="nav-link">Selling</a>
-    <a href="/recent-sales" class="nav-link active">Recent Sales</a>
-    <a href="/reviews"      class="nav-link">Reviews</a>
-    <a href="/team-1"       class="nav-link">The Team</a>
+    <a href="/" class="nav-link">Home</a>
     <div class="nav-dropdown">
-      <a href="/clienttools" class="nav-link">Tools ▾</a>
+      <span class="nav-link nav-label">Buying ▾</span>
       <div class="dropdown-menu">
-        <a href="/mortgagecalculator">Mortgage Calculator</a>
-        <a href="/valuationrequest">Valuation Request</a>
-        <a href="/emailalerts">Email Alerts</a>
-        <a href="/mlssearch">MLS Search</a>
-        <a href="/openhouse">Open House</a>
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+        <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+        <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+        <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
       </div>
     </div>
-    <a href="/contact" class="nav-link">Contact</a>
-    <a href="/mlssearch" class="cta-btn">Check Out Our Listings</a>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Selling ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+        <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+        <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Insights ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+        <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Realtors ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+        <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+        <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Contact ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+        <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+        <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+      </div>
+    </div>
   </nav>
 </header>
 
+<!-- ═══ MAIN ══════════════════════════════════════════════════ -->
 <main role="main">
 <section class="portfolio-section">
   <div class="portfolio-header">
@@ -397,7 +417,6 @@
 </div>
 </main>
 
-<!-- ─── CTA 1: Current Listings ──────────────────────── -->
 <div class="cta-band cta-band--light">
   <div class="cta-band-inner">
     <div class="cta-band-text">
@@ -405,91 +424,52 @@
       <h2 class="cta-band-headline">Browse Our Current Listings</h2>
       <p class="cta-band-sub">From starter homes to luxury estates — see every active property Ray's team has on the market across the Chicagoland southwest suburbs.</p>
     </div>
-    <a href="/sale" class="cta-band-btn">See Available Listings</a>
+    <a href="https://morandiproperties.com/buying/listings" class="cta-band-btn">See Available Listings</a>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════
-     VIDEO WALKTHROUGHS
-     Replace each VIDEO_ID_HERE with the YouTube video ID.
-     Example: https://youtu.be/dQw4w9WgXcQ → ID is dQw4w9WgXcQ
-     Also update the address and sale price text below each video.
-════════════════════════════════════════════════════════ -->
 <section class="video-section">
   <div class="section-inner">
     <p class="section-eyebrow">Inside the Sale</p>
     <h2 class="section-headline">Property Walkthroughs</h2>
     <div class="video-grid">
-
       <div class="video-card">
         <div class="video-embed-wrap">
-          <!-- REPLACE VIDEO_ID_HERE with your YouTube video ID -->
-          <iframe
-            src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
-            title="Walkthrough — 16110 S Sandy Bank Ct, Homer Glen"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1" title="Walkthrough — 16110 S Sandy Bank Ct, Homer Glen" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="video-card-body">
-          <span class="video-card-address">16110 S Sandy Bank Ct — Homer Glen</span> <!-- REPLACE address -->
-          <span class="video-card-meta">Sold · $1,346,597</span> <!-- REPLACE price -->
+          <span class="video-card-address">16110 S Sandy Bank Ct — Homer Glen</span>
+          <span class="video-card-meta">Sold · $1,346,597</span>
         </div>
       </div>
-
       <div class="video-card">
         <div class="video-embed-wrap">
-          <!-- REPLACE VIDEO_ID_HERE with your YouTube video ID -->
-          <iframe
-            src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
-            title="Walkthrough — 15201 S Mackenzie Dr, Homer Glen"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1" title="Walkthrough — 15201 S Mackenzie Dr, Homer Glen" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="video-card-body">
-          <span class="video-card-address">15201 S Mackenzie Dr — Homer Glen</span> <!-- REPLACE address -->
-          <span class="video-card-meta">Sold · $1,315,529</span> <!-- REPLACE price -->
+          <span class="video-card-address">15201 S Mackenzie Dr — Homer Glen</span>
+          <span class="video-card-meta">Sold · $1,315,529</span>
         </div>
       </div>
-
       <div class="video-card">
         <div class="video-embed-wrap">
-          <!-- REPLACE VIDEO_ID_HERE with your YouTube video ID -->
-          <iframe
-            src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1"
-            title="Walkthrough — 421 S Sunnyside Ave, Elmhurst"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            loading="lazy">
-          </iframe>
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID_HERE?rel=0&modestbranding=1" title="Walkthrough — 421 S Sunnyside Ave, Elmhurst" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="video-card-body">
-          <span class="video-card-address">421 S Sunnyside Ave — Elmhurst</span> <!-- REPLACE address -->
-          <span class="video-card-meta">Sold · $1,149,000</span> <!-- REPLACE price -->
+          <span class="video-card-address">421 S Sunnyside Ave — Elmhurst</span>
+          <span class="video-card-meta">Sold · $1,149,000</span>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════
-     GOOGLE REVIEWS
-     Replace the reviewer name, initials, review text, and
-     date on each card with real Google reviews.
-     To get review text: Google "Morandi Properties" →
-     click Reviews → copy verbatim.
-════════════════════════════════════════════════════════ -->
 <section class="testimonials-section">
   <div class="section-inner">
     <p class="section-eyebrow">What Clients Are Saying</p>
     <h2 class="section-headline">Google Reviews</h2>
     <div class="testimonials-grid">
-
-      <!-- REVIEW 1 — replace all placeholder text -->
+      <!-- REVIEW 1 -->
       <div class="tcard">
         <div class="tcard-stars">
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -498,17 +478,13 @@
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
-        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT. Copy directly from Ray's Google Business Profile to keep it authentic and verbatim.</p>
+        <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
         <div class="tcard-footer">
-          <div class="tcard-avatar">AB</div> <!-- REPLACE initials -->
-          <div class="tcard-meta">
-            <span class="tcard-name">Reviewer Name</span> <!-- REPLACE -->
-            <span class="tcard-source">Google Review · Month Year</span> <!-- REPLACE date -->
-          </div>
+          <div class="tcard-avatar">AB</div>
+          <div class="tcard-meta"><span class="tcard-name">Reviewer Name</span><span class="tcard-source">Google Review · Month Year</span></div>
           <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         </div>
       </div>
-
       <!-- REVIEW 2 -->
       <div class="tcard">
         <div class="tcard-stars">
@@ -521,14 +497,10 @@
         <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
         <div class="tcard-footer">
           <div class="tcard-avatar">CD</div>
-          <div class="tcard-meta">
-            <span class="tcard-name">Reviewer Name</span>
-            <span class="tcard-source">Google Review · Month Year</span>
-          </div>
+          <div class="tcard-meta"><span class="tcard-name">Reviewer Name</span><span class="tcard-source">Google Review · Month Year</span></div>
           <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         </div>
       </div>
-
       <!-- REVIEW 3 -->
       <div class="tcard">
         <div class="tcard-stars">
@@ -541,14 +513,10 @@
         <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
         <div class="tcard-footer">
           <div class="tcard-avatar">EF</div>
-          <div class="tcard-meta">
-            <span class="tcard-name">Reviewer Name</span>
-            <span class="tcard-source">Google Review · Month Year</span>
-          </div>
+          <div class="tcard-meta"><span class="tcard-name">Reviewer Name</span><span class="tcard-source">Google Review · Month Year</span></div>
           <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         </div>
       </div>
-
       <!-- REVIEW 4 -->
       <div class="tcard">
         <div class="tcard-stars">
@@ -561,14 +529,10 @@
         <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
         <div class="tcard-footer">
           <div class="tcard-avatar">GH</div>
-          <div class="tcard-meta">
-            <span class="tcard-name">Reviewer Name</span>
-            <span class="tcard-source">Google Review · Month Year</span>
-          </div>
+          <div class="tcard-meta"><span class="tcard-name">Reviewer Name</span><span class="tcard-source">Google Review · Month Year</span></div>
           <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         </div>
       </div>
-
       <!-- REVIEW 5 -->
       <div class="tcard">
         <div class="tcard-stars">
@@ -581,14 +545,10 @@
         <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
         <div class="tcard-footer">
           <div class="tcard-avatar">IJ</div>
-          <div class="tcard-meta">
-            <span class="tcard-name">Reviewer Name</span>
-            <span class="tcard-source">Google Review · Month Year</span>
-          </div>
+          <div class="tcard-meta"><span class="tcard-name">Reviewer Name</span><span class="tcard-source">Google Review · Month Year</span></div>
           <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         </div>
       </div>
-
       <!-- REVIEW 6 -->
       <div class="tcard">
         <div class="tcard-stars">
@@ -601,19 +561,14 @@
         <p class="tcard-text">REPLACE WITH ACTUAL GOOGLE REVIEW TEXT.</p>
         <div class="tcard-footer">
           <div class="tcard-avatar">KL</div>
-          <div class="tcard-meta">
-            <span class="tcard-name">Reviewer Name</span>
-            <span class="tcard-source">Google Review · Month Year</span>
-          </div>
+          <div class="tcard-meta"><span class="tcard-name">Reviewer Name</span><span class="tcard-source">Google Review · Month Year</span></div>
           <svg class="tcard-google-icon" width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ─── CTA 2: Contact ───────────────────────────────── -->
 <div class="cta-band cta-band--light">
   <div class="cta-band-inner">
     <div class="cta-band-text">
@@ -621,21 +576,27 @@
       <h2 class="cta-band-headline">Ready to Buy or Sell? Let's Talk.</h2>
       <p class="cta-band-sub">Ray has helped 500+ Chicagoland families navigate one of the biggest decisions of their lives. Reach out today for a no-pressure conversation about your goals.</p>
     </div>
-    <a href="/contact" class="cta-band-btn">Contact Ray</a>
+    <a href="https://morandiproperties.com/contact/office" class="cta-band-btn">Contact Ray</a>
   </div>
 </div>
 
-<footer class="site-footer" role="contentinfo">
+<!-- ─── FOOTER ────────────────────────────────────────────────── -->
+<footer class="site-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="/" class="footer-logo">Morandi Properties</a>
+        <a href="/" class="footer-logo">
+  <img src="images/logos/morandi-properties-logo.png" alt="Morandi Properties Logo" style="height: 40px; width: auto;">
+</a>
         <p class="footer-tagline">Helping Chicagoland families buy and sell homes in Orland Park, Tinley Park, Frankfort, Mokena, and New Lenox since 2006.</p>
       </div>
-      <div class="footer-contact">
+      <div class="footer-contact" itemscope itemtype="https://schema.org/RealEstateAgent">
         <span class="footer-contact-label">Get In Touch</span>
-        <p class="footer-address">15715 Wolf Rd<br>Orland Park, IL 60462</p>
-        <a href="tel:+17085166666" class="footer-phone">(708) 516-6666</a>
+        <p class="footer-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="streetAddress">15715 S. Wolf Rd</span><br>
+          <span itemprop="addressLocality">Orland Park</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60467</span>
+        </p>
+        <a href="tel:+17085166666" class="footer-phone" itemprop="telephone">(708) 516-6666</a>
       </div>
       <div class="footer-social">
         <span class="footer-social-label">Follow Along</span>
@@ -649,40 +610,79 @@
           <a href="#" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-          </a>
           <a href="#" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
           </a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-legal">&copy; 2026 Morandi Properties. All rights reserved.<br>Ray Morandi — Licensed Illinois Real Estate Broker</p>
+      <p class="footer-legal">
+        &copy; 2026 Morandi Properties. All rights reserved.<br>
+        Ray Morandi — Licensed Illinois Real Estate Broker &middot; License #471003188
+      </p>
       <nav class="footer-links">
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms of Use</a>
-        <a href="/contact">Contact</a>
-        <a href="/mlssearch">MLS Search</a>
+        <a href="https://morandiproperties.com/contact/office">Contact</a>
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
       </nav>
     </div>
   </div>
 </footer>
 
-<nav class="mobile-nav" id="mobileNav">
-  <button class="mobile-nav-close" id="mobileNavClose">✕</button>
-  <a href="/">Home</a><a href="/sale">Our Listings</a><a href="/mlssearch">MLS Search</a>
-  <a href="/sell">Selling</a><a href="/recent-sales">Recent Sales</a><a href="/reviews">Reviews</a>
-  <a href="/team-1">The Team</a><a href="/clienttools">Tools</a><a href="/contact">Contact</a>
-  <div class="mobile-nav-cta"><a href="/mlssearch">Check Out Our Listings</a></div>
+<!-- ═══ MOBILE NAV OVERLAY ════════════════════════════════════ -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+  <a href="/">Home</a>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">Buying <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnBuying">
+      <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+      <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+      <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+      <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">Selling <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnSelling">
+      <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+      <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+      <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">Insights <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnInsights">
+      <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+      <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">Realtors <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnTeam">
+      <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+      <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+      <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">Contact <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnContact">
+      <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+      <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+      <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+    </div>
+  </div>
 </nav>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
-<!-- MarkerCluster JS -->
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
-<!-- Gesture Handling JS -->
 <script src="https://unpkg.com/leaflet-gesture-handling/dist/leaflet-gesture-handling.min.js" defer></script>
 
 <script>
@@ -696,154 +696,145 @@
   mCls.addEventListener('click', closeNav);
   mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+  document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sub = document.getElementById(btn.dataset.target);
+      const isOpen = sub.classList.contains('open');
+      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-toggle').forEach(b => b.setAttribute('aria-expanded','false'));
+      if (!isOpen) { sub.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
 
-  /*
-   * ── Sales data ───────────────────────────────────────────
-   * Columns: [addr, city, zip, price, lat, lng, photo]
-   *
-   * ADDING PHOTOS — paste the image URL into the 7th slot:
-   *   ["16110 S Sandy Bank Ct", "Homer Glen", "60491", 1346597, 41.6089,-87.9578, "https://...jpg"],
-   * Leave the quotes empty ("") for any property without a photo yet.
-   * The popup will show a clean placeholder until a URL is added.
-   */
+  /* ─── Sales data ─────────────────────────────────────── */
   const ALL = [
-    ["19602 Swanberg Ln",           "Mokena",         "60448", 440000,  41.5248,-87.8651, "/images/sold-properties/sold-home-19602-swanberg-ln-mokena-il-60448.webp"],
-    ["21726 Higley Ln",             "Frankfort",      "60423", 490000,  41.4963,-87.8459, "/images/sold-properties/sold-home-21726-higley-ln-frankfort-il-60423.webp"],
-    ["18409 S Haas Rd",             "Mokena",         "60448", 1000000, 41.5219,-87.8634, "/images/sold-properties/sold-home-18409-s-haas-rd-mokena-il-60448.webp"],
-    ["14848 W Ginger Ln",           "Homer Glen",     "60491", 689900,  41.6098,-87.9512, "/images/sold-properties/sold-home-14848-w-ginger-ln-homer-glen-il-60491.webp"],
-    ["0 C Rte 52",                 "Manhattan",      "60442", 250000,  41.4225,-87.9856, "/images/sold-properties/sold-home-0-c-rte-52-manhattan-il-60442.webp"],
-    ["(Undisclosed)",               "Manhattan",      "60442", 220000,  41.4198,-87.9901, "/images/sold-properties/sold-home-undisclosed-address-manhattan-il-60442.webp"],
-    ["18134 Martin Ave",            "Homewood",       "60430", 210400,  41.5598,-87.6612, "/images/sold-properties/sold-home-18134-martin-ave-homewood-il-60430.webp"],
-    ["7767 Bristol Park Dr",        "Tinley Park",    "60477", 260000,  41.5731,-87.7954, "/images/sold-properties/sold-home-7767-bristol-park-dr-unit-1nw-tinley-park-il-60477.webp"],
-    ["2451 Hawthorne Rd",           "Homewood",       "60430", 280000,  41.5621,-87.6589, "/images/sold-properties/sold-home-2451-hawthorne-rd-homewood-il-60430.webp"],
-    ["16813 81st Ave",              "Tinley Park",    "60477", 219900,  41.5698,-87.8001, "/images/sold-properties/sold-home-16813-81st-ave-apt-1s-tinley-park-il-60477.webp"],
-    ["20277 Brendan St",            "Frankfort",      "60423", 700000,  41.5019,-87.8512, "/images/sold-properties/sold-home-20277-brendan-st-frankfort-il-60423.webp"],
-    ["11636 Lake Shore Dr",         "Orland Park",    "60467", 490000,  41.6034,-87.8823, "/images/sold-properties/sold-home-11636-lake-shore-dr-orland-park-il-60467.webp"],
-    ["9134 S Pulaski Rd",           "Oak Lawn",       "60453", 191500,  41.7287,-87.7234, "/images/sold-properties/sold-home-9134-s-pulaski-rd-apt-2e-oak-lawn-il-60453.webp"],
-    ["18521 Homewood Ave",          "Homewood",       "60430", 279000,  41.5578,-87.6634, "/images/sold-properties/sold-home-18521-homewood-ave-homewood-il-60430.webp"],
-    ["421 S Sunnyside Ave",         "Elmhurst",       "60126", 1149000, 41.8921,-87.9367, "/images/sold-properties/sold-home-421-s-sunnyside-ave-elmhurst-il-60126.webp"],
-    ["14403 Iz Brook Dr",           "Homer Glen",     "60491", 1099900, 41.6023,-87.9478, "/images/sold-properties/sold-home-14403-iz-brook-dr-homer-glen-il-60491.webp"],
-    ["337 Sherlock St",             "Frankfort",      "60423", 950000,  41.4978,-87.8534, "/images/sold-properties/sold-home-337-sherlock-st-frankfort-il-60423.webp"],
-    ["17140 Deer Run Dr",           "Orland Park",    "60467", 715000,  41.6089,-87.8867, "/images/sold-properties/sold-home-17140-deer-run-dr-orland-park-il-60467.jpeg"],
-    ["1190 Sierra Rdg",             "New Lenox",      "60451", 781850,  41.5089,-87.9723, "/images/sold-properties/sold-home-1190-sierra-rdg-new-lenox-il-60451.webp"],
-    ["935 N Butternut Cir",         "Frankfort",      "60423", 765000,  41.4991,-87.8478, "/images/sold-properties/sold-home-935-n-butternut-cir-frankfort-il-60423.webp"],
-    ["NE Cornr Kankakee & Smith",   "Manhattan",      "60442", 103000,  41.4267,-87.9812, "/images/sold-properties/sold-home-ne-cornr-kankakee-street-&-smith-rd-manhattan-il-60442.webp"],
-    ["2165 High View Rd",           "New Lenox",      "60451", 529900,  41.5112,-87.9698, "/images/sold-properties/sold-home-2165-high-view-rd-new-lenox-il-60451.webp"],
-    ["19612 Crested Butte Ln",      "Mokena",         "60448", 470000,  41.5234,-87.8678, "/images/sold-properties/sold-home-19612-crested-butte-ln-mokena-il-60448.webp"],
-    ["17020 Delevan St",            "Lockport",       "60441", 342500,  41.5901,-88.0423, "/images/sold-properties/sold-home-17020-delevan-st-lockport-il-60441.webp"],
-    ["307 N Meadow St",             "Grant Park",     "60940", 160000,  41.2378,-87.6456, "/images/sold-properties/sold-home-307-n-meadow-st-grant-park-il-60940.webp"],
-    ["9366 Fox Run Cir",            "Frankfort",      "60423", 410000,  41.4945,-87.8501, "/images/sold-properties/sold-home-9366-fox-run-cir-frankfort-il-60423.webp"],
-    ["762 Lake Rd",                 "New Lenox",      "60451", 249900,  41.5067,-87.9745, "/images/sold-properties/sold-home-762-lake-rd-new-lenox-il-60451.webp"],
-    ["1911 W Crestview Cir",        "Romeoville",     "60446", 290000,  41.6478,-88.0934, "/images/sold-properties/sold-home-1911-w-crestview-cir-romeoville-il-60446.webp"],
-    ["15606 W Sweedler Rd",         "Manhattan",      "60442", 1000000, 41.4312,-87.9934, "/images/sold-properties/sold-home-15606-w-sweedler-rd-manhattan-il-60442.webp"],
-    ["9100 Oakwood Dr",             "Tinley Park",    "60487", 435000,  41.5812,-87.8123, "/images/sold-properties/sold-home-9100-oakwood-dr-tinley-park-il-60487.webp"],
-    ["1030 Hummingbird Ln",         "Peotone",        "60468", 454000,  41.3312,-87.7834, "/images/sold-properties/sold-home-1030-hummingbird-ln-peotone-il-60468.webp"],
-    ["14011 Creek Crossing Dr",     "Orland Park",    "60467", 495000,  41.6012,-87.8845, "/images/sold-properties/sold-home-14011-creek-crossing-dr-orland-park-il-60467.webp"],
-    ["16035 S Parker Rd",           "Homer Glen",     "60491", 699000,  41.6056,-87.9534, "/images/sold-properties/sold-home-16035-s-parker-rd-homer-glen-il-60491.webp"],
-    ["11315 Sycamore Ln",           "Palos Hills",    "60465", 248000,  41.6978,-87.8312, "/images/sold-properties/sold-home-11315-sycamore-ln-unit-b-palos-hills-il-60465.webp"],
-    ["669 Olde Oak Dr",             "Bourbonnais",    "60914", 340000,  41.1623,-87.8845, "/images/sold-properties/sold-home-669-olde-oak-dr-bourbonnais-il-60914.webp"],
-    ["18140 Buckingham Dr",         "Orland Park",    "60467", 720000,  41.6045,-87.8812, "/images/sold-properties/sold-home-18140-buckingham-dr-orland-park-il-60467.jpeg"],
-    ["14149 S Chicory Trl",         "Homer Glen",     "60491", 716500,  41.6034,-87.9501, "/images/sold-properties/sold-home-14149-s-chicory-trl-homer-glen-il-60491.webp"],
-    ["15175 Rodao Ln",              "Orland Park",    "60467", 810000,  41.6067,-87.8834, "/images/sold-properties/sold-home-15175-rodao-ln-orland-park-il-60467.webp"],
-    ["7833 W 100th Pl",             "Palos Hills",    "60465", 425000,  41.6945,-87.8345, "/images/sold-properties/sold-home-7833-w-100th-pl-palos-hills-il-60465.webp"],
-    ["8060 W Harvest Dr",           "Frankfort",      "60423", 445000,  41.4934,-87.8523, "/images/sold-properties/sold-home-8060-w-harvest-dr-frankfort-il-60423.webp"],
-    ["16417 Francis Ct",            "Orland Park",    "60467", 305000,  41.6023,-87.8856, "/images/sold-properties/sold-home-16417-francis-ct-orland-park-il-60467.webp"],
-    ["22736 Parkview Ln",           "Frankfort",      "60423", 115000,  41.5034,-87.8467, "/images/sold-properties/sold-home-22736-parkview-ln-frankfort-il-60423.webp"],
-    ["23039 Lakeview Estates Blvd", "Frankfort",      "60423", 115000,  41.5056,-87.8445, "/images/sold-properties/sold-home-23039-lakeview-estates-blvd-frankfort-il-60423.webp"],
-    ["22902 Maddeline Ln",          "Frankfort",      "60423", 115000,  41.5045,-87.8490, "/images/sold-properties/sold-home-22902-maddeline-ln-frankfort-il-60423.webp"],
-    ["14129 S Chicory Trl",         "Homer Glen",     "60491", 740000,  41.6028,-87.9489, "/images/sold-properties/sold-home-14129-s-chicory-trl-homer-glen-il-60491.webp"],
-    ["20358 Taliesin Way",          "Frankfort",      "60423", 565000,  41.5001,-87.8545, "/images/sold-properties/sold-home-20358-taliesin-way-frankfort-il-60423.webp"],
-    ["1262 Rutgers Dr",             "Woodridge",      "60517", 535000,  41.7434,-88.0312, "/images/sold-properties/sold-home-1262-rutgers-dr-woodridge-il-60517.webp"],
-    ["16437 W Deerwood Dr",         "Lockport",       "60441", 685000,  41.5934,-88.0467, "/images/sold-properties/sold-home-16437-w-deerwood-dr-lockport-il-60441.webp"],
-    ["27719 W Rowe Ave",            "Spring Grove",   "60081", 198000,  42.4423,-88.2312, "/images/sold-properties/sold-home-27719-w-rowe-ave-spring-grove-il-60081.webp"],
-    ["669 Bridgeman Ln",            "Romeoville",     "60446", 415000,  41.6512,-88.0912, "/images/sold-properties/sold-home-669-bridgeman-ln-romeoville-il-60446.webp"],
-    ["8425 Nielsen Dr",             "Tinley Park",    "60487", 485000,  41.5834,-87.8145, "/images/sold-properties/sold-home-8425-nielsen-dr-tinley-park-il-60487.webp"],
-    ["18538 May St",                "Homewood",       "60430", 323730,  41.5589,-87.6601, "/images/sold-properties/sold-home-18538-may-st-homewood-il-60430.webp"],
-    ["12503 W Manor Dr",            "Homer Glen",     "60491", 500000,  41.6012,-87.9556, "/images/sold-properties/sold-home-12503-w-manor-dr-homer-glen-il-60491.webp"],
-    ["20277 Brendan St (land)",     "Frankfort",      "60423", 95000,   41.5023,-87.8519, "/images/sold-properties/sold-home-20277-brendan-st-frankfort-illinois-60423.webp"],
-    ["13868 S Penny Ln",            "Homer Glen",     "60491", 615000,  41.6045,-87.9523, "/images/sold-properties/sold-home-13868-s-penny-ln-homer-glen-il-60491.webp"],
-    ["19921 Foxborough Dr",         "Mokena",         "60448", 749900,  41.5256,-87.8634, "/images/sold-properties/sold-home-19921-foxborough-dr-mokena-il-60448.webp"],
-    ["15201 S Mackenzie Dr",        "Homer Glen",     "60491", 1315529, 41.6078,-87.9567, "/images/sold-properties/sold-home-15201-s-mackenzie-dr-21-homer-glen-il-60491.webp"],
-    ["300 Village Cir Unit 503",    "Willow Springs", "60480", 315000,  41.7345,-87.8712, "/images/sold-properties/sold-home-300-village-cir-unit-503-willow-springs-il-60480.webp"],
-    ["16106 Syd Creek Dr",          "Lockport",       "60491", 825000,  41.5956,-88.0489, "/images/sold-properties/sold-home-16106-syd-creek-dr-lockport-il-60491.webp"],
-    ["16228 Goose Lake Dr",         "Crest Hill",     "60403", 399990,  41.5734,-88.1023, "/images/sold-properties/sold-home-16228-goose-lake-dr-crest-hill-il-60403.webp"],
-    ["9032 W 140th St",             "Orland Park",    "60462", 185000,  41.6145,-87.8934, "/images/sold-properties/sold-home-9032-w-140th-st-apt-1c-orland-park-il-60462.webp"],
-    ["16110 S Sandy Bank Ct",       "Homer Glen",     "60491", 1346597, 41.6089,-87.9578, "/images/sold-properties/sold-home-16110-s-sandy-bank-ct-homer-glen-il-60491.webp"],
-    ["8530 S Kolin Ave",            "Chicago",        "60652", 310000,  41.7356,-87.7234, "/images/sold-properties/sold-home-8530-s-kolin-ave-chicago-il-60652.webp"],
-    ["17748 Tulip Ln",              "Tinley Park",    "60477", 525000,  41.5756,-87.7978, "/images/sold-properties/sold-home-17748-tulip-ln-tinley-park-il-60477.webp"],
-    ["304 Hillside Rd",             "New Lenox",      "60451", 210000,  41.5134,-87.9712, "/images/sold-properties/sold-home-304-hillside-rd-new-lenox-il-60451.webp"],
-    ["1220 Lee Ave",                "Melrose Park",   "60160", 349000,  41.9012,-87.8578, "/images/sold-properties/sold-home-1220-lee-ave-melrose-park-il-60160.jpeg"],
-    ["7831 Northwoods Dr",          "Frankfort",      "60423", 922560,  41.4956,-87.8512, "/images/sold-properties/sold-home-7831-northwoods-dr-frankfort-il-60423.webp"],
-    ["438 N Catherine Ave",         "La Grange Park", "60526", 772500,  41.8334,-87.8712, "/images/sold-properties/sold-home-438-n-catherine-ave-la-grange-park-il-60526.webp"],
-    ["13252 S Country Club Ct",     "Palos Heights",  "60463", 265000,  41.6623,-87.8034, "/images/sold-properties/sold-home-13252-s-country-club-ct-apt-2a-palos-heights-il-60463.webp"],
-    ["147 Hawthorne Ln",            "New Lenox",      "60451", 265000,  41.5098,-87.9756, "/images/sold-properties/sold-home-147-hawthorne-ln-new-lenox-il-60451.webp"],
-    ["8924 Palos Springs Dr",       "Orland Park",    "60462", 466505,  41.6123,-87.8912, "/images/sold-properties/sold-home-8924-palos-springs-dr-orland-park-il-60462.webp"],
-    ["14037 Catherine Dr",          "Orland Park",    "60462", 425500,  41.6112,-87.8923, "/images/sold-properties/sold-home-14037-catherine-dr-orland-park-il-60462.webp"],
-    ["20322 Taliesin Way",          "Frankfort",      "60423", 579000,  41.5012,-87.8556, "/images/sold-properties/sold-home-20322-taliesin-way-frankfort-il-60423.webp"],
-    ["7458 W Benton Dr",            "Frankfort",      "60423", 364500,  41.4967,-87.8534, "/images/sold-properties/sold-home-7458-w-benton-dr-frankfort-il-60423.webp"],
-    ["2644 Par Four Ln",            "Joliet",         "60436", 218900,  41.5234,-88.1423, "/images/sold-properties/sold-home-2644-par-four-ln-joliet-il-60436.webp"],
-    ["13007 W Beaver Lake Dr",      "Homer Glen",     "60491", 650000,  41.6034,-87.9545, "/images/sold-properties/sold-home-13007-w-beaver-lake-dr-homer-glen-il-60491.webp"],
-    ["14525 Sanctuary Dr",          "Orland Park",    "60467", 119900,  41.6056,-87.8878, "/images/sold-properties/sold-home-14525-sanctuary-dr-lot-16-orland-park-il-60467.webp"],
-    ["1917 Carriage Ln",            "Joliet",         "60433", 280000,  41.5212,-88.1367, "/images/sold-properties/sold-home-1917-carriage-ln-joliet-il-60433.webp"],
-    ["11628 Kaup Ln",               "Orland Park",    "60467", 563000,  41.6023,-87.8834, "/images/sold-properties/sold-home-11628-kaup-ln-orland-park-il-60467.webp"],
-    ["5659 W Cornelia Ave",         "Chicago",        "60634", 435000,  41.9534,-87.7656, "/images/sold-properties/sold-home-5659-w-cornelia-ave-chicago-il-60634.webp"],
-    ["16141 Hackney Dr",            "Orland Park",    "60467", 339900,  41.6034,-87.8845, "/images/sold-properties/sold-home-16141-hackney-dr-orland-park-il-60467.webp"],
-    ["16206 Syd Creek Dr",          "Homer Glen",     "60491", 903500,  41.6067,-87.9589, "/images/sold-properties/sold-home-16206-syd-creek-dr-homer-glen-il-60491.webp"],
-    ["17523 S Gilbert Dr",          "Lockport",       "60441", 310000,  41.5912,-88.0445, "/images/sold-properties/sold-home-17523-s-gilbert-dr-lockport-il-60441.webp"],
-    ["19972 Lily Ct",               "Frankfort",      "60423", 647500,  41.4989,-87.8523, "/images/sold-properties/sold-home-19972-lily-ct-frankfort-il-60423.jpeg"],
-    ["1010 Rocky Hill Cir",         "Joliet",         "60432", 285000,  41.5189,-88.1389, "/images/sold-properties/sold-home-1010-rocky-hill-cir-joliet-il-60432.webp"],
-    ["10S280 Grant St",             "Burr Ridge",     "60527", 345000,  41.7523,-87.9178, "/images/sold-properties/sold-home-10s280-grant-st-burr-ridge-il-60527.webp"],
-    ["16152 Syd Creek Dr",          "Homer Glen",     "60491", 1125208, 41.6056,-87.9601, "/images/sold-properties/sold-home-16152-syd-creek-dr-homer-glen-il-60491.webp"],
-    ["15316 W Pinewood Rd",         "Lockport",       "60441", 314000,  41.5923,-88.0412, "/images/sold-properties/sold-home-15316-w-pinewood-rd-lockport-il-60441.webp"],
-    ["11603 Brookwood Dr",          "Orland Park",    "60467", 455000,  41.6012,-87.8867, "/images/sold-properties/sold-home-11603-brookwood-dr-orland-park-il-60467.webp"],
-    ["5629 James Dr",               "Oak Forest",     "60452", 298000,  41.6134,-87.7534, "/images/sold-properties/sold-home-5629-james-dr-oak-forest-il-60452.webp"],
-    ["15705 Orlan Brook Dr",        "Orland Park",    "60462", 225000,  41.6134,-87.8956, "/images/sold-properties/sold-home-15705-orlan-brook-dr-unit-6-orland-park-il-60462.webp"],
-    ["7540 S Hamilton Ave",         "Chicago",        "60620", 272900,  41.7612,-87.6534, "/images/sold-properties/sold-home-7540-s-hamilton-ave-chicago-il-60620.webp"],
-    ["13887 W Wildwood Ln",         "Homer Glen",     "60491", 939000,  41.6056,-87.9512, "/images/sold-properties/sold-home-13887-w-wildwood-ln-homer-glen-il-60491.webp"],
-    ["1106 Kinmonth Dr",            "Joliet",         "60433", 190000,  41.5201,-88.1345, "/images/sold-properties/sold-home-1106-kinmonth-dr-joliet-il-60433.webp"],
-    ["11515 Settlers Pond Way",     "Orland Park",    "60467", 240500,  41.6001,-87.8889, "/images/sold-properties/sold-home-11515-settlers-pond-way-unit-2d-orland-park-il-60467.webp"],
-    ["15201 S Mackenzie Dr #21",    "Homer Glen",     "60491", 127400,  41.6082,-87.9571, "/images/sold-properties/sold-home-15201-s-mackenzie-dr-homer-glen-il-60491.webp"],
-    ["15123 W Quincy Cir",          "Manhattan",      "60442", 265000,  41.4289,-87.9878, "/images/sold-properties/sold-home-15123-w-quincy-cir-manhattan-il-60442.webp"],
-    ["10 Silo Ridge Rd W",          "Orland Park",    "60467", 600000,  41.6045,-87.8901, "/images/sold-properties/sold-home-10-silo-ridge-rd-w-orland-park-il-60467.webp"],
-    ["16145 Hackney Dr",            "Orland Park",    "60467", 299900,  41.6038,-87.8849, "/images/sold-properties/sold-home-16145-hackney-dr-orland-park-il-60467.webp"],
-    ["7935 Richardson Ln",          "Tinley Park",    "60487", 338000,  41.5789,-87.8167, "/images/sold-properties/sold-home-7935-richardson-ln-tinley-park-il-60487.webp"],
+    ["19602 Swanberg Ln","Mokena","60448",440000,41.5248,-87.8651,"/images/sold-properties/sold-home-19602-swanberg-ln-mokena-il-60448.webp"],
+    ["21726 Higley Ln","Frankfort","60423",490000,41.4963,-87.8459,"/images/sold-properties/sold-home-21726-higley-ln-frankfort-il-60423.webp"],
+    ["18409 S Haas Rd","Mokena","60448",1000000,41.5219,-87.8634,"/images/sold-properties/sold-home-18409-s-haas-rd-mokena-il-60448.webp"],
+    ["14848 W Ginger Ln","Homer Glen","60491",689900,41.6098,-87.9512,"/images/sold-properties/sold-home-14848-w-ginger-ln-homer-glen-il-60491.webp"],
+    ["0 C Rte 52","Manhattan","60442",250000,41.4225,-87.9856,"/images/sold-properties/sold-home-0-c-rte-52-manhattan-il-60442.webp"],
+    ["(Undisclosed)","Manhattan","60442",220000,41.4198,-87.9901,"/images/sold-properties/sold-home-undisclosed-address-manhattan-il-60442.webp"],
+    ["18134 Martin Ave","Homewood","60430",210400,41.5598,-87.6612,"/images/sold-properties/sold-home-18134-martin-ave-homewood-il-60430.webp"],
+    ["7767 Bristol Park Dr","Tinley Park","60477",260000,41.5731,-87.7954,"/images/sold-properties/sold-home-7767-bristol-park-dr-unit-1nw-tinley-park-il-60477.webp"],
+    ["2451 Hawthorne Rd","Homewood","60430",280000,41.5621,-87.6589,"/images/sold-properties/sold-home-2451-hawthorne-rd-homewood-il-60430.webp"],
+    ["16813 81st Ave","Tinley Park","60477",219900,41.5698,-87.8001,"/images/sold-properties/sold-home-16813-81st-ave-apt-1s-tinley-park-il-60477.webp"],
+    ["20277 Brendan St","Frankfort","60423",700000,41.5019,-87.8512,"/images/sold-properties/sold-home-20277-brendan-st-frankfort-il-60423.webp"],
+    ["11636 Lake Shore Dr","Orland Park","60467",490000,41.6034,-87.8823,"/images/sold-properties/sold-home-11636-lake-shore-dr-orland-park-il-60467.webp"],
+    ["9134 S Pulaski Rd","Oak Lawn","60453",191500,41.7287,-87.7234,"/images/sold-properties/sold-home-9134-s-pulaski-rd-apt-2e-oak-lawn-il-60453.webp"],
+    ["18521 Homewood Ave","Homewood","60430",279000,41.5578,-87.6634,"/images/sold-properties/sold-home-18521-homewood-ave-homewood-il-60430.webp"],
+    ["421 S Sunnyside Ave","Elmhurst","60126",1149000,41.8921,-87.9367,"/images/sold-properties/sold-home-421-s-sunnyside-ave-elmhurst-il-60126.webp"],
+    ["14403 Iz Brook Dr","Homer Glen","60491",1099900,41.6023,-87.9478,"/images/sold-properties/sold-home-14403-iz-brook-dr-homer-glen-il-60491.webp"],
+    ["337 Sherlock St","Frankfort","60423",950000,41.4978,-87.8534,"/images/sold-properties/sold-home-337-sherlock-st-frankfort-il-60423.webp"],
+    ["17140 Deer Run Dr","Orland Park","60467",715000,41.6089,-87.8867,"/images/sold-properties/sold-home-17140-deer-run-dr-orland-park-il-60467.jpeg"],
+    ["1190 Sierra Rdg","New Lenox","60451",781850,41.5089,-87.9723,"/images/sold-properties/sold-home-1190-sierra-rdg-new-lenox-il-60451.webp"],
+    ["935 N Butternut Cir","Frankfort","60423",765000,41.4991,-87.8478,"/images/sold-properties/sold-home-935-n-butternut-cir-frankfort-il-60423.webp"],
+    ["NE Cornr Kankakee & Smith","Manhattan","60442",103000,41.4267,-87.9812,"/images/sold-properties/sold-home-ne-cornr-kankakee-street-&-smith-rd-manhattan-il-60442.webp"],
+    ["2165 High View Rd","New Lenox","60451",529900,41.5112,-87.9698,"/images/sold-properties/sold-home-2165-high-view-rd-new-lenox-il-60451.webp"],
+    ["19612 Crested Butte Ln","Mokena","60448",470000,41.5234,-87.8678,"/images/sold-properties/sold-home-19612-crested-butte-ln-mokena-il-60448.webp"],
+    ["17020 Delevan St","Lockport","60441",342500,41.5901,-88.0423,"/images/sold-properties/sold-home-17020-delevan-st-lockport-il-60441.webp"],
+    ["307 N Meadow St","Grant Park","60940",160000,41.2378,-87.6456,"/images/sold-properties/sold-home-307-n-meadow-st-grant-park-il-60940.webp"],
+    ["9366 Fox Run Cir","Frankfort","60423",410000,41.4945,-87.8501,"/images/sold-properties/sold-home-9366-fox-run-cir-frankfort-il-60423.webp"],
+    ["762 Lake Rd","New Lenox","60451",249900,41.5067,-87.9745,"/images/sold-properties/sold-home-762-lake-rd-new-lenox-il-60451.webp"],
+    ["1911 W Crestview Cir","Romeoville","60446",290000,41.6478,-88.0934,"/images/sold-properties/sold-home-1911-w-crestview-cir-romeoville-il-60446.webp"],
+    ["15606 W Sweedler Rd","Manhattan","60442",1000000,41.4312,-87.9934,"/images/sold-properties/sold-home-15606-w-sweedler-rd-manhattan-il-60442.webp"],
+    ["9100 Oakwood Dr","Tinley Park","60487",435000,41.5812,-87.8123,"/images/sold-properties/sold-home-9100-oakwood-dr-tinley-park-il-60487.webp"],
+    ["1030 Hummingbird Ln","Peotone","60468",454000,41.3312,-87.7834,"/images/sold-properties/sold-home-1030-hummingbird-ln-peotone-il-60468.webp"],
+    ["14011 Creek Crossing Dr","Orland Park","60467",495000,41.6012,-87.8845,"/images/sold-properties/sold-home-14011-creek-crossing-dr-orland-park-il-60467.webp"],
+    ["16035 S Parker Rd","Homer Glen","60491",699000,41.6056,-87.9534,"/images/sold-properties/sold-home-16035-s-parker-rd-homer-glen-il-60491.webp"],
+    ["11315 Sycamore Ln","Palos Hills","60465",248000,41.6978,-87.8312,"/images/sold-properties/sold-home-11315-sycamore-ln-unit-b-palos-hills-il-60465.webp"],
+    ["669 Olde Oak Dr","Bourbonnais","60914",340000,41.1623,-87.8845,"/images/sold-properties/sold-home-669-olde-oak-dr-bourbonnais-il-60914.webp"],
+    ["18140 Buckingham Dr","Orland Park","60467",720000,41.6045,-87.8812,"/images/sold-properties/sold-home-18140-buckingham-dr-orland-park-il-60467.jpeg"],
+    ["14149 S Chicory Trl","Homer Glen","60491",716500,41.6034,-87.9501,"/images/sold-properties/sold-home-14149-s-chicory-trl-homer-glen-il-60491.webp"],
+    ["15175 Rodao Ln","Orland Park","60467",810000,41.6067,-87.8834,"/images/sold-properties/sold-home-15175-rodao-ln-orland-park-il-60467.webp"],
+    ["7833 W 100th Pl","Palos Hills","60465",425000,41.6945,-87.8345,"/images/sold-properties/sold-home-7833-w-100th-pl-palos-hills-il-60465.webp"],
+    ["8060 W Harvest Dr","Frankfort","60423",445000,41.4934,-87.8523,"/images/sold-properties/sold-home-8060-w-harvest-dr-frankfort-il-60423.webp"],
+    ["16417 Francis Ct","Orland Park","60467",305000,41.6023,-87.8856,"/images/sold-properties/sold-home-16417-francis-ct-orland-park-il-60467.webp"],
+    ["22736 Parkview Ln","Frankfort","60423",115000,41.5034,-87.8467,"/images/sold-properties/sold-home-22736-parkview-ln-frankfort-il-60423.webp"],
+    ["23039 Lakeview Estates Blvd","Frankfort","60423",115000,41.5056,-87.8445,"/images/sold-properties/sold-home-23039-lakeview-estates-blvd-frankfort-il-60423.webp"],
+    ["22902 Maddeline Ln","Frankfort","60423",115000,41.5045,-87.8490,"/images/sold-properties/sold-home-22902-maddeline-ln-frankfort-il-60423.webp"],
+    ["14129 S Chicory Trl","Homer Glen","60491",740000,41.6028,-87.9489,"/images/sold-properties/sold-home-14129-s-chicory-trl-homer-glen-il-60491.webp"],
+    ["20358 Taliesin Way","Frankfort","60423",565000,41.5001,-87.8545,"/images/sold-properties/sold-home-20358-taliesin-way-frankfort-il-60423.webp"],
+    ["1262 Rutgers Dr","Woodridge","60517",535000,41.7434,-88.0312,"/images/sold-properties/sold-home-1262-rutgers-dr-woodridge-il-60517.webp"],
+    ["16437 W Deerwood Dr","Lockport","60441",685000,41.5934,-88.0467,"/images/sold-properties/sold-home-16437-w-deerwood-dr-lockport-il-60441.webp"],
+    ["27719 W Rowe Ave","Spring Grove","60081",198000,42.4423,-88.2312,"/images/sold-properties/sold-home-27719-w-rowe-ave-spring-grove-il-60081.webp"],
+    ["669 Bridgeman Ln","Romeoville","60446",415000,41.6512,-88.0912,"/images/sold-properties/sold-home-669-bridgeman-ln-romeoville-il-60446.webp"],
+    ["8425 Nielsen Dr","Tinley Park","60487",485000,41.5834,-87.8145,"/images/sold-properties/sold-home-8425-nielsen-dr-tinley-park-il-60487.webp"],
+    ["18538 May St","Homewood","60430",323730,41.5589,-87.6601,"/images/sold-properties/sold-home-18538-may-st-homewood-il-60430.webp"],
+    ["12503 W Manor Dr","Homer Glen","60491",500000,41.6012,-87.9556,"/images/sold-properties/sold-home-12503-w-manor-dr-homer-glen-il-60491.webp"],
+    ["20277 Brendan St (land)","Frankfort","60423",95000,41.5023,-87.8519,"/images/sold-properties/sold-home-20277-brendan-st-frankfort-illinois-60423.webp"],
+    ["13868 S Penny Ln","Homer Glen","60491",615000,41.6045,-87.9523,"/images/sold-properties/sold-home-13868-s-penny-ln-homer-glen-il-60491.webp"],
+    ["19921 Foxborough Dr","Mokena","60448",749900,41.5256,-87.8634,"/images/sold-properties/sold-home-19921-foxborough-dr-mokena-il-60448.webp"],
+    ["15201 S Mackenzie Dr","Homer Glen","60491",1315529,41.6078,-87.9567,"/images/sold-properties/sold-home-15201-s-mackenzie-dr-21-homer-glen-il-60491.webp"],
+    ["300 Village Cir Unit 503","Willow Springs","60480",315000,41.7345,-87.8712,"/images/sold-properties/sold-home-300-village-cir-unit-503-willow-springs-il-60480.webp"],
+    ["16106 Syd Creek Dr","Lockport","60491",825000,41.5956,-88.0489,"/images/sold-properties/sold-home-16106-syd-creek-dr-lockport-il-60491.webp"],
+    ["16228 Goose Lake Dr","Crest Hill","60403",399990,41.5734,-88.1023,"/images/sold-properties/sold-home-16228-goose-lake-dr-crest-hill-il-60403.webp"],
+    ["9032 W 140th St","Orland Park","60462",185000,41.6145,-87.8934,"/images/sold-properties/sold-home-9032-w-140th-st-apt-1c-orland-park-il-60462.webp"],
+    ["16110 S Sandy Bank Ct","Homer Glen","60491",1346597,41.6089,-87.9578,"/images/sold-properties/sold-home-16110-s-sandy-bank-ct-homer-glen-il-60491.webp"],
+    ["8530 S Kolin Ave","Chicago","60652",310000,41.7356,-87.7234,"/images/sold-properties/sold-home-8530-s-kolin-ave-chicago-il-60652.webp"],
+    ["17748 Tulip Ln","Tinley Park","60477",525000,41.5756,-87.7978,"/images/sold-properties/sold-home-17748-tulip-ln-tinley-park-il-60477.webp"],
+    ["304 Hillside Rd","New Lenox","60451",210000,41.5134,-87.9712,"/images/sold-properties/sold-home-304-hillside-rd-new-lenox-il-60451.webp"],
+    ["1220 Lee Ave","Melrose Park","60160",349000,41.9012,-87.8578,"/images/sold-properties/sold-home-1220-lee-ave-melrose-park-il-60160.jpeg"],
+    ["7831 Northwoods Dr","Frankfort","60423",922560,41.4956,-87.8512,"/images/sold-properties/sold-home-7831-northwoods-dr-frankfort-il-60423.webp"],
+    ["438 N Catherine Ave","La Grange Park","60526",772500,41.8334,-87.8712,"/images/sold-properties/sold-home-438-n-catherine-ave-la-grange-park-il-60526.webp"],
+    ["13252 S Country Club Ct","Palos Heights","60463",265000,41.6623,-87.8034,"/images/sold-properties/sold-home-13252-s-country-club-ct-apt-2a-palos-heights-il-60463.webp"],
+    ["147 Hawthorne Ln","New Lenox","60451",265000,41.5098,-87.9756,"/images/sold-properties/sold-home-147-hawthorne-ln-new-lenox-il-60451.webp"],
+    ["8924 Palos Springs Dr","Orland Park","60462",466505,41.6123,-87.8912,"/images/sold-properties/sold-home-8924-palos-springs-dr-orland-park-il-60462.webp"],
+    ["14037 Catherine Dr","Orland Park","60462",425500,41.6112,-87.8923,"/images/sold-properties/sold-home-14037-catherine-dr-orland-park-il-60462.webp"],
+    ["20322 Taliesin Way","Frankfort","60423",579000,41.5012,-87.8556,"/images/sold-properties/sold-home-20322-taliesin-way-frankfort-il-60423.webp"],
+    ["7458 W Benton Dr","Frankfort","60423",364500,41.4967,-87.8534,"/images/sold-properties/sold-home-7458-w-benton-dr-frankfort-il-60423.webp"],
+    ["2644 Par Four Ln","Joliet","60436",218900,41.5234,-88.1423,"/images/sold-properties/sold-home-2644-par-four-ln-joliet-il-60436.webp"],
+    ["13007 W Beaver Lake Dr","Homer Glen","60491",650000,41.6034,-87.9545,"/images/sold-properties/sold-home-13007-w-beaver-lake-dr-homer-glen-il-60491.webp"],
+    ["14525 Sanctuary Dr","Orland Park","60467",119900,41.6056,-87.8878,"/images/sold-properties/sold-home-14525-sanctuary-dr-lot-16-orland-park-il-60467.webp"],
+    ["1917 Carriage Ln","Joliet","60433",280000,41.5212,-88.1367,"/images/sold-properties/sold-home-1917-carriage-ln-joliet-il-60433.webp"],
+    ["11628 Kaup Ln","Orland Park","60467",563000,41.6023,-87.8834,"/images/sold-properties/sold-home-11628-kaup-ln-orland-park-il-60467.webp"],
+    ["5659 W Cornelia Ave","Chicago","60634",435000,41.9534,-87.7656,"/images/sold-properties/sold-home-5659-w-cornelia-ave-chicago-il-60634.webp"],
+    ["16141 Hackney Dr","Orland Park","60467",339900,41.6034,-87.8845,"/images/sold-properties/sold-home-16141-hackney-dr-orland-park-il-60467.webp"],
+    ["16206 Syd Creek Dr","Homer Glen","60491",903500,41.6067,-87.9589,"/images/sold-properties/sold-home-16206-syd-creek-dr-homer-glen-il-60491.webp"],
+    ["17523 S Gilbert Dr","Lockport","60441",310000,41.5912,-88.0445,"/images/sold-properties/sold-home-17523-s-gilbert-dr-lockport-il-60441.webp"],
+    ["19972 Lily Ct","Frankfort","60423",647500,41.4989,-87.8523,"/images/sold-properties/sold-home-19972-lily-ct-frankfort-il-60423.jpeg"],
+    ["1010 Rocky Hill Cir","Joliet","60432",285000,41.5189,-88.1389,"/images/sold-properties/sold-home-1010-rocky-hill-cir-joliet-il-60432.webp"],
+    ["10S280 Grant St","Burr Ridge","60527",345000,41.7523,-87.9178,"/images/sold-properties/sold-home-10s280-grant-st-burr-ridge-il-60527.webp"],
+    ["16152 Syd Creek Dr","Homer Glen","60491",1125208,41.6056,-87.9601,"/images/sold-properties/sold-home-16152-syd-creek-dr-homer-glen-il-60491.webp"],
+    ["15316 W Pinewood Rd","Lockport","60441",314000,41.5923,-88.0412,"/images/sold-properties/sold-home-15316-w-pinewood-rd-lockport-il-60441.webp"],
+    ["11603 Brookwood Dr","Orland Park","60467",455000,41.6012,-87.8867,"/images/sold-properties/sold-home-11603-brookwood-dr-orland-park-il-60467.webp"],
+    ["5629 James Dr","Oak Forest","60452",298000,41.6134,-87.7534,"/images/sold-properties/sold-home-5629-james-dr-oak-forest-il-60452.webp"],
+    ["15705 Orlan Brook Dr","Orland Park","60462",225000,41.6134,-87.8956,"/images/sold-properties/sold-home-15705-orlan-brook-dr-unit-6-orland-park-il-60462.webp"],
+    ["7540 S Hamilton Ave","Chicago","60620",272900,41.7612,-87.6534,"/images/sold-properties/sold-home-7540-s-hamilton-ave-chicago-il-60620.webp"],
+    ["13887 W Wildwood Ln","Homer Glen","60491",939000,41.6056,-87.9512,"/images/sold-properties/sold-home-13887-w-wildwood-ln-homer-glen-il-60491.webp"],
+    ["1106 Kinmonth Dr","Joliet","60433",190000,41.5201,-88.1345,"/images/sold-properties/sold-home-1106-kinmonth-dr-joliet-il-60433.webp"],
+    ["11515 Settlers Pond Way","Orland Park","60467",240500,41.6001,-87.8889,"/images/sold-properties/sold-home-11515-settlers-pond-way-unit-2d-orland-park-il-60467.webp"],
+    ["15201 S Mackenzie Dr #21","Homer Glen","60491",127400,41.6082,-87.9571,"/images/sold-properties/sold-home-15201-s-mackenzie-dr-homer-glen-il-60491.webp"],
+    ["15123 W Quincy Cir","Manhattan","60442",265000,41.4289,-87.9878,"/images/sold-properties/sold-home-15123-w-quincy-cir-manhattan-il-60442.webp"],
+    ["10 Silo Ridge Rd W","Orland Park","60467",600000,41.6045,-87.8901,"/images/sold-properties/sold-home-10-silo-ridge-rd-w-orland-park-il-60467.webp"],
+    ["16145 Hackney Dr","Orland Park","60467",299900,41.6038,-87.8849,"/images/sold-properties/sold-home-16145-hackney-dr-orland-park-il-60467.webp"],
+    ["7935 Richardson Ln","Tinley Park","60487",338000,41.5789,-87.8167,"/images/sold-properties/sold-home-7935-richardson-ln-tinley-park-il-60487.webp"],
   ];
 
-  /* ─── Helpers ─────────────────────────────────────────── */
   const fmt  = p => '$' + p.toLocaleString();
   const tier = p => p >= 1000000 ? 'Platinum Sale' : p >= 750000 ? 'Luxury Estate' : p >= 500000 ? 'Premium Sale' : 'Closed Sale';
   const cat  = p => p >= 1000000 ? '1M+' : p >= 750000 ? '750k' : p >= 500000 ? '500k' : 'other';
 
-  // No API key needed — photos come from the data array above (index 6).
-
-  /* ─── Sort & slice ───────────────────────────────────── */
   const SORTED = [...ALL].sort((a, b) => b[3] - a[3]);
   const TOP25  = SORTED.slice(0, 25);
 
-  /* ─── Single uniform pin SVG ─────────────────────────── */
   function mkIcon(active) {
     const fill = active ? '#2e4a6e' : '#1a2d4a';
     const sz   = active ? 34 : 26;
     const h    = Math.round(sz * 1.3);
     return L.divIcon({
       className: '',
-      html: `<svg width="${sz}" height="${h}" viewBox="0 0 30 39" xmlns="http://www.w3.org/2000/svg"
-               style="filter:drop-shadow(0 2px 5px rgba(0,0,0,.35));display:block;">
-               <path d="M15 0C6.716 0 0 6.716 0 15c0 8.284 15 24 15 24S30 23.284 30 15C30 6.716 23.284 0 15 0z" fill="${fill}"/>
-               <circle cx="15" cy="14" r="5.5" fill="white" opacity="0.9"/>
-             </svg>`,
+      html: `<svg width="${sz}" height="${h}" viewBox="0 0 30 39" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 2px 5px rgba(0,0,0,.35));display:block;"><path d="M15 0C6.716 0 0 6.716 0 15c0 8.284 15 24 15 24S30 23.284 30 15C30 6.716 23.284 0 15 0z" fill="${fill}"/><circle cx="15" cy="14" r="5.5" fill="white" opacity="0.9"/></svg>`,
       iconSize:   [sz, h],
       iconAnchor: [sz / 2, h],
       popupAnchor:[0, -h]
     });
   }
 
-  /* ─── Init map with gesture handling ────────────────── */
   window.addEventListener('load', function () {
     const map = L.map('sold-map', {
-      gestureHandling: true,   // ctrl+scroll on desktop / two-finger on mobile
-      zoomControl:     true,
-      scrollWheelZoom: true,   // enabled — gesture plugin manages the UX
+      gestureHandling: true,
+      zoomControl: true,
+      scrollWheelZoom: true,
     }).setView([41.59, -87.95], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -851,7 +842,6 @@
       maxZoom: 19
     }).addTo(map);
 
-    /* ─── MarkerCluster group ─────────────────────────── */
     const clusterGroup = L.markerClusterGroup({
       maxClusterRadius: 60,
       spiderfyOnMaxZoom: true,
@@ -859,24 +849,14 @@
       zoomToBoundsOnClick: true,
     });
 
-    /* ─── Build popup HTML ───────────────────────────── */
     function buildPopup(addr, city, zip, price, photo) {
       const imgHtml = photo
         ? `<img class="popup-sv-img" src="${photo}" alt="Photo of ${addr}" loading="lazy" onerror="this.parentElement.querySelector('.popup-sv-placeholder').style.display='flex';this.style.display='none'"><div class="popup-sv-placeholder" style="display:none">Photo Coming Soon</div>`
         : `<div class="popup-sv-placeholder">Photo Coming Soon</div>`;
-      return `
-        ${imgHtml}
-        <div class="popup-body">
-          <span class="popup-city">${city}, IL ${zip}</span>
-          <span class="popup-address">${addr}</span>
-          <span class="popup-price">${fmt(price)}</span>
-          <span class="popup-badge">${tier(price)}</span>
-        </div>`;
+      return `${imgHtml}<div class="popup-body"><span class="popup-city">${city}, IL ${zip}</span><span class="popup-address">${addr}</span><span class="popup-price">${fmt(price)}</span><span class="popup-badge">${tier(price)}</span></div>`;
     }
 
-    /* ─── Add all 100 pins to cluster ───────────────── */
-    const top25AddrSet = new Set(TOP25.map(s => s[0] + '|' + s[2]));
-    const cardMarkers  = {}; // top25 rank → marker
+    const cardMarkers = {};
 
     ALL.forEach(s => {
       const [addr, city, zip, price, lat, lng, photo] = s;
@@ -889,31 +869,24 @@
 
     map.addLayer(clusterGroup);
 
-    /* ─── Card interactions ──────────────────────────── */
     let activeRank = null;
 
     function filterCards(c, btnEl) {
       document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
       btnEl.classList.add('active');
-
-      // Reset previously active marker
       if (activeRank !== null && cardMarkers[activeRank]) {
         cardMarkers[activeRank].setIcon(mkIcon(false));
       }
       activeRank = null;
-
       const feed    = document.getElementById('listings-feed');
       const countEl = document.getElementById('prop-count');
       feed.innerHTML = '';
-
       const filtered = TOP25.map((s, r) => ({ s, r })).filter(({ s }) => c === 'all' || cat(s[3]) === c);
       countEl.textContent = filtered.length + ' properties';
-
       const ff = document.createElement('div');
       ff.className = 'flip-feed';
-
       filtered.forEach(({ s, r }) => {
-        const [addr, city, zip, price, lat, lng] = s;
+        const [addr, city, zip, price] = s;
         const card = document.createElement('div');
         card.className = 'flip-card';
         card.id = 'card-' + r;
@@ -921,10 +894,7 @@
           <div class="flip-inner">
             <div class="flip-front">
               <div class="flip-front-placeholder">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1a2d4a" stroke-width="1" opacity="0.3">
-                  <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
-                  <path d="M9 21V12h6v9"/>
-                </svg>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1a2d4a" stroke-width="1" opacity="0.3"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
               </div>
               <div class="flip-hint">Hover for details</div>
               <div class="flip-front-overlay">
@@ -944,24 +914,13 @@
                 <span class="flip-back-price">${fmt(price)}</span>
               </div>
               <div class="flip-back-stats">
-                <div class="flip-stat">
-                  <span class="flip-stat-val">#${r + 1}</span>
-                  <span class="flip-stat-lbl">Top Sale Rank</span>
-                </div>
-                <div class="flip-stat">
-                  <span class="flip-stat-val">${tier(price)}</span>
-                  <span class="flip-stat-lbl">Sale Tier</span>
-                </div>
-                <div class="flip-stat">
-                  <span class="flip-stat-val">${zip}</span>
-                  <span class="flip-stat-lbl">ZIP Code</span>
-                </div>
+                <div class="flip-stat"><span class="flip-stat-val">#${r + 1}</span><span class="flip-stat-lbl">Top Sale Rank</span></div>
+                <div class="flip-stat"><span class="flip-stat-val">${tier(price)}</span><span class="flip-stat-lbl">Sale Tier</span></div>
+                <div class="flip-stat"><span class="flip-stat-val">${zip}</span><span class="flip-stat-lbl">ZIP Code</span></div>
               </div>
             </div>
           </div>`;
-
         card.addEventListener('click', () => {
-          // Deactivate previous card
           if (activeRank !== null && activeRank !== r) {
             const prev = document.getElementById('card-' + activeRank);
             if (prev) prev.classList.remove('highlighted');
@@ -970,25 +929,19 @@
           card.classList.toggle('highlighted');
           const on = card.classList.contains('highlighted');
           if (cardMarkers[r]) cardMarkers[r].setIcon(mkIcon(on));
-
           if (on) {
-            // Zoom in, unspiderfy clusters, open popup
-            clusterGroup.zoomToShowLayer(cardMarkers[r], () => {
-              cardMarkers[r].openPopup();
-            });
+            clusterGroup.zoomToShowLayer(cardMarkers[r], () => { cardMarkers[r].openPopup(); });
             activeRank = r;
           } else {
             if (cardMarkers[r]) cardMarkers[r].closePopup();
             activeRank = null;
           }
         });
-
         ff.appendChild(card);
       });
       feed.appendChild(ff);
     }
 
-    /* expose filterCards globally for onclick handlers */
     window.filterCards = filterCards;
     filterCards('1M+', document.querySelector('.f-btn'));
   });

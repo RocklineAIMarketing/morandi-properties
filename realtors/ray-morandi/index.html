@@ -333,6 +333,10 @@
     }
     .press-cta::after { content: '→'; transition: transform 0.2s; }
     .press-card:hover .press-cta::after { transform: translateX(4px); }
+    .press-card-top { display: flex; gap: 20px; align-items: flex-start; }
+    .press-cover { width: 90px; flex-shrink: 0; box-shadow: 0 4px 16px rgba(26,45,74,0.15); }
+    .press-cover img { width: 100%; display: block; }
+    .press-card-text { flex: 1; }
 
     @media (max-width: 720px) {
       .press-section { padding: 60px 24px; }
@@ -627,7 +631,7 @@
       </div>
       <div class="bio-stats">
         <div class="stat-block">
-          <div class="stat-number">20+</div>
+          <div class="stat-number">25+</div>
           <div class="stat-label">Years in Real Estate</div>
         </div>
         <div class="stat-block">
@@ -662,8 +666,15 @@
           rel="noopener noreferrer"
           aria-label="Read Ray Morandi's Chicago Agent Magazine profile"
         >
-          <span class="press-source">Chicago Agent Magazine</span>
-          <h3 class="press-title">Who's Who 2020 — Raymond Morandi</h3>
+          <div class="press-card-top">
+            <div class="press-cover">
+              <img src="images/morandi-agency/ray-morandi-chicago-agent-magazine.jpeg" alt="Chicago Agent Magazine cover featuring Ray Morandi">
+            </div>
+            <div class="press-card-text">
+              <span class="press-source">Chicago Agent Magazine</span>
+              <h3 class="press-title">Who's Who 2020 — Raymond Morandi</h3>
+            </div>
+          </div>
           <p class="press-excerpt">
             Named among Chicago Agent Magazine's Top 10 Agents in Will County, Ray's innovative video marketing strategy, first-to-market technology approach, and thriving referral business earned him a feature in the publication's prestigious annual Who's Who edition.
           </p>
@@ -676,8 +687,15 @@
           rel="noopener noreferrer"
           aria-label="Read Ray Morandi's Top Agent Magazine profile"
         >
-          <span class="press-source">Top Agent Magazine</span>
-          <h3 class="press-title">Top Real Estate Agent in Illinois</h3>
+          <div class="press-card-top">
+            <div class="press-cover">
+              <img src="images/morandi-agency/ray-morandi-top-agent-magazine.jpg" alt="Top Agent Magazine cover featuring Ray Morandi">
+            </div>
+            <div class="press-card-text">
+              <span class="press-source">Top Agent Magazine</span>
+              <h3 class="press-title">Top Real Estate Agent in Illinois</h3>
+            </div>
+          </div>
           <p class="press-excerpt">
             Top Agent Magazine spotlights Ray's two-decade career built on hard work, integrity, and a passion for client service. The feature dives into his marketing philosophy, referral-first approach, and what drives his continued success in the southwest suburbs.
           </p>
@@ -739,7 +757,7 @@
           </div>
           <div class="contact-item">
             <strong>Email</strong>
-            <a href="mailto:Ray@morandiproperties.com">Raymorandi@gmail.com</a>
+            <a href="/cdn-cgi/l/email-protection#ebb98a928684998a858f82ab8c868a8287c5888486"><span class="__cf_email__" data-cfemail="a4f6c5ddc9cbd6c5cac0cde4c3c9c5cdc88ac7cbc9">[email&#160;protected]</span></a>
           </div>
           <div class="contact-item">
             <strong>Office</strong>
@@ -854,7 +872,7 @@
   </div>
 </nav>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const hBtn = document.getElementById('hamburgerBtn');
   const mNav = document.getElementById('mobileNav');
   const mCls = document.getElementById('mobileNavClose');
@@ -868,12 +886,4 @@
     btn.addEventListener('click', () => {
       const sub = document.getElementById(btn.dataset.target);
       const isOpen = sub.classList.contains('open');
-      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open'));
-      document.querySelectorAll('.mobile-nav-toggle').forEach(b => b.setAttribute('aria-expanded','false'));
-      if (!isOpen) { sub.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
-    });
-  });
-</script>
-
-</body>
-</html>
+      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open')

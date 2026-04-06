@@ -890,4 +890,14 @@
     btn.addEventListener('click', () => {
       const sub = document.getElementById(btn.dataset.target);
       const isOpen = sub.classList.contains('open');
-      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open')
+      
+      // Close all other sub-menus first
+      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open'));
+      
+      // Toggle the current one
+      if (!isOpen) {
+        sub.classList.add('open');
+      }
+    });
+  });
+</script>

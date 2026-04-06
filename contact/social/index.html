@@ -1,1 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Hub — Morandi Properties</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Facebook SDK for Page Plugin -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0">
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:      #ffffff;
+      --blue-grey:  #b0bec5;
+      --light-bg:   #f4f6f8;
+      --navy:       #1a2d4a;
+      --navy-light: #2e4a6e;
+      --text-muted: #607d8b;
+      --accent:     #2e7bb5;
+
+      /* Social brand colors */
+      --fb:   #1877F2;
+      --ig:   #E1306C;
+      --yt:   #FF0000;
+      --tt:   #010101;
+      --li:   #0A66C2;
+    }
+
+    body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
+
+    /* ─── HEADER ─────────────────────────────────────────────── */
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
+    .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
+    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,0.18); gap: 2px; }
+    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color 0.2s; }
+    .nav-link:hover { color: var(--navy-light); }
+    .nav-link.active { border-bottom: 2px solid var(--navy); }
+    .nav-label { cursor: default; user-select: none; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu, .nav-dropdown:focus-within .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,0.15); min-width: 200px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; z-index: 100; }
+    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background 0.15s; }
+    .dropdown-menu a:hover { background: #eceff1; }
+    .hamburger-btn { display: none; flex-direction: column; gap: 5px; align-items: flex-start; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all 0.25s ease; }
+    .hamburger-btn span:nth-child(1) { width: 24px; }
+    .hamburger-btn span:nth-child(2) { width: 17px; }
+    .hamburger-btn span:nth-child(3) { width: 24px; }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
+    .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
+    .mobile-nav-group { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .mobile-nav-toggle { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); background: none; border: none; cursor: pointer; padding: 8px 24px; display: flex; align-items: center; gap: 8px; }
+    .mobile-nav-toggle .caret { font-size: 18px; transition: transform 0.2s; display: inline-block; }
+    .mobile-nav-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+    .mobile-nav-sub { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding-bottom: 4px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height 0.35s ease, opacity 0.25s ease 0.2s; }
+    .mobile-nav-sub.open { max-height: 320px; opacity: 1; }
+    .mobile-nav-sub a { font-family: 'Barlow', sans-serif !important; font-size: 14px !important; font-weight: 500 !important; letter-spacing: 0.08em !important; color: var(--text-muted) !important; padding: 6px 24px !important; text-transform: uppercase; }
+    @media (max-width: 960px) {
+      .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
+      .hamburger-btn { display: flex; grid-column: 1; }
+      .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
+      .nav-row { display: none; }
+    }
+
+    /* ─── PAGE HERO ────────────────────────────────────────── */
+    .social-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 80px 40px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .social-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(46,123,181,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--blue-grey);
+      margin-bottom: 18px;
+    }
+    .hero-headline {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .hero-platforms {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .platform-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 20px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.8);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .platform-pill:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.5); color: var(--white); }
+    .platform-pill svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+    /* ─── SECTION WRAPPER ──────────────────────────────────── */
+    .section-wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+    .section-divider {
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      margin: 18px 0;
+    }
+
+    /* ─── FOLLOW STRIP ──────────────────────────────────────── */
+    .follow-strip {
+      background: var(--light-bg);
+      padding: 56px 40px;
+      border-bottom: 1px solid #dde3e8;
+    }
+    .follow-grid {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .follow-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 28px 20px;
+      background: var(--white);
+      border: 1px solid #dde3e8;
+      text-decoration: none;
+      transition: all 0.22s;
+      position: relative;
+      overflow: hidden;
+    }
+    .follow-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .follow-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(26,45,74,0.1); }
+    .follow-card:hover::after { opacity: 1; }
+    .follow-card.fb::after  { background: var(--fb); }
+    .follow-card.ig::after  { background: linear-gradient(90deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .follow-card.yt::after  { background: var(--yt); }
+    .follow-card.tt::after  { background: var(--tt); }
+    .follow-card.li::after  { background: var(--li); }
+    .follow-icon-wrap {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .follow-card.fb .follow-icon-wrap { background: var(--fb); }
+    .follow-card.ig .follow-icon-wrap { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+    .follow-card.yt .follow-icon-wrap { background: var(--yt); }
+    .follow-card.tt .follow-icon-wrap { background: var(--tt); }
+    .follow-card.li .follow-icon-wrap { background: var(--li); }
+    .follow-icon-wrap svg { width: 22px; height: 22px; fill: white; display: block; }
+    .follow-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .follow-handle {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .follow-btn {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 6px 16px;
+      transition: all 0.2s;
+    }
+    .follow-card:hover .follow-btn {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    /* ─── FACEBOOK FEED + REVIEWS ───────────────────────────── */
+    .fb-section {
+      padding: 80px 0;
+      background: var(--white);
+    }
+    .fb-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .fb-col-header {
+      margin-bottom: 32px;
+    }
+
+    /* Facebook Page Plugin container */
+    .fb-plugin-wrap {
+      border: 1px solid #dde3e8;
+      overflow: hidden;
+      min-height: 500px;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .fb-plugin-wrap .fb_iframe_widget {
+      width: 100% !important;
+    }
+    .fb-plugin-wrap .fb_iframe_widget span {
+      width: 100% !important;
+    }
+    .fb-plugin-wrap .fb_iframe_widget iframe {
+      width: 100% !important;
+    }
+
+    /* Placeholder shown before SDK loads */
+    .fb-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: #f0f2f5;
+      color: var(--text-muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.4s;
+    }
+    .fb-placeholder svg { width: 40px; height: 40px; fill: var(--fb); opacity: 0.5; }
+    .fb-placeholder strong { color: var(--navy); font-size: 14px; }
+    .fb-placeholder.hidden { opacity: 0; }
+
+    /* ─── STAR RATING ─────────────────────────────────────── */
+    .rating-summary {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--light-bg);
+      border: 1px solid #dde3e8;
+      margin-bottom: 24px;
+    }
+    .rating-score {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .rating-detail { display: flex; flex-direction: column; gap: 4px; }
+    .stars { display: flex; gap: 3px; }
+    .star { color: #f5a623; font-size: 18px; }
+    .rating-count { font-size: 12px; color: var(--text-muted); letter-spacing: 0.05em; }
+    .rating-source { font-size: 11px; color: var(--text-muted); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+    .rating-source svg { width: 12px; height: 12px; fill: var(--fb); }
+
+    /* ─── REVIEW CARDS ──────────────────────────────────────── */
+    .reviews-list { display: flex; flex-direction: column; gap: 16px; }
+    .review-card {
+      padding: 22px 24px;
+      border: 1px solid #dde3e8;
+      background: var(--white);
+      transition: box-shadow 0.2s;
+    }
+    .review-card:hover { box-shadow: 0 4px 18px rgba(26,45,74,0.08); }
+    .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .reviewer-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 15px; font-weight: 600; color: white;
+      flex-shrink: 0;
+    }
+    .reviewer-meta { flex: 1; }
+    .reviewer-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+    .review-date { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+    .review-stars { display: flex; gap: 2px; margin-bottom: 10px; }
+    .review-stars .star { font-size: 13px; }
+    .review-text { font-size: 13.5px; line-height: 1.65; color: #4a5e6e; }
+    .fb-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--fb); margin-top: 10px;
+    }
+    .fb-badge svg { width: 11px; height: 11px; fill: var(--fb); }
+    .reviews-cta {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 24px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--navy-light); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--navy);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 22px;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { background: var(--navy); color: var(--white); }
+
+    /* ─── INSTAGRAM GRID ────────────────────────────────────── */
+    .ig-section {
+      background: var(--light-bg);
+      padding: 80px 0;
+      border-top: 1px solid #dde3e8;
+    }
+    .ig-layout {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .ig-intro {
+      position: sticky;
+      top: 24px;
+    }
+    .ig-handle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .ig-avatar {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ig-avatar svg { width: 28px; height: 28px; fill: white; display: block; }
+    .ig-handle-text .name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; color: var(--navy); }
+    .ig-handle-text .handle { font-size: 13px; color: var(--text-muted); }
+    .ig-desc { font-size: 14px; line-height: 1.7; color: #4a5e6e; margin-bottom: 24px; }
+    .ig-follow-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      background: linear-gradient(135deg, #f09433, #dc2743, #bc1888);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .ig-follow-btn:hover { opacity: 0.88; }
+    .ig-follow-btn svg { width: 14px; height: 14px; fill: white; }
+
+    /* Instagram post grid — live embeds via oEmbed */
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .ig-post-slot {
+      aspect-ratio: 1;
+      background: #e4e6e8;
+      overflow: hidden;
+      position: relative;
+    }
+    .ig-post-slot iframe {
+      width: 100% !important;
+      min-width: 0 !important;
+      border: none;
+    }
+
+    /* Placeholder grid cards */
+    .ig-placeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+    }
+    .ig-placeholder-card {
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #e8ecf0 0%, #d0d8e0 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .ig-placeholder-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(26,45,74,0.06) 100%);
+    }
+    .ig-placeholder-card svg {
+      width: 28px; height: 28px;
+      fill: rgba(176,190,197,0.6);
+    }
+    .ig-notice {
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(46,123,181,0.08);
+      border-left: 3px solid var(--accent);
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: var(--navy-light);
+    }
+    .ig-notice strong { color: var(--navy); }
+
+    /* ─── YOUTUBE + TIKTOK STRIP ────────────────────────────── */
+    .video-section {
+      padding: 80px 0;
+      background: var(--white);
+      border-top: 1px solid #dde3e8;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .video-col-header {
+      margin-bottom: 24px;
+    }
+    .video-platform-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px 5px 10px;
+      background: var(--yt);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .video-platform-badge.tt { background: var(--tt); }
+    .video-platform-badge svg { width: 13px; height: 13px; fill: white; }
+    .video-embed-wrap {
+      aspect-ratio: 16/9;
+      background: #111;
+      position: relative;
+      overflow: hidden;
+    }
+    .video-embed-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: #0d1b2a;
+      color: rgba(255,255,255,0.5);
+      font-size: 12.5px;
+      text-align: center;
+      padding: 20px;
+    }
+    .video-placeholder svg { width: 44px; height: 44px; opacity: 0.4; }
+    .video-placeholder strong { color: rgba(255,255,255,0.75); font-size: 14px; display: block; }
+    .video-cta {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-yt {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--yt); color: white; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+      padding: 11px 22px; transition: opacity 0.2s;
+    }
+    .btn-yt:hover { opacity: 0.85; }
+    .btn-tt {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: #010101; color: white; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+      padding: 11px 22px; transition: opacity 0.2s;
+    }
+    .btn-tt:hover { opacity: 0.8; }
+    .btn-yt svg, .btn-tt svg { width: 14px; height: 14px; fill: white; }
+
+    /* ─── LEAVE A REVIEW CTA ────────────────────────────────── */
+    .review-cta-band {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      padding: 64px 40px;
+      text-align: center;
+    }
+    .review-cta-band .section-label { color: var(--blue-grey); }
+    .review-cta-band .section-title { color: var(--white); margin: 0 auto; max-width: 640px; }
+    .review-cta-band p {
+      font-size: 15px; line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      max-width: 480px; margin: 20px auto 36px;
+    }
+    .btn-white {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white); color: var(--navy); font-size: 11px;
+      font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none; padding: 16px 32px; transition: all 0.2s;
+    }
+    .btn-white:hover { background: var(--blue-grey); }
+    .btn-white svg { width: 15px; height: 15px; fill: var(--fb); }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    .site-footer { background: var(--navy); padding: 64px 40px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .footer-tagline { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
+    .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
+    .footer-address { font-size: 13.5px; font-weight: 400; line-height: 1.7; color: rgba(255,255,255,0.75); text-align: center; }
+    .footer-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.06em; color: var(--white); text-decoration: none; transition: color 0.2s; }
+    .footer-phone:hover { color: var(--blue-grey); }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    .footer-social-label { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue-grey); }
+    .footer-social-icons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, background 0.2s; flex-shrink: 0; }
+    .footer-social-link:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.75); display: block; transition: fill 0.2s; }
+    .footer-social-link:hover svg { fill: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; gap: 16px; flex-wrap: wrap; }
+    .footer-legal { font-size: 11.5px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .follow-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 780px) {
+      .follow-grid { grid-template-columns: repeat(2, 1fr); }
+      .fb-layout, .video-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ig-layout { grid-template-columns: 1fr; gap: 32px; }
+      .ig-intro { position: static; }
+    }
+    @media (max-width: 560px) {
+      .follow-grid { grid-template-columns: 1fr 1fr; }
+      .ig-placeholder-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-wrap { padding: 0 20px; }
+      .social-hero { padding: 56px 20px 52px; }
+      .follow-strip { padding: 40px 20px; }
+      .fb-section, .ig-section, .video-section { padding: 56px 0; }
+      .review-cta-band { padding: 56px 20px; }
+    }
+    @media (max-width: 900px) {
+      .site-footer { padding: 52px 24px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
+      .footer-social { align-items: flex-start; }
+      .footer-social-icons { justify-content: flex-start; }
+      .footer-contact { align-items: flex-start; text-align: left; }
+      .footer-address { text-align: left; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════ -->
+<header class="site-header" role="banner">
+  <div class="logo-row">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="/" class="logo-placeholder">Morandi Properties</a>
+  </div>
+  <nav class="nav-row" role="navigation" aria-label="Primary navigation">
+    <a href="/" class="nav-link">Home</a>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Buying ▾</span>
+      <div class="dropdown-menu">
+        <a href="/buying/listings">Current Listings</a>
+        <a href="/buying/open-house">Open House Search</a>
+        <a href="/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+        <a href="/buying/calculator">Mortgage Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Selling ▾</span>
+      <div class="dropdown-menu">
+        <a href="/selling/sold-portfolio">Sold Portfolio</a>
+        <a href="/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+        <a href="/selling/valuation">What is my Home Worth?</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Insights ▾</span>
+      <div class="dropdown-menu">
+        <a href="/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+        <a href="/insights/faq">Real Estate Q&amp;A</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Realtors ▾</span>
+      <div class="dropdown-menu">
+        <a href="/realtors/agents">Meet the Team</a>
+        <a href="/realtors/ray-morandi">Meet Ray Morandi</a>
+        <a href="/realtors/reviews">Client Reviews</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label active">Contact ▾</span>
+      <div class="dropdown-menu">
+        <a href="/contact/office">General Inquiry</a>
+        <a href="/contact/chicagoland-market-report">Market Insider</a>
+        <a href="/contact/social" style="font-weight:700;">Social Media Hub</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ═══ MAIN ═══════════════════════════════════════════════ -->
+<main role="main">
+
+  <!-- HERO -->
+  <section class="social-hero">
+    <p class="hero-eyebrow">Stay Connected</p>
+    <h1 class="hero-headline">Social Media Hub</h1>
+    <p class="hero-sub">Follow along for market updates, neighborhood spotlights, home tours, and real estate tips from the Morandi Properties team.</p>
+    <div class="hero-platforms">
+      <!-- UPDATE HREFS with actual profile URLs -->
+      <a href="https://www.facebook.com/MorandiProperties" class="platform-pill" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/MorandiProperties" class="platform-pill" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+      <a href="https://www.youtube.com/@MorandiProperties" class="platform-pill" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        YouTube
+      </a>
+      <a href="https://www.tiktok.com/@MorandiProperties" class="platform-pill" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        TikTok
+      </a>
+      <a href="https://www.linkedin.com/company/morandi-properties" class="platform-pill" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </section>
+
+  <!-- FOLLOW CARDS -->
+  <section class="follow-strip">
+    <div class="follow-grid">
+      <!-- UPDATE href and handle values with actual profile URLs -->
+      <a href="https://www.facebook.com/MorandiProperties" class="follow-card fb" target="_blank" rel="noopener">
+        <div class="follow-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+        </div>
+        <span class="follow-name">Facebook</span>
+        <span class="follow-handle">@MorandiProperties</span>
+        <span class="follow-btn">Follow</span>
+      </a>
+      <a href="https://www.instagram.com/MorandiProperties" class="follow-card ig" target="_blank" rel="noopener">
+        <div class="follow-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </div>
+        <span class="follow-name">Instagram</span>
+        <span class="follow-handle">@MorandiProperties</span>
+        <span class="follow-btn">Follow</span>
+      </a>
+      <a href="https://www.youtube.com/@MorandiProperties" class="follow-card yt" target="_blank" rel="noopener">
+        <div class="follow-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+        </div>
+        <span class="follow-name">YouTube</span>
+        <span class="follow-handle">@MorandiProperties</span>
+        <span class="follow-btn">Subscribe</span>
+      </a>
+      <a href="https://www.tiktok.com/@MorandiProperties" class="follow-card tt" target="_blank" rel="noopener">
+        <div class="follow-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+        </div>
+        <span class="follow-name">TikTok</span>
+        <span class="follow-handle">@MorandiProperties</span>
+        <span class="follow-btn">Follow</span>
+      </a>
+      <a href="https://www.linkedin.com/company/morandi-properties" class="follow-card li" target="_blank" rel="noopener">
+        <div class="follow-icon-wrap">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <span class="follow-name">LinkedIn</span>
+        <span class="follow-handle">Morandi Properties</span>
+        <span class="follow-btn">Connect</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ FACEBOOK FEED + REVIEWS ══════════════════════════════ -->
+  <section class="fb-section">
+    <div class="section-wrap">
+      <div class="fb-layout">
+
+        <!-- LEFT: Facebook Live Feed -->
+        <div class="reveal">
+          <div class="fb-col-header">
+            <span class="section-label">Live Feed</span>
+            <h2 class="section-title">Facebook<br>Latest Posts</h2>
+            <div class="section-divider"></div>
+            <p style="font-size:14px;line-height:1.7;color:var(--text-muted);">Stay up to date with our newest listings, open houses, and local market news directly from our Facebook page.</p>
+          </div>
+          <div class="fb-plugin-wrap">
+            <!--
+              ════════════════════════════════════════════════
+              SETUP: Replace the href value below with your
+              actual Facebook Page URL, then the SDK above
+              will render the live feed automatically.
+              Example: https://www.facebook.com/YourPageName
+              ════════════════════════════════════════════════
+            -->
+            <div
+              class="fb-page"
+              data-href="https://www.facebook.com/MorandiProperties"
+              data-tabs="timeline"
+              data-width="500"
+              data-height="600"
+              data-small-header="false"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="true">
+            </div>
+            <div class="fb-placeholder" id="fbFeedPlaceholder">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+              <strong>Facebook Live Feed</strong>
+              Update the <code>data-href</code> value<br>with your Facebook Page URL to activate.
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Facebook Reviews -->
+        <div class="reveal reveal-delay-2">
+          <div class="fb-col-header">
+            <span class="section-label">Client Feedback</span>
+            <h2 class="section-title">Facebook<br>Reviews</h2>
+            <div class="section-divider"></div>
+          </div>
+
+          <!-- Aggregate Rating -->
+          <div class="rating-summary">
+            <div class="rating-score">5.0</div>
+            <div class="rating-detail">
+              <div class="stars">
+                <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+              </div>
+              <div class="rating-count">Based on Facebook Recommendations</div>
+              <div class="rating-source">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+                Verified via Facebook
+              </div>
+            </div>
+          </div>
+
+          <!-- Facebook Reviews Plugin -->
+          <div class="fb-plugin-wrap" style="min-height:380px; margin-bottom:20px;">
+            <!--
+              ════════════════════════════════════════════════
+              SETUP: Replace data-href with your Facebook
+              Page URL. This renders the live Reviews tab.
+              ════════════════════════════════════════════════
+            -->
+            <div
+              class="fb-page"
+              data-href="https://www.facebook.com/MorandiProperties"
+              data-tabs="reviews"
+              data-width="500"
+              data-height="380"
+              data-small-header="true"
+              data-adapt-container-width="true"
+              data-hide-cover="true"
+              data-show-facepile="false">
+            </div>
+            <div class="fb-placeholder" id="fbReviewsPlaceholder">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+              <strong>Facebook Reviews Feed</strong>
+              Update the <code>data-href</code> value<br>with your Facebook Page URL to activate.
+            </div>
+          </div>
+
+          <!-- Pinned / Curated Reviews (always-visible highlights) -->
+          <div class="reviews-list">
+            <!-- REPLACE these with actual client reviews -->
+            <div class="review-card">
+              <div class="review-header">
+                <div class="reviewer-avatar">JM</div>
+                <div class="reviewer-meta">
+                  <div class="reviewer-name">Jennifer M.</div>
+                  <div class="review-date">March 2026 · Orland Park</div>
+                </div>
+              </div>
+              <div class="review-stars">
+                <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+              </div>
+              <p class="review-text">Ray and his team made our home sale completely stress-free. From pricing strategy to closing day, they were communicative, professional, and got us over asking. Couldn't recommend them more.</p>
+              <span class="fb-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg> Facebook Recommendation</span>
+            </div>
+            <div class="review-card">
+              <div class="review-header">
+                <div class="reviewer-avatar">TK</div>
+                <div class="reviewer-meta">
+                  <div class="reviewer-name">Tom K.</div>
+                  <div class="review-date">February 2026 · Tinley Park</div>
+                </div>
+              </div>
+              <div class="review-stars">
+                <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+              </div>
+              <p class="review-text">First-time buyer and Ray walked us through every single step. We never felt rushed or pressured. Found the perfect house in Tinley Park within six weeks. The whole experience was fantastic.</p>
+              <span class="fb-badge"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg> Facebook Recommendation</span>
+            </div>
+          </div>
+
+          <div class="reviews-cta">
+            <!-- UPDATE href with actual Facebook Reviews URL -->
+            <a href="https://www.facebook.com/MorandiProperties/reviews" class="btn-primary" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:white;"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+              See All Reviews
+            </a>
+            <a href="/realtors/reviews" class="btn-ghost">More Testimonials</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ INSTAGRAM GRID ════════════════════════════════════════ -->
+  <section class="ig-section">
+    <div class="section-wrap">
+      <div class="ig-layout">
+
+        <div class="ig-intro reveal">
+          <div class="ig-handle">
+            <div class="ig-avatar">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </div>
+            <div class="ig-handle-text">
+              <div class="name">Instagram</div>
+              <!-- UPDATE with actual handle -->
+              <div class="handle">@MorandiProperties</div>
+            </div>
+          </div>
+          <span class="section-label">On Instagram</span>
+          <h2 class="section-title">Home Tours,<br>Listings &amp;<br>Local Life</h2>
+          <div class="section-divider"></div>
+          <p class="ig-desc">Behind-the-scenes home tours, neighborhood spotlights, and the life of a Chicagoland realtor — all on Instagram.</p>
+          <!-- UPDATE href with actual Instagram URL -->
+          <a href="https://www.instagram.com/MorandiProperties" class="ig-follow-btn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Follow on Instagram
+          </a>
+        </div>
+
+        <div class="reveal reveal-delay-2">
+          <!--
+            ════════════════════════════════════════════════════
+            INSTAGRAM LIVE FEED OPTIONS:
+
+            Option A — Free: Copy individual post embed codes
+            from Instagram (Share → Embed) and paste them into
+            the .ig-post-slot divs below. They use Instagram's
+            oEmbed and load automatically.
+
+            Option B — Paid tool (recommended for auto-update):
+            Services like Elfsight, Curator.io, or LightWidget
+            generate a single <script> tag that pulls your full
+            feed automatically. Paste their snippet here and
+            remove the placeholder grid.
+
+            The placeholder grid below is shown until you
+            add real embeds or a feed tool.
+            ════════════════════════════════════════════════════
+          -->
+          <div class="ig-placeholder-grid">
+            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.wa-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+          </div>
+          <div class="ig-notice">
+            <strong>To activate the live Instagram feed:</strong> Instagram's API requires app-level approval. The quickest solution is a free embed tool like <strong>LightWidget</strong> or <strong>Elfsight</strong> — both generate a single script tag you paste here and they handle the feed automatically, no API setup needed.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ YOUTUBE + TIKTOK ══════════════════════════════════════ -->
+  <section class="video-section">
+    <div class="section-wrap">
+      <div class="video-grid">
+
+        <!-- YouTube -->
+        <div class="reveal">
+          <div class="video-col-header">
+            <div class="video-platform-badge">
+              <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              YouTube
+            </div>
+            <span class="section-label">Video Content</span>
+            <h2 class="section-title">Watch Our<br>Latest Videos</h2>
+            <div class="section-divider"></div>
+            <p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin-bottom:20px;">Full home walk-throughs, neighborhood guides, and market update videos — subscribe so you never miss one.</p>
+          </div>
+          <div class="video-embed-wrap">
+            <!--
+              SETUP: Replace YOUR_CHANNEL_ID with your actual
+              YouTube channel ID (found in YouTube Studio).
+              This embeds your latest uploads playlist.
+            -->
+            <iframe
+              src="https://www.youtube.com/embed?listType=user_uploads&list=YOUR_CHANNEL_ID&rel=0&modestbranding=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+            <div class="video-placeholder" id="ytPlaceholder">
+              <svg viewBox="0 0 24 24" style="fill:rgba(255,255,255,0.3);"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              <strong>YouTube Channel</strong>
+              Replace <code>YOUR_CHANNEL_ID</code> in the iframe src to activate.
+            </div>
+          </div>
+          <div class="video-cta">
+            <!-- UPDATE href with actual YouTube channel URL -->
+            <a href="https://www.youtube.com/@MorandiProperties" class="btn-yt" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+              Subscribe on YouTube
+            </a>
+          </div>
+        </div>
+
+        <!-- TikTok -->
+        <div class="reveal reveal-delay-2">
+          <div class="video-col-header">
+            <div class="video-platform-badge tt">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              TikTok
+            </div>
+            <span class="section-label">Short-Form Video</span>
+            <h2 class="section-title">Find Us<br>on TikTok</h2>
+            <div class="section-divider"></div>
+            <p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin-bottom:20px;">Quick market tips, listing reveals, and day-in-the-life content from the Morandi team. Short videos, big value.</p>
+          </div>
+          <div class="video-embed-wrap">
+            <!--
+              SETUP: To embed a specific TikTok video, go to
+              TikTok → Share → Embed and paste the iframe src
+              value below. For a full profile feed widget, use
+              TikTok's official embed widget or a tool like
+              Elfsight.
+            -->
+            <div class="video-placeholder">
+              <svg viewBox="0 0 24 24" style="fill:rgba(255,255,255,0.3);"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              <strong>TikTok Videos</strong>
+              Paste a TikTok embed iframe here,<br>or use an Elfsight widget for a live profile feed.
+            </div>
+          </div>
+          <div class="video-cta">
+            <!-- UPDATE href with actual TikTok URL -->
+            <a href="https://www.tiktok.com/@MorandiProperties" class="btn-tt" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              Follow on TikTok
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ LEAVE A REVIEW CTA ════════════════════════════════════ -->
+  <section class="review-cta-band">
+    <span class="section-label">Share Your Experience</span>
+    <h2 class="section-title">Had a Great Experience<br>with Morandi Properties?</h2>
+    <p>Your review helps other Chicagoland families find the right agent. It only takes two minutes and means the world to us.</p>
+    <!-- UPDATE href with your Facebook Reviews URL -->
+    <a href="https://www.facebook.com/MorandiProperties/reviews" class="btn-white" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+      Leave a Facebook Review
+    </a>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═════════════════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">Morandi Properties</a>
+        <p class="footer-tagline">Helping Chicagoland families buy and sell homes in Orland Park, Tinley Park, Frankfort, Mokena, and New Lenox since 2006.</p>
+      </div>
+      <div class="footer-contact">
+        <span class="footer-contact-label">Get In Touch</span>
+        <p class="footer-address">
+          123 Main Street, Suite 100<br>
+          Orland Park, IL 60462
+        </p>
+        <a href="tel:+17085550000" class="footer-phone">(708) 555-0000</a>
+      </div>
+      <div class="footer-social">
+        <span class="footer-social-label">Follow Along</span>
+        <div class="footer-social-icons">
+          <a href="https://www.facebook.com/MorandiProperties" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/MorandiProperties" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/morandi-properties" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@MorandiProperties" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@MorandiProperties" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">
+        &copy; 2026 Morandi Properties. All rights reserved.<br>
+        Ray Morandi — Licensed Illinois Real Estate Broker &middot; License #PLACEHOLDER
+      </p>
+      <nav class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="/contact/office">Contact</a>
+        <a href="/buying/listings">Current Listings</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+  <a href="/">Home</a>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">Buying <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnBuying">
+      <a href="/buying/listings">Current Listings</a>
+      <a href="/buying/open-house">Open House Search</a>
+      <a href="/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+      <a href="/buying/calculator">Mortgage Calculator</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">Selling <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnSelling">
+      <a href="/selling/sold-portfolio">Sold Portfolio</a>
+      <a href="/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+      <a href="/selling/valuation">What is my Home Worth?</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">Insights <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnInsights">
+      <a href="/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+      <a href="/insights/faq">Real Estate Q&amp;A</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">Realtors <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnTeam">
+      <a href="/realtors/agents">Meet the Team</a>
+      <a href="/realtors/ray-morandi">Meet Ray Morandi</a>
+      <a href="/realtors/reviews">Client Reviews</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">Contact <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnContact">
+      <a href="/contact/office">General Inquiry</a>
+      <a href="/contact/chicagoland-market-report">Market Insider</a>
+      <a href="/contact/social">Social Media Hub</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // ── Mobile nav ─────────────────────────────────────────────
+  const hBtn = document.getElementById('hamburgerBtn');
+  const mNav = document.getElementById('mobileNav');
+  const mCls = document.getElementById('mobileNavClose');
+  function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
+  hBtn.addEventListener('click', openNav);
+  mCls.addEventListener('click', closeNav);
+  mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+  document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sub = document.getElementById(btn.dataset.target);
+      const isOpen = sub.classList.contains('open');
+      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-toggle').forEach(b => b.setAttribute('aria-expanded','false'));
+      if (!isOpen) { sub.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  // ── Scroll reveal ───────────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Hide Facebook placeholders once SDK renders ────────────
+  window.fbAsyncInit = function() {
+    FB.init({ xfbml: true, version: 'v19.0' });
+    FB.Event.subscribe('xfbml.render', function() {
+      document.querySelectorAll('.fb-placeholder').forEach(p => p.classList.add('hidden'));
+    });
+  };
+</script>
+
+</body>
+</html>

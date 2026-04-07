@@ -1,1 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Post Title | Morandi Properties</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white:      #ffffff;
+      --blue-grey:  #b0bec5;
+      --light-bg:   #f4f6f8;
+      --navy:       #1a2d4a;
+      --navy-light: #2e4a6e;
+      --text-muted: #607d8b;
+      --line:       #dce3e8;
+      --warm-off:   #faf9f7;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); overflow-x: hidden; }
+
+    /* ─── Header ─────────────────────────────────────────── */
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
+    .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
+    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,.18); gap: 2px; }
+    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color .2s; }
+    .nav-link:hover { color: var(--navy-light); }
+    .nav-link.active { border-bottom: 2px solid var(--navy); }
+    .nav-label { cursor: default; user-select: none; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu,
+    .nav-dropdown:focus-within .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,.15); min-width: 200px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 100; }
+    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background .15s; }
+    .dropdown-menu a:hover { background: #eceff1; }
+    .dropdown-menu a.active { font-weight: 600; background: var(--light-bg); }
+    .hamburger-btn { display: none; flex-direction: column; gap: 5px; align-items: flex-start; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all .25s ease; }
+    .hamburger-btn span:nth-child(1) { width: 24px; }
+    .hamburger-btn span:nth-child(2) { width: 17px; }
+    .hamburger-btn span:nth-child(3) { width: 24px; }
+    .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
+    .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+    .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
+    .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
+    .mobile-nav-group { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .mobile-nav-toggle { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); background: none; border: none; cursor: pointer; padding: 8px 24px; display: flex; align-items: center; gap: 8px; }
+    .mobile-nav-toggle .caret { font-size: 18px; transition: transform .2s; display: inline-block; }
+    .mobile-nav-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+    .mobile-nav-sub { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding-bottom: 4px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s ease .2s; }
+    .mobile-nav-sub.open { max-height: 320px; opacity: 1; }
+    .mobile-nav-sub a { font-family: 'Barlow', sans-serif !important; font-size: 14px !important; font-weight: 500 !important; letter-spacing: .08em !important; color: var(--text-muted) !important; padding: 6px 24px !important; text-transform: uppercase; }
+    @media (max-width: 960px) {
+      .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
+      .hamburger-btn { display: flex; grid-column: 1; }
+      .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
+      .nav-row { display: none; }
+    }
+
+    /* ─── Blog Hero ──────────────────────────────────────── */
+    .blog-hero {
+      position: relative;
+      background: var(--navy);
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      align-items: flex-end;
+    }
+    .blog-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.38;
+    }
+    /* Placeholder gradient when no image is used */
+    .blog-hero-img-placeholder {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a2d4a 0%, #2e4a6e 50%, #3d6186 100%);
+      opacity: 0.9;
+    }
+    .blog-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,45,74,.92) 0%, rgba(26,45,74,.35) 60%, transparent 100%);
+    }
+    .blog-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 64px 40px 56px;
+      width: 100%;
+    }
+    .blog-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .blog-breadcrumb a,
+    .blog-breadcrumb span {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .blog-breadcrumb a:hover { color: rgba(255,255,255,.85); }
+    .blog-breadcrumb .sep { color: rgba(255,255,255,.3); }
+    .blog-category-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      padding: 5px 12px;
+      margin-bottom: 18px;
+    }
+    .blog-hero-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 18px;
+      max-width: 740px;
+    }
+    .blog-hero-subtitle {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(255,255,255,.75);
+      max-width: 600px;
+      margin-bottom: 28px;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .blog-author-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+      border: 2px solid rgba(255,255,255,.3);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .blog-author-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: .03em;
+    }
+    .blog-meta-sep { width: 1px; height: 16px; background: rgba(255,255,255,.25); }
+    .blog-meta-item {
+      font-size: 12px;
+      color: rgba(255,255,255,.55);
+      letter-spacing: .04em;
+    }
+    @media (max-width: 600px) {
+      .blog-hero { min-height: 360px; }
+      .blog-hero-content { padding: 40px 24px 40px; }
+    }
+
+    /* ─── Blog Layout ────────────────────────────────────── */
+    .blog-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 40px;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 64px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .blog-layout { grid-template-columns: 1fr; gap: 48px; padding: 40px 24px; }
+    }
+
+    /* ─── Article Body ───────────────────────────────────── */
+    .blog-article {}
+    .blog-body {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.85;
+      color: #2c3e50;
+    }
+    .blog-body p { margin-bottom: 1.5em; }
+    .blog-body p:first-child::first-letter {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 64px;
+      font-weight: 600;
+      line-height: 0.8;
+      float: left;
+      margin: 6px 12px 0 0;
+      color: var(--navy);
+    }
+    .blog-body h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin: 2.2em 0 .8em;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--line);
+    }
+    .blog-body h3 {
+      font-family: 'Barlow', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 1.8em 0 .6em;
+    }
+    .blog-body ul, .blog-body ol {
+      padding-left: 1.4em;
+      margin-bottom: 1.5em;
+    }
+    .blog-body li { margin-bottom: .5em; }
+    .blog-body blockquote {
+      margin: 2em 0;
+      padding: 24px 28px;
+      background: var(--light-bg);
+      border-left: 4px solid var(--navy);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--navy);
+    }
+    .blog-body blockquote cite {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .blog-body .inline-img {
+      width: 100%;
+      display: block;
+      margin: 2em 0;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: var(--light-bg);
+    }
+    .blog-body .img-caption {
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      margin-top: -1.5em;
+      margin-bottom: 2em;
+      text-align: center;
+    }
+    .blog-body a {
+      color: var(--navy-light);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .blog-body a:hover { color: var(--navy); }
+
+    /* Stat callout box */
+    .stat-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      margin: 2em 0;
+    }
+    .stat-box-item {
+      background: var(--warm-off);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .stat-box-number {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--navy);
+      display: block;
+      letter-spacing: .04em;
+    }
+    .stat-box-label {
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* CTA strip inside article */
+    .article-cta {
+      margin: 2.5em 0;
+      padding: 32px 28px;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .article-cta-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+    .article-cta-sub {
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,.6);
+      margin-top: 4px;
+      font-weight: 300;
+    }
+    .article-cta-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--white);
+      border: none;
+      padding: 12px 24px;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background .2s;
+    }
+    .article-cta-btn:hover { background: var(--blue-grey); }
+
+    /* Tags */
+    .article-tags {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .article-tags-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--navy-light);
+      border: 1px solid var(--line);
+      padding: 5px 12px;
+      text-decoration: none;
+      transition: background .15s, border-color .15s;
+    }
+    .tag:hover { background: var(--light-bg); border-color: var(--blue-grey); }
+
+    /* Share bar */
+    .share-bar {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .share-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--light-bg);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .share-btn:hover { background: #e8edf0; }
+    .share-btn svg { width: 14px; height: 14px; fill: currentColor; }
+
+    /* Author bio */
+    .author-bio {
+      margin-top: 48px;
+      padding: 28px 28px;
+      background: var(--light-bg);
+      border-left: 4px solid var(--navy);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .author-bio-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--navy);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: .05em;
+    }
+    .author-bio-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .author-bio-role {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .author-bio-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #4a5568;
+    }
+
+    /* ─── Sidebar ────────────────────────────────────────── */
+    .blog-sidebar { display: flex; flex-direction: column; gap: 36px; }
+
+    .sidebar-widget {}
+    .sidebar-widget-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+
+    /* Free home valuation CTA */
+    .sidebar-cta {
+      background: var(--navy);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .sidebar-cta-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--blue-grey);
+      margin-bottom: 10px;
+    }
+    .sidebar-cta-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .sidebar-cta-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,.6);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .sidebar-cta-btn {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--white);
+      padding: 12px 20px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .sidebar-cta-btn:hover { background: var(--blue-grey); }
+
+    /* Related posts */
+    .related-post {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+    }
+    .related-post:last-child { border-bottom: none; }
+    .related-post-thumb {
+      width: 70px;
+      height: 52px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--light-bg);
+    }
+    .related-post-info {}
+    .related-post-cat {
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .related-post-title {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--navy);
+      transition: color .2s;
+    }
+    .related-post:hover .related-post-title { color: var(--navy-light); }
+
+    /* Market stats */
+    .market-stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .market-stat-row:last-child { border-bottom: none; }
+    .market-stat-label { font-size: 13px; color: var(--text-muted); }
+    .market-stat-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: .04em;
+    }
+    .market-stat-change {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 6px;
+      margin-left: 6px;
+    }
+    .up { background: #e8f5e9; color: #2e7d32; }
+    .down { background: #fce4ec; color: #c62828; }
+
+    /* Newsletter */
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-input {
+      font-family: 'Barlow', sans-serif;
+      font-size: 13.5px;
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--navy);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .newsletter-input:focus { border-color: var(--navy); }
+    .newsletter-input::placeholder { color: var(--blue-grey); }
+    .newsletter-submit {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--navy);
+      border: none;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .newsletter-submit:hover { background: var(--navy-light); }
+    .newsletter-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Related Articles Section ───────────────────────── */
+    .related-articles-section {
+      background: var(--light-bg);
+      padding: 64px 40px;
+      border-top: 1px solid var(--line);
+    }
+    .related-articles-inner { max-width: 1100px; margin: 0 auto; }
+    .section-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 36px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .related-card {
+      background: var(--white);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .2s;
+      border: 1px solid var(--line);
+    }
+    .related-card:hover { box-shadow: 0 8px 32px rgba(26,45,74,.1); }
+    .related-card-img {
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      width: 100%;
+      background: var(--light-bg);
+      display: block;
+    }
+    .related-card-img-placeholder {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #cfd8dc 0%, #b0bec5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(26,45,74,.4);
+    }
+    .related-card-body { padding: 20px 20px 24px; flex: 1; display: flex; flex-direction: column; }
+    .related-card-cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .related-card-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .related-card-excerpt {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      flex: 1;
+    }
+    .related-card-date {
+      font-size: 11px;
+      color: var(--blue-grey);
+      letter-spacing: .06em;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 600px) {
+      .related-articles-section { padding: 48px 24px; }
+    }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    .site-footer { background: var(--navy); padding: 64px 40px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .footer-tagline { font-size: 13px; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
+    .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
+    .footer-address { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,.75); text-align: center; }
+    .footer-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .06em; color: var(--white); text-decoration: none; transition: color .2s; }
+    .footer-phone:hover { color: var(--blue-grey); }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    .footer-social-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); }
+    .footer-social-icons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; flex-shrink: 0; text-decoration: none; }
+    .footer-social-link:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,.75); display: block; transition: fill .2s; }
+    .footer-social-link:hover svg { fill: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; gap: 16px; flex-wrap: wrap; }
+    .footer-legal { font-size: 11.5px; color: rgba(255,255,255,.35); line-height: 1.6; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: rgba(255,255,255,.7); }
+    @media (max-width: 860px) {
+      .site-footer { padding: 52px 24px 28px; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-social { align-items: flex-start; }
+      .footer-social-icons { justify-content: flex-start; }
+      .footer-contact { align-items: flex-start; text-align: left; }
+      .footer-address { text-align: left; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     HEADER
+     ══════════════════════════════════════════════════════ -->
+<header class="site-header" role="banner">
+  <div class="logo-row">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="/" class="logo-placeholder">Morandi Properties</a>
+  </div>
+  <nav class="nav-row" role="navigation" aria-label="Primary navigation">
+    <a href="/" class="nav-link">Home</a>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Buying ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+        <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+        <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+        <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Selling ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+        <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+        <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Insights ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+        <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Realtors ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+        <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+        <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+      </div>
+    </div>
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Contact ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+        <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+        <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════
+     BLOG HERO
+     Replace .blog-hero-img-placeholder with an <img> tag
+     when you have a real hero image.
+     ══════════════════════════════════════════════════════ -->
+<section class="blog-hero">
+  <!-- Option A: real image → <img src="your-image.jpg" alt="" class="blog-hero-img"> -->
+  <!-- Option B: gradient placeholder (remove when using real image) -->
+  <div class="blog-hero-img-placeholder"></div>
+  <div class="blog-hero-overlay"></div>
+
+  <div class="blog-hero-content">
+    <div class="blog-breadcrumb">
+      <a href="/">Home</a>
+      <span class="sep">›</span>
+      <a href="/insights">Insights</a>
+      <span class="sep">›</span>
+      <span>Article Title</span>
+    </div>
+    <span class="blog-category-badge">Market Insights</span>
+    <h1 class="blog-hero-title">Your Blog Post Title Goes Right Here — Make It Count</h1>
+    <p class="blog-hero-subtitle">A short subtitle or teaser sentence that hooks the reader and gives them a clear reason to keep scrolling. Keep it to one or two sentences.</p>
+    <div class="blog-meta">
+      <div class="blog-author">
+        <div class="blog-author-avatar">RM</div>
+        <span class="blog-author-name">Ray Morandi</span>
+      </div>
+      <div class="blog-meta-sep"></div>
+      <span class="blog-meta-item">April 7, 2026</span>
+      <div class="blog-meta-sep"></div>
+      <span class="blog-meta-item">6 min read</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     MAIN BLOG LAYOUT  (article + sidebar)
+     ══════════════════════════════════════════════════════ -->
+<main>
+  <div class="blog-layout">
+
+    <!-- ── Article ──────────────────────────────────────── -->
+    <article class="blog-article">
+      <div class="blog-body">
+
+        <p>This is the opening paragraph of your blog post. The first letter is styled as a drop cap automatically. Lead with your most compelling insight — give readers an immediate reason to trust you and keep reading. This paragraph should set up the central tension or question the article will answer.</p>
+
+        <p>Continue building context here. Provide the background your reader needs to appreciate the insight that follows. Use clear, direct language — your clients are smart people making major financial decisions, and they deserve straight talk.</p>
+
+        <h2>Section Heading One</h2>
+
+        <p>Use section headings to break up longer posts and let skimmers navigate to what matters most to them. Each section should deliver a complete, stand-alone idea.</p>
+
+        <!-- Stat callout box — great for market data -->
+        <div class="stat-box">
+          <div class="stat-box-item">
+            <span class="stat-box-number">$389K</span>
+            <span class="stat-box-label">Median Sale Price</span>
+          </div>
+          <div class="stat-box-item">
+            <span class="stat-box-number">18</span>
+            <span class="stat-box-label">Avg. Days on Market</span>
+          </div>
+          <div class="stat-box-item">
+            <span class="stat-box-number">102%</span>
+            <span class="stat-box-label">List-to-Sale Ratio</span>
+          </div>
+          <div class="stat-box-item">
+            <span class="stat-box-number">1.4 mo</span>
+            <span class="stat-box-label">Months of Inventory</span>
+          </div>
+        </div>
+
+        <p>Follow up the data with your interpretation. Numbers alone don't tell the whole story — your expertise is what transforms raw statistics into actionable advice for buyers and sellers.</p>
+
+        <!-- Inline image placeholder -->
+        <div class="inline-img" style="background: linear-gradient(135deg, #cfd8dc 0%, #eceff1 100%); display:flex; align-items:center; justify-content:center; font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:rgba(26,45,74,.35);">Replace with your photo — 16:9 ratio recommended</div>
+        <p class="img-caption">Caption: Describe what's shown and why it's relevant. Photo credit if applicable.</p>
+
+        <h2>Section Heading Two</h2>
+
+        <p>Another key point. Use bullet lists sparingly — most ideas deserve a full sentence or paragraph. But when you have a clear list of distinct items, a bulleted list is faster to scan:</p>
+
+        <ul>
+          <li>First important item with enough detail to be useful</li>
+          <li>Second item — don't pad, but don't truncate either</li>
+          <li>Third item that rounds out the list logically</li>
+          <li>A fourth item if it genuinely adds value</li>
+        </ul>
+
+        <p>Return to prose after the list to tie the points together and lead into the next idea.</p>
+
+        <!-- Blockquote / pull quote -->
+        <blockquote>
+          "In a market with less than two months of inventory, sellers who price strategically from day one are consistently netting more than those who test the market high and reduce later."
+          <cite>— Ray Morandi, Licensed IL Real Estate Broker</cite>
+        </blockquote>
+
+        <h2>Section Heading Three</h2>
+
+        <p>Use this section for tactical advice — the specific, actionable steps your reader can take based on what you've shared above. This is where you earn trust by demonstrating real expertise, not just market awareness.</p>
+
+        <h3>Sub-point A</h3>
+        <p>A more granular point within the section. Use H3 headings sparingly — only when a section is long enough to need internal structure.</p>
+
+        <h3>Sub-point B</h3>
+        <p>Another tactical sub-point. Keep these concrete and specific. Vague advice ("work with a professional") is less useful than precise guidance ("request a comparative market analysis that includes expired listings, not just recent sales").</p>
+
+        <!-- In-article CTA -->
+        <div class="article-cta">
+          <div>
+            <div class="article-cta-text">What's Your Home Worth?</div>
+            <div class="article-cta-sub">Get a free, no-obligation valuation from our team.</div>
+          </div>
+          <a href="https://morandiproperties.com/selling/valuation" class="article-cta-btn">Get My Free Estimate</a>
+        </div>
+
+        <p>Closing paragraph. Summarize the takeaway in one or two sentences, then give readers a clear next step — contact you, read another article, or use one of your tools. End with confidence, not hedging.</p>
+
+      </div><!-- /.blog-body -->
+
+      <!-- Tags -->
+      <div class="article-tags">
+        <span class="article-tags-label">Topics</span>
+        <a href="#" class="tag">Chicagoland Market</a>
+        <a href="#" class="tag">Home Buying</a>
+        <a href="#" class="tag">Market Trends</a>
+        <a href="#" class="tag">Orland Park</a>
+      </div>
+
+      <!-- Share bar -->
+      <div class="share-bar">
+        <span class="share-label">Share</span>
+        <a href="#" class="share-btn">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="#" class="share-btn">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X / Twitter
+        </a>
+        <a href="#" class="share-btn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="#" class="share-btn">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Copy Link
+        </a>
+      </div>
+
+      <!-- Author bio -->
+      <div class="author-bio">
+        <div class="author-bio-avatar">RM</div>
+        <div>
+          <div class="author-bio-name">Ray Morandi</div>
+          <div class="author-bio-role">Licensed Illinois Real Estate Broker · License #71003188</div>
+          <p class="author-bio-text">Ray has been helping Chicagoland families buy and sell homes since 2006, serving Chicago and 90+ communities across Cook, Will, DuPage, Lake, and Kane counties. Known for his straight-talking market analysis and hands-on approach, Ray brings two decades of local expertise to every transaction.</p>
+        </div>
+      </div>
+
+    </article>
+
+    <!-- ── Sidebar ────────────────────────────────────────── -->
+    <aside class="blog-sidebar">
+
+      <!-- Free valuation CTA -->
+      <div class="sidebar-cta">
+        <div class="sidebar-cta-eyebrow">Free &amp; No Obligation</div>
+        <div class="sidebar-cta-title">Find Out What Your Home Is Worth</div>
+        <p class="sidebar-cta-desc">Get a personalized market analysis from Ray's team — usually ready within 24 hours.</p>
+        <a href="https://morandiproperties.com/selling/valuation" class="sidebar-cta-btn">Get My Free Valuation</a>
+      </div>
+
+      <!-- Chicagoland market snapshot -->
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title">Chicagoland Snapshot</div>
+        <div class="market-stat-row">
+          <span class="market-stat-label">Median Sale Price</span>
+          <span class="market-stat-value">$389K <span class="market-stat-change up">+4.2%</span></span>
+        </div>
+        <div class="market-stat-row">
+          <span class="market-stat-label">Days on Market</span>
+          <span class="market-stat-value">18 <span class="market-stat-change down">-3</span></span>
+        </div>
+        <div class="market-stat-row">
+          <span class="market-stat-label">Months of Inventory</span>
+          <span class="market-stat-value">1.4 mo <span class="market-stat-change down">-0.2</span></span>
+        </div>
+        <div class="market-stat-row">
+          <span class="market-stat-label">List-to-Sale Ratio</span>
+          <span class="market-stat-value">102% <span class="market-stat-change up">+1%</span></span>
+        </div>
+      </div>
+
+      <!-- Related posts -->
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title">Related Articles</div>
+        <a href="#" class="related-post">
+          <div class="related-post-thumb" style="background:linear-gradient(135deg,#cfd8dc,#b0bec5)"></div>
+          <div class="related-post-info">
+            <div class="related-post-cat">Buying Tips</div>
+            <div class="related-post-title">How to Win a Multiple-Offer Situation Without Overpaying</div>
+          </div>
+        </a>
+        <a href="#" class="related-post">
+          <div class="related-post-thumb" style="background:linear-gradient(135deg,#b0bec5,#90a4ae)"></div>
+          <div class="related-post-info">
+            <div class="related-post-cat">Selling Strategy</div>
+            <div class="related-post-title">5 Things That Actually Add Value Before You List</div>
+          </div>
+        </a>
+        <a href="#" class="related-post">
+          <div class="related-post-thumb" style="background:linear-gradient(135deg,#cfd8dc,#eceff1)"></div>
+          <div class="related-post-info">
+            <div class="related-post-cat">Neighborhood</div>
+            <div class="related-post-title">Orland Park vs. Tinley Park: A 2026 Buyer's Comparison</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Newsletter signup -->
+      <div class="sidebar-widget">
+        <div class="sidebar-widget-title">Market Insider Newsletter</div>
+        <p style="font-size:13px;line-height:1.65;color:var(--text-muted);margin-bottom:14px;">Monthly Chicagoland market data, neighborhood spotlights, and no-fluff real estate insights — straight to your inbox.</p>
+        <div class="newsletter-form">
+          <input type="text" class="newsletter-input" placeholder="First name">
+          <input type="email" class="newsletter-input" placeholder="Email address">
+          <button class="newsletter-submit">Subscribe Free</button>
+          <p class="newsletter-note">No spam. Unsubscribe any time. Your information is never shared.</p>
+        </div>
+      </div>
+
+    </aside>
+  </div><!-- /.blog-layout -->
+</main>
+
+<!-- ═══════════════════════════════════════════════════════
+     RELATED ARTICLES SECTION
+     ══════════════════════════════════════════════════════ -->
+<section class="related-articles-section">
+  <div class="related-articles-inner">
+    <p class="section-heading">Keep Reading</p>
+    <h2 class="section-title">More from Morandi Insights</h2>
+    <div class="related-grid">
+
+      <a href="#" class="related-card">
+        <div class="related-card-img-placeholder">Photo placeholder</div>
+        <div class="related-card-body">
+          <div class="related-card-cat">Buying Tips</div>
+          <div class="related-card-title">The Chicagoland Buyer's Checklist: 12 Steps from Search to Close</div>
+          <p class="related-card-excerpt">Everything you need to know about navigating the Chicagoland market — from getting pre-approved to what happens the morning of closing.</p>
+          <div class="related-card-date">March 18, 2026</div>
+        </div>
+      </a>
+
+      <a href="#" class="related-card">
+        <div class="related-card-img-placeholder">Photo placeholder</div>
+        <div class="related-card-body">
+          <div class="related-card-cat">Market Update</div>
+          <div class="related-card-title">Q1 2026 Chicagoland Real Estate Recap: What the Numbers Tell Us</div>
+          <p class="related-card-excerpt">Prices held strong, inventory ticked up slightly, and buyer demand surprised everyone. Here's what actually happened in the first quarter.</p>
+          <div class="related-card-date">April 1, 2026</div>
+        </div>
+      </a>
+
+      <a href="#" class="related-card">
+        <div class="related-card-img-placeholder">Photo placeholder</div>
+        <div class="related-card-body">
+          <div class="related-card-cat">Selling Strategy</div>
+          <div class="related-card-title">Why Overpricing Your Home Costs You More Than You Think</div>
+          <p class="related-card-excerpt">The math is counterintuitive: listing too high often results in a lower final sale price. Here's the data behind that claim, and what to do instead.</p>
+          <div class="related-card-date">February 22, 2026</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════════ -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="footer-logo">Morandi Properties</a>
+        <p class="footer-tagline">Helping Chicagoland families buy and sell homes across Chicago and 90+ communities in Cook, Will, DuPage, Lake, and Kane counties since 2006.</p>
+      </div>
+      <div class="footer-contact">
+        <span class="footer-contact-label">Get In Touch</span>
+        <p class="footer-address">15715 Wolf Rd<br>Orland Park, IL 60462</p>
+        <a href="tel:+17085166666" class="footer-phone">(708) 516-6666</a>
+      </div>
+      <div class="footer-social">
+        <span class="footer-social-label">Follow Along</span>
+        <div class="footer-social-icons">
+          <a href="#" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+          <a href="#" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.threads.net/@morandiproperties" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.028-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 012.26.141c-.094-.575-.28-1.035-.562-1.372-.505-.607-1.294-.915-2.346-.92h-.048c-.79 0-1.802.199-2.584 1.29l-1.684-1.17c1.01-1.445 2.589-2.24 4.268-2.24h.068c3.003.025 4.805 1.884 4.805 5.013 0 .126-.005.252-.015.378.68.28 1.27.654 1.77 1.117.858.799 1.424 1.872 1.585 3.024C21.19 17.97 20.456 21 15.924 22.744c-1.403.544-2.986.82-4.73.843-.003 0-.005.001-.008.001v.412z"/></svg></a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+          <a href="https://g.page/morandiproperties" class="footer-social-link" aria-label="Google Business" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.25 16.195c-1.39 1.304-3.244 2.054-5.25 2.054-4.004 0-7.25-3.246-7.25-7.25 0-4.003 3.246-7.249 7.25-7.249 1.942 0 3.645.751 4.952 1.977l-2.006 1.93c-.742-.71-1.79-1.158-2.946-1.158-2.412 0-4.37 1.958-4.37 4.5 0 2.543 1.958 4.5 4.37 4.5 2.152 0 3.745-1.244 4.112-3h-4.112v-2.5H18c.084.495.13 1 .13 1.5 0 1.33-.306 2.61-.88 3.696z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">&copy; 2026 Morandi Properties. All rights reserved.<br>Ray Morandi — Licensed Illinois Real Estate Broker &middot; License #71003188</p>
+      <nav class="footer-links">
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
+        <a href="https://morandiproperties.com/contact/office">Contact</a>
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════
+     MOBILE NAV
+     ══════════════════════════════════════════════════════ -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+  <a href="/">Home</a>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">Buying <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnBuying">
+      <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+      <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+      <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+      <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">Selling <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnSelling">
+      <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+      <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+      <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">Insights <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnInsights">
+      <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+      <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">Realtors <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnTeam">
+      <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+      <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+      <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">Contact <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnContact">
+      <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+      <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+      <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // ── Mobile nav ─────────────────────────────────────────
+  const hBtn = document.getElementById('hamburgerBtn');
+  const mNav = document.getElementById('mobileNav');
+  const mCls = document.getElementById('mobileNavClose');
+  function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
+  hBtn.addEventListener('click', openNav);
+  mCls.addEventListener('click', closeNav);
+  mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
+  document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sub = document.getElementById(btn.dataset.target);
+      const isOpen = sub.classList.contains('open');
+      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-toggle').forEach(b => b.setAttribute('aria-expanded','false'));
+      if (!isOpen) { sub.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+
+  // ── Copy link share button ─────────────────────────────
+  document.querySelectorAll('.share-btn').forEach(btn => {
+    if (btn.textContent.trim() === 'Copy Link') {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const orig = btn.innerHTML;
+          btn.innerHTML = btn.innerHTML.replace('Copy Link', 'Copied!');
+          setTimeout(() => { btn.innerHTML = orig; }, 2000);
+        });
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

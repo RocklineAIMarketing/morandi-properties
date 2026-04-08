@@ -1,1 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Estate FAQ — Morandi Properties</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ═══════════════════════════════════════════════════
+       JSON-LD SCHEMA — GEO / AI CITATION LAYER
+       Each expert quote is wrapped in Person + FAQPage
+       schema so AI engines treat them as citable sources.
+  ════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "name": "Chicagoland Real Estate FAQ — Morandi Properties",
+    "url": "https://morandiproperties.com/insights/faq",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How competitive is the Homer Glen housing market right now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In Homer Glen, split-levels are moving 20% faster than last year. Buyers need to be pre-approved and ready to act within 48 hours.",
+          "author": {
+            "@type": "Person",
+            "name": "Ray Morandi",
+            "jobTitle": "Broker / Owner",
+            "worksFor": { "@type": "Organization", "name": "Morandi Properties" },
+            "url": "https://morandiproperties.com/realtors/ray-morandi",
+            "areaServed": "Homer Glen, IL"
+          }
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the best time to list a home in Orland Park?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Orland Park's spring market opens earlier than most sellers expect — we see serious buyer activity starting in late February, well before the traditional March rush.",
+          "author": {
+            "@type": "Person",
+            "name": "Jonathan Garrity",
+            "jobTitle": "Listing Specialist — Will County",
+            "worksFor": { "@type": "Organization", "name": "Morandi Properties" },
+            "url": "https://morandiproperties.com/realtors/agents",
+            "areaServed": "Orland Park, IL"
+          }
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should buyers know about Tinley Park vs. Mokena?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tinley Park gives you Metra access and more price flexibility. Mokena buyers are paying a premium for newer construction and top-rated schools — both are strong, it depends on your priorities.",
+          "author": {
+            "@type": "Person",
+            "name": "Maria Deluca",
+            "jobTitle": "Buyer's Agent — South Suburbs",
+            "worksFor": { "@type": "Organization", "name": "Morandi Properties" },
+            "url": "https://morandiproperties.com/realtors/agents",
+            "areaServed": "Tinley Park, IL; Mokena, IL"
+          }
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know how much to offer over asking price?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There's no universal answer, but in the southwest suburbs we're seeing well-priced homes receive 3–8% over list. I walk every buyer through a hyper-local CMA before they write a single number.",
+          "author": {
+            "@type": "Person",
+            "name": "Lisa Kowalczyk",
+            "jobTitle": "Senior Buyer's Agent",
+            "worksFor": { "@type": "Organization", "name": "Morandi Properties" },
+            "url": "https://morandiproperties.com/realtors/agents",
+            "areaServed": "Chicagoland, IL"
+          }
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:      #ffffff;
+      --blue-grey:  #b0bec5;
+      --light-bg:   #f4f6f8; 
+      --navy:       #1a2d4a;
+      --navy-light: #2e4a6e;
+      --text-muted: #607d8b;
+      --line:       #dce3e8;
+      --accent:     #96A6C0;
+
+    body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
+
+    /* ─── HEADER ─────────────────────────────────────── */
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
+    .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
+    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,.18); gap: 2px; }
+    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color .2s; cursor: pointer; }
+    .nav-link:hover { color: var(--navy-light); }
+    .nav-link.active { border-bottom: 2px solid var(--navy); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown:hover .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,.15); min-width: 200px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 100; }
+    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background .15s; }
+    .dropdown-menu a:hover { background: #eceff1; }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .faq-hero {
+      background: var(--navy);
+      padding: 72px 40px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .faq-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        0deg, transparent, transparent 39px, rgba(255,255,255,.03) 39px, rgba(255,255,255,.03) 40px
+      ), repeating-linear-gradient(
+        90deg, transparent, transparent 39px, rgba(255,255,255,.03) 39px, rgba(255,255,255,.03) 40px
+      );
+    }
+    .faq-hero-inner { position: relative; z-index: 1; }
+    .faq-hero-eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid rgba(201,168,76,.35);
+      padding: 5px 14px; margin-bottom: 24px;
+    }
+    .faq-hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--white); line-height: 1.05; margin-bottom: 20px;
+    }
+    .faq-hero h1 em { font-style: normal; color: var(--accent); }
+    .faq-hero-sub {
+      font-size: 15px; color: var(--blue-grey); max-width: 540px;
+      margin: 0 auto 36px; line-height: 1.75;
+    }
+    .hero-search {
+      display: flex; max-width: 520px; margin: 0 auto;
+      border: 1px solid rgba(255,255,255,.2); background: rgba(255,255,255,.05);
+    }
+    .hero-search input {
+      flex: 1; background: transparent; border: none; outline: none;
+      padding: 14px 18px; font-size: 14px; color: var(--white);
+      font-family: 'Barlow', sans-serif;
+    }
+    .hero-search input::placeholder { color: rgba(255,255,255,.35); }
+    .hero-search button {
+      background: var(--accent); border: none; color: var(--navy);
+      padding: 14px 22px; font-size: 12px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; cursor: pointer;
+      font-family: 'Barlow', sans-serif; white-space: nowrap;
+    }
+
+    /* ─── MAIN LAYOUT: 2-COL + SIDEBAR ───────────────── */
+    .faq-main {
+      max-width: 1160px; margin: 0 auto;
+      padding: 64px 40px;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ─── LEFT: FAQ QUESTIONS ────────────────────────── */
+    .faq-col-label {
+      font-size: 11px; font-weight: 500; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .faq-col-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 28px; font-weight: 600; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 32px;
+    }
+
+    .faq-category { margin-bottom: 40px; }
+    .faq-cat-header {
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 16px;
+    }
+    .faq-cat-label {
+      font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--white); background: var(--navy);
+      padding: 3px 10px;
+    }
+    .faq-cat-count { font-size: 12px; color: var(--text-muted); }
+
+    .faq-item { border-bottom: 1px solid var(--line); padding: 0; }
+    .faq-question {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 16px; padding: 18px 0;
+      font-family: 'Barlow', sans-serif; font-size: 14.5px; font-weight: 500;
+      color: var(--navy); line-height: 1.4;
+    }
+    .faq-question:hover { color: var(--navy-light); }
+    .faq-chevron {
+      flex-shrink: 0; width: 22px; height: 22px;
+      border: 1px solid var(--line); display: flex; align-items: center;
+      justify-content: center; transition: transform .25s, background .2s;
+      font-size: 11px; color: var(--text-muted);
+    }
+    .faq-item.open .faq-chevron { transform: rotate(45deg); background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-answer-inner {
+      padding: 0 0 20px;
+      font-size: 14px; color: #455a64; line-height: 1.75;
+    }
+    .faq-answer-inner p + p { margin-top: 10px; }
+    .faq-cta-link {
+      display: inline-block; margin-top: 12px;
+      font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--navy); text-decoration: none;
+      border-bottom: 1px solid var(--navy); padding-bottom: 2px;
+    }
+
+    /* ─── RIGHT: VERIFIED EXPERT SIDEBAR ─────────────── */
+    .expert-sidebar { position: sticky; top: 32px; }
+    .sidebar-label {
+      font-size: 11px; font-weight: 500; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .sidebar-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 22px; font-weight: 600; letter-spacing: .05em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 20px;
+    }
+
+    .expert-card {
+      background: var(--white); border: 1px solid var(--line);
+      margin-bottom: 16px; position: relative;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .expert-card:hover { border-color: #90a4ae; box-shadow: 0 4px 18px rgba(26,45,74,.08); }
+
+    .expert-card-photo-strip { width: 100%; height: 120px; overflow: hidden; position: relative; }
+    .expert-card-photo-strip img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: brightness(.65); }
+    .expert-card-photo-strip-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 30%, rgba(26,45,74,.85) 100%);
+    }
+    .expert-card-headshot-wrap {
+      position: absolute; bottom: -22px; left: 18px;
+      width: 52px; height: 52px; border: 2px solid var(--white); overflow: hidden;
+    }
+    .expert-card-headshot-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .expert-avatar-initials {
+      width: 52px; height: 52px; background: var(--navy-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px; font-weight: 600; color: var(--white); letter-spacing: .05em;
+    }
+
+    .verified-badge {
+      position: absolute; top: 10px; right: 10px;
+      display: flex; align-items: center; gap: 5px;
+      background: rgba(201,168,76,.15); border: 1px solid rgba(201,168,76,.5);
+      padding: 4px 9px;
+    }
+    .verified-badge-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+    .verified-badge span { font-size: 9.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+
+    .expert-card-body { padding: 32px 18px 18px; }
+    .expert-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px; font-weight: 600; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: 2px;
+    }
+    .expert-title { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .expert-quote {
+      font-size: 13.5px; line-height: 1.7; color: #37474f;
+      border-left: 2px solid var(--accent); padding-left: 12px;
+      margin-bottom: 14px; font-style: italic;
+    }
+    .expert-area-tag {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      letter-spacing: .09em; text-transform: uppercase;
+      color: var(--navy); background: var(--light-bg);
+      padding: 3px 8px; margin-bottom: 14px;
+    }
+    .expert-card-footer {
+      border-top: 1px solid var(--line); padding-top: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .expert-sold-link {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--navy); text-decoration: none;
+      border-bottom: 1px solid var(--navy); padding-bottom: 1px;
+    }
+    .expert-contact-btn {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--white); background: var(--navy);
+      border: none; padding: 7px 14px; cursor: pointer;
+      font-family: 'Barlow', sans-serif; text-decoration: none;
+    }
+
+    /* ─── TOPIC CHIPS ─────────────────────────────────── */
+    .topic-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .chip {
+      font-size: 11.5px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase;
+      color: var(--navy); background: var(--light-bg);
+      border: 1px solid var(--line); padding: 7px 14px;
+      cursor: pointer; transition: background .15s, border-color .15s;
+    }
+    .chip:hover, .chip.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    .site-footer { background: var(--navy); padding: 64px 40px 32px; margin-top: 0; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .footer-tagline { font-size: 13px; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
+    .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
+    .footer-address { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,.75); }
+    .footer-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .06em; color: var(--white); text-decoration: none; }
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    .footer-social-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); }
+    .footer-social-icons { display: flex; gap: 10px; }
+    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; transition: all .2s; text-decoration: none; }
+    .footer-social-link:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,.75); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; font-size: 11.5px; color: rgba(255,255,255,.35); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: inherit; text-decoration: none; text-transform: uppercase; font-size: 11px; }
+
+    @media (max-width: 900px) {
+      .faq-main { grid-template-columns: 1fr; }
+      .expert-sidebar { position: static; }
+      .footer-top { grid-template-columns: 1fr; text-align: left; }
+      .footer-contact, .footer-social { align-items: flex-start; text-align: left; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .nav-row { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HEADER ──────────────────────────────────────── -->
+  <header class="site-header" role="banner">
+    <div class="logo-row">
+      <a href="/" class="logo-placeholder">Morandi Properties</a>
+    </div>
+    <nav class="nav-row" role="navigation" aria-label="Primary navigation">
+      <a href="/" class="nav-link">Home</a>
+      <div class="nav-dropdown">
+        <span class="nav-link">Buying ▾</span>
+        <div class="dropdown-menu">
+          <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+          <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+          <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+          <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <span class="nav-link">Selling ▾</span>
+        <div class="dropdown-menu">
+          <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+          <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+          <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <span class="nav-link active">Insights ▾</span>
+        <div class="dropdown-menu">
+          <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+          <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <span class="nav-link">Realtors ▾</span>
+        <div class="dropdown-menu">
+          <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+          <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+          <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <span class="nav-link">Contact ▾</span>
+        <div class="dropdown-menu">
+          <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+          <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+          <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ─── HERO ────────────────────────────────────────── -->
+  <section class="faq-hero">
+    <div class="faq-hero-inner">
+      <span class="faq-hero-eyebrow">Chicagoland Real Estate · Expert Answers</span>
+      <h1>Your Questions,<br><em>Answered Local</em></h1>
+      <p class="faq-hero-sub">18 years. 90+ communities. Real answers from the agents who work these neighborhoods every day — not generic advice from the internet.</p>
+      <div class="hero-search">
+        <input type="text" placeholder="Search a question, neighborhood, or topic…" />
+        <button>Search</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MAIN: FAQ + SIDEBAR ─────────────────────────── -->
+  <main class="faq-main">
+
+    <!-- LEFT COLUMN: FAQ -->
+    <div class="faq-questions">
+      <p class="faq-col-label">Browse by topic</p>
+      <h2 class="faq-col-title">Common Questions</h2>
+
+      <!-- Topic filter chips -->
+      <div class="topic-chips">
+        <span class="chip active" onclick="filterChip(this,'all')">All Topics</span>
+        <span class="chip" onclick="filterChip(this,'buying')">Buying</span>
+        <span class="chip" onclick="filterChip(this,'selling')">Selling</span>
+        <span class="chip" onclick="filterChip(this,'finance')">Mortgage &amp; Finance</span>
+        <span class="chip" onclick="filterChip(this,'area')">Neighborhoods</span>
+        <span class="chip" onclick="filterChip(this,'process')">The Process</span>
+      </div>
+
+      <!-- BUYING -->
+      <div class="faq-category" data-cat="buying">
+        <div class="faq-cat-header">
+          <span class="faq-cat-label">Buying</span>
+          <span class="faq-cat-count">4 questions</span>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            How much over asking price should I offer in a competitive Chicagoland market?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>In the southwest suburbs, well-priced homes are receiving 3–8% over list. But the number is less important than the package — a clean offer with strong pre-approval and flexible closing date often beats a higher number with conditions attached.</p>
+              <p>We run a hyper-local Comparative Market Analysis (CMA) for every buyer before they write a single number, so you're not guessing.</p>
+              <a href="https://morandiproperties.com/buying/buying-strategy-guide" class="faq-cta-link">Read the Buyer's Strategy Guide →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Do I need a home inspection even in an as-is sale?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Yes — always. An as-is sale means the seller won't make repairs, but it does <em>not</em> mean you waive your right to know what you're buying. An inspection gives you documented knowledge of the home's condition, which protects you financially and legally.</p>
+              <p>In some cases, inspection findings also give you legitimate grounds to renegotiate price.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            How long does it take to close on a home in Illinois?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>From accepted offer to keys, most Illinois transactions close in 30–45 days. Cash offers can move faster — sometimes under 3 weeks. Loan type matters: conventional financing typically closes faster than FHA or VA.</p>
+              <a href="https://morandiproperties.com/buying/listings" class="faq-cta-link">View Current Listings →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            What's the difference between pre-qualification and pre-approval?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Pre-qualification is an estimate based on self-reported information — it takes minutes and means very little to a seller. Pre-approval involves verified income, assets, and a credit check, and carries real weight in a competitive offer.</p>
+              <p>In today's market, we strongly recommend getting fully pre-approved before touring homes.</p>
+              <a href="https://morandiproperties.com/buying/calculator" class="faq-cta-link">Try Our Mortgage Calculator →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELLING -->
+      <div class="faq-category" data-cat="selling">
+        <div class="faq-cat-header">
+          <span class="faq-cat-label">Selling</span>
+          <span class="faq-cat-count">3 questions</span>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            When is the best time to list a home in the Chicago suburbs?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>The southwest suburbs' spring market opens earlier than most sellers expect — serious buyer activity typically begins in late February, well before the traditional March rush. Listing early means less competition and more motivated buyers.</p>
+              <p>Fall (September–October) is a strong secondary window. Summer and January/February are typically slower, though low inventory can still yield good results.</p>
+              <a href="https://morandiproperties.com/selling/selling-strategy-guide" class="faq-cta-link">See the Seller's Strategy Guide →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            How long does the selling process take from listing to closing?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>A well-priced, well-presented home in a healthy market typically goes under contract within 1–3 weeks. Add 30–45 days for the buyer's financing and closing process. Total: roughly 45–75 days from list date to closing day.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            How do I find out what my home is worth?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Online estimates (Zestimates, etc.) are a starting point, but they don't account for your home's specific condition, upgrades, or hyper-local market nuances. A Comparative Market Analysis from a local agent is far more accurate — and we provide them at no cost.</p>
+              <a href="https://morandiproperties.com/selling/valuation" class="faq-cta-link">Get a Free Home Valuation →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AREA -->
+      <div class="faq-category" data-cat="area">
+        <div class="faq-cat-header">
+          <span class="faq-cat-label">Neighborhoods</span>
+          <span class="faq-cat-count">2 questions</span>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Tinley Park vs. Mokena — which suburb should I buy in?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Tinley Park offers Metra commuter rail access, more price flexibility, and an established walkable downtown. Mokena buyers pay a premium for newer construction and top-rated Lincoln-Way schools. Both are strong — the right choice depends on your commute, school priorities, and budget.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFAQ(this)">
+            Is Homer Glen a good place to buy a first home?
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              <p>Homer Glen consistently ranks among the safest and most desirable communities in Will County. Split-levels and ranch homes offer good entry-level price points, and the area has seen strong appreciation. It's an excellent long-term investment for first-time buyers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /faq-questions -->
+
+    <!-- RIGHT COLUMN: VERIFIED EXPERT SIDEBAR -->
+    <aside class="expert-sidebar" aria-label="Expert Insights">
+      <p class="sidebar-label">From the field</p>
+      <h2 class="sidebar-title">Agent Insights</h2>
+
+      <!-- Card 1: Ray Morandi -->
+      <article class="expert-card" itemscope itemtype="https://schema.org/Person">
+        <div class="expert-card-photo-strip">
+          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=400&q=60" alt="Homer Glen home sold by Ray Morandi" loading="lazy" />
+          <div class="expert-card-photo-strip-overlay"></div>
+          <div class="expert-card-headshot-wrap">
+            <div class="expert-avatar-initials" aria-label="Ray Morandi">RM</div>
+          </div>
+        </div>
+        <div class="verified-badge">
+          <div class="verified-badge-dot"></div>
+          <span>Verified Expert</span>
+        </div>
+        <div class="expert-card-body">
+          <p class="expert-name" itemprop="name">Ray Morandi</p>
+          <p class="expert-title" itemprop="jobTitle">Broker / Owner</p>
+          <blockquote class="expert-quote" itemprop="description">
+            "In Homer Glen, split-levels are moving 20% faster than last year. Buyers need to be pre-approved and ready to act within 48 hours."
+          </blockquote>
+          <span class="expert-area-tag">📍 Homer Glen · Will County</span>
+          <div class="expert-card-footer">
+            <a href="https://morandiproperties.com/selling/sold-portfolio" class="expert-sold-link" itemprop="url">View Sold Portfolio</a>
+            <a href="https://morandiproperties.com/realtors/ray-morandi" class="expert-contact-btn">Meet Ray</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 2: Jonathan Garrity -->
+      <article class="expert-card" itemscope itemtype="https://schema.org/Person">
+        <div class="expert-card-photo-strip">
+          <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&q=60" alt="Orland Park home sold by Morandi Properties" loading="lazy" />
+          <div class="expert-card-photo-strip-overlay"></div>
+          <div class="expert-card-headshot-wrap">
+            <div class="expert-avatar-initials" aria-label="Jonathan Garrity">JG</div>
+          </div>
+        </div>
+        <div class="verified-badge">
+          <div class="verified-badge-dot"></div>
+          <span>Verified Expert</span>
+        </div>
+        <div class="expert-card-body">
+          <p class="expert-name" itemprop="name">Jonathan Garrity</p>
+          <p class="expert-title" itemprop="jobTitle">Listing Specialist — Will County</p>
+          <blockquote class="expert-quote" itemprop="description">
+            "Orland Park's spring market opens earlier than most sellers expect — serious buyers show up in late February, well before the March rush."
+          </blockquote>
+          <span class="expert-area-tag">📍 Orland Park · Cook County</span>
+          <div class="expert-card-footer">
+            <a href="https://morandiproperties.com/selling/sold-portfolio" class="expert-sold-link" itemprop="url">View Sold Portfolio</a>
+            <a href="https://morandiproperties.com/realtors/agents" class="expert-contact-btn">Meet Jonathan</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 3: Maria Deluca -->
+      <article class="expert-card" itemscope itemtype="https://schema.org/Person">
+        <div class="expert-card-photo-strip">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=60" alt="Tinley Park home sold by Morandi Properties" loading="lazy" />
+          <div class="expert-card-photo-strip-overlay"></div>
+          <div class="expert-card-headshot-wrap">
+            <div class="expert-avatar-initials" aria-label="Maria Deluca">MD</div>
+          </div>
+        </div>
+        <div class="verified-badge">
+          <div class="verified-badge-dot"></div>
+          <span>Verified Expert</span>
+        </div>
+        <div class="expert-card-body">
+          <p class="expert-name" itemprop="name">Maria Deluca</p>
+          <p class="expert-title" itemprop="jobTitle">Buyer's Agent — South Suburbs</p>
+          <blockquote class="expert-quote" itemprop="description">
+            "Tinley Park gives you Metra access and price flexibility. Mokena buyers pay more for newer construction and Lincoln-Way schools — both are solid, it depends on your priorities."
+          </blockquote>
+          <span class="expert-area-tag">📍 Tinley Park · Mokena</span>
+          <div class="expert-card-footer">
+            <a href="https://morandiproperties.com/selling/sold-portfolio" class="expert-sold-link" itemprop="url">View Sold Portfolio</a>
+            <a href="https://morandiproperties.com/realtors/agents" class="expert-contact-btn">Meet Maria</a>
+          </div>
+        </div>
+      </article>
+
+    </aside>
+  </main>
+
+  <!-- ─── FOOTER ──────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo">Morandi Properties</a>
+          <p class="footer-tagline">Helping Chicagoland families buy and sell homes across Chicago and 90+ communities in Cook, Will, DuPage, Lake, and Kane counties since 2006.</p>
+        </div>
+        <div class="footer-contact">
+          <span class="footer-contact-label">Get In Touch</span>
+          <p class="footer-address">15715 Wolf Rd<br>Orland Park, IL 60462</p>
+          <a href="tel:+17085166666" class="footer-phone">(708) 516-6666</a>
+        </div>
+        <div class="footer-social">
+          <span class="footer-social-label">Follow Along</span>
+          <div class="footer-social-icons">
+            <a href="#" class="footer-social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="footer-social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal">© 2026 Morandi Properties. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPTS ──────────────────────────────────────── -->
+  <script>
+    function toggleFAQ(btn) {
+      const item = btn.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => {
+        el.classList.remove('open');
+        el.querySelector('.faq-answer').style.maxHeight = null;
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
+
+    function filterChip(chip, cat) {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      document.querySelectorAll('.faq-category').forEach(el => {
+        el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>

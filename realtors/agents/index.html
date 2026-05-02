@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meet the Team | Morandi Properties</title>
-  <meta name="description" content="Meet the Morandi Properties team — Jonathan Garrity, Erik Breese, Renee Elosh and Douglas Loizzo. Experienced brokers serving Chicagoland's 30+ southwest suburban communities.">
+  <title>Buyer's Strategy Guide | Southwest Suburbs Home Buying | Morandi Properties</title>
+  <meta name="description" content="Ray Morandi's complete home buying guide for the southwest suburbs of Chicago — Orland Park, Tinley Park, Frankfort, Mokena, New Lenox and more. Step-by-step from pre-approval to closing day.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.morandiproperties.com/buying/buying-strategy-guide">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap"></noscript>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,9 +25,9 @@
       --line:       #dce3e8;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); overflow-x: hidden; }
+    body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
 
-    /* ─── Header ─────────────────────────────────────────── */
+    /* ─── Header ─────────────────────────────────────────────── */
     .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
     .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
     .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
@@ -42,6 +43,8 @@
     .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background .15s; }
     .dropdown-menu a:hover { background: #eceff1; }
     .dropdown-menu a.active { font-weight: 600; background: var(--light-bg); }
+
+    /* ─── Hamburger ──────────────────────────────────────────── */
     .hamburger-btn { display: none; flex-direction: column; gap: 5px; align-items: flex-start; background: none; border: none; cursor: pointer; padding: 4px; }
     .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all .25s ease; }
     .hamburger-btn span:nth-child(1) { width: 24px; }
@@ -50,6 +53,8 @@
     .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
     .hamburger-btn.open span:nth-child(2) { opacity: 0; }
     .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
+
+    /* ─── Mobile Nav ─────────────────────────────────────────── */
     .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
     .mobile-nav.open { opacity: 1; pointer-events: all; }
     .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
@@ -61,6 +66,7 @@
     .mobile-nav-sub { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding-bottom: 4px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s ease .2s; }
     .mobile-nav-sub.open { max-height: 320px; opacity: 1; }
     .mobile-nav-sub a { font-family: 'Barlow', sans-serif !important; font-size: 14px !important; font-weight: 500 !important; letter-spacing: .08em !important; color: var(--text-muted) !important; padding: 6px 24px !important; text-transform: uppercase; }
+
     @media (max-width: 960px) {
       .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
       .hamburger-btn { display: flex; grid-column: 1; }
@@ -68,175 +74,175 @@
       .nav-row { display: none; }
     }
 
-    /* ─── Hero ───────────────────────────────────────────── */
-    .team-hero {
-      background: linear-gradient(165deg, var(--navy) 0%, var(--navy-light) 100%);
-      padding: 80px 40px 72px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .team-hero::before {
-      content: ''; position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.03) 39px, rgba(255,255,255,.03) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.03) 39px, rgba(255,255,255,.03) 40px);
-    }
-    .team-hero-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
-    .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 18px; }
-    .team-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(42px, 7vw, 68px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: 1; margin-bottom: 20px; }
-    .team-hero p { font-size: 15.5px; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,.65); max-width: 480px; margin: 0 auto; }
+    /* ─── PAGE HERO ──────────────────────────────────────────── */
+    .page-hero { background: var(--white); padding: 72px 40px 64px; border-bottom: 1px solid #dce3e8; }
+    .page-hero-inner { max-width: 760px; margin: 0 auto; }
+    .page-hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 16px; }
+    .page-hero-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 5vw, 56px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; margin-bottom: 24px; }
+    .page-hero-divider { width: 48px; height: 3px; background: var(--navy); margin-bottom: 28px; opacity: .2; }
+    .page-hero-body { font-size: 16px; font-weight: 400; line-height: 1.85; color: var(--text-muted); margin-bottom: 20px; }
+    .page-hero-body strong { color: var(--navy); font-weight: 600; }
+    .page-hero-note { font-size: 13px; font-weight: 500; color: var(--blue-grey); letter-spacing: .06em; border-left: 3px solid #dce3e8; padding-left: 16px; line-height: 1.7; margin-top: 28px; }
+    @media (max-width: 900px) { .page-hero { padding: 52px 24px 48px; } }
 
-    /* ─── Section rule ────────────────────────────────────── */
-    .section-rule { height: 1px; background: var(--line); max-width: 1100px; margin: 0 auto; }
-
-    /* ─── Coverage Map ───────────────────────────────────── */
-    .coverage-map-section {
-      background: var(--light-bg);
-      padding: 80px 40px;
+    /* ─── TIMELINE ───────────────────────────────────────────── */
+    .timeline-section { background: var(--white); padding: 100px 0 0; overflow: hidden; }
+    .timeline-header { text-align: center; padding: 0 40px 80px; }
+    .timeline-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 14px; }
+    .timeline-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(30px, 4vw, 48px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; }
+    .tl-step { display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+    .tl-step.visible { opacity: 1; transform: translateY(0); }
+    .tl-step:nth-child(odd)  { direction: ltr; }
+    .tl-step:nth-child(even) { direction: rtl; }
+    .tl-step:nth-child(even) .tl-content, .tl-step:nth-child(even) .tl-photo { direction: ltr; }
+    .tl-step:nth-child(even) .tl-content { background: var(--light-bg); }
+    .tl-step:nth-child(odd)  .tl-content { background: var(--white); }
+    .tl-photo { position: relative; overflow: hidden; background: var(--navy); }
+    .tl-photo-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
+    .tl-step:hover .tl-photo-bg { transform: scale(1.04); }
+    .tl-badge { position: absolute; bottom: 28px; left: 28px; z-index: 2; }
+    .tl-step:nth-child(even) .tl-badge { left: auto; right: 28px; }
+    .tl-badge-num { font-family: 'Barlow Condensed', sans-serif; font-size: 72px; font-weight: 600; line-height: 1; color: var(--white); opacity: .18; letter-spacing: -.02em; display: block; user-select: none; }
+    .tl-content { display: flex; flex-direction: column; justify-content: center; padding: 64px 60px; gap: 20px; border-bottom: 1px solid #dce3e8; }
+    .tl-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); background: var(--navy); padding: 5px 12px; align-self: flex-start; }
+    .tl-step-num { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .2em; color: var(--blue-grey); }
+    .tl-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(22px, 2.5vw, 32px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; }
+    .tl-divider { width: 40px; height: 2px; background: var(--navy); opacity: .2; }
+    .tl-body { font-size: 14.5px; font-weight: 400; line-height: 1.85; color: var(--text-muted); max-width: 420px; }
+    .tl-body strong { color: var(--navy); font-weight: 600; }
+    .tl-tip { font-size: 12.5px; font-weight: 500; color: var(--navy-light); border-left: 3px solid var(--blue-grey); padding-left: 14px; line-height: 1.7; max-width: 400px; opacity: .75; }
+    .tl-step:nth-child(1) .tl-photo { background: linear-gradient(135deg, #1a2d4a 0%, #2e4a6e 100%); }
+    .tl-step:nth-child(2) .tl-photo { background: linear-gradient(135deg, #263950 0%, #37556e 100%); }
+    .tl-step:nth-child(3) .tl-photo { background: linear-gradient(135deg, #1e3554 0%, #2a4a6a 100%); }
+    .tl-step:nth-child(4) .tl-photo { background: linear-gradient(135deg, #223060 0%, #304a70 100%); }
+    .tl-step:nth-child(5) .tl-photo { background: linear-gradient(135deg, #1a2d4a 0%, #3a5060 100%); }
+    .tl-step:nth-child(6) .tl-photo { background: linear-gradient(135deg, #233050 0%, #2e4862 100%); }
+    .tl-step:nth-child(7) .tl-photo { background: linear-gradient(135deg, #1a3060 0%, #263d56 100%); }
+    .tl-photo-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: .12; }
+    @media (max-width: 900px) {
+      .timeline-section { padding: 64px 0 0; }
+      .timeline-header { padding: 0 24px 52px; }
+      .tl-step { grid-template-columns: 1fr; min-height: auto; }
+      .tl-step:nth-child(even) { direction: ltr; }
+      .tl-photo { height: 260px; order: -1; }
+      .tl-step:nth-child(even) .tl-badge { left: 28px; right: auto; }
+      .tl-content { padding: 40px 28px; }
+      .tl-body, .tl-tip { max-width: 100%; }
     }
-    .coverage-map-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .coverage-map-eyebrow {
-      font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 14px;
-    }
-    .coverage-map-inner h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
-      color: var(--navy); line-height: 1; margin-bottom: 16px;
-    }
-    .coverage-map-inner p {
-      font-size: 15px; font-weight: 300; line-height: 1.9;
-      color: var(--navy); max-width: 560px; margin-bottom: 36px;
-    }
-    #morandi-map {
-      width: 100%; height: 520px;
-      border-radius: 4px; overflow: hidden;
-    }
-    @media (max-width: 860px) {
-      .coverage-map-section { padding: 56px 24px; }
-      #morandi-map { height: 380px; }
+
+    /* ─── MID-PAGE CTA ───────────────────────────────────────── */
+    .mid-cta { background: var(--navy); padding: 64px 40px; position: relative; overflow: hidden; }
+    .mid-cta::before { content: 'MORANDI'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Barlow Condensed', sans-serif; font-size: 160px; font-weight: 600; letter-spacing: .06em; color: rgba(255,255,255,.04); white-space: nowrap; pointer-events: none; user-select: none; }
+    .mid-cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; position: relative; z-index: 1; }
+    .mid-cta-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 12px; }
+    .mid-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: 1.1; margin-bottom: 10px; }
+    .mid-cta-sub { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.7; max-width: 480px; }
+    .mid-cta-btns { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .btn-primary { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; text-align: center; padding: 15px 32px; white-space: nowrap; transition: background .2s, color .2s; }
+    .btn-primary-white { background: var(--white); color: var(--navy); }
+    .btn-primary-white:hover { background: #eceff1; }
+    .btn-primary-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.35); }
+    .btn-primary-outline:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
+    @media (max-width: 800px) {
+      .mid-cta { padding: 52px 24px; }
+      .mid-cta-inner { grid-template-columns: 1fr; gap: 32px; }
+      .mid-cta-btns { flex-direction: row; flex-wrap: wrap; }
+      .mid-cta::before { display: none; }
     }
 
-    /* ─── Agent Panels ───────────────────────────────────── */
-    .agents-wrapper { background: var(--white); }
-
-    .agent-panel {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 580px;
-      overflow: hidden;
+    /* ─── LISTINGS TEASER ────────────────────────────────────── */
+    .listings-teaser { background: var(--light-bg); padding: 88px 40px; }
+    .listings-teaser-header { max-width: 1100px; margin: 0 auto 48px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+    .listings-teaser-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 10px; }
+    .listings-teaser-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; }
+    .listings-teaser-viewall { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1.5px solid var(--navy); padding-bottom: 2px; white-space: nowrap; flex-shrink: 0; transition: color .2s, border-color .2s; }
+    .listings-teaser-viewall:hover { color: var(--navy-light); border-color: var(--navy-light); }
+    .listings-teaser-grid { max-width: 1100px; margin: 0 auto 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .lt-card { background: var(--white); border: 1px solid #dce3e8; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .22s ease, box-shadow .22s ease; overflow: hidden; }
+    .lt-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,45,74,.1); }
+    .lt-photo { width: 100%; aspect-ratio: 4/3; background: var(--navy); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .lt-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .lt-card:hover .lt-photo img { transform: scale(1.04); }
+    .lt-badge { position: absolute; top: 14px; left: 14px; z-index: 2; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--white); background: var(--navy); padding: 5px 10px; }
+    .lt-badge-new { background: #2e7d32; }
+    .lt-info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .lt-price { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .02em; color: var(--navy); line-height: 1; }
+    .lt-address { font-size: 14px; font-weight: 500; color: var(--navy); }
+    .lt-city { font-size: 13px; color: var(--text-muted); }
+    .lt-divider { width: 100%; height: 1px; background: #eceff1; margin: 6px 0; }
+    .lt-meta { display: flex; gap: 16px; }
+    .lt-meta-item { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
+    .lt-meta-item strong { color: var(--navy); font-weight: 600; }
+    .listings-teaser-bottom { max-width: 1100px; margin: 0 auto; text-align: center; }
+    @media (max-width: 900px) {
+      .listings-teaser { padding: 60px 24px; }
+      .listings-teaser-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .listings-teaser-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
     }
-    .agent-panel.flip { direction: rtl; }
-    .agent-panel.flip > * { direction: ltr; }
+    @media (max-width: 560px) { .listings-teaser-grid { grid-template-columns: 1fr; } }
 
-    .agent-photo-side {
-      position: relative; overflow: hidden;
-      background: linear-gradient(135deg, #dce3e8 0%, #b0bec5 100%);
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq-section { background: var(--white); padding: 88px 40px; border-top: 1px solid #dce3e8; }
+    .faq-inner { max-width: 860px; margin: 0 auto; }
+    .faq-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 14px; }
+    .faq-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; margin-bottom: 52px; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid #dce3e8; }
+    .faq-item { border-bottom: 1px solid #dce3e8; overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 0; transition: color .2s; }
+    .faq-q:hover .faq-q-text { color: var(--navy-light); }
+    .faq-q-text { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.15; transition: color .2s; }
+    .faq-icon { flex-shrink: 0; width: 28px; height: 28px; border: 1.5px solid #dce3e8; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background .2s, border-color .2s; }
+    .faq-item.open .faq-icon { background: var(--navy); border-color: var(--navy); }
+    .faq-icon svg { transition: transform .3s ease; stroke: var(--navy); }
+    .faq-item.open .faq-icon svg { transform: rotate(45deg); stroke: var(--white); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; }
+    .faq-item.open .faq-a { max-height: 400px; }
+    .faq-a-inner { font-size: 15px; font-weight: 400; line-height: 1.8; color: var(--text-muted); padding-bottom: 28px; max-width: 720px; }
+    .faq-a-inner strong { color: var(--navy); font-weight: 600; }
+    @media (max-width: 900px) { .faq-section { padding: 60px 24px; } .faq-q-text { font-size: 17px; } }
+
+    /* ─── BOTTOM CTA ─────────────────────────────────────────── */
+    .bottom-cta { background: var(--light-bg); padding: 0 40px; overflow: hidden; border-top: 1px solid #dce3e8; }
+    .bottom-cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
+    .bottom-cta-left { display: flex; flex-direction: column; justify-content: center; padding: 72px 60px 72px 0; gap: 24px; border-right: 1px solid #dce3e8; }
+    .bottom-cta-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); }
+    .bottom-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(30px, 3.5vw, 48px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; }
+    .bottom-cta-body { font-size: 14.5px; color: var(--text-muted); line-height: 1.8; max-width: 400px; }
+    .bottom-cta-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+    .bottom-cta .btn-primary-white { background: var(--navy); color: var(--white); }
+    .bottom-cta .btn-primary-white:hover { background: var(--navy-light); }
+    .bottom-cta .btn-primary-outline { color: var(--navy); border-color: rgba(26,45,74,.35); }
+    .bottom-cta .btn-primary-outline:hover { border-color: var(--navy); background: rgba(26,45,74,.06); }
+    .bottom-cta-right { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 72px 0 72px 60px; gap: 32px; }
+    .bottom-cta-stat-block { display: flex; flex-direction: column; align-items: center; gap: 28px; width: 100%; }
+    .bottom-cta-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; width: 100%; border: 1px solid #dce3e8; }
+    .bottom-cta-stat { padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; background: var(--white); }
+    .bottom-cta-stat:nth-child(2) { border-left: 1px solid #dce3e8; }
+    .bottom-cta-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 600; color: var(--navy); letter-spacing: .02em; line-height: 1; }
+    .bottom-cta-stat-label { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); }
+    .bottom-cta-contact-block { width: 100%; border: 1px solid #dce3e8; padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; background: var(--white); }
+    .bottom-cta-contact-label { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--text-muted); }
+    .bottom-cta-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: .04em; color: var(--navy); text-decoration: none; transition: color .2s; }
+    .bottom-cta-phone:hover { color: var(--navy-light); }
+    .bottom-cta-hours { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
+    @media (max-width: 900px) {
+      .bottom-cta { padding: 0 24px; }
+      .bottom-cta-inner { grid-template-columns: 1fr; min-height: auto; }
+      .bottom-cta-left { padding: 52px 0 40px; border-right: none; border-bottom: 1px solid #dce3e8; }
+      .bottom-cta-right { padding: 40px 0 52px; }
+      .bottom-cta-body { max-width: 100%; }
     }
-    .agent-photo-side img {
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: top;
-      display: block;
-      transition: transform .8s ease;
-    }
-    .agent-panel:hover .agent-photo-side img { transform: scale(1.04); }
 
-    .photo-placeholder {
-      width: 100%; height: 100%; min-height: 580px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 14px;
-    }
-    .photo-placeholder svg { width: 60px; height: 60px; opacity: .22; fill: var(--navy); }
-    .ph-name { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(26,45,74,.32); }
-    .ph-hint { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: rgba(26,45,74,.2); }
-
-    .agent-index {
-      position: absolute; bottom: -14px; right: 6px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 168px; font-weight: 600; letter-spacing: -.02em;
-      color: rgba(26,45,74,.07); line-height: 1;
-      pointer-events: none; user-select: none;
-    }
-    .agent-panel.flip .agent-index { right: auto; left: 6px; }
-
-    .agent-content-side {
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 64px 72px;
-      background: var(--white);
-    }
-    .agent-panel:nth-child(even) .agent-content-side { background: var(--light-bg); }
-
-    .agent-role-tag {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 14px;
-    }
-    .agent-role-tag::before { content: ''; display: block; width: 28px; height: 1px; background: var(--blue-grey); }
-
-    .agent-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(40px, 4.5vw, 58px);
-      font-weight: 600; letter-spacing: .02em; text-transform: uppercase;
-      color: var(--navy); line-height: 1; margin-bottom: 24px;
-    }
-    .agent-divider { width: 36px; height: 2px; background: var(--navy); margin-bottom: 24px; }
-    .agent-bio { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--navy); margin-bottom: 32px; max-width: 440px; }
-
-    .agent-contact { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-    .contact-row { display: flex; align-items: center; gap: 12px; }
-    .contact-icon { width: 32px; height: 32px; flex-shrink: 0; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; }
-    .contact-icon svg { width: 13px; height: 13px; fill: var(--text-muted); }
-    .contact-link { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 500; letter-spacing: .06em; color: var(--navy); text-decoration: none; transition: color .2s; }
-    .contact-link:hover { color: var(--navy-light); }
-
-    .agent-cta {
-      display: inline-block; align-self: flex-start;
-      font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--white); background: var(--navy);
-      text-decoration: none; padding: 13px 28px;
-      transition: background .2s;
-    }
-    .agent-cta:hover { background: var(--navy-light); }
-
-    /* ─── Scroll animations ──────────────────────────────── */
-    .fade-left  { opacity: 0; transform: translateX(-52px); transition: opacity .85s ease, transform .85s ease; }
-    .fade-right { opacity: 0; transform: translateX(52px);  transition: opacity .85s ease, transform .85s ease; }
-    .fade-up    { opacity: 0; transform: translateY(32px);  transition: opacity .7s ease, transform .7s ease; }
-
-    .fade-left.in-view, .fade-right.in-view, .fade-up.in-view { opacity: 1; transform: none; }
-
-    .stagger > *:nth-child(1) { transition-delay: .05s; }
-    .stagger > *:nth-child(2) { transition-delay: .16s; }
-    .stagger > *:nth-child(3) { transition-delay: .25s; }
-    .stagger > *:nth-child(4) { transition-delay: .34s; }
-    .stagger > *:nth-child(5) { transition-delay: .43s; }
-    .stagger > *:nth-child(6) { transition-delay: .52s; }
-
-    /* ─── CTA Strip ──────────────────────────────────────── */
-    .cta-strip { background: var(--white); border-top: 1px solid var(--line); padding: 72px 40px; text-align: center; }
-    .cta-strip h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--navy); margin-bottom: 14px; }
-    .cta-strip p { font-size: 15px; font-weight: 300; color: var(--text-muted); max-width: 460px; margin: 0 auto 32px; }
-    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-btn-primary { font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white); background: var(--navy); text-decoration: none; padding: 14px 32px; transition: background .2s; }
-    .cta-btn-primary:hover { background: var(--navy-light); }
-    .cta-btn-outline { font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); border: 1px solid var(--navy); text-decoration: none; padding: 14px 32px; transition: border-color .2s, color .2s, background .2s; }
-    .cta-btn-outline:hover { background: var(--light-bg); }
-
-    /* ─── Footer ─────────────────────────────────────────── */
+    /* ─── Footer ─────────────────────────────────────────────── */
     .site-footer { background: var(--navy); padding: 64px 40px 32px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
     .footer-brand { display: flex; flex-direction: column; gap: 16px; }
     .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
-    .footer-tagline { font-size: 13px; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
+    .footer-tagline { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
     .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
     .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
-    .footer-address { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,.75); text-align: center; }
+    .footer-address { font-size: 13.5px; font-weight: 400; line-height: 1.7; color: rgba(255,255,255,.75); text-align: center; }
     .footer-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .06em; color: var(--white); text-decoration: none; transition: color .2s; }
     .footer-phone:hover { color: var(--blue-grey); }
     .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
@@ -251,18 +257,9 @@
     .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
     .footer-links a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
     .footer-links a:hover { color: rgba(255,255,255,.7); }
-
-    /* ─── Responsive ─────────────────────────────────────── */
-    @media (max-width: 860px) {
-      .agent-panel, .agent-panel.flip { grid-template-columns: 1fr; direction: ltr; }
-      .agent-photo-side { aspect-ratio: 4/3; }
-      .photo-placeholder { min-height: 260px; }
-      .agent-index { display: none; }
-      .agent-content-side { padding: 40px 28px; }
-      .team-hero { padding: 56px 24px 48px; }
-      .cta-strip { padding: 56px 24px; }
+    @media (max-width: 960px) {
       .site-footer { padding: 52px 24px 28px; }
-      .footer-top { grid-template-columns: 1fr; gap: 36px; }
+      .footer-top { grid-template-columns: 1fr; gap: 40px; }
       .footer-social { align-items: flex-start; }
       .footer-social-icons { justify-content: flex-start; }
       .footer-contact { align-items: flex-start; text-align: left; }
@@ -284,11 +281,11 @@
   <nav class="nav-row" role="navigation" aria-label="Primary navigation">
     <a href="/" class="nav-link">Home</a>
     <div class="nav-dropdown">
-      <span class="nav-link nav-label">Buying ▾</span>
+      <span class="nav-link nav-label active">Buying ▾</span>
       <div class="dropdown-menu">
         <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
         <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
-        <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+        <a href="https://morandiproperties.com/buying/buying-strategy-guide" class="active">Buyer's Strategy Guide</a>
         <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
       </div>
     </div>
@@ -308,9 +305,9 @@
       </div>
     </div>
     <div class="nav-dropdown">
-      <span class="nav-link nav-label active">Realtors ▾</span>
+      <span class="nav-link nav-label">Realtors ▾</span>
       <div class="dropdown-menu">
-        <a href="https://morandiproperties.com/realtors/agents" class="active">Meet the Team</a>
+        <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
         <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
         <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
       </div>
@@ -327,119 +324,339 @@
 </header>
 
 <!-- ═══ MAIN ══════════════════════════════════════════════ -->
-<main>
+<main role="main">
 
-  <section class="team-hero">
-    <div class="team-hero-inner">
-      <p class="hero-eyebrow">Morandi Properties · Our Brokers</p>
-      <h1>The Team</h1>
-      <p>Behind every successful transaction is a broker who knows the market, knows the neighborhoods, and genuinely cares about the outcome. Meet ours.</p>
+  <section class="page-hero" aria-label="Buyers Guide introduction" itemscope itemtype="https://schema.org/Article">
+    <div class="page-hero-inner">
+      <p class="page-hero-eyebrow">Morandi Properties &mdash; Southwest Suburbs of Chicago</p>
+      <h1 class="page-hero-headline" itemprop="name">Buyers Guide:<br>Buying a Home in Chicago and its 30+ Southwest Suburbs</h1>
+      <div class="page-hero-divider"></div>
+      <p class="page-hero-body" itemprop="description">
+        Buying a home in <strong>the Chicagoland area, including Orland Park, Tinley Park, New Lenox, Frankfort, Homer Glen and Mokena,</strong> is one of the biggest financial decisions you will ever make — and the southwest Chicago suburbs are one of the most competitive real estate markets in the state. Whether you are a first-time buyer or making your fifth move, having a <strong>local expert in your corner changes everything</strong>.
+      </p>
+      <p class="page-hero-body">
+        At Morandi Properties, Ray Morandi has guided <strong>more than 500 Chicagoland families</strong> through the home-buying process since 2006. His approach is straightforward: understand exactly what you need, move fast when the right home comes up, and negotiate hard to protect your interests from offer to closing. With over <strong>$180 million in closed sales</strong> and a consistent ranking in the <strong>top 1% of Illinois real estate agents</strong>, Ray brings a level of experience and local market knowledge that is difficult to match anywhere in the southwest suburbs.
+      </p>
+      <p class="page-hero-body">
+        This guide walks you through every step of the buying process — from getting pre-approved and understanding what neighborhoods best fit your lifestyle, to writing a competitive offer and navigating inspections, appraisals, and closing day. The southwest suburbs offer an exceptional range of communities, each with its own character, school districts, commute options, and price points. Knowing the difference between a home that is priced right and one that is priced to sit is the kind of local insight that only comes from <strong>20 years of experience on these streets</strong>.
+      </p>
+      <p class="page-hero-note">
+        Ready to start your search? Ray Morandi and the Morandi Properties team are available seven days a week to answer questions, schedule showings, and help you find the right home in the right neighborhood — at the right price.
+      </p>
     </div>
   </section>
 
-  <!-- ═══ COVERAGE MAP ══════════════════════════════════════ -->
-  <section class="coverage-map-section">
-    <div class="coverage-map-inner">
-      <p class="coverage-map-eyebrow">Morandi Properties · Service Area</p>
-      <h2>Where We Work</h2>
-      <p>From Chicago's neighborhoods to the far southwest suburbs and beyond, our team knows this region inside and out — the streets, the schools, the values, and the trends that matter when you're buying or selling.</p>
-      <div id="morandi-map"></div>
+  <!-- ─── TIMELINE ──────────────────────────────────────────── -->
+  <section class="timeline-section" aria-label="Home buying process steps" itemscope itemtype="https://schema.org/HowTo">
+    <div class="timeline-header">
+      <p class="timeline-eyebrow">The Home Buying Process</p>
+      <h2 class="timeline-headline" itemprop="name">What to Expect — Step by Step</h2>
+    </div>
+
+    <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+      <div class="tl-photo">
+        <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M9 14l2 2 4-4"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+        <div class="tl-badge"><span class="tl-badge-num">01</span></div>
+      </div>
+      <div class="tl-content">
+        <span class="tl-step-num">Step 01</span>
+        <span class="tl-tag">Week 1</span>
+        <h3 class="tl-title" itemprop="name">Get Pre-Approved for a Mortgage</h3>
+        <div class="tl-divider"></div>
+        <p class="tl-body" itemprop="text">Before you look at a single listing, get a <strong>mortgage pre-approval letter</strong> from a lender. This tells you exactly how much home you can afford and shows sellers you are a serious, qualified buyer. In a competitive market like Orland Park or Tinley Park, homes move fast — sometimes within 24 to 48 hours of hitting the MLS. Showing up without pre-approval means you will almost certainly lose out to a buyer who did their homework.</p>
+        <p class="tl-tip">Ray works with a network of trusted local lenders who know the southwest suburbs market and can turn pre-approvals around quickly.</p>
+      </div>
+    </div>
+
+    <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+      <div class="tl-photo">
+        <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+        <div class="tl-badge"><span class="tl-badge-num">02</span></div>
+      </div>
+      <div class="tl-content">
+        <span class="tl-step-num">Step 02</span>
+        <span class="tl-tag">Week 1–2</span>
+        <h3 class="tl-title" itemprop="name">Define Your Needs &amp; Choose a Neighborhood</h3>
+        <div class="tl-divider"></div>
+        <p class="tl-body" itemprop="text">The southwest suburbs each have a distinct character. <strong>Orland Park</strong> offers excellent schools, walkable retail, and strong resale value. <strong>Frankfort</strong> and <strong>Mokena</strong> have a quieter, small-town feel with newer construction options. <strong>Tinley Park</strong> offers strong commuter access and a wide range of price points. <strong>New Lenox</strong> is one of the fastest-growing communities in Will County. Getting this right before you start touring homes saves weeks of searching.</p>
+        <p class="tl-tip">Ray has lived in the southwest suburbs his entire life and can walk you through the real differences between every neighborhood, subdivision, and school district in the area.</p>
+      </div>
+    </div>
+
+    <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+      <div class="tl-photo">
+        <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <div class="tl-badge"><span class="tl-badge-num">03</span></div>
+      </div>
+      <div class="tl-content">
+        <span class="tl-step-num">Step 03</span>
+        <span class="tl-tag">Week 2–4</span>
+        <h3 class="tl-title" itemprop="name">Search Listings &amp; Tour Homes</h3>
+        <div class="tl-divider"></div>
+        <p class="tl-body" itemprop="text">With your criteria set, you will start touring active listings. Your agent will set up <strong>MLS alerts</strong> so you see new homes the moment they hit the market. Pay close attention to layout, lot, condition, and location relative to schools and major roads — not just finishes, which are easy to change. A home that checks every surface box but backs up to a busy road or sits in a flood zone can be a costly mistake.</p>
+        <p class="tl-tip">The best homes in desirable southwest suburb school districts often go under contract within a week. Be ready to move quickly when the right one appears.</p>
+      </div>
+    </div>
+
+    <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+      <div class="tl-photo">
+        <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+        <div class="tl-badge"><span class="tl-badge-num">04</span></div>
+      </div>
+      <div class="tl-content">
+        <span class="tl-step-num">Step 04</span>
+        <span class="tl-tag">Day of Decision</span>
+        <h3 class="tl-title" itemprop="name">Make a Competitive Offer</h3>
+        <div class="tl-divider"></div>
+        <p class="tl-body" itemprop="text">When you find the right home, your agent will pull <strong>comparable sales</strong> and help you craft an offer that is competitive without overpaying. In a seller's market, this may mean offering at or above list price, limiting contingencies, or writing an escalation clause. The terms of an offer — closing timeline, earnest money, contingencies — matter just as much as the number. A well-structured offer at list price often beats a higher offer with messy terms.</p>
+        <p class="tl-tip">Ray has helped clients win multiple-offer situations across the southwest suburbs for 20 years. His strategy is built on knowing exactly what local sellers respond to.</p>
+      </div>
     </div>
   </section>
 
-  <div class="agents-wrapper">
-
-    <!-- ── Jonathan Garrity ── photo left ──────────────── -->
-    <article class="agent-panel" id="jonathan">
-      <div class="agent-photo-side fade-left">
-        <img src="images/agents/jonathan-garrity.jpg" alt="Jonathan Garrity">
-        <span class="agent-index">01</span>
+  <!-- ─── MID-PAGE CTA ─────────────────────────────────────── -->
+  <div class="mid-cta" aria-label="Contact Ray Morandi mid-page">
+    <div class="mid-cta-inner">
+      <div>
+        <p class="mid-cta-eyebrow">Morandi Properties &mdash; Orland Park, IL</p>
+        <h3 class="mid-cta-headline">Found a Home You Love?<br>Let's Make the Right Move.</h3>
+        <p class="mid-cta-sub">Ray Morandi has helped over 500 Chicagoland families navigate offers, inspections, and negotiations in the southwest suburbs. Don't go into the most important steps alone.</p>
       </div>
-      <div class="agent-content-side stagger">
-        <p class="agent-role-tag fade-up">Broker</p>
-        <h2 class="agent-name fade-up">Jonathan<br>Garrity</h2>
-        <div class="agent-divider fade-up"></div>
-        <p class="agent-bio fade-up">Jonathan brings a client-first approach to every transaction, combining deep local knowledge with a straightforward, honest style that keeps buyers and sellers informed and confident every step of the way. Whether it's your first home or your next investment, Jonathan is the steady hand you want in your corner.</p>
-        <div class="agent-contact fade-up">
-          <div class="contact-row">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></div>
-            <a href="tel:+17083415063" class="contact-link">(708) 341-5063</a>
-          </div>
-          <div class="contact-row">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-            <a href="mailto:jonathan@morandiproperties.com" class="contact-link">jonathan@morandiproperties.com</a>
-          </div>
-        </div>
-        <a href="mailto:jonathan@morandiproperties.com" class="agent-cta fade-up">Get in Touch</a>
+      <div class="mid-cta-btns">
+        <a href="tel:+17085166666" class="btn-primary btn-primary-white">Call Ray: (708) 516-6666</a>
+        <a href="https://morandiproperties.com/buying/listings" class="btn-primary btn-primary-outline">Browse Active Listings &rarr;</a>
       </div>
-    </article>
-
-    <div class="section-rule"></div>
-
-    <!-- ── Erik Breese ── photo right ──────────────────── -->
-    <article class="agent-panel flip" id="erik">
-      <div class="agent-photo-side fade-right">
-        <img src="images/agents/erik-breese.jpg" alt="Erik Breese">
-        <span class="agent-index">02</span>
-      </div>
-      <div class="agent-content-side stagger">
-        <p class="agent-role-tag fade-up">Broker</p>
-        <h2 class="agent-name fade-up">Erik<br>Breese</h2>
-        <div class="agent-divider fade-up"></div>
-        <p class="agent-bio fade-up">With nearly 10 years of experience, Erik has helped clients navigate buying and selling homes in every price range and through every market condition.
-
-In addition to real estate, I proudly serve as a firefighter where trust, quick decision making, and putting people first are part of the job. I bring that same mindset and open communication to every client I work with.
-
-My goal is simple: deliver successful results while making the process as smooth and stress-free as possible.</p>
-        <div class="agent-contact fade-up">
-          <div class="contact-row">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c-1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></div>
-            <a href="tel:+17082886922" class="contact-link">(708) 288-6922</a>
-          </div>
-          <div class="contact-row">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-            <a href="mailto:ebreese@comcast.net" class="contact-link">ebreese@comcast.net</a>
-          </div>
-        </div>
-        <a href="mailto:ebreese@comcast.net" class="agent-cta fade-up">Get in Touch</a>
-      </div>
-    </article>
-
-    <div class="section-rule"></div>
-
-    <!-- ── Renee Elosh ── photo left ─────────────────── -->
-    <article class="agent-panel" id="douglas">
-      <div class="agent-photo-side fade-left">
-        <img src="images/agents/renee-elosh.jpg" alt="Renee Elosh">
-        <span class="agent-index">03</span>
-      </div>
-      <div class="agent-content-side stagger">
-        <p class="agent-role-tag fade-up">Broker</p>
-        <h2 class="agent-name fade-up">Renee<br>Elosh</h2>
-        <div class="agent-divider fade-up"></div>
-        <p class="agent-bio fade-up">Renee brings hands-on experience in buying, selling, rental properties, and working with investors. She prides herself on being easy to work with, responsive, and honest—helping clients feel confident every step of the way. Whether you're searching for your first home, expanding your portfolio, or finding the right rental, Renee is here to help make it happen.</p>
-        <div class="agent-contact fade-up">
-          <div class="contact-row">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg></div>
-            <a href="tel:+17089067272" class="contact-link">(708) 969-6671</a>
-          </div>
-          <div class="contact-row">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
-            <a href="mailto:renee@morandiproperties.com" class="contact-link">renee@morandiproperties.com</a>
-          </div>
-        </div>
-        <a href="mailto:renee@morandiproperties.com" class="agent-cta fade-up">Get in Touch</a>
-      </div>
-    </article>
-
+    </div>
   </div>
 
-  <section class="cta-strip">
-    <h2>Ready to Work With Our Team?</h2>
-    <p>Whether buying or selling, we know Chicagoland's southwest suburban communities like the back of our hand.</p>
-    <div class="cta-btns">
-      <a href="https://morandiproperties.com/contact/office" class="cta-btn-primary">Contact Us</a>
-      <a href="https://morandiproperties.com/realtors/ray-morandi" class="cta-btn-outline">Meet Ray Morandi</a>
+  <!-- ─── TIMELINE CONTINUED ───────────────────────────────── -->
+  <section class="timeline-section" style="padding-top:0;" aria-label="Home buying process steps continued" itemscope itemtype="https://schema.org/HowTo">
+
+    <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+      <div class="tl-photo">
+        <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        <div class="tl-badge"><span class="tl-badge-num">05</span></div>
+      </div>
+      <div class="tl-content">
+        <span class="tl-step-num">Step 05</span>
+        <span class="tl-tag">Within 5–7 Days of Accepted Offer</span>
+        <h3 class="tl-title" itemprop="name">Home Inspection</h3>
+        <div class="tl-divider"></div>
+        <p class="tl-body" itemprop="text">After your offer is accepted, you will hire a licensed home inspector to evaluate the property top to bottom — roof, foundation, electrical, plumbing, HVAC, and more. The report identifies any material defects. From there you can <strong>negotiate repairs or credits</strong> with the seller, walk away if issues are serious enough, or accept the home as-is with full knowledge of what you are taking on. Never waive the inspection unless you fully understand the risk.</p>
+        <p class="tl-tip">Older homes in established Orland Park and Tinley Park neighborhoods can come with aging mechanicals. A thorough inspection protects your investment before you commit.</p>
+      </div>
+    </div>
+
+    <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+      <div class="tl-photo">
+        <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <div class="tl-badge"><span class="tl-badge-num">06</span></div>
+      </div>
+      <div class="tl-content">
+        <span class="tl-step-num">Step 06</span>
+        <span class="tl-tag">Weeks 2–4 Under Contract</span>
+        <h3 class="tl-title" itemprop="name">Appraisal &amp; Underwriting</h3>
+        <div class="tl-divider"></div>
+        <p class="tl-body" itemprop="text">Your lender will order an appraisal to confirm the home's market value supports the purchase price. If the appraisal comes in low, you will need to <strong>renegotiate the price</strong>, cover the gap in cash, or walk away. Simultaneously, underwriting will verify your income, assets, credit, and employment. This is when lenders typically request additional documentation — respond quickly to keep your closing on schedule.</p>
+        <p class="tl-tip">Avoid any major financial changes during this phase — new credit cards, large purchases, or job changes — until after the keys are in your hand.</p>
+      </div>
+    </div>
+
+    <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
+      <div class="tl-photo">
+        <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div class="tl-badge"><span class="tl-badge-num">07</span></div>
+      </div>
+      <div class="tl-content">
+        <span class="tl-step-num">Step 07</span>
+        <span class="tl-tag">30–45 Days After Accepted Offer</span>
+        <h3 class="tl-title" itemprop="name">Final Walk-Through &amp; Closing Day</h3>
+        <div class="tl-divider"></div>
+        <p class="tl-body" itemprop="text">A day or two before closing, you will walk through the home one final time to confirm it is in agreed-upon condition and that any negotiated repairs were completed. Then comes <strong>closing day</strong> — you will sign loan documents, pay your closing costs and down payment, and receive the keys. In Illinois, closings take place at a title company. The full process from accepted offer to keys typically runs <strong>30 to 45 days</strong>.</p>
+        <p class="tl-tip">Morandi Properties stays with you through every detail of closing — reviewing the settlement statement, coordinating with the title company, and making sure nothing falls through the cracks.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── LISTINGS TEASER ──────────────────────────────────── -->
+  <section class="listings-teaser" aria-label="Featured homes for sale in the southwest Chicago suburbs">
+    <div class="listings-teaser-header">
+      <div>
+        <p class="listings-teaser-eyebrow">Active Listings &mdash; Southwest Suburbs</p>
+        <h2 class="listings-teaser-headline">Homes For Sale Right Now</h2>
+      </div>
+      <a href="https://morandiproperties.com/buying/listings" class="listings-teaser-viewall">View All Listings &rarr;</a>
+    </div>
+
+    <div class="listings-teaser-grid">
+
+      <!-- Frankfort -->
+      <a href="https://morandiproperties.com/buying/listings" class="lt-card">
+        <div class="lt-photo">
+          <img src="/images/on-market/23039-lakeview-estates-blvd.jpeg" alt="23039 Lakeview Estates Blvd, Frankfort IL" loading="lazy" />
+          <span class="lt-badge lt-badge-new">New</span>
+        </div>
+        <div class="lt-info">
+          <span class="lt-price">$819,000</span>
+          <span class="lt-address">23039 Lakeview Estates Blvd.</span>
+          <span class="lt-city">Frankfort, IL 60423</span>
+          <div class="lt-divider"></div>
+          <div class="lt-meta">
+            <span class="lt-meta-item"><strong>4</strong> bd</span>
+            <span class="lt-meta-item"><strong>2</strong> ba</span>
+            <span class="lt-meta-item"><strong>3,025</strong> sqft</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Orland Park -->
+      <a href="https://morandiproperties.com/buying/listings" class="lt-card">
+        <div class="lt-photo">
+          <img src="/images/on-market/14237-ashford-ct-orland-park-il-60467.jpeg" alt="14237 Ashford Ct, Orland Park IL" loading="lazy" />
+          <span class="lt-badge">Active</span>
+        </div>
+        <div class="lt-info">
+          <span class="lt-price">$789,000</span>
+          <span class="lt-address">14237 Ashford Ct.</span>
+          <span class="lt-city">Orland Park, IL 60467</span>
+          <div class="lt-divider"></div>
+          <div class="lt-meta">
+            <span class="lt-meta-item"><strong>4</strong> bd</span>
+            <span class="lt-meta-item"><strong>2.5</strong> ba</span>
+            <span class="lt-meta-item"><strong>3,500</strong> sqft</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tinley Park -->
+      <a href="https://morandiproperties.com/buying/listings" class="lt-card">
+        <div class="lt-photo">
+          <img src="/images/on-market/17801-67th-ave-tinley-park-il-60477.jpeg" alt="17801 67th Ave, Tinley Park IL" loading="lazy" />
+          <span class="lt-badge lt-badge-new">New</span>
+        </div>
+        <div class="lt-info">
+          <span class="lt-price">$249,000</span>
+          <span class="lt-address">17801 67th Ave.</span>
+          <span class="lt-city">Tinley Park, IL 60477</span>
+          <div class="lt-divider"></div>
+          <div class="lt-meta">
+            <span class="lt-meta-item"><strong>4</strong> bd</span>
+            <span class="lt-meta-item"><strong>2</strong> ba</span>
+            <span class="lt-meta-item"><strong>1,472</strong> sqft</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="listings-teaser-bottom">
+      <a href="https://morandiproperties.com/buying/listings" class="btn-primary btn-primary-white" style="background:var(--navy);color:var(--white);display:inline-block;">See All Active Listings &rarr;</a>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ──────────────────────────────────────────────── -->
+  <section class="faq-section" aria-label="Frequently asked questions about buying a home" itemscope itemtype="https://schema.org/FAQPage">
+    <div class="faq-inner">
+      <p class="faq-eyebrow">Common Questions</p>
+      <h2 class="faq-headline">Buyers Ask. Ray Answers.</h2>
+      <div class="faq-list">
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text" itemprop="name">How long does it take to buy a home in Orland Park?</span>
+            <span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+          </button>
+          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p class="faq-a-inner" itemprop="text">From the day you start your search to closing day, most buyers in the southwest Chicago suburbs are in their new home within <strong>60 to 90 days</strong>. The process breaks down into two phases: the search (which can take anywhere from a few weeks to a few months depending on inventory and how quickly you act) and the contract-to-close period, which typically runs <strong>30 to 45 days</strong>. Getting pre-approved before you start searching is the single best way to compress that timeline.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text" itemprop="name">Do I need a buyer's agent when buying a home in Illinois?</span>
+            <span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+          </button>
+          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p class="faq-a-inner" itemprop="text">You are not legally required to have a buyer's agent in Illinois, but working without one means negotiating directly against a seller's agent whose job is to protect the seller — not you. A buyer's agent costs you nothing out of pocket (the seller typically pays both commissions), and a good one will <strong>negotiate harder, spot red flags earlier, and save you far more</strong> than any fee involved. In a competitive market like Orland Park or Tinley Park, having an experienced local agent is a significant strategic advantage.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text" itemprop="name">What is a good down payment for a home in the southwest suburbs?</span>
+            <span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+          </button>
+          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p class="faq-a-inner" itemprop="text">The common benchmark is <strong>20% down</strong>, which lets you avoid private mortgage insurance (PMI) and typically qualifies you for better rates. That said, many buyers in Illinois purchase with significantly less — FHA loans allow as little as 3.5% down, and conventional loans can go as low as 3% for qualified buyers. In a multiple-offer situation, a stronger down payment can make your offer more attractive to sellers even if the price is the same. Ray's lending network can walk you through the options that make sense for your specific financial situation.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text" itemprop="name">Which southwest suburb is the best place to buy a home?</span>
+            <span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+          </button>
+          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p class="faq-a-inner" itemprop="text">It depends entirely on what matters most to you. <strong>Orland Park</strong> consistently tops the list for school quality, retail access, and long-term resale strength. <strong>Frankfort and Mokena</strong> appeal to buyers who want a quieter, small-town feel with newer construction options. <strong>Tinley Park</strong> offers excellent Metra access and a wider price range. <strong>New Lenox</strong> is growing fast and offers strong value for buyers who don't mind being slightly further out. Ray has spent 20 years working in all five communities and can give you an honest, street-level comparison based on your priorities.</p>
+          </div>
+        </div>
+
+        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+          <button class="faq-q" aria-expanded="false">
+            <span class="faq-q-text" itemprop="name">How competitive is the Orland Park real estate market right now?</span>
+            <span class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
+          </button>
+          <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+            <p class="faq-a-inner" itemprop="text">The southwest suburbs remain one of the more competitive residential real estate markets in the Chicago metro area. Well-priced homes in good school districts routinely receive multiple offers within the first few days on market, and above-asking-price sales are common. Inventory has remained tight, which continues to favor sellers. As a buyer, that means <strong>being pre-approved, moving quickly, and having an experienced agent</strong> who can structure a compelling offer is more important than ever. Ray monitors market conditions across all five communities in real time.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BOTTOM CTA ────────────────────────────────────────── -->
+  <section class="bottom-cta" aria-label="Contact Morandi Properties to start your home search">
+    <div class="bottom-cta-inner">
+      <div class="bottom-cta-left">
+        <p class="bottom-cta-eyebrow">Ready to Find Your Home?</p>
+        <h2 class="bottom-cta-headline">Let's Find the Right Home in the Right Neighborhood.</h2>
+        <p class="bottom-cta-body">Ray Morandi has been helping southwest suburb buyers find and win the right homes since 2006. When you're ready to take the next step — whether that's a conversation or a showing — Morandi Properties is available seven days a week.</p>
+        <div class="bottom-cta-btns">
+          <a href="tel:+17085166666" class="btn-primary btn-primary-white">Call Ray: (708) 516-6666</a>
+          <a href="https://morandiproperties.com/buying/listings" class="btn-primary btn-primary-outline">Browse Listings &rarr;</a>
+        </div>
+      </div>
+      <div class="bottom-cta-right">
+        <div class="bottom-cta-stat-block">
+          <div class="bottom-cta-stat-row">
+            <div class="bottom-cta-stat">
+              <span class="bottom-cta-stat-num">500+</span>
+              <span class="bottom-cta-stat-label">Families Helped</span>
+            </div>
+            <div class="bottom-cta-stat">
+              <span class="bottom-cta-stat-num">$180M+</span>
+              <span class="bottom-cta-stat-label">In Closed Sales</span>
+            </div>
+          </div>
+          <div class="bottom-cta-stat-row">
+            <div class="bottom-cta-stat">
+              <span class="bottom-cta-stat-num">Top 1%</span>
+              <span class="bottom-cta-stat-label">Agents in Illinois</span>
+            </div>
+            <div class="bottom-cta-stat">
+              <span class="bottom-cta-stat-num">20 Yr</span>
+              <span class="bottom-cta-stat-label">Local Experience</span>
+            </div>
+          </div>
+          <div class="bottom-cta-contact-block">
+            <span class="bottom-cta-contact-label">Call or Text Anytime</span>
+            <a href="tel:+17085166666" class="bottom-cta-phone">(708) 516-6666</a>
+            <span class="bottom-cta-hours">Mon–Fri 9am–6pm &nbsp;·&nbsp; Sat–Sun 10am–4pm</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -455,25 +672,28 @@ My goal is simple: deliver successful results while making the process as smooth
       </div>
       <div class="footer-contact">
         <span class="footer-contact-label">Get In Touch</span>
-        <p class="footer-address">15715 Wolf Rd<br>Orland Park, IL 60462</p>
+        <p class="footer-address">15715 Wolf Rd<br>Orland Park, IL 60467</p>
         <a href="tel:+17085166666" class="footer-phone">(708) 516-6666</a>
       </div>
       <div class="footer-social">
         <span class="footer-social-label">Follow Along</span>
         <div class="footer-social-icons">
-          <a href="#" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
-          <a href="#" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.facebook.com/morandiproperties" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+          <a href="https://www.instagram.com/morandiproperties" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
           <a href="https://www.threads.net/@morandiproperties" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.028-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 012.26.141c-.094-.575-.28-1.035-.562-1.372-.505-.607-1.294-.915-2.346-.92h-.048c-.79 0-1.802.199-2.584 1.29l-1.684-1.17c1.01-1.445 2.589-2.24 4.268-2.24h.068c3.003.025 4.805 1.884 4.805 5.013 0 .126-.005.252-.015.378.68.28 1.27.654 1.77 1.117.858.799 1.424 1.872 1.585 3.024C21.19 17.97 20.456 21 15.924 22.744c-1.403.544-2.986.82-4.73.843-.003 0-.005.001-.008.001v.412z"/></svg></a>
-          <a href="#" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-          <a href="#" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
-          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+          <a href="https://www.linkedin.com/in/raymorandi" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://www.tiktok.com/@morandiproperties" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="https://www.youtube.com/@morandiproperties" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
           <a href="https://g.page/morandiproperties" class="footer-social-link" aria-label="Google Business" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.25 16.195c-1.39 1.304-3.244 2.054-5.25 2.054-4.004 0-7.25-3.246-7.25-7.25 0-4.003 3.246-7.249 7.25-7.249 1.942 0 3.645.751 4.952 1.977l-2.006 1.93c-.742-.71-1.79-1.158-2.946-1.158-2.412 0-4.37 1.958-4.37 4.5 0 2.543 1.958 4.5 4.37 4.5 2.152 0 3.745-1.244 4.112-3h-4.112v-2.5H18c.084.495.13 1 .13 1.5 0 1.33-.306 2.61-.88 3.696z"/></svg></a>
         </div>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-legal">&copy; 2026 Morandi Properties. All rights reserved.<br>Ray Morandi — Licensed Illinois Real Estate Broker &middot; License #71003188</p>
-      <nav class="footer-links">
+      <p class="footer-legal">
+        &copy; 2026 Morandi Properties. All rights reserved.<br>
+        Ray Morandi — Licensed Illinois Real Estate Broker &middot; License #71003188
+      </p>
+      <nav class="footer-links" aria-label="Footer navigation">
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms of Use</a>
         <a href="https://morandiproperties.com/contact/office">Contact</a>
@@ -484,7 +704,7 @@ My goal is simple: deliver successful results while making the process as smooth
 </footer>
 
 <!-- ═══ MOBILE NAV ════════════════════════════════════════ -->
-<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
   <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
   <a href="/">Home</a>
   <div class="mobile-nav-group">
@@ -529,14 +749,14 @@ My goal is simple: deliver successful results while making the process as smooth
   </div>
 </nav>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- ═══ SCRIPTS ═══════════════════════════════════════════ -->
 <script>
   // ── Mobile nav ─────────────────────────────────────────
   const hBtn = document.getElementById('hamburgerBtn');
   const mNav = document.getElementById('mobileNav');
   const mCls = document.getElementById('mobileNavClose');
-  function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); document.body.style.overflow='hidden'; }
-  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
+  function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); hBtn.setAttribute('aria-expanded','true'); mNav.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); hBtn.setAttribute('aria-expanded','false'); mNav.setAttribute('aria-hidden','true'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
   hBtn.addEventListener('click', openNav);
   mCls.addEventListener('click', closeNav);
   mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
@@ -551,119 +771,30 @@ My goal is simple: deliver successful results while making the process as smooth
     });
   });
 
-  // ── Coverage Map ───────────────────────────────────────
-  (function() {
-    const chicago = { name: "Chicago", lat: 41.8781, lng: -87.6298, county: "Chicago" };
-
-    const suburbs = [
-      // Cook County
-      { name: "Alsip",              lat: 41.6678, lng: -87.7312, county: "Cook" },
-      { name: "Bedford Park",       lat: 41.7667, lng: -87.7917, county: "Cook" },
-      { name: "Bridgeview",         lat: 41.7406, lng: -87.8045, county: "Cook" },
-      { name: "Burbank",            lat: 41.7450, lng: -87.7700, county: "Cook" },
-      { name: "Chicago Ridge",      lat: 41.7039, lng: -87.7812, county: "Cook" },
-      { name: "Hickory Hills",      lat: 41.7228, lng: -87.8270, county: "Cook" },
-      { name: "Hometown",           lat: 41.7334, lng: -87.7312, county: "Cook" },
-      { name: "Justice",            lat: 41.7481, lng: -87.8367, county: "Cook" },
-      { name: "Lemont",             lat: 41.6736, lng: -88.0020, county: "Cook" },
-      { name: "Merrionette Park",   lat: 41.6792, lng: -87.7020, county: "Cook" },
-      { name: "Orland Hills",       lat: 41.6025, lng: -87.8414, county: "Cook" },
-      { name: "Orland Park",        lat: 41.6331, lng: -87.8539, county: "Cook" },
-      { name: "Palos Heights",      lat: 41.6681, lng: -87.7997, county: "Cook" },
-      { name: "Palos Hills",        lat: 41.6978, lng: -87.8275, county: "Cook" },
-      { name: "Palos Park",         lat: 41.6653, lng: -87.8328, county: "Cook" },
-      { name: "Tinley Park",        lat: 41.5731, lng: -87.7874, county: "Cook" },
-      { name: "Willow Springs",     lat: 41.7356, lng: -87.8667, county: "Cook" },
-      { name: "Worth",              lat: 41.6881, lng: -87.7984, county: "Cook" },
-      { name: "Oak Lawn",           lat: 41.7197, lng: -87.7478, county: "Cook" },
-      { name: "Oak Forest",         lat: 41.6081, lng: -87.7437, county: "Cook" },
-      { name: "Evergreen Park",     lat: 41.7214, lng: -87.7020, county: "Cook" },
-      { name: "Blue Island",        lat: 41.6578, lng: -87.6800, county: "Cook" },
-      { name: "Midlothian",         lat: 41.6256, lng: -87.7187, county: "Cook" },
-      { name: "Crestwood",          lat: 41.6567, lng: -87.7373, county: "Cook" },
-
-      // Will County
-      { name: "Bolingbrook",        lat: 41.6986, lng: -88.0684, county: "Will" },
-      { name: "Channahon",          lat: 41.4317, lng: -88.2284, county: "Will" },
-      { name: "Crest Hill",         lat: 41.5592, lng: -88.1017, county: "Will" },
-      { name: "Elwood",             lat: 41.4000, lng: -88.1145, county: "Will" },
-      { name: "Frankfort",          lat: 41.4961, lng: -87.8514, county: "Will" },
-      { name: "Goodings Grove",     lat: 41.6167, lng: -87.9167, county: "Will" },
-      { name: "Homer Glen",         lat: 41.6006, lng: -87.9378, county: "Will" },
-      { name: "Joliet",             lat: 41.5250, lng: -88.0817, county: "Will" },
-      { name: "Lockport",           lat: 41.5894, lng: -88.0581, county: "Will" },
-      { name: "Manhattan",          lat: 41.4278, lng: -87.9859, county: "Will" },
-      { name: "Minooka",            lat: 41.4531, lng: -88.2659, county: "Will" },
-      { name: "Mokena",             lat: 41.5256, lng: -87.8881, county: "Will" },
-      { name: "Monee",              lat: 41.4206, lng: -87.7437, county: "Will" },
-      { name: "New Lenox",          lat: 41.5123, lng: -87.9673, county: "Will" },
-      { name: "Plainfield",         lat: 41.6228, lng: -88.2020, county: "Will" },
-      { name: "Rockdale",           lat: 41.5081, lng: -88.0867, county: "Will" },
-      { name: "Romeoville",         lat: 41.6472, lng: -88.0895, county: "Will" },
-      { name: "Shorewood",          lat: 41.5209, lng: -88.2028, county: "Will" },
-    ];
-
-    const palette = {
-      "Chicago": { fill: "#c0392b", label: "City of Chicago" },
-      "Cook":    { fill: "#1a2d4a", label: "Cook County" },
-      "Will":    { fill: "#b45309", label: "Will County" },
-    };
-
-    const map = L.map('morandi-map', { zoomControl: true }).setView([41.60, -87.97], 10);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      maxZoom: 16
-    }).addTo(map);
-
-    function makeIcon(color, size, star) {
-      const inner = star
-        ? `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-size:${size*.45}px;line-height:1;">&#9733;</span></div>`
-        : `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.4);"></div>`;
-      return L.divIcon({ className: '', html: inner, iconSize: [size,size], iconAnchor: [size/2,size/2] });
-    }
-
-    // Chicago star pin
-    L.marker([chicago.lat, chicago.lng], { icon: makeIcon(palette.Chicago.fill, 22, true), zIndexOffset: 1000 })
-      .addTo(map)
-      .bindPopup(`<strong style="font-size:13px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;">Chicago</strong><br><span style="font-size:11px;color:#607d8b;">City of Chicago</span>`, { closeButton: false, offset: [0,-8] });
-
-    suburbs.forEach(s => {
-      const c = palette[s.county];
-      L.marker([s.lat, s.lng], { icon: makeIcon(c.fill, 12, false) })
-        .addTo(map)
-        .bindPopup(
-          `<strong style="font-size:13px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;">${s.name}</strong><br><span style="font-size:11px;color:#607d8b;">${c.label}</span>`,
-          { closeButton: false, offset: [0, -6] }
-        );
-    });
-
-    const legend = L.control({ position: 'bottomright' });
-    legend.onAdd = () => {
-      const d = L.DomUtil.create('div');
-      d.style.cssText = 'background:#fff;padding:10px 14px;border-radius:4px;font-size:12px;line-height:2;border:1px solid #dce3e8;font-family:Barlow,sans-serif;';
-      d.innerHTML = [
-        ["#c0392b","City of Chicago", true],
-        ["#1a2d4a","Cook County", false],
-        ["#b45309","Will County", false],
-      ].map(([color,label,star]) =>
-        `<div style="display:flex;align-items:center;gap:8px;"><div style="width:12px;height:12px;border-radius:50%;background:${color};flex-shrink:0;border:2px solid #fff;outline:1px solid #ccc;display:flex;align-items:center;justify-content:center;">${star ? '<span style="color:#fff;font-size:8px;line-height:1;">&#9733;</span>' : ''}</div>${label}</div>`
-      ).join('');
-      return d;
-    };
-    legend.addTo(map);
-  })();
-
-  // ── Scroll-driven fade & slide animations ──────────────
-  const animEls = document.querySelectorAll('.fade-left, .fade-right, .fade-up');
+  // ── Timeline scroll-reveal ─────────────────────────────
+  const steps = document.querySelectorAll('.tl-step');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('in-view');
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  animEls.forEach(el => observer.observe(el));
+  }, { threshold: 0.15 });
+  steps.forEach(s => observer.observe(s));
+
+  // ── FAQ accordion ──────────────────────────────────────
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
 </script>
 
 </body>

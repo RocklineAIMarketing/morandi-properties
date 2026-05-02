@@ -26,7 +26,7 @@
     body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
 
     /* ─── Header ─────────────────────────────────────────── */
-    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); background-size: cover; background-position: center; }
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
     .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
     .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
     .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,.18); gap: 2px; }
@@ -78,158 +78,75 @@
     }
     .listings-hero::before {
       content: '';
-      position: absolute;
-      inset: 0;
-      background-image: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 39px,
-        rgba(255,255,255,.03) 39px,
-        rgba(255,255,255,.03) 40px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 39px,
-        rgba(255,255,255,.03) 39px,
-        rgba(255,255,255,.03) 40px
-      );
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,.03) 39px, rgba(255,255,255,.03) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,.03) 39px, rgba(255,255,255,.03) 40px);
     }
     .listings-hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
-    .listings-hero-eyebrow {
-      font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--blue-grey); margin-bottom: 16px;
-    }
+    .listings-hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 16px; }
     .listings-hero h1 {
       font-family: 'Barlow Condensed', sans-serif;
       font-size: clamp(38px, 6vw, 58px);
       font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
       color: var(--white); line-height: 1.05; margin-bottom: 18px;
     }
-    .listings-hero p {
-      font-size: 16px; font-weight: 300; line-height: 1.75;
-      color: rgba(255,255,255,.7); max-width: 520px; margin: 0 auto;
-    }
+    .listings-hero p { font-size: 16px; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,.7); max-width: 520px; margin: 0 auto; }
 
     /* ─── Filter Bar ───────────────────────────────────────── */
     .filter-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--line);
-      padding: 20px 40px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      background: var(--white); border-bottom: 1px solid var(--line);
+      padding: 20px 40px; position: sticky; top: 0; z-index: 50;
       box-shadow: 0 2px 12px rgba(26,45,74,.07);
     }
-    .filter-bar-inner {
-      max-width: 1100px; margin: 0 auto;
-      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-    }
-    .filter-label {
-      font-size: 11px; font-weight: 600; letter-spacing: .15em;
-      text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
-      margin-right: 4px;
-    }
+    .filter-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .filter-label { font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; color: var(--text-muted); white-space: nowrap; margin-right: 4px; }
     .filter-select {
-      font-family: 'Barlow', sans-serif;
-      font-size: 13px; font-weight: 500;
-      color: var(--navy); background: var(--light-bg);
-      border: 1px solid var(--line); padding: 9px 32px 9px 14px;
-      appearance: none;
+      font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 500;
+      color: var(--navy); background: var(--light-bg); border: 1px solid var(--line);
+      padding: 9px 32px 9px 14px; appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%231a2d4a' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 12px center;
-      cursor: pointer; transition: border-color .2s;
+      background-repeat: no-repeat; background-position: right 12px center; cursor: pointer; transition: border-color .2s;
     }
     .filter-select:focus { outline: none; border-color: var(--navy); }
-    .filter-results-count {
-      margin-left: auto;
-      font-size: 12.5px; font-weight: 500; color: var(--text-muted); white-space: nowrap;
-    }
+    .filter-results-count { margin-left: auto; font-size: 12.5px; font-weight: 500; color: var(--text-muted); white-space: nowrap; }
     .filter-results-count strong { color: var(--navy); }
 
     /* ─── Listings Grid ────────────────────────────────────── */
     .listings-section { background: var(--light-bg); padding: 48px 40px 80px; }
     .listings-inner { max-width: 1100px; margin: 0 auto; }
-    .listings-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 28px;
-    }
+    .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
 
     /* ─── Listing Card ─────────────────────────────────────── */
     .listing-card {
-      background: var(--white);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease;
-      position: relative;
+      background: var(--white); border: 1px solid var(--line); overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease; position: relative;
     }
     .listing-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,45,74,.12); }
-    .listing-card-photo {
-      position: relative; overflow: hidden;
-      width: 100%; aspect-ratio: 4/3;
-      background: #dce3e8;
-    }
-    .listing-card-photo img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .5s ease;
-      display: block;
-    }
+    .listing-card-photo { position: relative; overflow: hidden; width: 100%; aspect-ratio: 4/3; background: #dce3e8; }
+    .listing-card-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; display: block; }
     .listing-card:hover .listing-card-photo img { transform: scale(1.04); }
-
-    .photo-placeholder {
-      width: 100%; height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 10px;
-      background: linear-gradient(135deg, #dce3e8 0%, #b0bec5 100%);
-    }
-    .photo-placeholder svg { width: 40px; height: 40px; opacity: .35; fill: var(--navy); }
-    .photo-placeholder span { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(26,45,74,.45); }
-
     .listing-badge {
-      position: absolute; top: 14px; left: 14px;
-      font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-      padding: 5px 10px;
+      position: absolute; top: 14px; left: 14px; z-index: 2;
+      font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; padding: 5px 10px;
     }
     .badge-active { background: var(--navy); color: var(--white); }
     .badge-contingent { background: #e8a020; color: var(--white); }
     .badge-new { background: #2e7d32; color: var(--white); }
-
     .listing-card-body { padding: 22px 22px 20px; }
-    .listing-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 26px; font-weight: 600; letter-spacing: .02em;
-      color: var(--navy); margin-bottom: 6px;
-    }
+    .listing-price { font-family: 'Barlow Condensed', sans-serif; font-size: 26px; font-weight: 600; letter-spacing: .02em; color: var(--navy); margin-bottom: 6px; }
     .listing-address { font-size: 14.5px; font-weight: 500; color: var(--navy); margin-bottom: 3px; }
     .listing-city { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
-    .listing-stats {
-      display: flex; gap: 0;
-      border-top: 1px solid var(--line);
-      padding-top: 16px;
-    }
-    .listing-stat {
-      flex: 1; display: flex; flex-direction: column; gap: 3px;
-      padding-right: 12px;
-    }
-    .listing-stat + .listing-stat {
-      padding-left: 12px; padding-right: 0;
-      border-left: 1px solid var(--line);
-    }
-    .stat-value {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 17px; font-weight: 600; color: var(--navy);
-    }
+    .listing-stats { display: flex; gap: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+    .listing-stat { flex: 1; display: flex; flex-direction: column; gap: 3px; padding-right: 12px; }
+    .listing-stat + .listing-stat { padding-left: 12px; padding-right: 0; border-left: 1px solid var(--line); }
+    .stat-value { font-family: 'Barlow Condensed', sans-serif; font-size: 17px; font-weight: 600; color: var(--navy); }
     .stat-label { font-size: 10.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
-
-    .listing-card-footer {
-      padding: 0 22px 20px;
-    }
+    .listing-card-footer { padding: 0 22px 20px; }
     .listing-detail-btn {
       display: block; width: 100%; text-align: center;
       font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--navy); border: 1px solid var(--navy);
-      padding: 11px; text-decoration: none;
+      color: var(--navy); border: 1px solid var(--navy); padding: 11px; text-decoration: none;
       transition: background .2s, color .2s;
     }
     .listing-detail-btn:hover { background: var(--navy); color: var(--white); }
@@ -238,58 +155,20 @@
     .idx-section { background: var(--white); padding: 64px 40px; }
     .idx-inner { max-width: 1100px; margin: 0 auto; }
     .section-header { text-align: center; margin-bottom: 40px; }
-    .section-eyebrow {
-      font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 12px;
-    }
-    .section-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(28px, 4vw, 40px); font-weight: 600;
-      letter-spacing: .04em; text-transform: uppercase;
-      color: var(--navy); line-height: 1.1;
-    }
-    .section-divider {
-      width: 40px; height: 2px; background: var(--navy);
-      margin: 16px auto 0;
-    }
-
-    .idx-embed-wrapper {
-      width: 100%; min-height: 600px;
-    }
-    .idx-embed-wrapper iframe {
-      width: 100%;
-      min-height: 800px;
-      border: none;
-      display: block;
-    }
+    .section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .section-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px, 4vw, 40px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; }
+    .section-divider { width: 40px; height: 2px; background: var(--navy); margin: 16px auto 0; }
+    .idx-embed-wrapper { width: 100%; min-height: 600px; }
+    .idx-embed-wrapper iframe { width: 100%; min-height: 800px; border: none; display: block; }
 
     /* ─── CTA Strip ────────────────────────────────────────── */
-    .cta-strip {
-      background: var(--navy);
-      padding: 64px 40px;
-      text-align: center;
-    }
-    .cta-strip h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(28px, 4vw, 42px); font-weight: 600;
-      letter-spacing: .05em; text-transform: uppercase;
-      color: var(--white); margin-bottom: 14px;
-    }
+    .cta-strip { background: var(--navy); padding: 64px 40px; text-align: center; }
+    .cta-strip h2 { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(28px, 4vw, 42px); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
     .cta-strip p { font-size: 15px; font-weight: 300; color: rgba(255,255,255,.65); max-width: 480px; margin: 0 auto 32px; }
     .cta-strip-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-strip-btn-primary {
-      font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--navy); background: var(--white);
-      text-decoration: none; padding: 14px 32px;
-      transition: background .2s, color .2s;
-    }
+    .cta-strip-btn-primary { font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); background: var(--white); text-decoration: none; padding: 14px 32px; transition: background .2s, color .2s; }
     .cta-strip-btn-primary:hover { background: var(--blue-grey); }
-    .cta-strip-btn-outline {
-      font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-      color: var(--white); border: 1px solid rgba(255,255,255,.4);
-      text-decoration: none; padding: 14px 32px;
-      transition: border-color .2s, background .2s;
-    }
+    .cta-strip-btn-outline { font-size: 12.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,.4); text-decoration: none; padding: 14px 32px; transition: border-color .2s, background .2s; }
     .cta-strip-btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.07); }
 
     /* ─── Footer ──────────────────────────────────────────── */
@@ -353,7 +232,6 @@
   </div>
   <nav class="nav-row" role="navigation" aria-label="Primary navigation">
     <a href="/" class="nav-link">Home</a>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Buying ▾</span>
       <div class="dropdown-menu">
@@ -363,7 +241,6 @@
         <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Selling ▾</span>
       <div class="dropdown-menu">
@@ -372,7 +249,6 @@
         <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Insights ▾</span>
       <div class="dropdown-menu">
@@ -380,7 +256,6 @@
         <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Realtors ▾</span>
       <div class="dropdown-menu">
@@ -389,7 +264,6 @@
         <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Contact ▾</span>
       <div class="dropdown-menu">
@@ -417,7 +291,6 @@
   <div class="filter-bar" role="search" aria-label="Filter listings">
     <div class="filter-bar-inner">
       <span class="filter-label">Filter By</span>
-
       <select class="filter-select" id="filterCity" aria-label="City">
         <option value="">All Cities</option>
         <option value="orland-park">Orland Park</option>
@@ -425,8 +298,8 @@
         <option value="frankfort">Frankfort</option>
         <option value="mokena">Mokena</option>
         <option value="new-lenox">New Lenox</option>
+        <option value="alsip">Alsip</option>
       </select>
-
       <select class="filter-select" id="filterPrice" aria-label="Price range">
         <option value="">Any Price</option>
         <option value="0-300000">Under $300K</option>
@@ -435,7 +308,6 @@
         <option value="500000-650000">$500K – $650K</option>
         <option value="650000-up">$650K+</option>
       </select>
-
       <select class="filter-select" id="filterBeds" aria-label="Bedrooms">
         <option value="">Any Beds</option>
         <option value="2">2+ Beds</option>
@@ -443,29 +315,25 @@
         <option value="4">4+ Beds</option>
         <option value="5">5+ Beds</option>
       </select>
-
       <select class="filter-select" id="filterStatus" aria-label="Listing status">
         <option value="">All Status</option>
         <option value="active">Active</option>
         <option value="contingent">Contingent</option>
         <option value="new">New</option>
       </select>
-
       <span class="filter-results-count" id="resultsCount"><strong>6</strong> listings found</span>
     </div>
   </div>
 
-  <!-- ── Featured Listings — IDX Feed ───────────────────── -->
+  <!-- ── Featured Listings ───────────────────────────────── -->
   <section class="listings-section">
     <div class="listings-inner">
       <div class="listings-grid" id="listingsGrid">
 
+        <!-- 23039 Lakeview Estates Blvd — Frankfort -->
         <article class="listing-card reveal" data-city="frankfort" data-price="819000" data-beds="4" data-status="new">
           <div class="listing-card-photo">
-            <div class="photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-              <span>Photo Coming Soon</span>
-            </div>
+            <img src="/images/on-market/23039-lakeview-estates-blvd.jpeg" alt="23039 Lakeview Estates Blvd, Frankfort IL" loading="lazy" />
             <span class="listing-badge badge-new">New</span>
           </div>
           <div class="listing-card-body">
@@ -481,37 +349,33 @@
           <div class="listing-card-footer"><a href="http://www.idxhome.com/homes/98967/34/23039-LAKEVIEW-ESTATES-BOULEVARD-FRANKFORT-IL-60423/12605535" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
         </article>
 
-        <article class="listing-card reveal" data-city="homer-glen" data-price="1062000" data-beds="5" data-status="active">
+        <!-- 542 Doxbury Ln — New Lenox -->
+        <article class="listing-card reveal" data-city="new-lenox" data-price="469990" data-beds="4" data-status="contingent">
           <div class="listing-card-photo">
-            <div class="photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-              <span>Photo Coming Soon</span>
-            </div>
-            <span class="listing-badge badge-active">Active</span>
+            <img src="/images/on-market/542-doxbury-ln-new-lenox-il-60451.jpeg" alt="542 Doxbury Ln, New Lenox IL" loading="lazy" />
+            <span class="listing-badge badge-contingent">Contingent</span>
           </div>
           <div class="listing-card-body">
-            <p class="listing-price">$1,062,000</p>
-            <p class="listing-address">15966 S Crystal Creek Dr.</p>
-            <p class="listing-city">Homer Glen, IL 60491</p>
+            <p class="listing-price">469,990</p>
+            <p class="listing-address">542 Doxbury Ln.</p>
+            <p class="listing-city">New Lenox, IL 60451</p>
             <div class="listing-stats">
-              <div class="listing-stat"><span class="stat-value">5</span><span class="stat-label">Beds</span></div>
+              <div class="listing-stat"><span class="stat-value">4</span><span class="stat-label">Beds</span></div>
               <div class="listing-stat"><span class="stat-value">3</span><span class="stat-label">Baths</span></div>
-              <div class="listing-stat"><span class="stat-value">3,500</span><span class="stat-label">Sq Ft</span></div>
+              <div class="listing-stat"><span class="stat-value">2,250</span><span class="stat-label">Sq Ft</span></div>
             </div>
           </div>
-          <div class="listing-card-footer"><a href="http://www.idxhome.com/homes/98967/34/15966-S-CRYSTAL-CREEK-DRIVE-HOMER-GLEN-IL-60491/12584935" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
+          <div class="listing-card-footer"><a href="http://www.idxhome.com/homes/98967/34/address/12579063" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
         </article>
 
+        <!-- 428 W. 118th Pl — Alsip -->
         <article class="listing-card reveal" data-city="alsip" data-price="299000" data-beds="4" data-status="active">
           <div class="listing-card-photo">
-            <div class="photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-              <span>Photo Coming Soon</span>
-            </div>
+            <img src="/images/on-market/428-w-118th-pl-alsip-il-60803.jpeg" alt="428 W 118th Pl, Alsip IL" loading="lazy" />
             <span class="listing-badge badge-active">Active</span>
           </div>
           <div class="listing-card-body">
-            <p class="listing-price">299,000</p>
+            <p class="listing-price">$299,000</p>
             <p class="listing-address">428 W. 118th Pl.</p>
             <p class="listing-city">Alsip, IL 60803</p>
             <div class="listing-stats">
@@ -523,16 +387,14 @@
           <div class="listing-card-footer"><a href="http://www.idxhome.com/homes/98967/34/4318-W-118TH-PLACE-ALSIP-IL-60803/12618645" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
         </article>
 
+        <!-- 22736 Parkview Ln — Frankfort -->
         <article class="listing-card reveal" data-city="frankfort" data-price="840000" data-beds="4" data-status="contingent">
           <div class="listing-card-photo">
-            <div class="photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-              <span>Photo Coming Soon</span>
-            </div>
+            <img src="/images/on-market/22736-parkview-ln-frankfort-il-60423.jpeg" alt="22736 Parkview Ln, Frankfort IL" loading="lazy" />
             <span class="listing-badge badge-contingent">Contingent</span>
           </div>
           <div class="listing-card-body">
-            <p class="listing-price">840,000</p>
+            <p class="listing-price">$840,000</p>
             <p class="listing-address">22736 Parkview Ln.</p>
             <p class="listing-city">Frankfort, IL 60423</p>
             <div class="listing-stats">
@@ -544,16 +406,14 @@
           <div class="listing-card-footer"><a href="http://www.idxhome.com/homes/98967/34/22736-PARKVIEW-LANE-FRANKFORT-IL-60423/12608233" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
         </article>
 
+        <!-- 14237 Ashford Ct — Orland Park -->
         <article class="listing-card reveal" data-city="orland-park" data-price="789000" data-beds="4" data-status="active">
           <div class="listing-card-photo">
-            <div class="photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-              <span>Photo Coming Soon</span>
-            </div>
+            <img src="/images/on-market/14237-ashford-ct-orland-park-il-60467.jpeg" alt="14237 Ashford Ct, Orland Park IL" loading="lazy" />
             <span class="listing-badge badge-active">Active</span>
           </div>
           <div class="listing-card-body">
-            <p class="listing-price">789,000</p>
+            <p class="listing-price">$789,000</p>
             <p class="listing-address">14237 Ashford Ct.</p>
             <p class="listing-city">Orland Park, IL 60467</p>
             <div class="listing-stats">
@@ -565,16 +425,14 @@
           <div class="listing-card-footer"><a href="http://www.idxhome.com/homes/98967/34/14237-ASHFORD-COURT-ORLAND-PARK-IL-60467/12554777" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
         </article>
 
+        <!-- 17801 67th Ave — Tinley Park -->
         <article class="listing-card reveal" data-city="tinley-park" data-price="249000" data-beds="4" data-status="new">
           <div class="listing-card-photo">
-            <div class="photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-              <span>Photo Coming Soon</span>
-            </div>
+            <img src="/images/on-market/17801-67th-ave-tinley-park-il-60477.jpeg" alt="17801 67th Ave, Tinley Park IL" loading="lazy" />
             <span class="listing-badge badge-new">New</span>
           </div>
           <div class="listing-card-body">
-            <p class="listing-price">249,000</p>
+            <p class="listing-price">$249,000</p>
             <p class="listing-address">17801 67th Ave.</p>
             <p class="listing-city">Tinley Park, IL 60477</p>
             <div class="listing-stats">
@@ -622,45 +480,28 @@
 </main>
 
 <!-- ═══ FOOTER ════════════════════════════════════════════ -->
-<footer class="site-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
+<footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
         <a href="/" class="footer-logo">Morandi Properties</a>
         <p class="footer-tagline">Helping families buy and sell homes across 30+ communities in the southwest suburbs of Chicago since 2006.</p>
       </div>
-      <div class="footer-contact" itemscope itemtype="https://schema.org/RealEstateAgent">
+      <div class="footer-contact">
         <span class="footer-contact-label">Get In Touch</span>
-        <p class="footer-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-          <span itemprop="streetAddress">15715 Wolf Rd</span><br>
-          <span itemprop="addressLocality">Orland Park</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60467</span>
-        </p>
-        <a href="tel:+17085166666" class="footer-phone" itemprop="telephone">(708) 516-6666</a>
+        <p class="footer-address">15715 Wolf Rd<br>Orland Park, IL 60467</p>
+        <a href="tel:+17085166666" class="footer-phone">(708) 516-6666</a>
       </div>
       <div class="footer-social">
         <span class="footer-social-label">Follow Along</span>
         <div class="footer-social-icons">
-          <a href="https://www.facebook.com/morandiproperties" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/morandiproperties" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-          <a href="https://www.threads.net/@morandiproperties" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 013.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.583-1.3-.881-2.342-.887h-.062c-.76 0-1.702.214-2.351 1.086l-1.651-1.24C7.52 5.995 8.94 5.302 10.7 5.302h.085c3.377.023 5.396 2.045 5.616 5.623.71.355 1.342.804 1.878 1.343 1.255 1.252 1.942 2.97 1.93 4.934-.018 3.95-3.088 6.773-7.023 6.798zM11.99 10.57c-.137 0-.274.003-.41.01-1.98.114-3.197 1.027-3.133 2.294.037.675.52 1.892 2.454 1.892h.044c1.688-.1 2.618-1.198 2.757-3.265a11.026 11.026 0 00-1.712-.931z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/raymorandi" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="https://www.tiktok.com/@morandiproperties" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-          </a>
-          <a href="https://www.youtube.com/@morandiproperties" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-          </a>
-          <a href="https://g.page/morandiproperties" class="footer-social-link" aria-label="Google Business" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.25 16.195c-1.39 1.304-3.244 2.054-5.25 2.054-4.004 0-7.25-3.246-7.25-7.25 0-4.003 3.246-7.249 7.25-7.249 1.942 0 3.645.751 4.952 1.977l-2.006 1.93c-.742-.71-1.79-1.158-2.946-1.158-2.412 0-4.37 1.958-4.37 4.5 0 2.543 1.958 4.5 4.37 4.5 2.152 0 3.745-1.244 4.112-3h-4.112v-2.5H18c.084.495.13 1 .13 1.5 0 1.33-.306 2.61-.88 3.696z"/></svg>
-          </a>
+          <a href="https://www.facebook.com/morandiproperties" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+          <a href="https://www.instagram.com/morandiproperties" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.threads.net/@morandiproperties" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.028-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 012.26.141c-.094-.575-.28-1.035-.562-1.372-.505-.607-1.294-.915-2.346-.92h-.048c-.79 0-1.802.199-2.584 1.29l-1.684-1.17c1.01-1.445 2.589-2.24 4.268-2.24h.068c3.003.025 4.805 1.884 4.805 5.013 0 .126-.005.252-.015.378.68.28 1.27.654 1.77 1.117.858.799 1.424 1.872 1.585 3.024C21.19 17.97 20.456 21 15.924 22.744c-1.403.544-2.986.82-4.73.843-.003 0-.005.001-.008.001v.412z"/></svg></a>
+          <a href="https://www.linkedin.com/in/raymorandi" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://www.tiktok.com/@morandiproperties" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="https://www.youtube.com/@morandiproperties" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+          <a href="https://g.page/morandiproperties" class="footer-social-link" aria-label="Google Business" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.25 16.195c-1.39 1.304-3.244 2.054-5.25 2.054-4.004 0-7.25-3.246-7.25-7.25 0-4.003 3.246-7.249 7.25-7.249 1.942 0 3.645.751 4.952 1.977l-2.006 1.93c-.742-.71-1.79-1.158-2.946-1.158-2.412 0-4.37 1.958-4.37 4.5 0 2.543 1.958 4.5 4.37 4.5 2.152 0 3.745-1.244 4.112-3h-4.112v-2.5H18c.084.495.13 1 .13 1.5 0 1.33-.306 2.61-.88 3.696z"/></svg></a>
         </div>
       </div>
     </div>
@@ -679,16 +520,12 @@
   </div>
 </footer>
 
-<!-- ═══ MOBILE NAV OVERLAY ════════════════════════════════ -->
+<!-- ═══ MOBILE NAV ════════════════════════════════════════ -->
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
   <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
-
   <a href="/">Home</a>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">
-      Buying <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">Buying <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnBuying">
       <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
       <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
@@ -696,43 +533,31 @@
       <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">
-      Selling <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">Selling <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnSelling">
       <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
       <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
       <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">
-      Insights <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">Insights <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnInsights">
       <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
       <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">
-      Realtors <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">Realtors <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnTeam">
       <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
       <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
       <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">
-      Contact <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">Contact <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnContact">
       <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
       <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
@@ -741,8 +566,9 @@
   </div>
 </nav>
 
+<!-- ═══ SCRIPTS ═══════════════════════════════════════════ -->
 <script>
-  // ── Mobile nav open/close ───────────────────────────────
+  // ── Mobile nav ─────────────────────────────────────────
   const hBtn = document.getElementById('hamburgerBtn');
   const mNav = document.getElementById('mobileNav');
   const mCls = document.getElementById('mobileNavClose');
@@ -752,8 +578,6 @@
   mCls.addEventListener('click', closeNav);
   mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
-
-  // ── Mobile nav accordion toggles ───────────────────────
   document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const sub = document.getElementById(btn.dataset.target);

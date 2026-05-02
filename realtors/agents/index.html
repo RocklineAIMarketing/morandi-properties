@@ -352,12 +352,7 @@
     <!-- ── Jonathan Garrity ── photo left ──────────────── -->
     <article class="agent-panel" id="jonathan">
       <div class="agent-photo-side fade-left">
-        <!-- SWAP PHOTO: replace this div with <img src="jonathan-garrity.jpg" alt="Jonathan Garrity"> -->
-        <div class="photo-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-          <span class="ph-name">Jonathan Garrity</span>
-          <span class="ph-hint">Photo coming soon</span>
-        </div>
+        <img src="images/agents/jonathan-garrity.jpg" alt="Jonathan Garrity">
         <span class="agent-index">01</span>
       </div>
       <div class="agent-content-side stagger">
@@ -384,12 +379,7 @@
     <!-- ── Erik Breese ── photo right ──────────────────── -->
     <article class="agent-panel flip" id="erik">
       <div class="agent-photo-side fade-right">
-        <!-- SWAP PHOTO: replace this div with <img src="erik-breese.jpg" alt="Erik Breese"> -->
-        <div class="photo-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-          <span class="ph-name">Erik Breese</span>
-          <span class="ph-hint">Photo coming soon</span>
-        </div>
+        <img src="images/agents/erik-breese.jpg" alt="Erik Breese">
         <span class="agent-index">02</span>
       </div>
       <div class="agent-content-side stagger">
@@ -420,12 +410,7 @@ My goal is simple: deliver successful results while making the process as smooth
     <!-- ── Renee Elosh ── photo left ─────────────────── -->
     <article class="agent-panel" id="douglas">
       <div class="agent-photo-side fade-left">
-        <!-- SWAP PHOTO: replace this div with <img src="renee-elosh.jpg" alt="Renee Elosh"> -->
-        <div class="photo-placeholder">
-          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
-          <span class="ph-name">Renee Elosh</span>
-          <span class="ph-hint">Photo coming soon</span>
-        </div>
+        <img src="images/agents/renee-elosh.jpg" alt="Renee Elosh">
         <span class="agent-index">03</span>
       </div>
       <div class="agent-content-side stagger">
@@ -451,7 +436,7 @@ My goal is simple: deliver successful results while making the process as smooth
 
   <section class="cta-strip">
     <h2>Ready to Work With Our Team?</h2>
-    <p>Whether buying or selling, we know Chicagoland's 30+ southwest suburban communities like the back of our hand.</p>
+    <p>Whether buying or selling, we know Chicagoland's southwest suburban communities like the back of our hand.</p>
     <div class="cta-btns">
       <a href="https://morandiproperties.com/contact/office" class="cta-btn-primary">Contact Us</a>
       <a href="https://morandiproperties.com/realtors/ray-morandi" class="cta-btn-outline">Meet Ray Morandi</a>
@@ -572,120 +557,59 @@ My goal is simple: deliver successful results while making the process as smooth
 
     const suburbs = [
       // Cook County
-      { name: "Orland Park",      lat: 41.6331, lng: -87.8539, county: "Cook" },
-      { name: "Tinley Park",      lat: 41.5731, lng: -87.7874, county: "Cook" },
-      { name: "Orland Hills",     lat: 41.6025, lng: -87.8414, county: "Cook" },
-      { name: "Palos Park",       lat: 41.6653, lng: -87.8328, county: "Cook" },
-      { name: "Palos Heights",    lat: 41.6681, lng: -87.7997, county: "Cook" },
-      { name: "Palos Hills",      lat: 41.6978, lng: -87.8275, county: "Cook" },
-      { name: "Lemont",           lat: 41.6736, lng: -88.0020, county: "Cook" },
-      { name: "Evanston",         lat: 42.0450, lng: -87.6877, county: "Cook" },
-      { name: "Skokie",           lat: 42.0334, lng: -87.7334, county: "Cook" },
-      { name: "Oak Park",         lat: 41.8850, lng: -87.7845, county: "Cook" },
-      { name: "Cicero",           lat: 41.8456, lng: -87.7539, county: "Cook" },
-      { name: "Berwyn",           lat: 41.8506, lng: -87.7939, county: "Cook" },
-      { name: "Evergreen Park",   lat: 41.7214, lng: -87.7020, county: "Cook" },
-      { name: "Oak Lawn",         lat: 41.7197, lng: -87.7478, county: "Cook" },
-      { name: "Chicago Ridge",    lat: 41.7039, lng: -87.7812, county: "Cook" },
-      { name: "Worth",            lat: 41.6881, lng: -87.7984, county: "Cook" },
-      { name: "Blue Island",      lat: 41.6578, lng: -87.6800, county: "Cook" },
-      { name: "Harvey",           lat: 41.6103, lng: -87.6467, county: "Cook" },
-      { name: "Calumet City",     lat: 41.6153, lng: -87.5292, county: "Cook" },
-      { name: "Lansing",          lat: 41.5645, lng: -87.5381, county: "Cook" },
-      { name: "Dolton",           lat: 41.6367, lng: -87.5992, county: "Cook" },
-      { name: "South Holland",    lat: 41.5997, lng: -87.6059, county: "Cook" },
-      { name: "Park Forest",      lat: 41.4831, lng: -87.6800, county: "Cook" },
-      { name: "Matteson",         lat: 41.5053, lng: -87.7131, county: "Cook" },
-      { name: "Richton Park",     lat: 41.4831, lng: -87.7373, county: "Cook" },
-      { name: "Country Club Hills", lat: 41.5653, lng: -87.7248, county: "Cook" },
-      { name: "Midlothian",       lat: 41.6256, lng: -87.7187, county: "Cook" },
-      { name: "Alsip",            lat: 41.6678, lng: -87.7312, county: "Cook" },
-      { name: "Bridgeview",       lat: 41.7406, lng: -87.8045, county: "Cook" },
-      { name: "Justice",          lat: 41.7481, lng: -87.8367, county: "Cook" },
-      { name: "Hickory Hills",    lat: 41.7228, lng: -87.8270, county: "Cook" },
-      { name: "Hometown",         lat: 41.7334, lng: -87.7312, county: "Cook" },
-      { name: "Schaumburg",       lat: 42.0334, lng: -88.0837, county: "Cook" },
-      { name: "Des Plaines",      lat: 42.0336, lng: -87.8834, county: "Cook" },
-      { name: "Niles",            lat: 42.0167, lng: -87.8128, county: "Cook" },
-      { name: "Park Ridge",       lat: 42.0114, lng: -87.8406, county: "Cook" },
-      { name: "Rosemont",         lat: 41.9867, lng: -87.8742, county: "Cook" },
-      { name: "Melrose Park",     lat: 41.9006, lng: -87.8575, county: "Cook" },
-      { name: "Maywood",          lat: 41.8797, lng: -87.8434, county: "Cook" },
-      { name: "Riverside",        lat: 41.8347, lng: -87.8237, county: "Cook" },
-      { name: "Norridge",         lat: 41.9639, lng: -87.8270, county: "Cook" },
-      { name: "Wilmette",         lat: 42.0728, lng: -87.7278, county: "Cook" },
-      { name: "Glenview",         lat: 42.0700, lng: -87.8270, county: "Cook" },
-
-      // DuPage County
-      { name: "Burr Ridge",       lat: 41.7478, lng: -87.9170, county: "DuPage" },
-      { name: "Willowbrook",      lat: 41.7717, lng: -87.9400, county: "DuPage" },
-      { name: "Darien",           lat: 41.7481, lng: -87.9828, county: "DuPage" },
-      { name: "Woodridge",        lat: 41.7478, lng: -88.0428, county: "DuPage" },
-      { name: "Naperville",       lat: 41.7508, lng: -88.1535, county: "DuPage" },
-      { name: "Downers Grove",    lat: 41.8081, lng: -88.0106, county: "DuPage" },
-      { name: "Lisle",            lat: 41.7978, lng: -88.0717, county: "DuPage" },
-      { name: "Wheaton",          lat: 41.8661, lng: -88.1070, county: "DuPage" },
-      { name: "Glen Ellyn",       lat: 41.8781, lng: -88.0631, county: "DuPage" },
-      { name: "Lombard",          lat: 41.8803, lng: -88.0073, county: "DuPage" },
-      { name: "Villa Park",       lat: 41.8892, lng: -87.9745, county: "DuPage" },
-      { name: "Elmhurst",         lat: 41.8995, lng: -87.9401, county: "DuPage" },
-      { name: "Addison",          lat: 41.9317, lng: -88.0031, county: "DuPage" },
-      { name: "Glendale Heights", lat: 41.9192, lng: -88.0773, county: "DuPage" },
-      { name: "Carol Stream",     lat: 41.9131, lng: -88.1345, county: "DuPage" },
-      { name: "Bloomingdale",     lat: 41.9531, lng: -88.0798, county: "DuPage" },
-      { name: "Itasca",           lat: 41.9742, lng: -88.0073, county: "DuPage" },
-      { name: "Oak Brook",        lat: 41.8320, lng: -87.9281, county: "DuPage" },
-      { name: "Westmont",         lat: 41.7953, lng: -87.9748, county: "DuPage" },
-      { name: "Hinsdale",         lat: 41.8017, lng: -87.9298, county: "DuPage" },
+      { name: "Alsip",              lat: 41.6678, lng: -87.7312, county: "Cook" },
+      { name: "Bedford Park",       lat: 41.7667, lng: -87.7917, county: "Cook" },
+      { name: "Bridgeview",         lat: 41.7406, lng: -87.8045, county: "Cook" },
+      { name: "Burbank",            lat: 41.7450, lng: -87.7700, county: "Cook" },
+      { name: "Chicago Ridge",      lat: 41.7039, lng: -87.7812, county: "Cook" },
+      { name: "Hickory Hills",      lat: 41.7228, lng: -87.8270, county: "Cook" },
+      { name: "Hometown",           lat: 41.7334, lng: -87.7312, county: "Cook" },
+      { name: "Justice",            lat: 41.7481, lng: -87.8367, county: "Cook" },
+      { name: "Lemont",             lat: 41.6736, lng: -88.0020, county: "Cook" },
+      { name: "Merrionette Park",   lat: 41.6792, lng: -87.7020, county: "Cook" },
+      { name: "Orland Hills",       lat: 41.6025, lng: -87.8414, county: "Cook" },
+      { name: "Orland Park",        lat: 41.6331, lng: -87.8539, county: "Cook" },
+      { name: "Palos Heights",      lat: 41.6681, lng: -87.7997, county: "Cook" },
+      { name: "Palos Hills",        lat: 41.6978, lng: -87.8275, county: "Cook" },
+      { name: "Palos Park",         lat: 41.6653, lng: -87.8328, county: "Cook" },
+      { name: "Tinley Park",        lat: 41.5731, lng: -87.7874, county: "Cook" },
+      { name: "Willow Springs",     lat: 41.7356, lng: -87.8667, county: "Cook" },
+      { name: "Worth",              lat: 41.6881, lng: -87.7984, county: "Cook" },
+      { name: "Oak Lawn",           lat: 41.7197, lng: -87.7478, county: "Cook" },
+      { name: "Oak Forest",         lat: 41.6081, lng: -87.7437, county: "Cook" },
+      { name: "Evergreen Park",     lat: 41.7214, lng: -87.7020, county: "Cook" },
+      { name: "Blue Island",        lat: 41.6578, lng: -87.6800, county: "Cook" },
+      { name: "Midlothian",         lat: 41.6256, lng: -87.7187, county: "Cook" },
+      { name: "Crestwood",          lat: 41.6567, lng: -87.7373, county: "Cook" },
 
       // Will County
-      { name: "Frankfort",        lat: 41.4961, lng: -87.8514, county: "Will" },
-      { name: "Mokena",           lat: 41.5256, lng: -87.8881, county: "Will" },
-      { name: "New Lenox",        lat: 41.5123, lng: -87.9673, county: "Will" },
-      { name: "Homer Glen",       lat: 41.6006, lng: -87.9378, county: "Will" },
-      { name: "Lockport",         lat: 41.5894, lng: -88.0581, county: "Will" },
-      { name: "Romeoville",       lat: 41.6472, lng: -88.0895, county: "Will" },
-      { name: "Plainfield",       lat: 41.6228, lng: -88.2020, county: "Will" },
-      { name: "Joliet",           lat: 41.5250, lng: -88.0817, county: "Will" },
-      { name: "Shorewood",        lat: 41.5209, lng: -88.2028, county: "Will" },
-      { name: "Crest Hill",       lat: 41.5592, lng: -88.1017, county: "Will" },
-      { name: "Bolingbrook",      lat: 41.6986, lng: -88.0684, county: "Will" },
-      { name: "Manhattan",        lat: 41.4278, lng: -87.9859, county: "Will" },
-      { name: "Channahon",        lat: 41.4317, lng: -88.2284, county: "Will" },
-      { name: "Minooka",          lat: 41.4531, lng: -88.2659, county: "Will" },
-
-      // Lake County
-      { name: "Waukegan",         lat: 42.3636, lng: -87.8448, county: "Lake" },
-      { name: "North Chicago",    lat: 42.3253, lng: -87.8406, county: "Lake" },
-      { name: "Winthrop Harbor",  lat: 42.4806, lng: -87.8234, county: "Lake" },
-      { name: "Zion",             lat: 42.4461, lng: -87.8309, county: "Lake" },
-      { name: "Lake Forest",      lat: 42.2581, lng: -87.8362, county: "Lake" },
-      { name: "Libertyville",     lat: 42.2831, lng: -87.9523, county: "Lake" },
-      { name: "Mundelein",        lat: 42.2631, lng: -88.0045, county: "Lake" },
-      { name: "Vernon Hills",     lat: 42.2214, lng: -87.9609, county: "Lake" },
-      { name: "Buffalo Grove",    lat: 42.1661, lng: -87.9598, county: "Lake" },
-      { name: "Gurnee",           lat: 42.3703, lng: -87.9284, county: "Lake" },
-      { name: "Round Lake Beach", lat: 42.3714, lng: -88.0887, county: "Lake" },
-
-      // Kane County
-      { name: "Aurora",           lat: 41.7606, lng: -88.3201, county: "Kane" },
-      { name: "Elgin",            lat: 42.0372, lng: -88.2812, county: "Kane" },
-      { name: "St. Charles",      lat: 41.9142, lng: -88.3112, county: "Kane" },
-      { name: "Geneva",           lat: 41.8878, lng: -88.3051, county: "Kane" },
-      { name: "Batavia",          lat: 41.8478, lng: -88.3120, county: "Kane" },
-      { name: "Carpentersville",  lat: 42.1214, lng: -88.2579, county: "Kane" },
+      { name: "Bolingbrook",        lat: 41.6986, lng: -88.0684, county: "Will" },
+      { name: "Channahon",          lat: 41.4317, lng: -88.2284, county: "Will" },
+      { name: "Crest Hill",         lat: 41.5592, lng: -88.1017, county: "Will" },
+      { name: "Elwood",             lat: 41.4000, lng: -88.1145, county: "Will" },
+      { name: "Frankfort",          lat: 41.4961, lng: -87.8514, county: "Will" },
+      { name: "Goodings Grove",     lat: 41.6167, lng: -87.9167, county: "Will" },
+      { name: "Homer Glen",         lat: 41.6006, lng: -87.9378, county: "Will" },
+      { name: "Joliet",             lat: 41.5250, lng: -88.0817, county: "Will" },
+      { name: "Lockport",           lat: 41.5894, lng: -88.0581, county: "Will" },
+      { name: "Manhattan",          lat: 41.4278, lng: -87.9859, county: "Will" },
+      { name: "Minooka",            lat: 41.4531, lng: -88.2659, county: "Will" },
+      { name: "Mokena",             lat: 41.5256, lng: -87.8881, county: "Will" },
+      { name: "Monee",              lat: 41.4206, lng: -87.7437, county: "Will" },
+      { name: "New Lenox",          lat: 41.5123, lng: -87.9673, county: "Will" },
+      { name: "Plainfield",         lat: 41.6228, lng: -88.2020, county: "Will" },
+      { name: "Rockdale",           lat: 41.5081, lng: -88.0867, county: "Will" },
+      { name: "Romeoville",         lat: 41.6472, lng: -88.0895, county: "Will" },
+      { name: "Shorewood",          lat: 41.5209, lng: -88.2028, county: "Will" },
     ];
 
     const palette = {
       "Chicago": { fill: "#c0392b", label: "City of Chicago" },
       "Cook":    { fill: "#1a2d4a", label: "Cook County" },
       "Will":    { fill: "#b45309", label: "Will County" },
-      "DuPage":  { fill: "#2e7d32", label: "DuPage County" },
-      "Lake":    { fill: "#6b21a8", label: "Lake County" },
-      "Kane":    { fill: "#0e7490", label: "Kane County" },
     };
 
-    const map = L.map('morandi-map', { zoomControl: true }).setView([41.85, -87.98], 9);
+    const map = L.map('morandi-map', { zoomControl: true }).setView([41.60, -87.97], 10);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       maxZoom: 16
@@ -721,9 +645,6 @@ My goal is simple: deliver successful results while making the process as smooth
         ["#c0392b","City of Chicago", true],
         ["#1a2d4a","Cook County", false],
         ["#b45309","Will County", false],
-        ["#2e7d32","DuPage County", false],
-        ["#6b21a8","Lake County", false],
-        ["#0e7490","Kane County", false],
       ].map(([color,label,star]) =>
         `<div style="display:flex;align-items:center;gap:8px;"><div style="width:12px;height:12px;border-radius:50%;background:${color};flex-shrink:0;border:2px solid #fff;outline:1px solid #ccc;display:flex;align-items:center;justify-content:center;">${star ? '<span style="color:#fff;font-size:8px;line-height:1;">&#9733;</span>' : ''}</div>${label}</div>`
       ).join('');

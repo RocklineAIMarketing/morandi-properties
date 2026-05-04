@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="https://schema.org/WebPage">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sellers Guide | Morandi Properties</title>
+  <title>Seller's Strategy Guide | Southwest Suburbs Home Selling | Morandi Properties</title>
+  <meta name="description" content="Ray Morandi's complete home selling guide for the southwest suburbs of Chicago — Orland Park, Tinley Park, Frankfort, Mokena, New Lenox and more. Step-by-step from valuation to closing day.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.morandiproperties.com/selling/selling-strategy-guide">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap"></noscript>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --white:      #ffffff;
       --blue-grey:  #b0bec5;
@@ -18,452 +22,97 @@
       --navy:       #1a2d4a;
       --navy-light: #2e4a6e;
       --text-muted: #607d8b;
+      --line:       #dce3e8;
     }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
 
-    body { font-family: 'Barlow', sans-serif; color: var(--navy); }
-
-    /* ─── HEADER ─────────────────────────────────────────────── */
-    .site-header {
-      width: 100%;
-      /* PLACEHOLDER — swap with: background-image: url('photo.jpg'); */
-      background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%);
-      background-size: cover;
-      background-position: center;
-    }
-
-    .logo-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 24px 40px 16px;
-    }
-
-    .logo-placeholder {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--navy);
-      text-decoration: none;
-    }
-
-    .nav-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 40px 18px;
-      border-top: 1px solid rgba(26,45,74,0.18);
-    }
-
-    .nav-link {
-      font-size: 12.5px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--navy);
-      text-decoration: none;
-      padding: 12px 15px;
-      white-space: nowrap;
-      transition: color 0.2s;
-    }
-
+    /* ─── Header ─────────────────────────────────────────────── */
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
+    .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
+    .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,.18); gap: 2px; }
+    .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color .2s; }
     .nav-link:hover { color: var(--navy-light); }
-
+    .nav-link.active { border-bottom: 2px solid var(--navy); }
+    .nav-label { cursor: default; user-select: none; }
     .nav-dropdown { position: relative; }
-
     .nav-dropdown:hover .dropdown-menu,
-    .nav-dropdown:focus-within .dropdown-menu {
-      opacity: 1;
-      pointer-events: all;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-6px);
-      background: var(--white);
-      border: 1px solid rgba(26,45,74,0.15);
-      min-width: 180px;
-      padding: 8px 0;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s, transform 0.2s;
-      z-index: 100;
-    }
-
-    .dropdown-menu a {
-      display: block;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--navy);
-      text-decoration: none;
-      padding: 10px 18px;
-      transition: background 0.15s;
-    }
-
+    .nav-dropdown:focus-within .dropdown-menu { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(-6px); background: var(--white); border: 1px solid rgba(26,45,74,.15); min-width: 200px; padding: 8px 0; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 100; }
+    .dropdown-menu a { display: block; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 10px 18px; transition: background .15s; }
     .dropdown-menu a:hover { background: #eceff1; }
+    .dropdown-menu a.active { font-weight: 600; background: var(--light-bg); }
 
-    .cta-btn {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: var(--navy);
-      text-decoration: none;
-      padding: 10px 20px;
-      margin-left: 12px;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-
-    .cta-btn:hover { background: var(--navy-light); }
-
-    /* ─── HAMBURGER ───────────────────────────────────────────── */
-    .hamburger-btn {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      align-items: flex-start;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .hamburger-btn span {
-      display: block;
-      height: 2px;
-      background: var(--navy);
-      transition: all 0.25s ease;
-    }
-
+    /* ─── Hamburger ──────────────────────────────────────────── */
+    .hamburger-btn { display: none; flex-direction: column; gap: 5px; align-items: flex-start; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger-btn span { display: block; height: 2px; background: var(--navy); transition: all .25s ease; }
     .hamburger-btn span:nth-child(1) { width: 24px; }
     .hamburger-btn span:nth-child(2) { width: 17px; }
     .hamburger-btn span:nth-child(3) { width: 24px; }
-
     .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); width: 24px; }
     .hamburger-btn.open span:nth-child(2) { opacity: 0; }
     .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
 
-    /* ─── MOBILE NAV ──────────────────────────────────────────── */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--white);
-      z-index: 200;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-
+    /* ─── Mobile Nav ─────────────────────────────────────────── */
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
     .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
+    .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
+    .mobile-nav-group { width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .mobile-nav-toggle { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); background: none; border: none; cursor: pointer; padding: 8px 24px; display: flex; align-items: center; gap: 8px; }
+    .mobile-nav-toggle .caret { font-size: 18px; transition: transform .2s; display: inline-block; }
+    .mobile-nav-toggle[aria-expanded="true"] .caret { transform: rotate(180deg); }
+    .mobile-nav-sub { display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; padding-bottom: 4px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s ease .2s; }
+    .mobile-nav-sub.open { max-height: 320px; opacity: 1; }
+    .mobile-nav-sub a { font-family: 'Barlow', sans-serif !important; font-size: 14px !important; font-weight: 500 !important; letter-spacing: .08em !important; color: var(--text-muted) !important; padding: 6px 24px !important; text-transform: uppercase; }
 
-    .mobile-nav-close {
-      position: absolute;
-      top: 24px; right: 24px;
-      background: none;
-      border: none;
-      font-size: 24px;
-      color: var(--navy);
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    .mobile-nav a {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 30px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--navy);
-      text-decoration: none;
-      padding: 8px 24px;
-      transition: color 0.2s;
-    }
-
-    .mobile-nav a:hover { color: var(--navy-light); }
-
-    .mobile-nav-cta { margin-top: 28px; }
-
-    .mobile-nav-cta a {
-      font-family: 'Barlow', sans-serif !important;
-      font-size: 13px !important;
-      font-weight: 600 !important;
-      background: var(--navy) !important;
-      color: var(--white) !important;
-      padding: 13px 28px !important;
-      letter-spacing: 0.1em !important;
-    }
-
-    /* ─── RESPONSIVE HEADER ──────────────────────────────────── */
-    @media (max-width: 900px) {
-      .logo-row {
-        display: grid;
-        grid-template-columns: 44px 1fr 44px;
-        align-items: center;
-        padding: 20px;
-      }
-
+    /* ─── Responsive header ──────────────────────────────────── */
+    @media (max-width: 960px) {
+      .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
       .hamburger-btn { display: flex; grid-column: 1; }
-
-      .logo-placeholder {
-        grid-column: 2;
-        justify-self: center;
-        font-size: 20px;
-      }
-
+      .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
       .nav-row { display: none; }
     }
 
     /* ─── PAGE HERO ──────────────────────────────────────────── */
-    .page-hero {
-      background: var(--white);
-      padding: 72px 40px 64px;
-      border-bottom: 1px solid #dce3e8;
-    }
-
-    .page-hero-inner {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .page-hero-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue-grey);
-      margin-bottom: 16px;
-    }
-
-    .page-hero-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(36px, 5vw, 56px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.05;
-      margin-bottom: 24px;
-    }
-
-    .page-hero-divider {
-      width: 48px;
-      height: 3px;
-      background: var(--navy);
-      margin-bottom: 28px;
-      opacity: 0.2;
-    }
-
-    .page-hero-body {
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-    }
-
-    .page-hero-body strong {
-      color: var(--navy);
-      font-weight: 600;
-    }
-
-    .page-hero-note {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--blue-grey);
-      letter-spacing: 0.06em;
-      border-left: 3px solid #dce3e8;
-      padding-left: 16px;
-      line-height: 1.7;
-      margin-top: 28px;
-    }
-
-    @media (max-width: 900px) {
-      .page-hero { padding: 52px 24px 48px; }
-    }
+    .page-hero { background: var(--white); padding: 72px 40px 64px; border-bottom: 1px solid #dce3e8; }
+    .page-hero-inner { max-width: 760px; margin: 0 auto; }
+    .page-hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 16px; }
+    .page-hero-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(36px, 5vw, 56px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; margin-bottom: 24px; }
+    .page-hero-divider { width: 48px; height: 3px; background: var(--navy); margin-bottom: 28px; opacity: .2; }
+    .page-hero-body { font-size: 16px; font-weight: 400; line-height: 1.85; color: var(--text-muted); margin-bottom: 20px; }
+    .page-hero-body strong { color: var(--navy); font-weight: 600; }
+    .page-hero-note { font-size: 13px; font-weight: 500; color: var(--blue-grey); letter-spacing: .06em; border-left: 3px solid #dce3e8; padding-left: 16px; line-height: 1.7; margin-top: 28px; }
+    @media (max-width: 900px) { .page-hero { padding: 52px 24px 48px; } }
 
     /* ─── TIMELINE ───────────────────────────────────────────── */
-    .timeline-section {
-      background: var(--white);
-      padding: 100px 0 0;
-      overflow: hidden;
-    }
-
-    .timeline-header {
-      text-align: center;
-      padding: 0 40px 80px;
-    }
-
-    .timeline-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue-grey);
-      margin-bottom: 14px;
-    }
-
-    .timeline-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(30px, 4vw, 48px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.05;
-    }
-
-    .tl-step {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 480px;
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-
-    .tl-step.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
+    .timeline-section { background: var(--white); padding: 100px 0 0; overflow: hidden; }
+    .timeline-header { text-align: center; padding: 0 40px 80px; }
+    .timeline-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 14px; }
+    .timeline-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(30px, 4vw, 48px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; }
+    .tl-step { display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; opacity: 0; transform: translateY(32px); transition: opacity .65s ease, transform .65s ease; }
+    .tl-step.visible { opacity: 1; transform: translateY(0); }
     .tl-step:nth-child(odd)  { direction: ltr; }
     .tl-step:nth-child(even) { direction: rtl; }
-    .tl-step:nth-child(even) .tl-content,
-    .tl-step:nth-child(even) .tl-photo { direction: ltr; }
-
+    .tl-step:nth-child(even) .tl-content, .tl-step:nth-child(even) .tl-photo { direction: ltr; }
     .tl-step:nth-child(even) .tl-content { background: var(--light-bg); }
     .tl-step:nth-child(odd)  .tl-content { background: var(--white); }
-
-    .tl-photo {
-      position: relative;
-      overflow: hidden;
-      background: var(--navy);
-    }
-
-    .tl-photo-bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.7s ease;
-    }
-
+    .tl-photo { position: relative; overflow: hidden; background: var(--navy); }
+    .tl-photo-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s ease; }
     .tl-step:hover .tl-photo-bg { transform: scale(1.04); }
-
-    .tl-badge {
-      position: absolute;
-      bottom: 28px;
-      left: 28px;
-      z-index: 2;
-    }
-
-    .tl-step:nth-child(even) .tl-badge {
-      left: auto;
-      right: 28px;
-    }
-
-    .tl-badge-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 72px;
-      font-weight: 600;
-      line-height: 1;
-      color: var(--white);
-      opacity: 0.18;
-      letter-spacing: -0.02em;
-      display: block;
-      user-select: none;
-    }
-
-    .tl-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 64px 60px;
-      gap: 20px;
-      border-bottom: 1px solid #dce3e8;
-    }
-
-    .tl-tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: var(--navy);
-      padding: 5px 12px;
-      align-self: flex-start;
-    }
-
-    .tl-step-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      color: var(--blue-grey);
-    }
-
-    .tl-title {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(22px, 2.5vw, 32px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.1;
-    }
-
-    .tl-divider {
-      width: 40px;
-      height: 2px;
-      background: var(--navy);
-      opacity: 0.2;
-    }
-
-    .tl-body {
-      font-size: 14.5px;
-      font-weight: 400;
-      line-height: 1.85;
-      color: var(--text-muted);
-      max-width: 420px;
-    }
-
+    .tl-badge { position: absolute; bottom: 28px; left: 28px; z-index: 2; }
+    .tl-step:nth-child(even) .tl-badge { left: auto; right: 28px; }
+    .tl-badge-num { font-family: 'Barlow Condensed', sans-serif; font-size: 72px; font-weight: 600; line-height: 1; color: var(--white); opacity: .18; letter-spacing: -.02em; display: block; user-select: none; }
+    .tl-content { display: flex; flex-direction: column; justify-content: center; padding: 64px 60px; gap: 20px; border-bottom: 1px solid #dce3e8; }
+    .tl-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); background: var(--navy); padding: 5px 12px; align-self: flex-start; }
+    .tl-step-num { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: .2em; color: var(--blue-grey); }
+    .tl-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(22px, 2.5vw, 32px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; }
+    .tl-divider { width: 40px; height: 2px; background: var(--navy); opacity: .2; }
+    .tl-body { font-size: 14.5px; font-weight: 400; line-height: 1.85; color: var(--text-muted); max-width: 420px; }
     .tl-body strong { color: var(--navy); font-weight: 600; }
-
-    .tl-tip {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--navy-light);
-      border-left: 3px solid var(--blue-grey);
-      padding-left: 14px;
-      line-height: 1.7;
-      max-width: 400px;
-      opacity: 0.75;
-    }
-
-    .tl-photo-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      opacity: 0.12;
-    }
-
+    .tl-tip { font-size: 12.5px; font-weight: 500; color: var(--navy-light); border-left: 3px solid var(--blue-grey); padding-left: 14px; line-height: 1.7; max-width: 400px; opacity: .75; }
+    .tl-photo-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: .12; }
     .tl-step:nth-child(1) .tl-photo { background: linear-gradient(135deg, #1a2d4a 0%, #2e4a6e 100%); }
     .tl-step:nth-child(2) .tl-photo { background: linear-gradient(135deg, #263950 0%, #37556e 100%); }
     .tl-step:nth-child(3) .tl-photo { background: linear-gradient(135deg, #1e3554 0%, #2a4a6a 100%); }
@@ -471,132 +120,30 @@
     .tl-step:nth-child(5) .tl-photo { background: linear-gradient(135deg, #1a2d4a 0%, #3a5060 100%); }
     .tl-step:nth-child(6) .tl-photo { background: linear-gradient(135deg, #233050 0%, #2e4862 100%); }
     .tl-step:nth-child(7) .tl-photo { background: linear-gradient(135deg, #1a3060 0%, #263d56 100%); }
-
     @media (max-width: 900px) {
       .timeline-section { padding: 64px 0 0; }
       .timeline-header { padding: 0 24px 52px; }
-
-      .tl-step {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
+      .tl-step { grid-template-columns: 1fr; min-height: auto; }
       .tl-step:nth-child(even) { direction: ltr; }
-
-      .tl-photo {
-        height: 260px;
-        order: -1;
-      }
-
-      .tl-step:nth-child(even) .tl-badge {
-        left: 28px;
-        right: auto;
-      }
-
+      .tl-photo { height: 260px; order: -1; }
+      .tl-step:nth-child(even) .tl-badge { left: 28px; right: auto; }
       .tl-content { padding: 40px 28px; }
-
-      .tl-body { max-width: 100%; }
-      .tl-tip  { max-width: 100%; }
+      .tl-body, .tl-tip { max-width: 100%; }
     }
 
     /* ─── MID-PAGE CTA ───────────────────────────────────────── */
-    .mid-cta {
-      background: var(--navy);
-      padding: 64px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mid-cta::before {
-      content: 'MORANDI';
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 160px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.04);
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .mid-cta-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 40px;
-      align-items: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .mid-cta-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue-grey);
-      margin-bottom: 12px;
-    }
-
-    .mid-cta-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(26px, 3vw, 38px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 10px;
-    }
-
-    .mid-cta-sub {
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.7;
-      max-width: 480px;
-    }
-
-    .mid-cta-btns {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      text-decoration: none;
-      text-align: center;
-      padding: 15px 32px;
-      white-space: nowrap;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn-primary-white {
-      background: var(--white);
-      color: var(--navy);
-    }
+    .mid-cta { background: var(--navy); padding: 64px 40px; position: relative; overflow: hidden; }
+    .mid-cta::before { content: 'MORANDI'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: 'Barlow Condensed', sans-serif; font-size: 160px; font-weight: 600; letter-spacing: .06em; color: rgba(255,255,255,.04); white-space: nowrap; pointer-events: none; user-select: none; }
+    .mid-cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; position: relative; z-index: 1; }
+    .mid-cta-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 12px; }
+    .mid-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: 1.1; margin-bottom: 10px; }
+    .mid-cta-sub { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.7; max-width: 480px; }
+    .mid-cta-btns { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .btn-primary { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; text-align: center; padding: 15px 32px; white-space: nowrap; transition: background .2s, color .2s; }
+    .btn-primary-white { background: var(--white); color: var(--navy); }
     .btn-primary-white:hover { background: #eceff1; }
-
-    .btn-primary-outline {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(255,255,255,0.35);
-    }
-    .btn-primary-outline:hover {
-      border-color: var(--white);
-      background: rgba(255,255,255,0.06);
-    }
-
+    .btn-primary-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.35); }
+    .btn-primary-outline:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
     @media (max-width: 800px) {
       .mid-cta { padding: 52px 24px; }
       .mid-cta-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -605,462 +152,78 @@
     }
 
     /* ─── RECENT SALES TEASER ────────────────────────────────── */
-    .sales-teaser {
-      background: var(--light-bg);
-      padding: 88px 40px;
-    }
-
-    .sales-teaser-header {
-      max-width: 1100px;
-      margin: 0 auto 48px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .sales-teaser-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue-grey);
-      margin-bottom: 10px;
-    }
-
-    .sales-teaser-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(26px, 3vw, 38px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.1;
-    }
-
-    .sales-teaser-viewall {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--navy);
-      text-decoration: none;
-      border-bottom: 1.5px solid var(--navy);
-      padding-bottom: 2px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: color 0.2s, border-color 0.2s;
-    }
+    .sales-teaser { background: var(--light-bg); padding: 88px 40px; }
+    .sales-teaser-header { max-width: 1100px; margin: 0 auto 48px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+    .sales-teaser-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 10px; }
+    .sales-teaser-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; }
+    .sales-teaser-viewall { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1.5px solid var(--navy); padding-bottom: 2px; white-space: nowrap; flex-shrink: 0; transition: color .2s, border-color .2s; }
     .sales-teaser-viewall:hover { color: var(--navy-light); border-color: var(--navy-light); }
-
-    .sales-teaser-grid {
-      max-width: 1100px;
-      margin: 0 auto 48px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .st-card {
-      background: var(--white);
-      border: 1px solid #dce3e8;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-      overflow: hidden;
-    }
-
-    .st-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(26,45,74,0.1);
-    }
-
-    .st-photo {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: var(--navy);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .st-photo-placeholder { opacity: 0.15; }
-
-    .st-badge {
-      position: absolute;
-      top: 14px;
-      left: 14px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: #4a7a5a;
-      padding: 5px 10px;
-    }
-
-    .st-photo img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
+    .sales-teaser-grid { max-width: 1100px; margin: 0 auto 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .st-card { background: var(--white); border: 1px solid #dce3e8; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .22s ease, box-shadow .22s ease; overflow: hidden; }
+    .st-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,45,74,.1); }
+    .st-photo { width: 100%; aspect-ratio: 4/3; background: var(--navy); position: relative; overflow: hidden; }
+    .st-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; display: block; }
     .st-card:hover .st-photo img { transform: scale(1.04); }
-
-    .st-info {
-      padding: 20px 22px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      flex: 1;
-    }
-
-    .st-price {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--navy);
-      line-height: 1;
-    }
-
-    .st-address {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--navy);
-    }
-
-    .st-city {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .st-divider {
-      width: 100%;
-      height: 1px;
-      background: #eceff1;
-      margin: 6px 0;
-    }
-
-    .st-meta {
-      display: flex;
-      gap: 16px;
-    }
-
-    .st-meta-item {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .st-meta-item strong {
-      color: var(--navy);
-      font-weight: 600;
-    }
-
-    .sales-teaser-bottom {
-      max-width: 1100px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
+    .st-badge { position: absolute; top: 14px; left: 14px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--white); background: #4a7a5a; padding: 5px 10px; z-index: 1; }
+    .st-info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .st-price { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .02em; color: var(--navy); line-height: 1; }
+    .st-address { font-size: 14px; font-weight: 500; color: var(--navy); }
+    .st-city { font-size: 13px; color: var(--text-muted); }
+    .st-divider { width: 100%; height: 1px; background: #eceff1; margin: 6px 0; }
+    .st-meta { display: flex; gap: 16px; }
+    .st-meta-item { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
+    .sales-teaser-bottom { max-width: 1100px; margin: 0 auto; text-align: center; }
     @media (max-width: 900px) {
       .sales-teaser { padding: 60px 24px; }
       .sales-teaser-header { flex-direction: column; align-items: flex-start; gap: 12px; }
       .sales-teaser-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
     }
+    @media (max-width: 560px) { .sales-teaser-grid { grid-template-columns: 1fr; } }
 
-    @media (max-width: 560px) {
-      .sales-teaser-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ─── FAQ STRIP ──────────────────────────────────────────── */
-    .faq-section {
-      background: var(--white);
-      padding: 88px 40px;
-      border-top: 1px solid #dce3e8;
-    }
-
-    .faq-inner {
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .faq-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--blue-grey);
-      margin-bottom: 14px;
-    }
-
-    .faq-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(26px, 3vw, 38px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.05;
-      margin-bottom: 52px;
-    }
-
-    .faq-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-top: 1px solid #dce3e8;
-    }
-
-    .faq-item {
-      border-bottom: 1px solid #dce3e8;
-      overflow: hidden;
-    }
-
-    .faq-q {
-      width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 24px 0;
-      transition: color 0.2s;
-    }
-
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq-section { background: var(--white); padding: 88px 40px; border-top: 1px solid #dce3e8; }
+    .faq-inner { max-width: 860px; margin: 0 auto; }
+    .faq-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 14px; }
+    .faq-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; margin-bottom: 52px; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid #dce3e8; }
+    .faq-item { border-bottom: 1px solid #dce3e8; overflow: hidden; }
+    .faq-q { width: 100%; background: none; border: none; text-align: left; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 0; transition: color .2s; }
     .faq-q:hover .faq-q-text { color: var(--navy-light); }
-
-    .faq-q-text {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.15;
-      transition: color 0.2s;
-    }
-
-    .faq-icon {
-      flex-shrink: 0;
-      width: 28px;
-      height: 28px;
-      border: 1.5px solid #dce3e8;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .faq-item.open .faq-icon {
-      background: var(--navy);
-      border-color: var(--navy);
-    }
-
-    .faq-icon svg {
-      transition: transform 0.3s ease;
-      stroke: var(--navy);
-    }
-
-    .faq-item.open .faq-icon svg {
-      transform: rotate(45deg);
-      stroke: var(--white);
-    }
-
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease, padding 0.3s ease;
-    }
-
+    .faq-q-text { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.15; transition: color .2s; }
+    .faq-icon { flex-shrink: 0; width: 28px; height: 28px; border: 1.5px solid #dce3e8; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background .2s, border-color .2s; }
+    .faq-item.open .faq-icon { background: var(--navy); border-color: var(--navy); }
+    .faq-icon svg { transition: transform .3s ease; stroke: var(--navy); }
+    .faq-item.open .faq-icon svg { transform: rotate(45deg); stroke: var(--white); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease; }
     .faq-item.open .faq-a { max-height: 400px; }
-
-    .faq-a-inner {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.8;
-      color: var(--text-muted);
-      padding-bottom: 28px;
-      max-width: 720px;
-    }
-
+    .faq-a-inner { font-size: 15px; font-weight: 400; line-height: 1.8; color: var(--text-muted); padding-bottom: 28px; max-width: 720px; }
     .faq-a-inner strong { color: var(--navy); font-weight: 600; }
+    @media (max-width: 900px) { .faq-section { padding: 60px 24px; } .faq-q-text { font-size: 17px; } }
 
-    @media (max-width: 900px) {
-      .faq-section { padding: 60px 24px; }
-      .faq-q-text { font-size: 17px; }
-    }
-
-    /* ─── BOTTOM CTA (light) ─────────────────────────────────── */
-    .bottom-cta {
-      background: var(--light-bg);
-      padding: 0 40px;
-      overflow: hidden;
-      border-top: 1px solid #dce3e8;
-    }
-
-    .bottom-cta-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 420px;
-    }
-
-    .bottom-cta-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 72px 60px 72px 0;
-      gap: 24px;
-      border-right: 1px solid #dce3e8;
-    }
-
-    .bottom-cta-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .bottom-cta-headline {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(30px, 3.5vw, 48px);
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--navy);
-      line-height: 1.05;
-    }
-
-    .bottom-cta-body {
-      font-size: 14.5px;
-      color: var(--text-muted);
-      line-height: 1.8;
-      max-width: 400px;
-    }
-
-    .bottom-cta-btns {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 8px;
-    }
-
-    .bottom-cta .btn-primary-white {
-      background: var(--navy);
-      color: var(--white);
-    }
+    /* ─── BOTTOM CTA ─────────────────────────────────────────── */
+    .bottom-cta { background: var(--light-bg); padding: 0 40px; overflow: hidden; border-top: 1px solid #dce3e8; }
+    .bottom-cta-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; min-height: 420px; }
+    .bottom-cta-left { display: flex; flex-direction: column; justify-content: center; padding: 72px 60px 72px 0; gap: 24px; border-right: 1px solid #dce3e8; }
+    .bottom-cta-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted); }
+    .bottom-cta-headline { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(30px, 3.5vw, 48px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; }
+    .bottom-cta-body { font-size: 14.5px; color: var(--text-muted); line-height: 1.8; max-width: 400px; }
+    .bottom-cta-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+    .bottom-cta .btn-primary-white { background: var(--navy); color: var(--white); }
     .bottom-cta .btn-primary-white:hover { background: var(--navy-light); }
-
-    .bottom-cta .btn-primary-outline {
-      color: var(--navy);
-      border-color: rgba(26,45,74,0.35);
-    }
-    .bottom-cta .btn-primary-outline:hover {
-      border-color: var(--navy);
-      background: rgba(26,45,74,0.06);
-    }
-
-    .bottom-cta-right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 72px 0 72px 60px;
-      gap: 32px;
-    }
-
-    .bottom-cta-stat-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      width: 100%;
-    }
-
-    .bottom-cta-stat-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      width: 100%;
-      border: 1px solid #dce3e8;
-    }
-
-    .bottom-cta-stat {
-      padding: 24px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: var(--white);
-    }
-
+    .bottom-cta .btn-primary-outline { color: var(--navy); border-color: rgba(26,45,74,.35); }
+    .bottom-cta .btn-primary-outline:hover { border-color: var(--navy); background: rgba(26,45,74,.06); }
+    .bottom-cta-right { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 72px 0 72px 60px; gap: 32px; }
+    .bottom-cta-stat-block { display: flex; flex-direction: column; align-items: center; gap: 28px; width: 100%; }
+    .bottom-cta-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; width: 100%; border: 1px solid #dce3e8; }
+    .bottom-cta-stat { padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; background: var(--white); }
     .bottom-cta-stat:nth-child(2) { border-left: 1px solid #dce3e8; }
-
-    .bottom-cta-stat-num {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 36px;
-      font-weight: 600;
-      color: var(--navy);
-      letter-spacing: 0.02em;
-      line-height: 1;
-    }
-
-    .bottom-cta-stat-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .bottom-cta-contact-block {
-      width: 100%;
-      border: 1px solid #dce3e8;
-      padding: 24px 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: var(--white);
-    }
-
-    .bottom-cta-contact-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-    }
-
-    .bottom-cta-phone {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 30px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--navy);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .bottom-cta-stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 600; color: var(--navy); letter-spacing: .02em; line-height: 1; }
+    .bottom-cta-stat-label { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); }
+    .bottom-cta-contact-block { width: 100%; border: 1px solid #dce3e8; padding: 24px 20px; display: flex; flex-direction: column; gap: 6px; background: var(--white); }
+    .bottom-cta-contact-label { font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--text-muted); }
+    .bottom-cta-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: .04em; color: var(--navy); text-decoration: none; transition: color .2s; }
     .bottom-cta-phone:hover { color: var(--navy-light); }
-
-    .bottom-cta-hours {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
+    .bottom-cta-hours { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
     @media (max-width: 900px) {
       .bottom-cta { padding: 0 24px; }
       .bottom-cta-inner { grid-template-columns: 1fr; min-height: auto; }
@@ -1069,169 +232,31 @@
       .bottom-cta-body { max-width: 100%; }
     }
 
-    /* ─── FOOTER ─────────────────────────────────────────────── */
-    .site-footer {
-      background: var(--navy);
-      padding: 64px 40px 32px;
-    }
-
-    .footer-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 40px;
-      align-items: start;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
-    }
-
-    .footer-tagline {
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 1.7;
-      color: var(--blue-grey);
-      max-width: 260px;
-    }
-
-    .footer-contact {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      text-align: center;
-      align-items: center;
-    }
-
-    .footer-contact-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue-grey);
-      margin-bottom: 4px;
-    }
-
-    .footer-address {
-      font-size: 13.5px;
-      font-weight: 400;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.75);
-      text-align: center;
-    }
-
-    .footer-phone {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--white);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    /* ─── Footer ─────────────────────────────────────────────── */
+    .site-footer { background: var(--navy); padding: 64px 40px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
+    .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+    .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .footer-tagline { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
+    .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
+    .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
+    .footer-address { font-size: 13.5px; font-weight: 400; line-height: 1.7; color: rgba(255,255,255,.75); text-align: center; }
+    .footer-phone { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .06em; color: var(--white); text-decoration: none; transition: color .2s; }
     .footer-phone:hover { color: var(--blue-grey); }
-
-    .footer-social {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 16px;
-    }
-
-    .footer-social-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--blue-grey);
-    }
-
-    .footer-social-icons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: flex-end;
-    }
-
-    .footer-social-link {
-      width: 38px;
-      height: 38px;
-      border: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.2s, background 0.2s;
-      flex-shrink: 0;
-    }
-
-    .footer-social-link:hover {
-      border-color: rgba(255,255,255,0.5);
-      background: rgba(255,255,255,0.07);
-    }
-
-    .footer-social-link svg {
-      width: 16px;
-      height: 16px;
-      fill: rgba(255,255,255,0.75);
-      display: block;
-      transition: fill 0.2s;
-    }
-
+    .footer-social { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    .footer-social-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); }
+    .footer-social-icons { display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; }
+    .footer-social-link { width: 38px; height: 38px; border: 1px solid rgba(255,255,255,.15); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; flex-shrink: 0; text-decoration: none; }
+    .footer-social-link:hover { border-color: rgba(255,255,255,.5); background: rgba(255,255,255,.07); }
+    .footer-social-link svg { width: 16px; height: 16px; fill: rgba(255,255,255,.75); display: block; transition: fill .2s; }
     .footer-social-link:hover svg { fill: var(--white); }
-
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 28px;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .footer-legal {
-      font-size: 11.5px;
-      color: rgba(255,255,255,0.35);
-      line-height: 1.6;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: rgba(255,255,255,0.7); }
-
-    @media (max-width: 900px) {
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; gap: 16px; flex-wrap: wrap; }
+    .footer-legal { font-size: 11.5px; color: rgba(255,255,255,.35); line-height: 1.6; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: rgba(255,255,255,.7); }
+    @media (max-width: 960px) {
       .site-footer { padding: 52px 24px 28px; }
       .footer-top { grid-template-columns: 1fr; gap: 40px; }
       .footer-social { align-items: flex-start; }
@@ -1244,84 +269,93 @@
 </head>
 <body>
 
+<!-- ============================================================ -->
+<!--  HEADER                                                      -->
+<!-- ============================================================ -->
 <header class="site-header" role="banner">
-
   <div class="logo-row">
-    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
-    <!-- Swap with <img src="logo.png" alt="Morandi Properties"> -->
     <a href="/" class="logo-placeholder">Morandi Properties</a>
   </div>
-
   <nav class="nav-row" role="navigation" aria-label="Primary navigation">
-    <a href="/"             class="nav-link">Home</a>
-    <a href="/sale"         class="nav-link">Our Listings</a>
-    <a href="/mlssearch"    class="nav-link">MLS Search</a>
-    <a href="/sell"         class="nav-link">Selling</a>
-    <a href="/recent-sales" class="nav-link">Recent Sales</a>
-    <a href="/reviews"      class="nav-link">Reviews</a>
-    <a href="/team-1"       class="nav-link">The Team</a>
+    <a href="/" class="nav-link">Home</a>
+
     <div class="nav-dropdown">
-      <a href="/clienttools" class="nav-link">Tools ▾</a>
+      <span class="nav-link nav-label">Buying ▾</span>
       <div class="dropdown-menu">
-        <a href="/mortgagecalculator">Mortgage Calculator</a>
-        <a href="/valuationrequest">Valuation Request</a>
-        <a href="/emailalerts">Email Alerts</a>
-        <a href="/mlssearch">MLS Search</a>
-        <a href="/openhouse">Open House</a>
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+        <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+        <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+        <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
       </div>
     </div>
-    <a href="/contact" class="nav-link">Contact</a>
-    <a href="https://www.morandiproperties.com/mlssearch" class="cta-btn">Check Out Our Listings</a>
-  </nav>
 
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label active">Selling ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+        <a href="https://morandiproperties.com/selling/selling-strategy-guide" class="active">Seller's Strategy Guide</a>
+        <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+      </div>
+    </div>
+
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Insights ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+        <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+      </div>
+    </div>
+
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Realtors ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+        <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+        <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+      </div>
+    </div>
+
+    <div class="nav-dropdown">
+      <span class="nav-link nav-label">Contact ▾</span>
+      <div class="dropdown-menu">
+        <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+        <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+        <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+      </div>
+    </div>
+  </nav>
 </header>
 
+<!-- ============================================================ -->
+<!--  MAIN CONTENT                                                -->
+<!-- ============================================================ -->
 <main role="main">
 
   <!-- ─── PAGE HERO ─────────────────────────────────────────────── -->
   <section class="page-hero" aria-label="Sellers Guide introduction" itemscope itemtype="https://schema.org/Article">
     <div class="page-hero-inner">
-
       <p class="page-hero-eyebrow">Morandi Properties &mdash; Southwest Suburbs of Chicago</p>
-
-      <h1 class="page-hero-headline" itemprop="name">Sellers Guide:<br>How to Sell Your Home in Chicagoland &amp; the 30+ suburban communities</h1>
-
+      <h1 class="page-hero-headline" itemprop="name">Sellers Guide:<br>How to Sell Your Home in Chicagoland &amp; the 30+ Suburban Communities</h1>
       <div class="page-hero-divider"></div>
-
-      <p class="page-hero-body" itemprop="description">
-        Selling your home in Chicagoland's 90
-        + suburban communities including <strong>Orland Park, Tinley Park, Homer Glen,  Frankfort, Mokena, or New Lenox</strong> is one of the largest financial transactions you will ever make — and the difference between a good outcome and a great one often comes down to one thing: the agent you choose. In a competitive Chicagoland suburban market, pricing strategy, presentation, and negotiation skills are not interchangeable. They define your result.
-      </p>
-
-      <p class="page-hero-body">
-        Ray Morandi has represented sellers across the Chicagoland suburbs since 2006. With over <strong>$180 million in closed sales</strong>, a consistent ranking in the <strong>top 1% of Illinois real estate agents</strong>, and recognition as a <strong>Top 100 Agent by Chicago Magazine</strong> multiple years running, Ray brings a level of experience to the selling side of a transaction that is difficult to find anywhere in the region. His sellers consistently achieve strong prices and fast closings — not by accident, but because of a disciplined process built over two decades.
-      </p>
-
-      <p class="page-hero-body">
-        This guide walks you through every step of the home-selling process in the Chicagoland's 30+ suburban communities — from your initial valuation and pricing strategy, through preparation, marketing, and offer negotiations, all the way to closing day. The Chicago suburban market rewards homes that are priced correctly and presented well. Getting either of those wrong is expensive. Knowing <strong>how to position your home for maximum value</strong> in this specific market is exactly what Ray does.
-      </p>
-
-      <p class="page-hero-note">
-        Thinking about selling? Ray Morandi offers free, no-obligation home valuations for Chicagoland's homeowners. Call or reach out online to get started — there is no pressure and no obligation.
-      </p>
-
+      <p class="page-hero-body" itemprop="description">Selling your home in Chicagoland's southwest suburbs — including <strong>Orland Park, Tinley Park, Homer Glen, Frankfort, Mokena, or New Lenox</strong> — is one of the largest financial transactions you will ever make. The difference between a good outcome and a great one often comes down to one thing: the agent you choose. In a competitive Chicagoland suburban market, pricing strategy, presentation, and negotiation skills are not interchangeable. They define your result.</p>
+      <p class="page-hero-body">Ray Morandi has represented sellers across the Chicagoland suburbs since 2006. With over <strong>$180 million in closed sales</strong>, a consistent ranking in the <strong>top 1% of Illinois real estate agents</strong>, and recognition as a <strong>Top 100 Agent by Chicago Magazine</strong> multiple years running, Ray brings a level of experience to the selling side of a transaction that is difficult to find anywhere in the region. His sellers consistently achieve strong prices and fast closings — not by accident, but because of a disciplined process built over two decades.</p>
+      <p class="page-hero-body">This guide walks you through every step of the home-selling process in the southwest suburbs — from your initial valuation and pricing strategy, through preparation, marketing, and offer negotiations, all the way to closing day. The Chicago suburban market rewards homes that are priced correctly and presented well. Knowing <strong>how to position your home for maximum value</strong> in this specific market is exactly what Ray does.</p>
+      <p class="page-hero-note">Thinking about selling? Ray Morandi offers free, no-obligation home valuations for Chicagoland homeowners. Call <strong>(708) 516-6666</strong> or reach out online to get started — no pressure and no obligation.</p>
     </div>
   </section>
 
   <!-- ─── TIMELINE ──────────────────────────────────────────────── -->
   <section class="timeline-section" aria-label="Home selling process steps" itemscope itemtype="https://schema.org/HowTo">
-
     <div class="timeline-header">
       <p class="timeline-eyebrow">The Home Selling Process</p>
       <h2 class="timeline-headline" itemprop="name">What to Expect — Step by Step</h2>
     </div>
 
-    <!-- Step 1 -->
     <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
       <div class="tl-photo">
-        <!-- PLACEHOLDER: swap with <img class="tl-photo-bg" src="valuation.jpg" alt="Ray Morandi conducting a home valuation"> -->
         <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
         <div class="tl-badge"><span class="tl-badge-num">01</span></div>
       </div>
@@ -1335,10 +369,8 @@
       </div>
     </div>
 
-    <!-- Step 2 -->
     <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
       <div class="tl-photo">
-        <!-- PLACEHOLDER: swap with <img class="tl-photo-bg" src="pricing.jpg" alt="Reviewing comparable sales data"> -->
         <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
         <div class="tl-badge"><span class="tl-badge-num">02</span></div>
       </div>
@@ -1352,10 +384,8 @@
       </div>
     </div>
 
-    <!-- Step 3 -->
     <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
       <div class="tl-photo">
-        <!-- PLACEHOLDER: swap with <img class="tl-photo-bg" src="staging.jpg" alt="Staged home interior ready for listing photos"> -->
         <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         <div class="tl-badge"><span class="tl-badge-num">03</span></div>
       </div>
@@ -1369,10 +399,8 @@
       </div>
     </div>
 
-    <!-- Step 4 -->
     <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
       <div class="tl-photo">
-        <!-- PLACEHOLDER: swap with <img class="tl-photo-bg" src="marketing.jpg" alt="Home listed on the MLS with professional photos"> -->
         <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         <div class="tl-badge"><span class="tl-badge-num">04</span></div>
       </div>
@@ -1385,7 +413,6 @@
         <p class="tl-tip">Homes that launch with professional photos, accurate MLS data, and active marketing see significantly higher first-week traffic than those that don't. First-week traffic drives offers.</p>
       </div>
     </div>
-
   </section>
 
   <!-- ─── MID-PAGE CTA ─────────────────────────────────────────── -->
@@ -1394,11 +421,11 @@
       <div>
         <p class="mid-cta-eyebrow">Morandi Properties &mdash; Orland Park, IL</p>
         <h3 class="mid-cta-headline">Thinking About Selling?<br>Start with a Free Valuation.</h3>
-        <p class="mid-cta-sub">Ray Morandi has helped 500+ Chicagoland families sell their homes for top dollar in the Chicagoland suburbs. Get an honest, no-obligation assessment of what your home is worth in today's market.</p>
+        <p class="mid-cta-sub">Ray Morandi has helped 500+ Chicagoland families sell their homes for top dollar. Get an honest, no-obligation assessment of what your home is worth in today's market.</p>
       </div>
       <div class="mid-cta-btns">
-        <a href="tel:+17085550000" class="btn-primary btn-primary-white">Call Ray:(708) 516-6666</a>
-        <a href="/valuationrequest" class="btn-primary btn-primary-outline">Request a Valuation &rarr;</a>
+        <a href="tel:+17085166666" class="btn-primary btn-primary-white">Call Ray: (708) 516-6666</a>
+        <a href="https://morandiproperties.com/selling/valuation" class="btn-primary btn-primary-outline">Request a Valuation &rarr;</a>
       </div>
     </div>
   </div>
@@ -1406,10 +433,8 @@
   <!-- ─── TIMELINE CONTINUED ────────────────────────────────────── -->
   <section class="timeline-section" style="padding-top:0;" aria-label="Home selling process continued" itemscope itemtype="https://schema.org/HowTo">
 
-    <!-- Step 5 -->
     <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
       <div class="tl-photo">
-        <!-- PLACEHOLDER: swap with <img class="tl-photo-bg" src="offers.jpg" alt="Reviewing purchase offers at a table"> -->
         <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
         <div class="tl-badge"><span class="tl-badge-num">05</span></div>
       </div>
@@ -1423,10 +448,8 @@
       </div>
     </div>
 
-    <!-- Step 6 -->
     <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
       <div class="tl-photo">
-        <!-- PLACEHOLDER: swap with <img class="tl-photo-bg" src="attorney-review.jpg" alt="Attorney review documents and home inspection"> -->
         <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
         <div class="tl-badge"><span class="tl-badge-num">06</span></div>
       </div>
@@ -1440,10 +463,8 @@
       </div>
     </div>
 
-    <!-- Step 7 -->
     <div class="tl-step" itemscope itemprop="step" itemtype="https://schema.org/HowToStep">
       <div class="tl-photo">
-        <!-- PLACEHOLDER: swap with <img class="tl-photo-bg" src="closing-day.jpg" alt="Handing over house keys at closing"> -->
         <svg class="tl-photo-icon" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="0.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
         <div class="tl-badge"><span class="tl-badge-num">07</span></div>
       </div>
@@ -1460,78 +481,72 @@
   </section>
 
   <!-- ─── RECENT SALES TEASER ───────────────────────────────────── -->
-  <section class="sales-teaser" aria-label="Recent home sales in the 30+ Chicagoland suburban communities">
+  <section class="sales-teaser" aria-label="Recent home sales in the southwest suburbs">
     <div class="sales-teaser-header">
       <div>
         <p class="sales-teaser-eyebrow">Recent Sales &mdash; Chicagoland</p>
         <h2 class="sales-teaser-headline">Homes Ray Has Recently Sold</h2>
       </div>
-      <a href="/recent-sales" class="sales-teaser-viewall">View All Recent Sales &rarr;</a>
+      <a href="https://morandiproperties.com/selling/sold-portfolio" class="sales-teaser-viewall">View All Recent Sales &rarr;</a>
     </div>
 
     <div class="sales-teaser-grid">
 
-      <a href="/recent-sales" class="st-card">
+      <!-- Sale 1: 16110 S Sandy Bank Ct, Homer Glen -->
+      <a href="https://morandiproperties.com/selling/sold-portfolio" class="st-card">
         <div class="st-photo">
-          <!-- PLACEHOLDER: replace with <img src="sold1.jpg" alt="123 Placeholder Dr, Orland Park"> -->
-          <svg class="st-photo-placeholder" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+          <img src="/images/sold-properties/sold-home-16110-s-sandy-bank-ct-homer-glen-il-60491.webp"
+               alt="16110 S Sandy Bank Ct — Sold in Homer Glen, IL"
+               loading="lazy">
           <span class="st-badge">Sold</span>
         </div>
         <div class="st-info">
-          <span class="st-price">$XXX,000</span>
-          <span class="st-address">123 Placeholder Drive</span>
-          <span class="st-city">Orland Park, IL 60462</span>
+          <span class="st-price">$1,346,597</span>
+          <span class="st-address">16110 S Sandy Bank Ct</span>
+          <span class="st-city">Homer Glen, IL 60491</span>
           <div class="st-divider"></div>
-          <div class="st-meta">
-            <span class="st-meta-item"><strong>4</strong> bd</span>
-            <span class="st-meta-item"><strong>2.5</strong> ba</span>
-            <span class="st-meta-item"><strong>2,400</strong> sqft</span>
-          </div>
+          <div class="st-meta"><span class="st-meta-item">Sold for $1,346,597</span></div>
         </div>
       </a>
 
-      <a href="/recent-sales" class="st-card">
+      <!-- Sale 2: 15201 S Mackenzie Dr #21, Homer Glen -->
+      <a href="https://morandiproperties.com/selling/sold-portfolio" class="st-card">
         <div class="st-photo">
-          <!-- PLACEHOLDER: replace with <img src="sold2.jpg" alt="456 Sample St, Tinley Park"> -->
-          <svg class="st-photo-placeholder" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+          <img src="/images/sold-properties/sold-home-15201-s-mackenzie-dr-homer-glen-il-60491.webp"
+               alt="15201 S Mackenzie Dr #21 — Sold in Homer Glen, IL"
+               loading="lazy">
           <span class="st-badge">Sold</span>
         </div>
         <div class="st-info">
-          <span class="st-price">$XXX,000</span>
-          <span class="st-address">456 Sample Street</span>
-          <span class="st-city">Tinley Park, IL 60477</span>
+          <span class="st-price">$1,315,529</span>
+          <span class="st-address">15201 S Mackenzie Dr #21</span>
+          <span class="st-city">Homer Glen, IL 60491</span>
           <div class="st-divider"></div>
-          <div class="st-meta">
-            <span class="st-meta-item"><strong>3</strong> bd</span>
-            <span class="st-meta-item"><strong>2</strong> ba</span>
-            <span class="st-meta-item"><strong>1,850</strong> sqft</span>
-          </div>
+          <div class="st-meta"><span class="st-meta-item">Sold for $1,315,529</span></div>
         </div>
       </a>
 
-      <a href="/recent-sales" class="st-card">
+      <!-- Sale 3: 421 S Sunnyside Ave, Elmhurst -->
+      <a href="https://morandiproperties.com/selling/sold-portfolio" class="st-card">
         <div class="st-photo">
-          <!-- PLACEHOLDER: replace with <img src="sold3.jpg" alt="789 Example Blvd, Frankfort"> -->
-          <svg class="st-photo-placeholder" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+          <img src="/images/sold-properties/sold-home-421-s-sunnyside-ave-elmhurst-il-60126.webp"
+               alt="421 S Sunnyside Ave — Sold in Elmhurst, IL"
+               loading="lazy">
           <span class="st-badge">Sold</span>
         </div>
         <div class="st-info">
-          <span class="st-price">$XXX,000</span>
-          <span class="st-address">789 Example Boulevard</span>
-          <span class="st-city">Frankfort, IL 60423</span>
+          <span class="st-price">$1,149,000</span>
+          <span class="st-address">421 S Sunnyside Ave</span>
+          <span class="st-city">Elmhurst, IL 60126</span>
           <div class="st-divider"></div>
-          <div class="st-meta">
-            <span class="st-meta-item"><strong>5</strong> bd</span>
-            <span class="st-meta-item"><strong>3</strong> ba</span>
-            <span class="st-meta-item"><strong>3,100</strong> sqft</span>
-          </div>
+          <div class="st-meta"><span class="st-meta-item">Sold for $1,149,000</span></div>
         </div>
       </a>
 
     </div>
 
     <div class="sales-teaser-bottom">
-      <a href="/recent-sales" class="btn-primary btn-primary-white" style="background:var(--navy);color:var(--white);display:inline-block;">See All Recent Sales &rarr;</a>
+      <a href="https://morandiproperties.com/selling/sold-portfolio" class="btn-primary btn-primary-white" style="background:var(--navy);color:var(--white);display:inline-block;">See All Recent Sales &rarr;</a>
     </div>
   </section>
 
@@ -1540,7 +555,6 @@
     <div class="faq-inner">
       <p class="faq-eyebrow">Common Questions</p>
       <h2 class="faq-headline">Sellers Ask. Ray Answers.</h2>
-
       <div class="faq-list">
 
         <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
@@ -1600,17 +614,15 @@
   <!-- ─── BOTTOM CTA ────────────────────────────────────────────── -->
   <section class="bottom-cta" aria-label="Contact Morandi Properties to sell your home">
     <div class="bottom-cta-inner">
-
       <div class="bottom-cta-left">
         <p class="bottom-cta-eyebrow">Ready to Sell?</p>
         <h2 class="bottom-cta-headline">Let's Find Out What Your Home Is Worth.</h2>
         <p class="bottom-cta-body">Ray Morandi has been helping Chicagoland suburb sellers achieve top-dollar results since 2006. Whether you are ready to list now or just starting to think about it, the first step is a free, no-obligation home valuation — available seven days a week.</p>
         <div class="bottom-cta-btns">
-          <a href="tel:+17085550000" class="btn-primary btn-primary-white">Call Ray:(708) 516-6666</a>
-          <a href="/valuationrequest" class="btn-primary btn-primary-outline">Request a Valuation &rarr;</a>
+          <a href="tel:+17085166666" class="btn-primary btn-primary-white">Call Ray: (708) 516-6666</a>
+          <a href="https://morandiproperties.com/selling/valuation" class="btn-primary btn-primary-outline">Request a Valuation &rarr;</a>
         </div>
       </div>
-
       <div class="bottom-cta-right">
         <div class="bottom-cta-stat-block">
           <div class="bottom-cta-stat-row">
@@ -1635,132 +647,151 @@
           </div>
           <div class="bottom-cta-contact-block">
             <span class="bottom-cta-contact-label">Call or Text Anytime</span>
-            <a href="tel:+17085550000" class="bottom-cta-phone">(708) 555-0000</a>
+            <a href="tel:+17085166666" class="bottom-cta-phone">(708) 516-6666</a>
             <span class="bottom-cta-hours">Mon–Fri 9am–6pm &nbsp;·&nbsp; Sat–Sun 10am–4pm</span>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
 </main>
 
-<!-- ─── FOOTER ────────────────────────────────────────────────── -->
+<!-- ============================================================ -->
+<!--  FOOTER                                                      -->
+<!-- ============================================================ -->
 <footer class="site-footer" role="contentinfo" itemscope itemtype="https://schema.org/WPFooter">
   <div class="footer-inner">
-
     <div class="footer-top">
-
       <div class="footer-brand">
-        <!-- Swap with <img src="logo-white.png" alt="Morandi Properties" style="height:36px;"> -->
         <a href="/" class="footer-logo">Morandi Properties</a>
-        <p class="footer-tagline">Helping Chicagoland families buy and sell homes in Chicagoland's 30+ suburban communities including Orland Park, Tinley Park, Frankfort, Mokena, and New Lenox since 2006.</p>
+        <p class="footer-tagline">Helping families buy and sell homes across 30+ communities in the southwest suburbs of Chicago since 2006.</p>
       </div>
-
       <div class="footer-contact" itemscope itemtype="https://schema.org/RealEstateAgent">
         <span class="footer-contact-label">Get In Touch</span>
         <p class="footer-address" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-          <span itemprop="streetAddress">123 Main Street, Suite 100</span><br>
-          <span itemprop="addressLocality">Orland Park</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60462</span>
+          <span itemprop="streetAddress">15715 Wolf Rd</span><br>
+          <span itemprop="addressLocality">Orland Park</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60467</span>
         </p>
-        <a href="tel:+17085550000" class="footer-phone" itemprop="telephone">(708) 555-0000</a>
+        <a href="tel:+17085166666" class="footer-phone" itemprop="telephone">(708) 516-6666</a>
       </div>
-
       <div class="footer-social">
         <span class="footer-social-label">Follow Along</span>
         <div class="footer-social-icons">
-
-          <a href="#" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          <a href="https://www.facebook.com/morandiproperties" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
           </a>
-
-          <a href="#" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <a href="https://www.instagram.com/morandiproperties" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
-
-          <a href="#" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 013.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.583-1.3-.881-2.342-.887h-.062c-.76 0-1.702.214-2.351 1.086l-1.651-1.24C7.52 5.995 8.94 5.302 10.7 5.302h.085c3.377.023 5.396 2.045 5.616 5.623.71.355 1.342.804 1.878 1.343 1.255 1.252 1.942 2.97 1.93 4.934-.018 3.95-3.088 6.773-7.023 6.798zM11.99 10.57c-.137 0-.274.003-.41.01-1.98.114-3.197 1.027-3.133 2.294.037.675.52 1.892 2.454 1.892h.044c1.688-.1 2.618-1.198 2.757-3.265a11.026 11.026 0 00-1.712-.931z"/></svg>
+          <a href="https://www.threads.net/@morandiproperties" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 013.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.583-1.3-.881-2.342-.887h-.062c-.76 0-1.702.214-2.351 1.086l-1.651-1.24C7.52 5.995 8.94 5.302 10.7 5.302h.085c3.377.023 5.396 2.045 5.616 5.623.71.355 1.342.804 1.878 1.343 1.255 1.252 1.942 2.97 1.93 4.934-.018 3.95-3.088 6.773-7.023 6.798zM11.99 10.57c-.137 0-.274.003-.41.01-1.98.114-3.197 1.027-3.133 2.294.037.675.52 1.892 2.454 1.892h.044c1.688-.1 2.618-1.198 2.757-3.265a11.026 11.026 0 00-1.712-.931z"/></svg>
           </a>
-
-          <a href="#" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <a href="https://www.linkedin.com/in/raymorandi" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-
-          <a href="#" class="footer-social-link" aria-label="Google Business Profile" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+          <a href="https://www.tiktok.com/@morandiproperties" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
           </a>
-
-          <a href="#" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+          <a href="https://www.youtube.com/@morandiproperties" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
           </a>
-
-          <a href="#" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          <a href="https://g.page/morandiproperties" class="footer-social-link" aria-label="Google Business" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.25 16.195c-1.39 1.304-3.244 2.054-5.25 2.054-4.004 0-7.25-3.246-7.25-7.25 0-4.003 3.246-7.249 7.25-7.249 1.942 0 3.645.751 4.952 1.977l-2.006 1.93c-.742-.71-1.79-1.158-2.946-1.158-2.412 0-4.37 1.958-4.37 4.5 0 2.543 1.958 4.5 4.37 4.5 2.152 0 3.745-1.244 4.112-3h-4.112v-2.5H18c.084.495.13 1 .13 1.5 0 1.33-.306 2.61-.88 3.696z"/></svg>
           </a>
-
         </div>
       </div>
-
     </div>
-
     <div class="footer-bottom">
       <p class="footer-legal">
         &copy; 2026 Morandi Properties. All rights reserved.<br>
         Ray Morandi — Licensed Illinois Real Estate Broker &middot; License #71003188
       </p>
-      <nav class="footer-links">
+      <nav class="footer-links" aria-label="Footer navigation">
         <a href="/privacy">Privacy Policy</a>
         <a href="/terms">Terms of Use</a>
-        <a href="/contact">Contact</a>
-        <a href="/mlssearch">MLS Search</a>
+        <a href="https://morandiproperties.com/contact/office">Contact</a>
+        <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
       </nav>
     </div>
-
   </div>
 </footer>
 
-<nav class="mobile-nav" id="mobileNav">
-  <button class="mobile-nav-close" id="mobileNavClose">✕</button>
+<!-- ============================================================ -->
+<!--  MOBILE NAV OVERLAY                                          -->
+<!-- ============================================================ -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
   <a href="/">Home</a>
-  <a href="/sale">Our Listings</a>
-  <a href="/mlssearch">MLS Search</a>
-  <a href="/sell">Selling</a>
-  <a href="/recent-sales">Recent Sales</a>
-  <a href="/reviews">Reviews</a>
-  <a href="/team-1">The Team</a>
-  <a href="/clienttools">Tools</a>
-  <a href="/contact">Contact</a>
-  <div class="mobile-nav-cta">
-    <a href="https://www.morandiproperties.com/mlssearch">Check Out Our Listings</a>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">Buying <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnBuying">
+      <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
+      <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
+      <a href="https://morandiproperties.com/buying/buying-strategy-guide">Buyer's Strategy Guide</a>
+      <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">Selling <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnSelling">
+      <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
+      <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
+      <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">Insights <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnInsights">
+      <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
+      <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">Realtors <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnTeam">
+      <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
+      <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
+      <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
+    </div>
+  </div>
+  <div class="mobile-nav-group">
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">Contact <span class="caret">▾</span></button>
+    <div class="mobile-nav-sub" id="mnContact">
+      <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
+      <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>
+      <a href="https://morandiproperties.com/contact/social">Social Media Hub</a>
+    </div>
   </div>
 </nav>
 
+<!-- ============================================================ -->
+<!--  SCRIPTS                                                     -->
+<!-- ============================================================ -->
 <script>
-  const btn   = document.getElementById('hamburgerBtn');
-  const nav   = document.getElementById('mobileNav');
-  const close = document.getElementById('mobileNavClose');
+  // ── Mobile nav ──────────────────────────────────────────────
+  const hBtn = document.getElementById('hamburgerBtn');
+  const mNav = document.getElementById('mobileNav');
+  const mCls = document.getElementById('mobileNavClose');
+  function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); hBtn.setAttribute('aria-expanded','true'); mNav.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); hBtn.setAttribute('aria-expanded','false'); mNav.setAttribute('aria-hidden','true'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
+  hBtn.addEventListener('click', openNav);
+  mCls.addEventListener('click', closeNav);
+  mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeNav(); });
 
-  function openNav() {
-    nav.style.display = 'flex';
-    requestAnimationFrame(() => nav.classList.add('open'));
-    btn.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+  // ── Mobile nav accordion ────────────────────────────────────
+  document.querySelectorAll('.mobile-nav-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sub = document.getElementById(btn.dataset.target);
+      const isOpen = sub.classList.contains('open');
+      document.querySelectorAll('.mobile-nav-sub').forEach(s => s.classList.remove('open'));
+      document.querySelectorAll('.mobile-nav-toggle').forEach(b => b.setAttribute('aria-expanded','false'));
+      if (!isOpen) { sub.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
 
-  function closeNav() {
-    nav.classList.remove('open');
-    btn.classList.remove('open');
-    document.body.style.overflow = '';
-    setTimeout(() => nav.style.display = 'none', 250);
-  }
-
-  btn.addEventListener('click', openNav);
-  close.addEventListener('click', closeNav);
-  nav.addEventListener('click', e => { if (e.target.tagName === 'A') closeNav(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
-
-  // Timeline scroll-reveal
+  // ── Timeline scroll-reveal ───────────────────────────────────
   const steps = document.querySelectorAll('.tl-step');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -1772,7 +803,7 @@
   }, { threshold: 0.15 });
   steps.forEach(s => observer.observe(s));
 
-  // FAQ accordion
+  // ── FAQ accordion ────────────────────────────────────────────
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
@@ -1781,10 +812,7 @@
         i.classList.remove('open');
         i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
       });
-      if (!isOpen) {
-        item.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-      }
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
     });
   });
 </script>

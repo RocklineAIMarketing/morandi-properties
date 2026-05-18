@@ -175,6 +175,10 @@
     .flip-card:hover .flip-inner { transform: rotateY(180deg); }
     .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
     .flip-front { background: var(--light-bg); border: 1px solid var(--line); }
+
+    /* FIX: photo fills the entire card front */
+    .flip-front-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
     .flip-front-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #dce3e8 0%, #b0bec5 100%); display: flex; align-items: center; justify-content: center; }
     .flip-front-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(26,45,74,.85) 0%, transparent 100%); padding: 10px 12px 8px; display: flex; justify-content: space-between; align-items: flex-end; }
     .flip-front-address { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .03em; color: var(--white); line-height: 1.15; }
@@ -372,8 +376,10 @@
         <p class="portfolio-eyebrow">Signature Sales</p>
         <h1 class="portfolio-headline">Check Out Our Last 100 Sales</h1>
       </div>
+      <!-- FIX: Added "All Top 25" as the first/default button -->
       <div class="filter-row">
-        <button class="f-btn active" onclick="filterCards('1M+', this)">$1M+</button>
+        <button class="f-btn active" onclick="filterCards('all', this)">All Top 25</button>
+        <button class="f-btn" onclick="filterCards('1M+', this)">$1M+</button>
         <button class="f-btn" onclick="filterCards('750k', this)">$750K–$999K</button>
         <button class="f-btn" onclick="filterCards('500k', this)">$500K–$749K</button>
       </div>
@@ -382,7 +388,8 @@
       <div class="map-col"><div id="sold-map"></div></div>
       <div class="list-col">
         <div class="list-col-header">
-          <span class="list-col-title">Top 25 Sales</span>
+          <!-- FIX: Title is now updated dynamically by filterCards() -->
+          <span class="list-col-title" id="list-col-title">Top 25 Sales</span>
           <span class="list-col-count" id="prop-count">25 properties</span>
         </div>
         <div class="scroll-container" id="listings-feed"></div>
@@ -454,7 +461,6 @@
     <h2 class="section-headline">Google Reviews</h2>
     <div class="testimonials-grid">
 
-      <!-- REVIEW 1 — Michael O. March 2026 -->
       <div class="tcard" itemscope itemtype="https://schema.org/Review">
         <div class="tcard-stars" aria-label="5 out of 5 stars">
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -471,7 +477,6 @@
         </div>
       </div>
 
-      <!-- REVIEW 2 — Victoria H. August 2025 -->
       <div class="tcard" itemscope itemtype="https://schema.org/Review">
         <div class="tcard-stars" aria-label="5 out of 5 stars">
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -488,7 +493,6 @@
         </div>
       </div>
 
-      <!-- REVIEW 3 — Joy B. August 2025 -->
       <div class="tcard" itemscope itemtype="https://schema.org/Review">
         <div class="tcard-stars" aria-label="5 out of 5 stars">
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -505,7 +509,6 @@
         </div>
       </div>
 
-      <!-- REVIEW 4 — Mia May 2025 -->
       <div class="tcard" itemscope itemtype="https://schema.org/Review">
         <div class="tcard-stars" aria-label="5 out of 5 stars">
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -522,7 +525,6 @@
         </div>
       </div>
 
-      <!-- REVIEW 5 — Haney J. July 2025 -->
       <div class="tcard" itemscope itemtype="https://schema.org/Review">
         <div class="tcard-stars" aria-label="5 out of 5 stars">
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -539,7 +541,6 @@
         </div>
       </div>
 
-      <!-- REVIEW 6 — Michael O. May 2025 -->
       <div class="tcard" itemscope itemtype="https://schema.org/Review">
         <div class="tcard-stars" aria-label="5 out of 5 stars">
           <svg class="tcard-star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
@@ -700,7 +701,7 @@
     hBtn.setAttribute('aria-expanded', 'false');
     mNav.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    setTimeout(() => mNav.style.display = 'none', 250);
+    setTimeout(() => { mNav.style.display = 'none'; }, 250);
   }
 
   hBtn.addEventListener('click', openNav);
@@ -826,6 +827,14 @@
   const tier = p => p >= 1000000 ? 'Platinum Sale' : p >= 750000 ? 'Luxury Estate' : p >= 500000 ? 'Premium Sale' : 'Closed Sale';
   const cat  = p => p >= 1000000 ? '1M+' : p >= 750000 ? '750k' : p >= 500000 ? '500k' : 'other';
 
+  /* FIX: Human-readable labels for each filter used in the sidebar header */
+  const FILTER_LABELS = {
+    'all':  'Top 25 Sales',
+    '1M+':  '$1M+ Sales',
+    '750k': '$750K – $999K',
+    '500k': '$500K – $749K'
+  };
+
   const SORTED = [...ALL].sort((a, b) => b[3] - a[3]);
   const TOP25  = SORTED.slice(0, 25);
 
@@ -863,7 +872,7 @@
 
     function buildPopup(addr, city, zip, price, photo) {
       const imgHtml = photo
-        ? `<img class="popup-sv-img" src="${photo}" alt="Photo of ${addr}" loading="lazy" onerror="this.parentElement.querySelector('.popup-sv-placeholder').style.display='flex';this.style.display='none'"><div class="popup-sv-placeholder" style="display:none">Photo Coming Soon</div>`
+        ? `<img class="popup-sv-img" src="${photo}" alt="Photo of ${addr}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="popup-sv-placeholder" style="display:none">Photo Coming Soon</div>`
         : `<div class="popup-sv-placeholder">Photo Coming Soon</div>`;
       return `${imgHtml}<div class="popup-body"><span class="popup-city">${city}, IL ${zip}</span><span class="popup-address">${addr}</span><span class="popup-price">${fmt(price)}</span><span class="popup-badge">${tier(price)}</span></div>`;
     }
@@ -884,30 +893,61 @@
     let activeRank = null;
 
     function filterCards(c, btnEl) {
+      /* Update active button state */
       document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
       btnEl.classList.add('active');
+
+      /* Reset any previously highlighted marker */
       if (activeRank !== null && cardMarkers[activeRank]) {
         cardMarkers[activeRank].setIcon(mkIcon(false));
+        cardMarkers[activeRank].closePopup();
       }
       activeRank = null;
+
       const feed    = document.getElementById('listings-feed');
       const countEl = document.getElementById('prop-count');
+      const titleEl = document.getElementById('list-col-title');
+
       feed.innerHTML = '';
+
       const filtered = TOP25.map((s, r) => ({ s, r })).filter(({ s }) => c === 'all' || cat(s[3]) === c);
-      countEl.textContent = filtered.length + ' properties';
+
+      /* FIX: Update both the count AND the sidebar header label to match the active filter */
+      countEl.textContent = filtered.length + (filtered.length === 1 ? ' property' : ' properties');
+      titleEl.textContent = FILTER_LABELS[c] || 'Top Sales';
+
       const ff = document.createElement('div');
       ff.className = 'flip-feed';
+
       filtered.forEach(({ s, r }) => {
-        const [addr, city, zip, price] = s;
+        /* FIX: Destructure photo (index 6) so it can be used in the card template */
+        const [addr, city, zip, price, , , photo] = s;
+
         const card = document.createElement('div');
         card.className = 'flip-card';
         card.id = 'card-' + r;
+
+        /*
+         * FIX: Photos now render on the card front.
+         * - If photo exists: <img> is shown, placeholder div is hidden.
+         * - If the image fails to load (onerror): img hides itself and reveals
+         *   the placeholder div sitting right after it in the DOM.
+         * - If no photo path exists: only the placeholder div is rendered.
+         */
+        const imgMarkup = photo
+          ? `<img class="flip-front-img" src="${photo}" alt="${addr}" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+             <div class="flip-front-placeholder" style="display:none">
+               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1a2d4a" stroke-width="1" opacity="0.3"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+             </div>`
+          : `<div class="flip-front-placeholder">
+               <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1a2d4a" stroke-width="1" opacity="0.3"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+             </div>`;
+
         card.innerHTML = `
           <div class="flip-inner">
             <div class="flip-front">
-              <div class="flip-front-placeholder">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1a2d4a" stroke-width="1" opacity="0.3"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-              </div>
+              ${imgMarkup}
               <div class="flip-hint">Hover for details</div>
               <div class="flip-front-overlay">
                 <div>
@@ -932,30 +972,45 @@
               </div>
             </div>
           </div>`;
+
         card.addEventListener('click', () => {
+          /* Deselect the previously active card (if different) */
           if (activeRank !== null && activeRank !== r) {
             const prev = document.getElementById('card-' + activeRank);
             if (prev) prev.classList.remove('highlighted');
-            if (cardMarkers[activeRank]) cardMarkers[activeRank].setIcon(mkIcon(false));
+            if (cardMarkers[activeRank]) {
+              cardMarkers[activeRank].setIcon(mkIcon(false));
+              cardMarkers[activeRank].closePopup();
+            }
           }
+
           card.classList.toggle('highlighted');
           const on = card.classList.contains('highlighted');
+
           if (cardMarkers[r]) cardMarkers[r].setIcon(mkIcon(on));
+
           if (on) {
-            clusterGroup.zoomToShowLayer(cardMarkers[r], () => { cardMarkers[r].openPopup(); });
+            clusterGroup.zoomToShowLayer(cardMarkers[r], () => {
+              if (cardMarkers[r]) cardMarkers[r].openPopup();
+            });
             activeRank = r;
           } else {
             if (cardMarkers[r]) cardMarkers[r].closePopup();
             activeRank = null;
           }
         });
+
         ff.appendChild(card);
       });
+
       feed.appendChild(ff);
     }
 
+    /* FIX: Assign to window so HTML onclick attributes can reach it */
     window.filterCards = filterCards;
-    filterCards('1M+', document.querySelector('.f-btn'));
+
+    /* FIX: Default to showing all top 25, matching the "All Top 25" button */
+    filterCards('all', document.querySelector('.f-btn'));
   });
 </script>
 </body>

@@ -25,7 +25,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap">
+  <!-- FIX 4: Async (non-render-blocking) font loading to match all other site pages -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap"></noscript>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -257,7 +259,8 @@
 <!-- ═══ HEADER (canonical) ═══════════════════════════════ -->
 <header class="site-header" role="banner">
   <div class="logo-row">
-    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+    <!-- FIX 5: Added aria-expanded="false" to match initial state in accessibility tree -->
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <a href="/" class="logo-placeholder">Morandi Properties</a>
@@ -313,8 +316,6 @@
   <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-inner">
       <div class="hero-left">
-
-        <!-- Video: fixed embed URL format (was youtu.be share link which doesn't work in iframes) -->
         <div class="hero-video-wrap">
           <iframe
             src="https://www.youtube.com/embed/ew0gCCLCKQM"
@@ -324,7 +325,6 @@
             loading="lazy">
           </iframe>
         </div>
-
         <div class="hero-content">
           <p class="hero-eyebrow">Free Expert Analysis</p>
           <h1 class="hero-headline" id="hero-heading">
@@ -354,100 +354,108 @@
         </div>
       </div>
 
-      <!-- Form column — submits via Web3Forms to ray@morandiproperties.com -->
+      <!-- Form column -->
       <div class="form-col">
         <div class="form-card" id="valuation-form-card">
-          <p class="form-card-eyebrow">Start Here — It's Free</p>
-          <h2 class="form-card-title">Get My Home's Value</h2>
 
-          <form id="valuationForm" novalidate>
-            <!-- Web3Forms access key -->
-            <input type="hidden" name="access_key" value="d99c7ea4-b143-47da-8fc1-346a39e13b77">
-            <input type="hidden" name="subject" value="New Home Valuation Request — Morandi Properties">
-            <input type="checkbox" name="botcheck" style="display:none;">
+          <!--
+            FIX 2: The eyebrow and title are now INSIDE the form wrapper div
+            so they can be hidden together when the success state is shown.
+            Previously they were siblings of <form> and stayed visible after submit.
+          -->
+          <div id="formContent">
+            <p class="form-card-eyebrow">Start Here — It's Free</p>
+            <h2 class="form-card-title">Get My Home's Value</h2>
 
-            <div class="form-group">
-              <label class="form-label" for="address">Property Address *</label>
-              <input class="form-input" type="text" id="address" name="address" placeholder="123 Main St" required autocomplete="street-address">
-            </div>
-            <div class="form-row">
-              <div>
-                <label class="form-label" for="city">City *</label>
-                <input class="form-input" type="text" id="city" name="city" placeholder="Orland Park" required>
-              </div>
-              <div>
-                <label class="form-label" for="zip">ZIP Code *</label>
-                <input class="form-input" type="text" id="zip" name="zip" placeholder="60467" required maxlength="5" inputmode="numeric">
-              </div>
-            </div>
+            <form id="valuationForm" novalidate>
+              <input type="hidden" name="access_key" value="d99c7ea4-b143-47da-8fc1-346a39e13b77">
+              <input type="hidden" name="subject" value="New Home Valuation Request — Morandi Properties">
+              <input type="checkbox" name="botcheck" style="display:none;">
 
-            <span class="form-section-label">Property Details</span>
-            <div class="form-row">
-              <div>
-                <label class="form-label" for="beds">Bedrooms</label>
-                <select class="form-select" id="beds" name="beds">
-                  <option value="">Select</option>
-                  <option>1</option><option>2</option><option>3</option>
-                  <option>4</option><option>5</option><option>6+</option>
-                </select>
+              <div class="form-group">
+                <label class="form-label" for="address">Property Address *</label>
+                <input class="form-input" type="text" id="address" name="address" placeholder="123 Main St" required autocomplete="street-address">
               </div>
-              <div>
-                <label class="form-label" for="baths">Bathrooms</label>
-                <select class="form-select" id="baths" name="baths">
-                  <option value="">Select</option>
-                  <option>1</option><option>1.5</option><option>2</option>
-                  <option>2.5</option><option>3</option><option>3.5</option><option>4+</option>
-                </select>
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="city">City *</label>
+                  <input class="form-input" type="text" id="city" name="city" placeholder="Orland Park" required>
+                </div>
+                <div>
+                  <label class="form-label" for="zip">ZIP Code *</label>
+                  <input class="form-input" type="text" id="zip" name="zip" placeholder="60467" required maxlength="5" inputmode="numeric">
+                </div>
               </div>
-            </div>
 
-            <span class="form-section-label">When Are You Looking to Sell?</span>
-            <div class="timeline-grid">
-              <div class="timeline-opt">
-                <input type="radio" name="timeline" id="tl1" value="As Soon As Possible">
-                <label for="tl1">As Soon As Possible</label>
+              <span class="form-section-label">Property Details</span>
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="beds">Bedrooms</label>
+                  <select class="form-select" id="beds" name="beds">
+                    <option value="">Select</option>
+                    <option>1</option><option>2</option><option>3</option>
+                    <option>4</option><option>5</option><option>6+</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label" for="baths">Bathrooms</label>
+                  <select class="form-select" id="baths" name="baths">
+                    <option value="">Select</option>
+                    <option>1</option><option>1.5</option><option>2</option>
+                    <option>2.5</option><option>3</option><option>3.5</option><option>4+</option>
+                  </select>
+                </div>
               </div>
-              <div class="timeline-opt">
-                <input type="radio" name="timeline" id="tl2" value="Within 3 Months">
-                <label for="tl2">Within 3 Months</label>
-              </div>
-              <div class="timeline-opt">
-                <input type="radio" name="timeline" id="tl3" value="3-6 Months">
-                <label for="tl3">3–6 Months</label>
-              </div>
-              <div class="timeline-opt">
-                <input type="radio" name="timeline" id="tl4" value="Just Exploring">
-                <label for="tl4">Just Exploring</label>
-              </div>
-            </div>
 
-            <span class="form-section-label">Your Contact Information</span>
-            <div class="form-row">
-              <div>
-                <label class="form-label" for="fname">First Name *</label>
-                <input class="form-input" type="text" id="fname" name="first_name" required autocomplete="given-name">
+              <span class="form-section-label">When Are You Looking to Sell?</span>
+              <div class="timeline-grid">
+                <div class="timeline-opt">
+                  <input type="radio" name="timeline" id="tl1" value="As Soon As Possible">
+                  <label for="tl1">As Soon As Possible</label>
+                </div>
+                <div class="timeline-opt">
+                  <input type="radio" name="timeline" id="tl2" value="Within 3 Months">
+                  <label for="tl2">Within 3 Months</label>
+                </div>
+                <div class="timeline-opt">
+                  <input type="radio" name="timeline" id="tl3" value="3-6 Months">
+                  <label for="tl3">3–6 Months</label>
+                </div>
+                <div class="timeline-opt">
+                  <input type="radio" name="timeline" id="tl4" value="Just Exploring">
+                  <label for="tl4">Just Exploring</label>
+                </div>
               </div>
-              <div>
-                <label class="form-label" for="lname">Last Name *</label>
-                <input class="form-input" type="text" id="lname" name="last_name" required autocomplete="family-name">
+
+              <span class="form-section-label">Your Contact Information</span>
+              <div class="form-row">
+                <div>
+                  <label class="form-label" for="fname">First Name *</label>
+                  <input class="form-input" type="text" id="fname" name="first_name" required autocomplete="given-name">
+                </div>
+                <div>
+                  <label class="form-label" for="lname">Last Name *</label>
+                  <input class="form-input" type="text" id="lname" name="last_name" required autocomplete="family-name">
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="email">Email Address *</label>
-              <input class="form-input" type="email" id="email" name="email" required autocomplete="email">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="phone">Phone Number</label>
-              <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel">
-            </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address *</label>
+                <input class="form-input" type="email" id="email" name="email" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number</label>
+                <input class="form-input" type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel">
+              </div>
 
-            <button type="submit" class="form-submit" id="formSubmitBtn">
-              Request My Free Valuation →
-            </button>
-            <p class="form-error-msg" id="formError">Please fill in all required fields.</p>
-            <p class="form-fine">No obligation. Ray personally reviews every submission.</p>
-          </form>
+              <button type="submit" class="form-submit" id="formSubmitBtn">
+                Request My Free Valuation →
+              </button>
+              <p class="form-error-msg" id="formError">Please fill in all required fields.</p>
+              <p class="form-fine">No obligation. Ray personally reviews every submission.</p>
+            </form>
+          </div>
 
+          <!-- Success state — hidden until form submits successfully -->
           <div class="form-success" id="formSuccess">
             <div class="form-success-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
@@ -457,6 +465,7 @@
             <h3>You're All Set!</h3>
             <p>Ray will personally review your property and reach out within 24 hours with your valuation.</p>
           </div>
+
         </div>
       </div>
 
@@ -482,7 +491,8 @@
           (708) 516-6666
         </a>
         <div class="text-cta-divider"></div>
-        <a href="sms:+17085166666&body=Hi%20Ray%2C%20I%27d%20like%20to%20know%20what%20my%20home%20is%20worth." class="text-cta-btn">
+        <!-- FIX 1: Changed & to ? — SMS URIs use ?body= not &body= -->
+        <a href="sms:+17085166666?body=Hi%20Ray%2C%20I%27d%20like%20to%20know%20what%20my%20home%20is%20worth." class="text-cta-btn">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           Text Us Now
         </a>
@@ -561,11 +571,7 @@
     </div>
   </section>
 
-  <!-- ═══ RECENT SALES ══════════════════════════════════════
-       ⚠️  VERIFY THESE with Ray before publishing.
-           These addresses were in the original code — confirm
-           they are real Ray Morandi closed sales from MLS.
-  ════════════════════════════════════════════════════════ -->
+  <!-- ═══ RECENT SALES ══════════════════════════════════════ -->
   <section class="comps-section">
     <div class="section-inner">
       <p class="section-eyebrow">Proof of Production</p>
@@ -687,7 +693,7 @@
   const mNav = document.getElementById('mobileNav');
   const mCls = document.getElementById('mobileNavClose');
   function openNav()  { mNav.style.display='flex'; requestAnimationFrame(()=>mNav.classList.add('open')); hBtn.classList.add('open'); hBtn.setAttribute('aria-expanded','true'); mNav.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); hBtn.setAttribute('aria-expanded','false'); mNav.setAttribute('aria-hidden','true'); document.body.style.overflow=''; setTimeout(()=>mNav.style.display='none',250); }
+  function closeNav() { mNav.classList.remove('open'); hBtn.classList.remove('open'); hBtn.setAttribute('aria-expanded','false'); mNav.setAttribute('aria-hidden','true'); document.body.style.overflow=''; setTimeout(()=>{ mNav.style.display='none'; },250); }
   hBtn.addEventListener('click', openNav);
   mCls.addEventListener('click', closeNav);
   mNav.addEventListener('click', e=>{ if(e.target.tagName==='A') closeNav(); });
@@ -703,25 +709,29 @@
   });
 
   // ── Valuation form → Web3Forms ─────────────────────────
-  const form      = document.getElementById('valuationForm');
-  const success   = document.getElementById('formSuccess');
-  const errorMsg  = document.getElementById('formError');
-  const submitBtn = document.getElementById('formSubmitBtn');
+  const form        = document.getElementById('valuationForm');
+  const formContent = document.getElementById('formContent');
+  const success     = document.getElementById('formSuccess');
+  const errorMsg    = document.getElementById('formError');
+  const submitBtn   = document.getElementById('formSubmitBtn');
 
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     errorMsg.style.display = 'none';
 
-    // Client-side required field validation
+    // FIX 3: Focus the first *invalid* field, not always the first required field
     const required = form.querySelectorAll('[required]');
-    let valid = true;
+    let firstInvalid = null;
     required.forEach(el => {
       el.style.borderColor = '';
-      if (!el.value.trim()) { el.style.borderColor = '#e57373'; valid = false; }
+      if (!el.value.trim()) {
+        el.style.borderColor = '#e57373';
+        if (!firstInvalid) firstInvalid = el;
+      }
     });
-    if (!valid) {
+    if (firstInvalid) {
       errorMsg.style.display = 'block';
-      form.querySelector('[required]').focus();
+      firstInvalid.focus();
       return;
     }
 
@@ -742,7 +752,9 @@
       const result = await response.json();
 
       if (response.ok && result.success) {
-        form.style.display = 'none';
+        // FIX 2: Hide the entire formContent div (eyebrow + title + form)
+        // so nothing bleeds through above the success message
+        formContent.style.display = 'none';
         success.style.display = 'flex';
         document.getElementById('valuation-form-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {

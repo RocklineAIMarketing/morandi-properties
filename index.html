@@ -193,7 +193,6 @@
   }
   </script>
 
-  <!-- ===== FONTS ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Barlow:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'">
@@ -283,6 +282,7 @@
     .back-name { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); }
     .back-location { font-size: 11px; color: var(--blue-grey); margin-top: 3px; letter-spacing: .06em; }
 
+    /* ─── Listings Section ────────────────────────────────── */
     .listings-section { background: var(--white); padding: 80px 40px; }
     .listings-header { max-width: 1100px; margin: 0 auto 48px; display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
     .listings-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 10px; }
@@ -309,6 +309,7 @@
     .listing-meta-item strong { color: var(--navy); font-weight: 600; }
     .listing-type-tag { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); border: 1px solid #dce3e8; display: inline-block; padding: 3px 8px; align-self: flex-start; }
 
+    /* ─── Testimonials ────────────────────────────────────── */
     .testimonials-section { background: var(--navy); padding: 80px 40px; }
     .testimonials-eyebrow { text-align: center; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 14px; }
     .testimonials-headline { text-align: center; font-family: 'Barlow Condensed', sans-serif; font-size: clamp(26px, 3vw, 36px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--white); margin-bottom: 48px; }
@@ -316,6 +317,7 @@
     .testimonial-video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: rgba(255,255,255,.05); }
     .testimonial-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: block; }
 
+    /* ─── Why Section ─────────────────────────────────────── */
     .why-section { background: var(--white); padding: 80px 40px; }
     .why-inner { max-width: 1100px; margin: 0 auto; }
     .why-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 60px; }
@@ -406,8 +408,7 @@
     <a href="/" class="logo-placeholder">Morandi Properties</a>
   </div>
   <nav class="nav-row" role="navigation" aria-label="Primary navigation">
-    <a href="/" class="nav-link">Home</a>
-
+    <a href="/" class="nav-link active">Home</a>
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Buying ▾</span>
       <div class="dropdown-menu">
@@ -417,7 +418,6 @@
         <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Selling ▾</span>
       <div class="dropdown-menu">
@@ -426,7 +426,6 @@
         <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Insights ▾</span>
       <div class="dropdown-menu">
@@ -434,7 +433,6 @@
         <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Realtors ▾</span>
       <div class="dropdown-menu">
@@ -443,7 +441,6 @@
         <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
       </div>
     </div>
-
     <div class="nav-dropdown">
       <span class="nav-link nav-label">Contact ▾</span>
       <div class="dropdown-menu">
@@ -464,7 +461,6 @@
   <section class="video-section" aria-label="About Ray Morandi" itemscope itemtype="https://schema.org/Person">
     <div class="video-inner">
       <div class="video-wrap" itemscope itemtype="https://schema.org/VideoObject">
-        <!-- ⚠️ Replace VIDEO_ID_HERE with the correct YouTube video ID -->
         <iframe
           src="https://www.youtube.com/embed/Kp0zo5JL4rA"
           title="Meet Ray Morandi — Southwest Suburbs Real Estate Expert"
@@ -585,138 +581,126 @@
       <a href="/buying/listings" class="listings-view-all">View All Listings &rarr;</a>
     </div>
     <div class="listings-grid">
-      <!-- Listing 1 -->
-      <a href="http://www.idxhome.com/homes/98967/34/address/12584935"
+
+      <!-- LISTINGS:START -->
+
+      <!-- 7428 Granton Place -->
+      <a href="https://www.idxhome.com/homes/98967/34/7428-GRANTON-PLACE-FRANKFORT-IL-60423/12645598"
          class="listing-card" target="_blank" rel="noopener"
-         aria-label="15966 S Crystal Creek Drive, Homer Glen, IL — $1,062,000"
+         aria-label="7428 Granton Place, Frankfort, IL — $949,000"
          itemscope itemtype="https://schema.org/RealEstateListing" itemprop="itemListElement">
         <meta itemprop="position" content="1">
         <div class="listing-photo">
-          <img src="https://mlsgrid.idxhome.com/images/MRD12584935/c61c1114-3860-46a7-9a74-e77ac9a3ff0c.jpeg"
-               alt="15966 S Crystal Creek Drive — New Construction Home in Homer Glen, IL"
-               loading="lazy" itemprop="image">
-          <span class="listing-badge new-construction">New Construction</span>
+          <img src="https://mlsgrid.idxhome.com/images/MRD12645598/0bf1445a-2c77-4d33-a159-a79b46639a83.jpeg"
+               alt="7428 Granton Place, Frankfort IL" loading="lazy" itemprop="image">
+          <span class="listing-badge">Active</span>
         </div>
         <div class="listing-info">
           <span class="listing-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <span itemprop="price" content="1062000">$1,062,000</span>
+            <span itemprop="price" content="949000">$949,000</span>
             <meta itemprop="priceCurrency" content="USD">
             <meta itemprop="availability" content="https://schema.org/InStock">
           </span>
-          <span class="listing-address" itemprop="name">15966 S Crystal Creek Drive</span>
-          <span class="listing-city" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <span itemprop="addressLocality">Homer Glen</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60491</span>
-          </span>
-          <div class="listing-divider"></div>
-          <div class="listing-meta">
-            <span class="listing-meta-item"><strong itemprop="numberOfBedrooms">5</strong> bd</span>
-            <span class="listing-meta-item"><strong>3.5</strong> ba</span>
-            <span class="listing-meta-item"><strong>3,500</strong> sqft</span>
-          </div>
-          <span class="listing-type-tag">Residential · MLS #12584935</span>
-        </div>
-      </a>
-      <!-- Listing 2 -->
-      <a href="http://www.idxhome.com/homes/98967/34/address/12526363"
-         class="listing-card" target="_blank" rel="noopener"
-         aria-label="1 Old Frankfort Way, Frankfort, IL — $839,000"
-         itemscope itemtype="https://schema.org/RealEstateListing" itemprop="itemListElement">
-        <meta itemprop="position" content="2">
-        <div class="listing-photo">
-          <img src="https://mlsgrid.idxhome.com/images/MRD12526363/e500b7a7-110a-4783-ad18-66488e5fc958.jpeg"
-               alt="1 Old Frankfort Way — Commercial End-Cap in Historic Downtown Frankfort, IL"
-               loading="lazy" itemprop="image">
-          <span class="listing-badge commercial">Commercial</span>
-        </div>
-        <div class="listing-info">
-          <span class="listing-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <span itemprop="price" content="839000">$839,000</span>
-            <meta itemprop="priceCurrency" content="USD">
-            <meta itemprop="availability" content="https://schema.org/InStock">
-          </span>
-          <span class="listing-address" itemprop="name">1 Old Frankfort Way #1-5</span>
+          <span class="listing-address" itemprop="name">7428 Granton Place</span>
           <span class="listing-city" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
             <span itemprop="addressLocality">Frankfort</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60423</span>
           </span>
           <div class="listing-divider"></div>
           <div class="listing-meta">
-            <span class="listing-meta-item"><strong>2,688</strong> sqft</span>
-            <span class="listing-meta-item"><strong>2</strong> units</span>
+            <span class="listing-meta-item"><strong itemprop="numberOfBedrooms">4</strong> bd</span>
+            <span class="listing-meta-item"><strong>3.5</strong> ba</span>
+            <span class="listing-meta-item"><strong>3,200</strong> sqft</span>
           </div>
-          <span class="listing-type-tag">Commercial · MLS #12526363</span>
+          <span class="listing-type-tag">Residential · MLS #12645598</span>
         </div>
       </a>
-      <!-- Listing 3 -->
-      <a href="http://www.idxhome.com/homes/98967/34/address/12524118"
+
+      <!-- 13326 W Creekside Drive -->
+      <a href="https://www.idxhome.com/homes/98967/34/13326-W-CREEKSIDE-DRIVE-HOMER-GLEN-IL-60491/12639280"
          class="listing-card" target="_blank" rel="noopener"
-         aria-label="14355 S 94th Avenue, Orland Park, IL — $299,900"
+         aria-label="13326 W Creekside Drive, Homer Glen, IL — $599,900"
          itemscope itemtype="https://schema.org/RealEstateListing" itemprop="itemListElement">
-        <meta itemprop="position" content="3">
+        <meta itemprop="position" content="2">
         <div class="listing-photo">
-          <img src="https://mlsgrid.idxhome.com/images/MRD12524118/f31d71f3-a6ce-4b86-bb4e-4376c89e930d.jpeg"
-               alt="14355 S 94th Avenue — 2 Acre Land Lot in Heart of Orland Park, IL"
-               loading="lazy" itemprop="image">
-          <span class="listing-badge land">Land</span>
+          <img src="https://mlsgrid.idxhome.com/images/MRD12639280/ba124a65-0738-4636-8755-3f8fff60aa95.jpeg"
+               alt="13326 W Creekside Drive, Homer Glen IL" loading="lazy" itemprop="image">
+          <span class="listing-badge">Contingent</span>
         </div>
         <div class="listing-info">
           <span class="listing-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <span itemprop="price" content="299900">$299,900</span>
+            <span itemprop="price" content="599900">$599,900</span>
             <meta itemprop="priceCurrency" content="USD">
             <meta itemprop="availability" content="https://schema.org/InStock">
           </span>
-          <span class="listing-address" itemprop="name">14355 S 94th Avenue</span>
+          <span class="listing-address" itemprop="name">13326 W Creekside Drive</span>
           <span class="listing-city" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <span itemprop="addressLocality">Orland Park</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60462</span>
+            <span itemprop="addressLocality">Homer Glen</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60491</span>
           </span>
           <div class="listing-divider"></div>
           <div class="listing-meta">
-            <span class="listing-meta-item"><strong>2</strong> acres</span>
-            <span class="listing-meta-item">Prime Location</span>
+            <span class="listing-meta-item"><strong itemprop="numberOfBedrooms">4</strong> bd</span>
+            <span class="listing-meta-item"><strong>2.5</strong> ba</span>
+            <span class="listing-meta-item"><strong>2,306</strong> sqft</span>
           </div>
-          <span class="listing-type-tag">Land · MLS #12524118</span>
+          <span class="listing-type-tag">Residential · MLS #12639280</span>
         </div>
       </a>
+
+      <!-- 22736 Parkview Lane -->
+      <a href="https://www.idxhome.com/homes/98967/34/22736-PARKVIEW-LANE-FRANKFORT-IL-60423/12608233"
+         class="listing-card" target="_blank" rel="noopener"
+         aria-label="22736 Parkview Lane, Frankfort, IL — $840,000"
+         itemscope itemtype="https://schema.org/RealEstateListing" itemprop="itemListElement">
+        <meta itemprop="position" content="3">
+        <div class="listing-photo">
+          <img src="https://mlsgrid.idxhome.com/images/MRD12608233/17c598ff-74f1-4716-a05a-c951bbfd3e5f.jpeg"
+               alt="22736 Parkview Lane, Frankfort IL" loading="lazy" itemprop="image">
+          <span class="listing-badge">Contingent</span>
+        </div>
+        <div class="listing-info">
+          <span class="listing-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <span itemprop="price" content="840000">$840,000</span>
+            <meta itemprop="priceCurrency" content="USD">
+            <meta itemprop="availability" content="https://schema.org/InStock">
+          </span>
+          <span class="listing-address" itemprop="name">22736 Parkview Lane</span>
+          <span class="listing-city" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="addressLocality">Frankfort</span>, <span itemprop="addressRegion">IL</span> <span itemprop="postalCode">60423</span>
+          </span>
+          <div class="listing-divider"></div>
+          <div class="listing-meta">
+            <span class="listing-meta-item"><strong itemprop="numberOfBedrooms">4</strong> bd</span>
+            <span class="listing-meta-item"><strong>2.5</strong> ba</span>
+            <span class="listing-meta-item"><strong>3,025</strong> sqft</span>
+          </div>
+          <span class="listing-type-tag">Residential · MLS #12608233</span>
+        </div>
+      </a>
+
+      <!-- LISTINGS:END -->
+
     </div>
   </section>
 
   <!-- ===== VIDEO TESTIMONIALS ===== -->
-  <!-- ⚠️ Verify these YouTube IDs (ZxaQcVMOBv8, 30axJZaPl0o, zPMv1Ucn7vw) belong to Morandi Properties before publishing -->
   <section class="testimonials-section" aria-label="Client video testimonials for Morandi Properties">
     <p class="testimonials-eyebrow">Client Stories</p>
     <h2 class="testimonials-headline">Hear It From Our Clients</h2>
     <div class="testimonials-grid">
       <div class="testimonial-video-wrap" itemscope itemtype="https://schema.org/VideoObject">
-        <iframe
-          src="https://www.youtube.com/embed/ZxaQcVMOBv8?si=TBQMtYsHkRIsjrgf"
-          title="Client Testimonial — Morandi Properties Southwest Suburbs"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/ZxaQcVMOBv8?si=TBQMtYsHkRIsjrgf" title="Client Testimonial — Morandi Properties Southwest Suburbs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <meta itemprop="name" content="Client Testimonial — Morandi Properties">
         <meta itemprop="embedUrl" content="https://www.youtube.com/embed/ZxaQcVMOBv8">
         <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/ZxaQcVMOBv8/maxresdefault.jpg">
       </div>
       <div class="testimonial-video-wrap" itemscope itemtype="https://schema.org/VideoObject">
-        <iframe
-          src="https://www.youtube.com/embed/30axJZaPl0o?si=mKpOr3X9GuM2OEMA"
-          title="Client Testimonial — Morandi Properties Southwest Suburbs"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/30axJZaPl0o?si=mKpOr3X9GuM2OEMA" title="Client Testimonial — Morandi Properties Southwest Suburbs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <meta itemprop="name" content="Client Testimonial — Morandi Properties">
         <meta itemprop="embedUrl" content="https://www.youtube.com/embed/30axJZaPl0o">
         <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/30axJZaPl0o/maxresdefault.jpg">
       </div>
       <div class="testimonial-video-wrap" itemscope itemtype="https://schema.org/VideoObject">
-        <iframe
-          src="https://www.youtube.com/embed/zPMv1Ucn7vw?si=HbfZXd5lGW4l276V"
-          title="Client Testimonial — Morandi Properties Southwest Suburbs"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
+        <iframe src="https://www.youtube.com/embed/zPMv1Ucn7vw?si=HbfZXd5lGW4l276V" title="Client Testimonial — Morandi Properties Southwest Suburbs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <meta itemprop="name" content="Client Testimonial — Morandi Properties">
         <meta itemprop="embedUrl" content="https://www.youtube.com/embed/zPMv1Ucn7vw">
         <meta itemprop="thumbnailUrl" content="https://img.youtube.com/vi/zPMv1Ucn7vw/maxresdefault.jpg">
@@ -769,51 +753,18 @@
   </section>
 
   <!-- ===== HIDDEN FAQ (Schema) ===== -->
-  <section
-    aria-label="Frequently asked questions about Morandi Properties"
-    style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;"
-    itemscope itemtype="https://schema.org/FAQPage">
+  <section aria-label="Frequently asked questions about Morandi Properties" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;" itemscope itemtype="https://schema.org/FAQPage">
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">Who is the best real estate agent in the southwest suburbs of Chicago?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Ray Morandi of Morandi Properties is consistently ranked among the top real estate agents in the southwest suburbs of Chicago. Ranked in the top 1% of agents in Illinois and named a Top 100 Agent by Chicago Magazine multiple years running, Ray has been serving buyers and sellers across 30+ communities since 2006 with over 500 families helped and more than $400 million in closed sales.</p>
-      </div>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Ray Morandi of Morandi Properties is consistently ranked among the top real estate agents in the southwest suburbs of Chicago. Ranked in the top 1% of agents in Illinois and named a Top 100 Agent by Chicago Magazine multiple years running, Ray has been serving buyers and sellers across 30+ communities since 2006 with over 500 families helped and more than $400 million in closed sales.</p></div>
     </div>
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What communities does Ray Morandi serve?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Ray Morandi and Morandi Properties serve 30+ communities across the southwest suburbs of Chicago including Orland Park, Tinley Park, Frankfort, Mokena, New Lenox, Homer Glen, Manhattan, Lockport, Joliet, Plainfield, and surrounding areas.</p>
-      </div>
-    </div>
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 itemprop="name">How long has Ray Morandi been a real estate agent?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Ray Morandi has been a licensed real estate broker in Illinois since 2006 — over 20 years of experience serving buyers and sellers across the southwest suburbs of Chicago.</p>
-      </div>
-    </div>
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 itemprop="name">How much real estate has Ray Morandi sold?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Ray Morandi has closed more than $400 million in real estate sales across over 500 transactions throughout the southwest suburbs of Chicago.</p>
-      </div>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Ray Morandi and Morandi Properties serve 30+ communities across the southwest suburbs of Chicago including Orland Park, Tinley Park, Frankfort, Mokena, New Lenox, Homer Glen, Manhattan, Lockport, Joliet, Plainfield, and surrounding areas.</p></div>
     </div>
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">How do I contact Ray Morandi at Morandi Properties?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">You can contact Ray Morandi at Morandi Properties by phone at (708) 516-6666 or by visiting morandiproperties.com. The office is located at 15715 Wolf Rd, Orland Park, IL 60467.</p>
-      </div>
-    </div>
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Does Morandi Properties sell commercial real estate?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Yes. Morandi Properties handles both residential and commercial real estate throughout the southwest suburbs, including retail, office, and mixed-use properties.</p>
-      </div>
-    </div>
-    <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <h3 itemprop="name">Does Ray Morandi sell new construction homes in the southwest suburbs?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Yes. Ray Morandi represents buyers and sellers of new construction homes throughout the southwest suburbs including Homer Glen, Frankfort, Mokena, Manhattan, and New Lenox, Illinois.</p>
-      </div>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">You can contact Ray Morandi at Morandi Properties by phone at (708) 516-6666 or by visiting morandiproperties.com. The office is located at 15715 Wolf Rd, Orland Park, IL 60467.</p></div>
     </div>
   </section>
 
@@ -840,27 +791,13 @@
       <div class="footer-social">
         <span class="footer-social-label">Follow Along</span>
         <div class="footer-social-icons">
-          <a href="https://www.facebook.com/morandiproperties" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-          </a>
-          <a href="https://www.instagram.com/morandiproperties" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-          <a href="https://www.threads.net/@morandiproperties" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 013.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.583-1.3-.881-2.342-.887h-.062c-.76 0-1.702.214-2.351 1.086l-1.651-1.24C7.52 5.995 8.94 5.302 10.7 5.302h.085c3.377.023 5.396 2.045 5.616 5.623.71.355 1.342.804 1.878 1.343 1.255 1.252 1.942 2.97 1.93 4.934-.018 3.95-3.088 6.773-7.023 6.798zM11.99 10.57c-.137 0-.274.003-.41.01-1.98.114-3.197 1.027-3.133 2.294.037.675.52 1.892 2.454 1.892h.044c1.688-.1 2.618-1.198 2.757-3.265a11.026 11.026 0 00-1.712-.931z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/raymorandi" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="https://www.tiktok.com/@morandiproperties" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
-          </a>
-          <a href="https://www.youtube.com/@morandiproperties" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-          </a>
-          <a href="https://g.page/morandiproperties" class="footer-social-link" aria-label="Google Business" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.25 16.195c-1.39 1.304-3.244 2.054-5.25 2.054-4.004 0-7.25-3.246-7.25-7.25 0-4.003 3.246-7.249 7.25-7.249 1.942 0 3.645.751 4.952 1.977l-2.006 1.93c-.742-.71-1.79-1.158-2.946-1.158-2.412 0-4.37 1.958-4.37 4.5 0 2.543 1.958 4.5 4.37 4.5 2.152 0 3.745-1.244 4.112-3h-4.112v-2.5H18c.084.495.13 1 .13 1.5 0 1.33-.306 2.61-.88 3.696z"/></svg>
-          </a>
+          <a href="https://www.facebook.com/morandiproperties" class="footer-social-link" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></a>
+          <a href="https://www.instagram.com/morandiproperties" class="footer-social-link" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.threads.net/@morandiproperties" class="footer-social-link" aria-label="Threads" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 013.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.583-1.3-.881-2.342-.887h-.062c-.76 0-1.702.214-2.351 1.086l-1.651-1.24C7.52 5.995 8.94 5.302 10.7 5.302h.085c3.377.023 5.396 2.045 5.616 5.623.71.355 1.342.804 1.878 1.343 1.255 1.252 1.942 2.97 1.93 4.934-.018 3.95-3.088 6.773-7.023 6.798zM11.99 10.57c-.137 0-.274.003-.41.01-1.98.114-3.197 1.027-3.133 2.294.037.675.52 1.892 2.454 1.892h.044c1.688-.1 2.618-1.198 2.757-3.265a11.026 11.026 0 00-1.712-.931z"/></svg></a>
+          <a href="https://www.linkedin.com/in/raymorandi" class="footer-social-link" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://www.tiktok.com/@morandiproperties" class="footer-social-link" aria-label="TikTok" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+          <a href="https://www.youtube.com/@morandiproperties" class="footer-social-link" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+          <a href="https://g.page/morandiproperties" class="footer-social-link" aria-label="Google Business" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.373 0 12s5.372 12 12 12 12-5.373 12-12S18.628 0 12 0zm5.25 16.195c-1.39 1.304-3.244 2.054-5.25 2.054-4.004 0-7.25-3.246-7.25-7.25 0-4.003 3.246-7.249 7.25-7.249 1.942 0 3.645.751 4.952 1.977l-2.006 1.93c-.742-.71-1.79-1.158-2.946-1.158-2.412 0-4.37 1.958-4.37 4.5 0 2.543 1.958 4.5 4.37 4.5 2.152 0 3.745-1.244 4.112-3h-4.112v-2.5H18c.084.495.13 1 .13 1.5 0 1.33-.306 2.61-.88 3.696z"/></svg></a>
         </div>
       </div>
     </div>
@@ -884,13 +821,9 @@
 <!-- ============================================================ -->
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
   <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
-
   <a href="/">Home</a>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">
-      Buying <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">Buying <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnBuying">
       <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
       <a href="https://morandiproperties.com/buying/open-house">Open House Search</a>
@@ -898,43 +831,31 @@
       <a href="https://morandiproperties.com/buying/calculator">Mortgage Calculator</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">
-      Selling <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">Selling <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnSelling">
       <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
       <a href="https://morandiproperties.com/selling/selling-strategy-guide">Seller's Strategy Guide</a>
       <a href="https://morandiproperties.com/selling/valuation">What is my Home Worth?</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">
-      Insights <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">Insights <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnInsights">
       <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
       <a href="https://morandiproperties.com/insights/faq">Real Estate Q&amp;A</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">
-      Realtors <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">Realtors <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnTeam">
       <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
       <a href="https://morandiproperties.com/realtors/ray-morandi">Meet Ray Morandi</a>
       <a href="https://morandiproperties.com/realtors/reviews">Client Reviews</a>
     </div>
   </div>
-
   <div class="mobile-nav-group">
-    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">
-      Contact <span class="caret">▾</span>
-    </button>
+    <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">Contact <span class="caret">▾</span></button>
     <div class="mobile-nav-sub" id="mnContact">
       <a href="https://morandiproperties.com/contact/office">General Inquiry</a>
       <a href="https://morandiproperties.com/contact/chicagoland-market-report">Market Insider</a>

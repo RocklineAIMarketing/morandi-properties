@@ -158,22 +158,28 @@
     .listings-teaser-viewall { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1.5px solid var(--navy); padding-bottom: 2px; white-space: nowrap; flex-shrink: 0; transition: color .2s, border-color .2s; }
     .listings-teaser-viewall:hover { color: var(--navy-light); border-color: var(--navy-light); }
     .listings-teaser-grid { max-width: 1100px; margin: 0 auto 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .lt-card { background: var(--white); border: 1px solid #dce3e8; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .22s ease, box-shadow .22s ease; overflow: hidden; }
-    .lt-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,45,74,.1); }
-    .lt-photo { width: 100%; aspect-ratio: 4/3; background: var(--navy); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-    .lt-photo-placeholder { opacity: .15; }
-    .lt-badge { position: absolute; top: 14px; left: 14px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--white); background: var(--navy); padding: 5px 10px; }
-    .lt-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
-    .lt-card:hover .lt-photo img { transform: scale(1.04); }
-    .lt-info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .lt-price { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .02em; color: var(--navy); line-height: 1; }
-    .lt-address { font-size: 14px; font-weight: 500; color: var(--navy); }
-    .lt-city { font-size: 13px; color: var(--text-muted); }
-    .lt-divider { width: 100%; height: 1px; background: #eceff1; margin: 6px 0; }
-    .lt-meta { display: flex; gap: 16px; }
-    .lt-meta-item { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
-    .lt-meta-item strong { color: var(--navy); font-weight: 600; }
     .listings-teaser-bottom { max-width: 1100px; margin: 0 auto; text-align: center; }
+
+    /* listing-card styles (matches homepage card markup from build_card_home) */
+    .listing-card { background: var(--white); border: 1px solid #dce3e8; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: transform .22s ease, box-shadow .22s ease; overflow: hidden; }
+    .listing-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,45,74,.1); }
+    .listing-photo { width: 100%; aspect-ratio: 4/3; background: var(--navy); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .listing-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+    .listing-card:hover .listing-photo img { transform: scale(1.04); }
+    .listing-badge { position: absolute; top: 14px; left: 14px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--white); background: var(--navy); padding: 5px 10px; }
+    .listing-badge.badge-contingent { background: #78909c; }
+    .listing-badge.commercial { background: #37474f; }
+    .listing-badge.land { background: #546e7a; }
+    .listing-info { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .listing-price { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .02em; color: var(--navy); line-height: 1; }
+    .listing-address { font-size: 14px; font-weight: 500; color: var(--navy); }
+    .listing-city { font-size: 13px; color: var(--text-muted); }
+    .listing-divider { width: 100%; height: 1px; background: #eceff1; margin: 6px 0; }
+    .listing-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .listing-meta-item { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
+    .listing-meta-item strong { color: var(--navy); font-weight: 600; }
+    .listing-type-tag { font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--blue-grey); margin-top: 4px; }
+
     @media (max-width: 900px) {
       .listings-teaser { padding: 60px 24px; }
       .listings-teaser-header { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -338,10 +344,10 @@
   <section class="page-hero" aria-label="Buyers Guide introduction" itemscope itemtype="https://schema.org/Article">
     <div class="page-hero-inner">
       <p class="page-hero-eyebrow">Morandi Properties &mdash; Southwest Suburbs of Chicago</p>
-      <h1 class="page-hero-headline" itemprop="name">Buyers Guide:<br>Buying a Home in Chicago and it's 30+ in Suburban Communities</h1>
+      <h1 class="page-hero-headline" itemprop="name">Buyers Guide:<br>Buying a Home in Chicago and its 30+ Suburban Communities</h1>
       <div class="page-hero-divider"></div>
       <p class="page-hero-body" itemprop="description">
-        Buying a home in <strong>the Chicagoland area, including Orland Park, Tinley Park, New Lenox, Frankfort, Homer Glen and Mokena, </strong> is one of the biggest financial decisions you will ever make — and the southwest Chicago suburbs are one of the most competitive real estate markets in the state. Whether you are a first-time buyer or making your fifth move, having a <strong>local expert in your corner changes everything</strong>.
+        Buying a home in <strong>the Chicagoland area, including Orland Park, Tinley Park, New Lenox, Frankfort, Homer Glen and Mokena,</strong> is one of the biggest financial decisions you will ever make — and the southwest Chicago suburbs are one of the most competitive real estate markets in the state. Whether you are a first-time buyer or making your fifth move, having a <strong>local expert in your corner changes everything</strong>.
       </p>
       <p class="page-hero-body">
         At Morandi Properties, Ray Morandi has guided <strong>more than 1,000 Chicagoland families</strong> through the home-buying process since 2006. His approach is straightforward: understand exactly what you need, move fast when the right home comes up, and negotiate hard to protect your interests from offer to closing. With over <strong>$400 million in closed sales</strong> and a consistent ranking in the <strong>top 1% of Illinois real estate agents</strong>, Ray brings a level of experience and local market knowledge that is difficult to match anywhere in the southwest suburbs.
@@ -367,7 +373,8 @@
       <div class="tl-photo">
         <img class="tl-photo-bg"
              src="/images/buyers-guide-photos/mortgage-pre-approval-process-orland-park-real-estate.jpg"
-             alt="Home buyer meeting with a mortgage lender for pre-approval in Orland Park, IL">
+             alt="Home buyer meeting with a mortgage lender for pre-approval in Orland Park, IL"
+             width="800" height="600">
         <div class="tl-badge"><span class="tl-badge-num">01</span></div>
       </div>
       <div class="tl-content">
@@ -386,7 +393,7 @@
         <img class="tl-photo-bg"
              src="/images/buyers-guide-photos/home-buyers-guide-orland-park-morandi-properties.jpg"
              alt="Couple reviewing southwest Chicago suburb neighborhoods with a Morandi Properties agent"
-             loading="lazy">
+             loading="lazy" width="800" height="600">
         <div class="tl-badge"><span class="tl-badge-num">02</span></div>
       </div>
       <div class="tl-content">
@@ -405,7 +412,7 @@
         <img class="tl-photo-bg"
              src="/images/buyers-guide-photos/house-hunting-chicagoland-southwest-suburbs-buyers.jpg"
              alt="Home buyers touring a house for sale in the southwest suburbs of Chicago"
-             loading="lazy">
+             loading="lazy" width="800" height="600">
         <div class="tl-badge"><span class="tl-badge-num">03</span></div>
       </div>
       <div class="tl-content">
@@ -424,7 +431,7 @@
         <img class="tl-photo-bg"
              src="/images/buyers-guide-photos/home-offer-negotiation-morandi-properties-illinois.jpg"
              alt="Real estate agent presenting a competitive home offer in Orland Park, Illinois"
-             loading="lazy">
+             loading="lazy" width="800" height="600">
         <div class="tl-badge"><span class="tl-badge-num">04</span></div>
       </div>
       <div class="tl-content">
@@ -463,7 +470,7 @@
         <img class="tl-photo-bg"
              src="/images/buyers-guide-photos/home-inspection-buyers-checklist-orland-park-il.jpg"
              alt="Licensed home inspector reviewing a property for buyers in the southwest Chicago suburbs"
-             loading="lazy">
+             loading="lazy" width="800" height="600">
         <div class="tl-badge"><span class="tl-badge-num">05</span></div>
       </div>
       <div class="tl-content">
@@ -482,7 +489,7 @@
         <img class="tl-photo-bg"
              src="/images/buyers-guide-photos/first-time-homebuyer-meeting-agent-orland-park-il.jpg"
              alt="Home appraisal and mortgage underwriting review with a Morandi Properties agent in Orland Park, IL"
-             loading="lazy">
+             loading="lazy" width="800" height="600">
         <div class="tl-badge"><span class="tl-badge-num">06</span></div>
       </div>
       <div class="tl-content">
@@ -501,7 +508,7 @@
         <img class="tl-photo-bg"
              src="/images/buyers-guide-photos/new-homeowners-keys-closing-day-chicagoland.jpg"
              alt="New homeowners receiving keys on closing day in the Chicagoland area"
-             loading="lazy">
+             loading="lazy" width="800" height="600">
         <div class="tl-badge"><span class="tl-badge-num">07</span></div>
       </div>
       <div class="tl-content">
@@ -517,67 +524,20 @@
   </section>
 
   <!-- ─── LISTINGS TEASER ───────────────────────────────────────── -->
-  <section class="listings-teaser" aria-label="Featured homes for sale in the southwest Chicago suburbs">
+  <section class="listings-teaser" aria-label="Featured homes for sale in the southwest Chicago suburbs"
+           itemscope itemtype="https://schema.org/ItemList">
+    <meta itemprop="numberOfItems" content="3">
     <div class="listings-teaser-header">
       <div>
         <p class="listings-teaser-eyebrow">Active Listings &mdash; Southwest Suburbs</p>
-        <h2 class="listings-teaser-headline">Homes For Sale Right Now</h2>
+        <h2 class="listings-teaser-headline">More Homes For Sale Right Now</h2>
       </div>
       <a href="https://morandiproperties.com/buying/listings" class="listings-teaser-viewall">View All Listings &rarr;</a>
     </div>
 
     <div class="listings-teaser-grid">
-      <a href="https://morandiproperties.com/buying/listings" class="lt-card">
-        <div class="lt-photo">
-          <svg class="lt-photo-placeholder" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-          <span class="lt-badge">Active</span>
-        </div>
-        <div class="lt-info">
-          <span class="lt-price">$XXX,000</span>
-          <span class="lt-address">123 Placeholder Drive</span>
-          <span class="lt-city">Orland Park, IL 60462</span>
-          <div class="lt-divider"></div>
-          <div class="lt-meta">
-            <span class="lt-meta-item"><strong>4</strong> bd</span>
-            <span class="lt-meta-item"><strong>2.5</strong> ba</span>
-            <span class="lt-meta-item"><strong>2,400</strong> sqft</span>
-          </div>
-        </div>
-      </a>
-      <a href="https://morandiproperties.com/buying/listings" class="lt-card">
-        <div class="lt-photo">
-          <svg class="lt-photo-placeholder" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-          <span class="lt-badge">Active</span>
-        </div>
-        <div class="lt-info">
-          <span class="lt-price">$XXX,000</span>
-          <span class="lt-address">456 Sample Street</span>
-          <span class="lt-city">Tinley Park, IL 60477</span>
-          <div class="lt-divider"></div>
-          <div class="lt-meta">
-            <span class="lt-meta-item"><strong>3</strong> bd</span>
-            <span class="lt-meta-item"><strong>2</strong> ba</span>
-            <span class="lt-meta-item"><strong>1,850</strong> sqft</span>
-          </div>
-        </div>
-      </a>
-      <a href="https://morandiproperties.com/buying/listings" class="lt-card">
-        <div class="lt-photo">
-          <svg class="lt-photo-placeholder" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
-          <span class="lt-badge">Active</span>
-        </div>
-        <div class="lt-info">
-          <span class="lt-price">$XXX,000</span>
-          <span class="lt-address">789 Example Boulevard</span>
-          <span class="lt-city">Frankfort, IL 60423</span>
-          <div class="lt-divider"></div>
-          <div class="lt-meta">
-            <span class="lt-meta-item"><strong>5</strong> bd</span>
-            <span class="lt-meta-item"><strong>3</strong> ba</span>
-            <span class="lt-meta-item"><strong>3,100</strong> sqft</span>
-          </div>
-        </div>
-      </a>
+      <!-- LISTINGS:START -->
+      <!-- LISTINGS:END -->
     </div>
 
     <div class="listings-teaser-bottom">
@@ -756,13 +716,13 @@
 <!--  MOBILE NAV OVERLAY                                          -->
 <!-- ============================================================ -->
 <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation" aria-hidden="true">
-  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">✕</button>
+  <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&#x2715;</button>
 
   <a href="/">Home</a>
 
   <div class="mobile-nav-group">
     <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnBuying">
-      Buying <span class="caret">▾</span>
+      Buying <span class="caret">&#9662;</span>
     </button>
     <div class="mobile-nav-sub" id="mnBuying">
       <a href="https://morandiproperties.com/buying/listings">Current Listings</a>
@@ -774,7 +734,7 @@
 
   <div class="mobile-nav-group">
     <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnSelling">
-      Selling <span class="caret">▾</span>
+      Selling <span class="caret">&#9662;</span>
     </button>
     <div class="mobile-nav-sub" id="mnSelling">
       <a href="https://morandiproperties.com/selling/sold-portfolio">Sold Portfolio</a>
@@ -785,7 +745,7 @@
 
   <div class="mobile-nav-group">
     <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnInsights">
-      Insights <span class="caret">▾</span>
+      Insights <span class="caret">&#9662;</span>
     </button>
     <div class="mobile-nav-sub" id="mnInsights">
       <a href="https://morandiproperties.com/insights/neighborhood-spotlights">Neighborhood Spotlights</a>
@@ -795,7 +755,7 @@
 
   <div class="mobile-nav-group">
     <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnTeam">
-      Realtors <span class="caret">▾</span>
+      Realtors <span class="caret">&#9662;</span>
     </button>
     <div class="mobile-nav-sub" id="mnTeam">
       <a href="https://morandiproperties.com/realtors/agents">Meet the Team</a>
@@ -806,7 +766,7 @@
 
   <div class="mobile-nav-group">
     <button class="mobile-nav-toggle" aria-expanded="false" data-target="mnContact">
-      Contact <span class="caret">▾</span>
+      Contact <span class="caret">&#9662;</span>
     </button>
     <div class="mobile-nav-sub" id="mnContact">
       <a href="https://morandiproperties.com/contact/office">General Inquiry</a>

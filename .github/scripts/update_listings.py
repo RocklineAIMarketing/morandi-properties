@@ -1,9 +1,10 @@
 """
 update_listings.py
 Fetches https://www.idxhome.com/featured/98967, parses the listings,
-and rewrites marker blocks in two HTML files:
-  1. buying/listings/index.html  — all listings (no limit)
-  2. index.html                  — homepage, first 3 only
+and rewrites marker blocks in three HTML files:
+  1. buying/listings/index.html        — all listings (no limit)
+  2. index.html                        — homepage, first 3 only
+  3. buying/buying-strategy-guide/index.html — next 3 (listings 4-6, no homepage overlap)
 """
 
 import re
@@ -19,6 +20,7 @@ TARGETS = [
         "file":    "buying/listings/index.html",
         "start":   "<!-- LISTINGS:START -->",
         "end":     "<!-- LISTINGS:END -->",
+        "offset":  0,
         "limit":   None,
         "card_fn": "build_card_listings",
     },
@@ -26,6 +28,15 @@ TARGETS = [
         "file":    "index.html",
         "start":   "<!-- LISTINGS:START -->",
         "end":     "<!-- LISTINGS:END -->",
+        "offset":  0,
+        "limit":   3,
+        "card_fn": "build_card_home",
+    },
+    {
+        "file":    "buying/buying-strategy-guide/index.html",
+        "start":   "<!-- LISTINGS:START -->",
+        "end":     "<!-- LISTINGS:END -->",
+        "offset":  3,       # skip the 3 already shown on homepage
         "limit":   3,
         "card_fn": "build_card_home",
     },
@@ -210,7 +221,7 @@ def build_card_listings(l, position):
 
 
 def build_card_home(l, position):
-    """Card style for index.html — matches .listing-card / .listing-info homepage markup."""
+    """Card style for index.html and buying-strategy-guide — matches .listing-card / .listing-info homepage markup."""
     img_tag = (
         f'<img src="{l["img_src"]}" alt="{l["street"]}, {l["city_st"]}" loading="lazy" itemprop="image">'
         if l["img_src"] else
@@ -294,6 +305,7 @@ def inject(listings, target):
     html_file    = target["file"]
     start_marker = target["start"]
     end_marker   = target["end"]
+    offset       = target.get("offset", 0)
     limit        = target["limit"]
     card_fn      = CARD_FNS[target["card_fn"]]
 
@@ -308,7 +320,14 @@ def inject(listings, target):
         print(f"SKIP: markers not found in {html_file}.")
         return
 
-    subset     = listings[:limit] if limit else listings
+    # Slice the listings window: start at offset, take up to limit
+    sliced = listings[offset:]
+    subset = sliced[:limit] if limit else sliced
+
+    if not subset:
+        print(f"WARN: No listings available for {html_file} at offset {offset} — skipping to avoid wiping cards.")
+        return
+
     cards_html = "\n".join(card_fn(l, i + 1) for i, l in enumerate(subset))
 
     new_block = f"{start_marker}\n{cards_html}\n      {end_marker}"
@@ -336,7 +355,7 @@ def inject(listings, target):
     with open(html_file, "w", encoding="utf-8") as f:
         f.write(updated)
 
-    print(f"✓ Wrote {len(subset)} listing(s) to {html_file}")
+    print(f"✓ Wrote {len(subset)} listing(s) to {html_file} (offset {offset})")
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":

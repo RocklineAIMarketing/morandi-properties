@@ -1,7 +1,9 @@
 """
 update_listings.py
 Fetches https://www.idxhome.com/featured/98967, parses the listings,
-and rewrites the LISTINGS:START / LISTINGS:END block in the target HTML file.
+and rewrites marker blocks in two HTML files:
+  1. buying/listings/index.html  — all listings (no limit)
+  2. index.html                  — homepage, first 3 only
 """
 
 import re
@@ -10,10 +12,24 @@ import requests
 from bs4 import BeautifulSoup
 
 # ── Config ────────────────────────────────────────────────────────────────────
-IDX_URL       = "https://www.idxhome.com/featured/98967"
-HTML_FILE     = "buying/listings/index.html"   # path inside your repo — adjust if needed
-START_MARKER  = "<!-- LISTINGS:START -->"
-END_MARKER    = "<!-- LISTINGS:END -->"
+IDX_URL = "https://www.idxhome.com/featured/98967"
+
+TARGETS = [
+    {
+        "file":    "buying/listings/index.html",
+        "start":   "<!-- LISTINGS:START -->",
+        "end":     "<!-- LISTINGS:END -->",
+        "limit":   None,
+        "card_fn": "build_card_listings",
+    },
+    {
+        "file":    "index.html",
+        "start":   "<!-- LISTINGS:START -->",
+        "end":     "<!-- LISTINGS:END -->",
+        "limit":   3,
+        "card_fn": "build_card_home",
+    },
+]
 
 HEADERS = {
     "User-Agent": (
@@ -29,9 +45,8 @@ def slugify(text):
 
 def badge_class(status):
     s = status.lower()
-    if "contingent" in s:  return "badge-contingent", "Contingent"
-    if "pending"    in s:  return "badge-contingent", "Pending"
-    if "new"        in s:  return "badge-new",        "New"
+    if "contingent" in s: return "badge-contingent", "Contingent"
+    if "pending"    in s: return "badge-contingent", "Pending"
     return "badge-active", "Active"
 
 def fmt_price(raw):
@@ -39,12 +54,19 @@ def fmt_price(raw):
     return f"${int(raw):,}" if raw else "—"
 
 def parse_baths(baths_raw):
-    """'2 | 1' → '3'  (full + half → display as e.g. 2.5)"""
     parts = [p.strip() for p in baths_raw.split("|") if p.strip()]
     if len(parts) == 2:
         full, half = int(parts[0]), int(parts[1])
         return str(full + 0.5) if half else str(full)
     return parts[0] if parts else "—"
+
+def listing_type(l):
+    block = (l.get("raw_block") or "").lower()
+    if "commercial" in block:
+        return "commercial", "Commercial"
+    if "land" in block or (l["beds"] == "—" and l["sqft"] == "—" and not l["units"]):
+        return "land", "Land"
+    return "residential", "Residential"
 
 # ── Fetch & parse ─────────────────────────────────────────────────────────────
 def fetch_listings():
@@ -57,93 +79,8 @@ def fetch_listings():
 
     soup = BeautifulSoup(r.text, "html.parser")
     listings = []
-
-    for item in soup.select("li[class*='listing'], div[class*='listing-item'], .idx-listing"):
-        # ── address ──────────────────────────────────────────────────────────
-        link_el = item.select_one("a[href*='/homes/']")
-        if not link_el:
-            continue
-        detail_url = link_el["href"]
-        if not detail_url.startswith("http"):
-            detail_url = "https://www.idxhome.com" + detail_url
-
-        full_address = link_el.get_text(strip=True)
-        # Split "742 GRANTON Place, Frankfort, IL 60423"
-        parts = [p.strip() for p in full_address.split(",")]
-        street   = parts[0].title() if parts else full_address
-        city_st  = ", ".join(parts[1:]).strip() if len(parts) > 1 else ""
-        city     = parts[1].strip().title() if len(parts) > 1 else ""
-        city_key = slugify(city)
-
-        # ── image ─────────────────────────────────────────────────────────────
-        img_el  = item.select_one("img[src*='mlsgrid']")
-        img_src = img_el["src"] if img_el else ""
-
-        # ── price + status ────────────────────────────────────────────────────
-        price_el  = item.select_one("span, div, p")
-        price_raw = ""
-        status_raw = "Active"
-
-        # Walk all text nodes for price/status
-        for el in item.find_all(string=True):
-            txt = el.strip()
-            if txt.startswith("$"):
-                price_raw = txt
-            if "Contingent" in txt:
-                status_raw = "Contingent"
-            if "Pending" in txt:
-                status_raw = "Pending"
-
-        price_fmt = fmt_price(price_raw)
-        badge_cls, badge_label = badge_class(status_raw)
-
-        # ── beds / baths / sqft ───────────────────────────────────────────────
-        text_block = item.get_text(" ", strip=True)
-        beds  = re.search(r"Beds:\s*(\d+)",   text_block)
-        baths = re.search(r"Baths:\s*([\d\s|]+)", text_block)
-        sqft  = re.search(r"Sq\.\s*Ft\.:\s*([\d,]+)", text_block)
-
-        beds_val  = beds.group(1)  if beds  else "—"
-        baths_val = parse_baths(baths.group(1)) if baths else "—"
-        sqft_val  = sqft.group(1).replace(",", "")  if sqft  else "—"
-        sqft_fmt  = f"{int(sqft_val):,}" if sqft_val != "—" else "—"
-
-        listings.append({
-            "street":      street,
-            "city_st":     city_st,
-            "city_key":    city_key,
-            "price_raw":   re.sub(r"[^\d]", "", price_raw) or "0",
-            "price_fmt":   price_fmt,
-            "beds":        beds_val,
-            "baths":       baths_val,
-            "sqft":        sqft_fmt,
-            "status":      status_raw.lower(),
-            "badge_cls":   badge_cls,
-            "badge_label": badge_label,
-            "img_src":     img_src,
-            "detail_url":  detail_url,
-        })
-
-    return listings
-
-# ── Fallback: parse the simpler flat structure idxhome actually renders ────────
-def fetch_listings_flat():
-    """
-    idxhome renders a flat page — this parser targets the actual markup
-    seen when fetching the page as a bot.
-    """
-    try:
-        r = requests.get(IDX_URL, headers=HEADERS, timeout=20)
-        r.raise_for_status()
-    except Exception as e:
-        print(f"ERROR fetching IDX page: {e}")
-        sys.exit(1)
-
-    soup = BeautifulSoup(r.text, "html.parser")
-    listings = []
-
-    # Each listing appears as an <a> with href /homes/...
     seen = set()
+
     for link_el in soup.select("a[href*='/homes/98967']"):
         href = link_el["href"]
         if href in seen:
@@ -152,19 +89,17 @@ def fetch_listings_flat():
 
         detail_url = href if href.startswith("http") else "https://www.idxhome.com" + href
 
-        # The address is the link text (or nearby text)
         raw_addr = link_el.get_text(" ", strip=True)
         if not raw_addr or len(raw_addr) < 5:
             continue
 
-        # Parse address parts
         addr_parts = [p.strip() for p in raw_addr.split(",")]
         street   = addr_parts[0].title()
         city_st  = ", ".join(addr_parts[1:]) if len(addr_parts) > 1 else ""
         city     = addr_parts[1].strip().title() if len(addr_parts) > 1 else ""
         city_key = slugify(city)
 
-        # Walk up to find the parent container for this listing
+        # Walk up to find container with price/details
         container = link_el
         for _ in range(6):
             container = container.parent
@@ -173,7 +108,6 @@ def fetch_listings_flat():
             ct = container.get_text(" ", strip=True)
             if "Beds:" in ct or "$" in ct:
                 break
-
         if container is None:
             container = link_el.parent
 
@@ -190,17 +124,25 @@ def fetch_listings_flat():
         if "Pending"    in block: status_raw = "Pending"
         badge_cls, badge_label = badge_class(status_raw)
 
-        # Beds / baths / sqft
+        # Beds / baths / sqft / acres / units
         beds  = re.search(r"Beds:\s*(\d+)", block)
         baths = re.search(r"Baths:\s*([\d\s|]+)", block)
         sqft  = re.search(r"Sq\.\s*Ft\.:\s*([\d,N/A]+)", block)
+        acres = re.search(r"Lot Acres:\s*([\d.]+)", block)
+        units = re.search(r"Number of Units:\s*(\d+)", block)
 
-        beds_val  = beds.group(1)             if beds  else "—"
+        beds_val  = beds.group(1)               if beds  else "—"
         baths_val = parse_baths(baths.group(1)) if baths else "—"
         sqft_raw  = sqft.group(1).replace(",","") if sqft else "—"
         sqft_fmt  = f"{int(sqft_raw):,}" if sqft_raw not in ("—","N/A") else "—"
+        acres_val = acres.group(1) if acres else None
+        units_val = units.group(1) if units else None
 
-        # Image — find nearest img with mlsgrid src
+        # MLS number from URL
+        mls_match = re.search(r"/(\d{7,9})$", href)
+        mls_num   = mls_match.group(1) if mls_match else ""
+
+        # Image
         img_el  = container.select_one("img[src*='mlsgrid']")
         img_src = img_el["src"] if img_el else ""
 
@@ -213,37 +155,40 @@ def fetch_listings_flat():
             "beds":        beds_val,
             "baths":       baths_val,
             "sqft":        sqft_fmt,
+            "acres":       acres_val,
+            "units":       units_val,
             "status":      status_raw.lower(),
             "badge_cls":   badge_cls,
             "badge_label": badge_label,
             "img_src":     img_src,
             "detail_url":  detail_url,
+            "mls_num":     mls_num,
+            "raw_block":   block,
         })
 
     return listings
 
-# ── Card HTML builder ─────────────────────────────────────────────────────────
-def build_card(l):
-    sqft_block = ""
-    if l["sqft"] != "—":
-        sqft_block = f"""
-              <div class="listing-stat"><span class="stat-value">{l["sqft"]}</span><span class="stat-label">Sq Ft</span></div>"""
+# ── Card builders ─────────────────────────────────────────────────────────────
 
-    baths_block = ""
-    if l["baths"] != "—":
-        baths_block = f"""
-              <div class="listing-stat"><span class="stat-value">{l["baths"]}</span><span class="stat-label">Baths</span></div>"""
-
-    beds_block = ""
-    if l["beds"] != "—":
-        beds_block = f"""
-              <div class="listing-stat"><span class="stat-value">{l["beds"]}</span><span class="stat-label">Beds</span></div>"""
-
+def build_card_listings(l, position):
+    """Card style for buying/listings/index.html"""
     img_tag = (
         f'<img src="{l["img_src"]}" alt="{l["street"]}, {l["city_st"]}" loading="lazy" />'
         if l["img_src"] else
         '<div style="width:100%;height:100%;background:#dce3e8;"></div>'
     )
+
+    stats = []
+    if l["beds"] != "—":
+        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["beds"]}</span><span class="stat-label">Beds</span></div>')
+    if l["baths"] != "—":
+        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["baths"]}</span><span class="stat-label">Baths</span></div>')
+    if l["sqft"] != "—":
+        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["sqft"]}</span><span class="stat-label">Sq Ft</span></div>')
+    if l["acres"]:
+        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["acres"]}</span><span class="stat-label">Acres</span></div>')
+    if l["units"]:
+        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["units"]}</span><span class="stat-label">Units</span></div>')
 
     return f"""
         <!-- {l["street"]} -->
@@ -256,52 +201,152 @@ def build_card(l):
             <p class="listing-price">{l["price_fmt"]}</p>
             <p class="listing-address">{l["street"]}</p>
             <p class="listing-city">{l["city_st"]}</p>
-            <div class="listing-stats">{beds_block}{baths_block}{sqft_block}
+            <div class="listing-stats">
+              {"".join(stats)}
             </div>
           </div>
           <div class="listing-card-footer"><a href="{l["detail_url"]}" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
         </article>"""
 
+
+def build_card_home(l, position):
+    """Card style for index.html — matches .listing-card / .listing-info homepage markup."""
+    img_tag = (
+        f'<img src="{l["img_src"]}" alt="{l["street"]}, {l["city_st"]}" loading="lazy" itemprop="image">'
+        if l["img_src"] else
+        '<div style="width:100%;height:100%;background:#dce3e8;"></div>'
+    )
+
+    ltype_key, ltype_label = listing_type(l)
+
+    if ltype_key == "commercial":
+        badge_cls_extra = " commercial"
+        badge_text = "Commercial"
+    elif ltype_key == "land":
+        badge_cls_extra = " land"
+        badge_text = "Land"
+    elif l["status"] == "contingent":
+        badge_cls_extra = ""
+        badge_text = "Contingent"
+    else:
+        badge_cls_extra = ""
+        badge_text = "Active"
+
+    meta_items = []
+    if l["beds"] != "—":
+        meta_items.append(f'<span class="listing-meta-item"><strong itemprop="numberOfBedrooms">{l["beds"]}</strong> bd</span>')
+    if l["baths"] != "—":
+        meta_items.append(f'<span class="listing-meta-item"><strong>{l["baths"]}</strong> ba</span>')
+    if l["sqft"] != "—":
+        meta_items.append(f'<span class="listing-meta-item"><strong>{l["sqft"]}</strong> sqft</span>')
+    if l["acres"]:
+        meta_items.append(f'<span class="listing-meta-item"><strong>{l["acres"]}</strong> acres</span>')
+    if l["units"]:
+        meta_items.append(f'<span class="listing-meta-item"><strong>{l["units"]}</strong> units</span>')
+
+    mls_tag = f'<span class="listing-type-tag">{ltype_label}{" · MLS #" + l["mls_num"] if l["mls_num"] else ""}</span>'
+
+    # Parse city / state / zip from city_st
+    city_parts = [p.strip() for p in l["city_st"].split(",")]
+    city_name  = city_parts[0] if city_parts else ""
+    state_zip  = city_parts[1].strip() if len(city_parts) > 1 else "IL"
+    state_parts = state_zip.split()
+    city_state = state_parts[0] if state_parts else "IL"
+    zip_code   = state_parts[1] if len(state_parts) > 1 else ""
+    zip_span   = f' <span itemprop="postalCode">{zip_code}</span>' if zip_code else ""
+
+    return f"""
+      <!-- {l["street"]} -->
+      <a href="{l["detail_url"]}"
+         class="listing-card" target="_blank" rel="noopener"
+         aria-label="{l["street"]}, {l["city_st"]} — {l["price_fmt"]}"
+         itemscope itemtype="https://schema.org/RealEstateListing" itemprop="itemListElement">
+        <meta itemprop="position" content="{position}">
+        <div class="listing-photo">
+          {img_tag}
+          <span class="listing-badge{badge_cls_extra}">{badge_text}</span>
+        </div>
+        <div class="listing-info">
+          <span class="listing-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <span itemprop="price" content="{l["price_raw"]}">{l["price_fmt"]}</span>
+            <meta itemprop="priceCurrency" content="USD">
+            <meta itemprop="availability" content="https://schema.org/InStock">
+          </span>
+          <span class="listing-address" itemprop="name">{l["street"]}</span>
+          <span class="listing-city" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <span itemprop="addressLocality">{city_name}</span>, <span itemprop="addressRegion">{city_state}</span>{zip_span}
+          </span>
+          <div class="listing-divider"></div>
+          <div class="listing-meta">
+            {"".join(meta_items)}
+          </div>
+          {mls_tag}
+        </div>
+      </a>"""
+
 # ── Inject into HTML ──────────────────────────────────────────────────────────
-def inject(listings):
-    with open(HTML_FILE, "r", encoding="utf-8") as f:
-        html = f.read()
+CARD_FNS = {
+    "build_card_listings": build_card_listings,
+    "build_card_home":     build_card_home,
+}
 
-    if START_MARKER not in html or END_MARKER not in html:
-        print(f"ERROR: markers not found in {HTML_FILE}")
-        print(f"  Add  {START_MARKER}  and  {END_MARKER}  around your listings grid content.")
-        sys.exit(1)
+def inject(listings, target):
+    html_file    = target["file"]
+    start_marker = target["start"]
+    end_marker   = target["end"]
+    limit        = target["limit"]
+    card_fn      = CARD_FNS[target["card_fn"]]
 
-    cards_html = "\n".join(build_card(l) for l in listings)
-    count      = len(listings)
+    try:
+        with open(html_file, "r", encoding="utf-8") as f:
+            html = f.read()
+    except FileNotFoundError:
+        print(f"SKIP: {html_file} not found — skipping.")
+        return
 
-    new_block = f"{START_MARKER}\n{cards_html}\n        {END_MARKER}"
+    if start_marker not in html or end_marker not in html:
+        print(f"SKIP: markers not found in {html_file}.")
+        return
+
+    subset     = listings[:limit] if limit else listings
+    cards_html = "\n".join(card_fn(l, i + 1) for i, l in enumerate(subset))
+
+    new_block = f"{start_marker}\n{cards_html}\n      {end_marker}"
     pattern   = re.compile(
-        re.escape(START_MARKER) + r".*?" + re.escape(END_MARKER),
+        re.escape(start_marker) + r".*?" + re.escape(end_marker),
         re.DOTALL
     )
     updated = pattern.sub(new_block, html)
 
-    # Also update the static results count span if present
+    # Update schema numberOfItems
     updated = re.sub(
-        r'(<strong>)\d+(</strong>\s*listing)',
-        rf'\g<1>{count}\g<2>',
+        r'(itemprop="numberOfItems"\s+content=")[^"]*(")',
+        rf'\g<1>{len(subset)}\g<2>',
         updated
     )
 
-    with open(HTML_FILE, "w", encoding="utf-8") as f:
+    # Update listings count display on listings page
+    if not limit:
+        updated = re.sub(
+            r'(<strong>)\d+(</strong>\s*listing)',
+            rf'\g<1>{len(subset)}\g<2>',
+            updated
+        )
+
+    with open(html_file, "w", encoding="utf-8") as f:
         f.write(updated)
 
-    print(f"✓ Wrote {count} listing(s) to {HTML_FILE}")
+    print(f"✓ Wrote {len(subset)} listing(s) to {html_file}")
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     print(f"Fetching {IDX_URL} ...")
-    listings = fetch_listings_flat()
+    listings = fetch_listings()
 
     if not listings:
         print("No listings parsed — aborting to avoid wiping existing cards.")
         sys.exit(0)
 
-    print(f"Found {len(listings)} listing(s). Injecting into {HTML_FILE} ...")
-    inject(listings)
+    print(f"Found {len(listings)} listing(s). Updating target files ...")
+    for target in TARGETS:
+        inject(listings, target)

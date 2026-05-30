@@ -216,6 +216,7 @@
     .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
     .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
     .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+    .logo-placeholder img { display: block; height: 48px; width: auto; }
     .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,.18); gap: 2px; }
     .nav-link { font-size: 12.5px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 12px 15px; white-space: nowrap; transition: color .2s; }
     .nav-link:hover { color: var(--navy-light); }
@@ -338,6 +339,7 @@
     .footer-top { display: grid; grid-template-columns: 1fr auto 1fr; gap: 40px; align-items: start; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.1); }
     .footer-brand { display: flex; flex-direction: column; gap: 16px; }
     .footer-logo { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .footer-logo img { display: block; height: 40px; width: auto; }
     .footer-tagline { font-size: 13px; font-weight: 400; line-height: 1.7; color: var(--blue-grey); max-width: 260px; }
     .footer-contact { display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
     .footer-contact-label { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--blue-grey); margin-bottom: 4px; }
@@ -362,6 +364,7 @@
       .logo-row { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 20px; }
       .hamburger-btn { display: flex; grid-column: 1; }
       .logo-placeholder { grid-column: 2; justify-self: center; font-size: 20px; }
+      .logo-placeholder img { height: 36px; }
       .nav-row { display: none; }
       .video-section { padding: 52px 24px; }
       .video-inner { grid-template-columns: 1fr; gap: 36px; }
@@ -405,7 +408,9 @@
     <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
-    <a href="/" class="logo-placeholder">   <img src="/images/logos/morandi-properties-realtor-logo.png" alt="Morandi Properties"> </a>
+    <a href="/" class="logo-placeholder">
+      <img src="/images/logos/morandi-properties-realtor-logo.png" alt="Morandi Properties">
+    </a>
   </div>
   <nav class="nav-row" role="navigation" aria-label="Primary navigation">
     <a href="/" class="nav-link active">Home</a>
@@ -767,7 +772,9 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="/" class="footer-logo">Morandi Properties</a>
+        <a href="/" class="footer-logo">
+          <img src="/images/logos/morandi-properties-realtor-logo.png" alt="Morandi Properties">
+        </a>
         <p class="footer-tagline">Helping families buy and sell homes across 30+ communities in the southwest suburbs of Chicago since 2006.</p>
       </div>
       <div class="footer-contact" itemscope itemtype="https://schema.org/RealEstateAgent">

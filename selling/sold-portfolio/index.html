@@ -100,7 +100,7 @@
     body { font-family: 'Barlow', sans-serif; color: var(--navy); background: var(--white); }
 
     /* ─── HEADER ─────────────────────────────────────────────── */
-    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); }
+    .site-header { width: 100%; background: linear-gradient(to bottom, #cfd8dc 0%, #b0bec5 100%); position: relative; z-index: 10; }
     .logo-row { display: flex; justify-content: center; align-items: center; padding: 24px 40px 16px; }
     .logo-placeholder { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
     .nav-row { display: flex; justify-content: center; align-items: center; padding: 0 40px 18px; border-top: 1px solid rgba(26,45,74,0.18); gap: 2px; }
@@ -126,7 +126,7 @@
     .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); width: 24px; }
 
     /* ─── MOBILE NAV ──────────────────────────────────────────── */
-    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+    .mobile-nav { display: none; position: fixed; inset: 0; background: var(--white); z-index: 300; flex-direction: column; align-items: center; justify-content: center; gap: 4px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
     .mobile-nav.open { opacity: 1; pointer-events: all; }
     .mobile-nav-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 8px; }
     .mobile-nav a { font-family: 'Barlow Condensed', sans-serif; font-size: 30px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 24px; }
@@ -175,10 +175,7 @@
     .flip-card:hover .flip-inner { transform: rotateY(180deg); }
     .flip-front, .flip-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; }
     .flip-front { background: var(--light-bg); border: 1px solid var(--line); }
-
-    /* FIX: photo fills the entire card front */
     .flip-front-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
     .flip-front-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, #dce3e8 0%, #b0bec5 100%); display: flex; align-items: center; justify-content: center; }
     .flip-front-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(26,45,74,.85) 0%, transparent 100%); padding: 10px 12px 8px; display: flex; justify-content: space-between; align-items: flex-end; }
     .flip-front-address { font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: .03em; color: var(--white); line-height: 1.15; }
@@ -376,7 +373,6 @@
         <p class="portfolio-eyebrow">Signature Sales</p>
         <h1 class="portfolio-headline">Check Out Some Of Our Notable Sales</h1>
       </div>
-      <!-- FIX: Added "All Top 25" as the first/default button -->
       <div class="filter-row">
         <button class="f-btn active" onclick="filterCards('all', this)">All Top 25</button>
         <button class="f-btn" onclick="filterCards('1M+', this)">$1M+</button>
@@ -388,7 +384,6 @@
       <div class="map-col"><div id="sold-map"></div></div>
       <div class="list-col">
         <div class="list-col-header">
-          <!-- FIX: Title is now updated dynamically by filterCards() -->
           <span class="list-col-title" id="list-col-title">Top 25 Sales</span>
           <span class="list-col-count" id="prop-count">25 properties</span>
         </div>
@@ -827,7 +822,6 @@
   const tier = p => p >= 1000000 ? 'Platinum Sale' : p >= 750000 ? 'Luxury Estate' : p >= 500000 ? 'Premium Sale' : 'Closed Sale';
   const cat  = p => p >= 1000000 ? '1M+' : p >= 750000 ? '750k' : p >= 500000 ? '500k' : 'other';
 
-  /* FIX: Human-readable labels for each filter used in the sidebar header */
   const FILTER_LABELS = {
     'all':  'Top 25 Sales',
     '1M+':  '$1M+ Sales',
@@ -893,11 +887,9 @@
     let activeRank = null;
 
     function filterCards(c, btnEl) {
-      /* Update active button state */
       document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('active'));
       btnEl.classList.add('active');
 
-      /* Reset any previously highlighted marker */
       if (activeRank !== null && cardMarkers[activeRank]) {
         cardMarkers[activeRank].setIcon(mkIcon(false));
         cardMarkers[activeRank].closePopup();
@@ -912,7 +904,6 @@
 
       const filtered = TOP25.map((s, r) => ({ s, r })).filter(({ s }) => c === 'all' || cat(s[3]) === c);
 
-      /* FIX: Update both the count AND the sidebar header label to match the active filter */
       countEl.textContent = filtered.length + (filtered.length === 1 ? ' property' : ' properties');
       titleEl.textContent = FILTER_LABELS[c] || 'Top Sales';
 
@@ -920,20 +911,12 @@
       ff.className = 'flip-feed';
 
       filtered.forEach(({ s, r }) => {
-        /* FIX: Destructure photo (index 6) so it can be used in the card template */
         const [addr, city, zip, price, , , photo] = s;
 
         const card = document.createElement('div');
         card.className = 'flip-card';
         card.id = 'card-' + r;
 
-        /*
-         * FIX: Photos now render on the card front.
-         * - If photo exists: <img> is shown, placeholder div is hidden.
-         * - If the image fails to load (onerror): img hides itself and reveals
-         *   the placeholder div sitting right after it in the DOM.
-         * - If no photo path exists: only the placeholder div is rendered.
-         */
         const imgMarkup = photo
           ? `<img class="flip-front-img" src="${photo}" alt="${addr}" loading="lazy"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -974,7 +957,6 @@
           </div>`;
 
         card.addEventListener('click', () => {
-          /* Deselect the previously active card (if different) */
           if (activeRank !== null && activeRank !== r) {
             const prev = document.getElementById('card-' + activeRank);
             if (prev) prev.classList.remove('highlighted');
@@ -1006,10 +988,7 @@
       feed.appendChild(ff);
     }
 
-    /* FIX: Assign to window so HTML onclick attributes can reach it */
     window.filterCards = filterCards;
-
-    /* FIX: Default to showing all top 25, matching the "All Top 25" button */
     filterCards('all', document.querySelector('.f-btn'));
   });
 </script>

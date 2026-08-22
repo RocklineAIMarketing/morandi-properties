@@ -275,11 +275,11 @@
     /* Facebook Page Plugin container */
     .fb-plugin-wrap {
       border: 1px solid #dde3e8;
-      overflow: hidden;
+      overflow: visible;
       min-height: 500px;
       background: #f0f2f5;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       position: relative;
     }
@@ -473,42 +473,6 @@
       border: none;
     }
 
-    /* Placeholder grid cards */
-    .ig-placeholder-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-    }
-    .ig-placeholder-card {
-      aspect-ratio: 1;
-      background: linear-gradient(135deg, #e8ecf0 0%, #d0d8e0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .ig-placeholder-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent 60%, rgba(26,45,74,0.06) 100%);
-    }
-    .ig-placeholder-card svg {
-      width: 28px; height: 28px;
-      fill: rgba(176,190,197,0.6);
-    }
-    .ig-notice {
-      margin-top: 16px;
-      padding: 14px 18px;
-      background: rgba(46,123,181,0.08);
-      border-left: 3px solid var(--accent);
-      font-size: 12.5px;
-      line-height: 1.6;
-      color: var(--navy-light);
-    }
-    .ig-notice strong { color: var(--navy); }
-
     /* ─── YOUTUBE + TIKTOK STRIP ────────────────────────────── */
     .video-section {
       padding: 80px 0;
@@ -648,7 +612,6 @@
     }
     @media (max-width: 560px) {
       .follow-grid { grid-template-columns: 1fr 1fr; }
-      .ig-placeholder-grid { grid-template-columns: repeat(2, 1fr); }
       .section-wrap { padding: 0 20px; }
       .social-hero { padding: 56px 20px 52px; }
       .follow-strip { padding: 40px 20px; }
@@ -742,7 +705,6 @@
     <h1 class="hero-headline">Social Media Hub</h1>
     <p class="hero-sub">Follow along for market updates, neighborhood spotlights, home tours, and real estate tips from the Morandi Properties team.</p>
     <div class="hero-platforms">
-      <!-- UPDATE HREFS with actual profile URLs -->
       <a href="https://www.facebook.com/MorandiProperties" class="platform-pill" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
         Facebook
@@ -777,7 +739,6 @@
   <!-- FOLLOW CARDS -->
   <section class="follow-strip">
     <div class="follow-grid">
-      <!-- UPDATE href and handle values with actual profile URLs -->
       <a href="https://www.facebook.com/MorandiProperties" class="follow-card fb" target="_blank" rel="noopener">
         <div class="follow-icon-wrap">
           <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
@@ -851,14 +812,6 @@
             <p style="font-size:14px;line-height:1.7;color:var(--text-muted);">Stay up to date with our newest listings, open houses, and local market news directly from our Facebook page.</p>
           </div>
           <div class="fb-plugin-wrap">
-            <!--
-              ════════════════════════════════════════════════
-              SETUP: Replace the href value below with your
-              actual Facebook Page URL, then the SDK above
-              will render the live feed automatically.
-              Example: https://www.facebook.com/YourPageName
-              ════════════════════════════════════════════════
-            -->
             <div
               class="fb-page"
               data-href="https://www.facebook.com/MorandiProperties"
@@ -902,19 +855,13 @@
           </div>
 
           <!-- Facebook Reviews Plugin -->
-          <div class="fb-plugin-wrap" style="min-height:380px; margin-bottom:20px;">
-            <!--
-              ════════════════════════════════════════════════
-              SETUP: Replace data-href with your Facebook
-              Page URL. This renders the live Reviews tab.
-              ════════════════════════════════════════════════
-            -->
+          <div class="fb-plugin-wrap" style="min-height:500px; margin-bottom:20px;">
             <div
               class="fb-page"
               data-href="https://www.facebook.com/MorandiProperties"
               data-tabs="reviews"
               data-width="500"
-              data-height="380"
+              data-height="500"
               data-small-header="true"
               data-adapt-container-width="true"
               data-hide-cover="true"
@@ -929,7 +876,6 @@
 
           <!-- Pinned / Curated Reviews (always-visible highlights) -->
           <div class="reviews-list">
-            <!-- REPLACE these with actual client reviews -->
             <div class="review-card">
               <div class="review-header">
                 <div class="reviewer-avatar">LE</div>
@@ -961,7 +907,6 @@
           </div>
 
           <div class="reviews-cta">
-            <!-- UPDATE href with actual Facebook Reviews URL -->
             <a href="https://www.facebook.com/MorandiProperties/reviews" class="btn-primary" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:white;"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
               See All Reviews
@@ -986,7 +931,6 @@
             </div>
             <div class="ig-handle-text">
               <div class="name">Instagram</div>
-              <!-- UPDATE with actual handle -->
               <div class="handle">@MorandiProperties</div>
             </div>
           </div>
@@ -994,7 +938,6 @@
           <h2 class="section-title">Home Tours,<br>Listings &amp;<br>Local Life</h2>
           <div class="section-divider"></div>
           <p class="ig-desc">Behind-the-scenes home tours, neighborhood spotlights, and the life of a Chicagoland realtor — all on Instagram.</p>
-          <!-- UPDATE href with actual Instagram URL -->
           <a href="https://www.instagram.com/MorandiProperties" class="ig-follow-btn" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             Follow on Instagram
@@ -1002,36 +945,9 @@
         </div>
 
         <div class="reveal reveal-delay-2">
-          <!--
-            ════════════════════════════════════════════════════
-            INSTAGRAM LIVE FEED OPTIONS:
-
-            Option A — Free: Copy individual post embed codes
-            from Instagram (Share → Embed) and paste them into
-            the .ig-post-slot divs below. They use Instagram's
-            oEmbed and load automatically.
-
-            Option B — Paid tool (recommended for auto-update):
-            Services like Elfsight, Curator.io, or LightWidget
-            generate a single <script> tag that pulls your full
-            feed automatically. Paste their snippet here and
-            remove the placeholder grid.
-
-            The placeholder grid below is shown until you
-            add real embeds or a feed tool.
-            ════════════════════════════════════════════════════
-          -->
-          <div class="ig-placeholder-grid">
-            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-            <div class="ig-placeholder-card"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
-          </div>
-          <div class="ig-notice">
-            <strong>To activate the live Instagram feed:</strong> Instagram's API requires app-level approval. The quickest solution is a free embed tool like <strong>LightWidget</strong> or <strong>Elfsight</strong> — both generate a single script tag you paste here and they handle the feed automatically, no API setup needed.
-          </div>
+          <!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+          <script src="https://elfsightcdn.com/platform.js" async></script>
+          <div class="elfsight-app-4f76fb46-0c5b-4397-a43f-74728325873b" data-elfsight-app-lazy></div>
         </div>
 
       </div>
@@ -1056,23 +972,6 @@
             <p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin-bottom:20px;">Full home walk-throughs, neighborhood guides, and market update videos — subscribe so you never miss one.</p>
           </div>
           <div class="video-embed-wrap">
-            <!--
-              ════════════════════════════════════════════════
-              SETUP: This embeds the channel's uploads playlist
-              (auto-generated by YouTube — no need to create it
-              manually). Get the playlist ID by taking your
-              channel ID and replacing the leading "UC" with
-              "UU". Example: channel ID UCg3uHUwYOlEAjgJIhXr4Lnw
-              becomes playlist ID UUg3uHUwYOlEAjgJIhXr4Lnw.
-
-              Verify the channel ID under YouTube Studio →
-              Settings → Channel → Advanced settings, then swap
-              the "list" value below if needed.
-
-              To feature a single video instead, use:
-              https://www.youtube.com/embed/VIDEO_ID
-              ════════════════════════════════════════════════
-            -->
             <iframe
               src="https://www.youtube.com/embed/videoseries?list=UUg3uHUwYOlEAjgJIhXr4Lnw&rel=0&modestbranding=1"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -1081,7 +980,6 @@
             </iframe>
           </div>
           <div class="video-cta">
-            <!-- UPDATE href with actual YouTube channel URL -->
             <a href="https://www.youtube.com/@MorandiProperties9192" class="btn-yt" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
               Subscribe on YouTube
@@ -1102,13 +1000,6 @@
             <p style="font-size:14px;line-height:1.7;color:var(--text-muted);margin-bottom:20px;">Quick market tips, listing reveals, and day-in-the-life content from the Morandi team. Short videos, big value.</p>
           </div>
           <div class="video-embed-wrap">
-            <!--
-              SETUP: To embed a specific TikTok video, go to
-              TikTok → Share → Embed and paste the iframe src
-              value below. For a full profile feed widget, use
-              TikTok's official embed widget or a tool like
-              Elfsight.
-            -->
             <div class="video-placeholder">
               <svg viewBox="0 0 24 24" style="fill:rgba(255,255,255,0.3);"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
               <strong>TikTok Videos</strong>
@@ -1116,7 +1007,6 @@
             </div>
           </div>
           <div class="video-cta">
-            <!-- UPDATE href with actual TikTok URL -->
             <a href="https://www.tiktok.com/@raymorandi" class="btn-tt" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
               Follow on TikTok
@@ -1133,7 +1023,6 @@
     <span class="section-label">Share Your Experience</span>
     <h2 class="section-title">Had a Great Experience<br>with Morandi Properties?</h2>
     <p>Your review helps other Chicagoland families find the right agent. It only takes two minutes and means the world to us.</p>
-    <!-- UPDATE href with your Facebook Reviews URL -->
     <a href="https://www.facebook.com/MorandiProperties/reviews" class="btn-white" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24"><path d="M24 12.073C24 5.404 18.627 0 12 0S0 5.404 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
       Leave a Facebook Review
@@ -1273,11 +1162,28 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // ── Hide Facebook placeholders once SDK renders ────────────
+  // ── Hide Facebook placeholders once SDK renders, and hide the
+  //    hardcoded fallback reviews once the live Reviews plugin
+  //    actually renders content (not just fires the event) ────
   window.fbAsyncInit = function() {
     FB.init({ xfbml: true, version: 'v19.0' });
     FB.Event.subscribe('xfbml.render', function() {
       document.querySelectorAll('.fb-placeholder').forEach(p => p.classList.add('hidden'));
+
+      const reviewsPlugin = document.querySelector('.fb-page[data-tabs="reviews"]');
+      const fallbackReviews = document.querySelector('.reviews-list');
+      if (reviewsPlugin && fallbackReviews) {
+        const checkRendered = () => {
+          const iframe = reviewsPlugin.querySelector('iframe');
+          if (iframe) {
+            fallbackReviews.style.display = 'none';
+          }
+        };
+        // The iframe may not exist yet the instant this event fires,
+        // so check now and again shortly after.
+        checkRendered();
+        setTimeout(checkRendered, 1500);
+      }
     });
   };
 </script>

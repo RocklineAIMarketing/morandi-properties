@@ -17,6 +17,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
     :root {
       --white:      #ffffff;
       --blue-grey:  #b0bec5;
@@ -508,6 +513,7 @@
       background: #111;
       position: relative;
       overflow: hidden;
+      max-width: 100%;
     }
     .video-embed-wrap.tall {
       aspect-ratio: auto;

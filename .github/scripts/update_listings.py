@@ -1,85 +1,3 @@
-"""
-update_listings.py
-Fetches https://www.idxhome.com/featured/98967, parses the listings,
-and rewrites marker blocks in three HTML files:
-  1. buying/listings/index.html        — all listings (no limit)
-  2. index.html                        — homepage, first 3 only
-  3. buying/buying-strategy-guide/index.html — next 3 (listings 4-6, no homepage overlap)
-"""
-
-import re
-import sys
-import requests
-from bs4 import BeautifulSoup
-
-# ── Config ────────────────────────────────────────────────────────────────────
-IDX_URL = "https://www.idxhome.com/featured/98967"
-
-TARGETS = [
-    {
-        "file":    "buying/listings/index.html",
-        "start":   "<!-- LISTINGS:START -->",
-        "end":     "<!-- LISTINGS:END -->",
-        "offset":  0,
-        "limit":   None,
-        "card_fn": "build_card_listings",
-    },
-    {
-        "file":    "index.html",
-        "start":   "<!-- LISTINGS:START -->",
-        "end":     "<!-- LISTINGS:END -->",
-        "offset":  0,
-        "limit":   3,
-        "card_fn": "build_card_home",
-    },
-    {
-        "file":    "buying/buying-strategy-guide/index.html",
-        "start":   "<!-- LISTINGS:START -->",
-        "end":     "<!-- LISTINGS:END -->",
-        "offset":  3,       # skip the 3 already shown on homepage
-        "limit":   3,
-        "card_fn": "build_card_home",
-    },
-]
-
-HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0 Safari/537.36"
-    )
-}
-
-# ── Helpers ───────────────────────────────────────────────────────────────────
-def slugify(text):
-    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
-
-def badge_class(status):
-    s = status.lower()
-    if "contingent" in s: return "badge-contingent", "Contingent"
-    if "pending"    in s: return "badge-contingent", "Pending"
-    return "badge-active", "Active"
-
-def fmt_price(raw):
-    raw = re.sub(r"[^\d]", "", raw)
-    return f"${int(raw):,}" if raw else "—"
-
-def parse_baths(baths_raw):
-    parts = [p.strip() for p in baths_raw.split("|") if p.strip()]
-    if len(parts) == 2:
-        full, half = int(parts[0]), int(parts[1])
-        return str(full + 0.5) if half else str(full)
-    return parts[0] if parts else "—"
-
-def listing_type(l):
-    block = (l.get("raw_block") or "").lower()
-    if "commercial" in block:
-        return "commercial", "Commercial"
-    if "land" in block or (l["beds"] == "—" and l["sqft"] == "—" and not l["units"]):
-        return "land", "Land"
-    return "residential", "Residential"
-
-# ── Fetch & parse ─────────────────────────────────────────────────────────────
 def fetch_listings():
     try:
         r = requests.get(IDX_URL, headers=HEADERS, timeout=20)
@@ -149,13 +67,33 @@ def fetch_listings():
         acres_val = acres.group(1) if acres else None
         units_val = units.group(1) if units else None
 
-        # MLS number from URL
+        # MLS number from URL — moved ABOVE the image lookup so the
+        # image fallback can use it
         mls_match = re.search(r"/(\d{7,9})$", href)
         mls_num   = mls_match.group(1) if mls_match else ""
 
-        # Image
-        img_el  = container.select_one("img[src*='mlsgrid']")
-        img_src = img_el["src"] if img_el else ""
+        # ── Image (FIXED) ──────────────────────────────────────────────
+        # idxhome actually serves photos from mgrid.idxhome.com, e.g.:
+        #   https://mgrid.idxhome.com/images/MRD12729857/<uuid>.jpeg
+        # The old selector looked for "mlsgrid" in the src, which never
+        # matches — that's why every card fell back to a gray box.
+        img_el = container.select_one("img[src*='mgrid.idxhome.com']")
+
+        # Fallback 1: match by MLS number in the path (MRD<mls_num>)
+        if not img_el and mls_num:
+            img_el = container.select_one(f"img[src*='MRD{mls_num}']")
+
+        # Fallback 2: just grab the first <img> in the container
+        if not img_el:
+            img_el = container.find("img")
+
+        img_src = img_el["src"] if img_el and img_el.get("src") else ""
+
+        # Normalize size params so all cards request a consistent thumbnail
+        if img_src and "width=" not in img_src:
+            sep = "&" if "?" in img_src else "?"
+            img_src = f"{img_src}{sep}width=800&height=800"
+        # ──────────────────────────────────────────────────────────────
 
         listings.append({
             "street":      street,
@@ -178,194 +116,3 @@ def fetch_listings():
         })
 
     return listings
-
-# ── Card builders ─────────────────────────────────────────────────────────────
-
-def build_card_listings(l, position):
-    """Card style for buying/listings/index.html"""
-    img_tag = (
-        f'<img src="{l["img_src"]}" alt="{l["street"]}, {l["city_st"]}" loading="lazy" />'
-        if l["img_src"] else
-        '<div style="width:100%;height:100%;background:#dce3e8;"></div>'
-    )
-
-    stats = []
-    if l["beds"] != "—":
-        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["beds"]}</span><span class="stat-label">Beds</span></div>')
-    if l["baths"] != "—":
-        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["baths"]}</span><span class="stat-label">Baths</span></div>')
-    if l["sqft"] != "—":
-        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["sqft"]}</span><span class="stat-label">Sq Ft</span></div>')
-    if l["acres"]:
-        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["acres"]}</span><span class="stat-label">Acres</span></div>')
-    if l["units"]:
-        stats.append(f'<div class="listing-stat"><span class="stat-value">{l["units"]}</span><span class="stat-label">Units</span></div>')
-
-    return f"""
-        <!-- {l["street"]} -->
-        <article class="listing-card reveal" data-city="{l["city_key"]}" data-price="{l["price_raw"]}" data-beds="{l["beds"]}" data-status="{l["status"]}">
-          <div class="listing-card-photo">
-            {img_tag}
-            <span class="listing-badge {l["badge_cls"]}">{l["badge_label"]}</span>
-          </div>
-          <div class="listing-card-body">
-            <p class="listing-price">{l["price_fmt"]}</p>
-            <p class="listing-address">{l["street"]}</p>
-            <p class="listing-city">{l["city_st"]}</p>
-            <div class="listing-stats">
-              {"".join(stats)}
-            </div>
-          </div>
-          <div class="listing-card-footer"><a href="{l["detail_url"]}" target="_blank" rel="noopener" class="listing-detail-btn">View Details</a></div>
-        </article>"""
-
-
-def build_card_home(l, position):
-    """Card style for index.html and buying-strategy-guide — matches .listing-card / .listing-info homepage markup."""
-    img_tag = (
-        f'<img src="{l["img_src"]}" alt="{l["street"]}, {l["city_st"]}" loading="lazy" itemprop="image">'
-        if l["img_src"] else
-        '<div style="width:100%;height:100%;background:#dce3e8;"></div>'
-    )
-
-    ltype_key, ltype_label = listing_type(l)
-
-    if ltype_key == "commercial":
-        badge_cls_extra = " commercial"
-        badge_text = "Commercial"
-    elif ltype_key == "land":
-        badge_cls_extra = " land"
-        badge_text = "Land"
-    elif l["status"] == "contingent":
-        badge_cls_extra = ""
-        badge_text = "Contingent"
-    else:
-        badge_cls_extra = ""
-        badge_text = "Active"
-
-    meta_items = []
-    if l["beds"] != "—":
-        meta_items.append(f'<span class="listing-meta-item"><strong itemprop="numberOfBedrooms">{l["beds"]}</strong> bd</span>')
-    if l["baths"] != "—":
-        meta_items.append(f'<span class="listing-meta-item"><strong>{l["baths"]}</strong> ba</span>')
-    if l["sqft"] != "—":
-        meta_items.append(f'<span class="listing-meta-item"><strong>{l["sqft"]}</strong> sqft</span>')
-    if l["acres"]:
-        meta_items.append(f'<span class="listing-meta-item"><strong>{l["acres"]}</strong> acres</span>')
-    if l["units"]:
-        meta_items.append(f'<span class="listing-meta-item"><strong>{l["units"]}</strong> units</span>')
-
-    mls_tag = f'<span class="listing-type-tag">{ltype_label}{" · MLS #" + l["mls_num"] if l["mls_num"] else ""}</span>'
-
-    # Parse city / state / zip from city_st
-    city_parts = [p.strip() for p in l["city_st"].split(",")]
-    city_name  = city_parts[0] if city_parts else ""
-    state_zip  = city_parts[1].strip() if len(city_parts) > 1 else "IL"
-    state_parts = state_zip.split()
-    city_state = state_parts[0] if state_parts else "IL"
-    zip_code   = state_parts[1] if len(state_parts) > 1 else ""
-    zip_span   = f' <span itemprop="postalCode">{zip_code}</span>' if zip_code else ""
-
-    return f"""
-      <!-- {l["street"]} -->
-      <a href="{l["detail_url"]}"
-         class="listing-card" target="_blank" rel="noopener"
-         aria-label="{l["street"]}, {l["city_st"]} — {l["price_fmt"]}"
-         itemscope itemtype="https://schema.org/RealEstateListing" itemprop="itemListElement">
-        <meta itemprop="position" content="{position}">
-        <div class="listing-photo">
-          {img_tag}
-          <span class="listing-badge{badge_cls_extra}">{badge_text}</span>
-        </div>
-        <div class="listing-info">
-          <span class="listing-price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <span itemprop="price" content="{l["price_raw"]}">{l["price_fmt"]}</span>
-            <meta itemprop="priceCurrency" content="USD">
-            <meta itemprop="availability" content="https://schema.org/InStock">
-          </span>
-          <span class="listing-address" itemprop="name">{l["street"]}</span>
-          <span class="listing-city" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-            <span itemprop="addressLocality">{city_name}</span>, <span itemprop="addressRegion">{city_state}</span>{zip_span}
-          </span>
-          <div class="listing-divider"></div>
-          <div class="listing-meta">
-            {"".join(meta_items)}
-          </div>
-          {mls_tag}
-        </div>
-      </a>"""
-
-# ── Inject into HTML ──────────────────────────────────────────────────────────
-CARD_FNS = {
-    "build_card_listings": build_card_listings,
-    "build_card_home":     build_card_home,
-}
-
-def inject(listings, target):
-    html_file    = target["file"]
-    start_marker = target["start"]
-    end_marker   = target["end"]
-    offset       = target.get("offset", 0)
-    limit        = target["limit"]
-    card_fn      = CARD_FNS[target["card_fn"]]
-
-    try:
-        with open(html_file, "r", encoding="utf-8") as f:
-            html = f.read()
-    except FileNotFoundError:
-        print(f"SKIP: {html_file} not found — skipping.")
-        return
-
-    if start_marker not in html or end_marker not in html:
-        print(f"SKIP: markers not found in {html_file}.")
-        return
-
-    # Slice the listings window: start at offset, take up to limit
-    sliced = listings[offset:]
-    subset = sliced[:limit] if limit else sliced
-
-    if not subset:
-        print(f"WARN: No listings available for {html_file} at offset {offset} — skipping to avoid wiping cards.")
-        return
-
-    cards_html = "\n".join(card_fn(l, i + 1) for i, l in enumerate(subset))
-
-    new_block = f"{start_marker}\n{cards_html}\n      {end_marker}"
-    pattern   = re.compile(
-        re.escape(start_marker) + r".*?" + re.escape(end_marker),
-        re.DOTALL
-    )
-    updated = pattern.sub(new_block, html)
-
-    # Update schema numberOfItems
-    updated = re.sub(
-        r'(itemprop="numberOfItems"\s+content=")[^"]*(")',
-        rf'\g<1>{len(subset)}\g<2>',
-        updated
-    )
-
-    # Update listings count display on listings page
-    if not limit:
-        updated = re.sub(
-            r'(<strong>)\d+(</strong>\s*listing)',
-            rf'\g<1>{len(subset)}\g<2>',
-            updated
-        )
-
-    with open(html_file, "w", encoding="utf-8") as f:
-        f.write(updated)
-
-    print(f"✓ Wrote {len(subset)} listing(s) to {html_file} (offset {offset})")
-
-# ── Main ──────────────────────────────────────────────────────────────────────
-if __name__ == "__main__":
-    print(f"Fetching {IDX_URL} ...")
-    listings = fetch_listings()
-
-    if not listings:
-        print("No listings parsed — aborting to avoid wiping existing cards.")
-        sys.exit(0)
-
-    print(f"Found {len(listings)} listing(s). Updating target files ...")
-    for target in TARGETS:
-        inject(listings, target)
